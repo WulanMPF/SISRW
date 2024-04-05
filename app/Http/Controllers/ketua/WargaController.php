@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\WargaModel;
 use Illuminate\Http\Request;
 
 class WargaController extends Controller
@@ -11,7 +12,11 @@ class WargaController extends Controller
      */
     public function index()
     {
-        //
+        $breadcrumb = (object) [];
+
+        $activeMenu = 'warga';
+
+        return view('ketua.warga.index', ['breadcrumb' => $breadcrumb, 'activeMenu' => $activeMenu]);
     }
 
     /**
