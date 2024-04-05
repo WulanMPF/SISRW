@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{{ config('app.name', 'PWL Laravel Starter Code') }}</title>
+    <title>{{ config('Ketua RW', 'Ketua RW') }}</title>
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- Untuk mengirimkan token Laravel CSRF pada setiap request ajax -->
@@ -12,6 +12,8 @@
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
     <!-- Font Awesome -->
     <link rel="stylesheet" href="{{ asset('adminlte/plugins/fontawesome-free/css/all.min.css') }}">
 
@@ -27,13 +29,17 @@
     @stack('css') <!-- Digunakan untuk memanggil custom css dari perintah push('css') pada masing-masing view -->
     <style>
         .brand-link {
-            padding-bottom: 10px !important; /* Menyesuaikan jarak menu dengan teks di atasnya */
-            border-bottom: none !important; /* Menghilangkan garis di bawah teks */
+            padding-bottom: 10px !important;
+            border-bottom: none !important;
         }
 
         .brand-link img {
             width: 40px;
             height: 40px;
+        }
+
+        .brand-text {
+            color: #463720;
         }
     </style>
 </head>
@@ -51,7 +57,7 @@
             <div class="brand-link">
                 <img src="{{ asset('adminlte/dist/img/AdminLTELogo.png') }}" alt="AdminLTE Logo"
                     class="brand-image img-circle elevation-3">
-                <span class="brand-text font-weight-light" style="font-size: 16px;">SISTEM INFORMASI RW 05</span>
+                <span class="brand-text font-weight-bold" style="font-size: 16px;">SISTEM INFORMASI RW 05</span>
             </div>
 
             <!-- Sidebar -->
