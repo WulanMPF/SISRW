@@ -23,7 +23,7 @@ class WelcomeController extends Controller
 
         $activeMenu = 'dashboard';
 
-        return view('ketua.index', ['breadcrumb' => $breadcrumb, 'activeMenu' => $activeMenu]);
+        return view('ketua.dashboard', ['breadcrumb' => $breadcrumb, 'activeMenu' => $activeMenu]);
     }
 
     public function sekretaris()
