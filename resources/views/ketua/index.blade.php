@@ -1,4 +1,4 @@
-@extends('layout.template')
+@extends('layout.ketua.template')
 
 @section('content')
     <div class="card">
