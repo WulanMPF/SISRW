@@ -29,8 +29,7 @@ class WelcomeController extends Controller
     public function sekretaris()
     {
         $breadcrumb = (object) [
-            'title' => 'Selamat Datang',
-            'list' => ['Home', 'Welcome']
+            'title' => 'Selamat Datang'
         ];
 
         $activeMenu = 'dashboard';
