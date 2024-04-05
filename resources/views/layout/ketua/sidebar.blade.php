@@ -16,7 +16,7 @@
             <li class="nav-item">
                 <a href="{{ url('/surat') }}" class="nav-link {{ $activeMenu == 'surat' ? 'active' : '' }}">
                     <i class="nav-icon fas fa-envelope"></i>
-                    <p>Arsip Suratr</p>
+                    <p>Arsip Surat</p>
                 </a>
             </li>
             <li class="nav-item">
