@@ -8,7 +8,7 @@
                     <p>Dashboard</p>
                 </a>
             <li class="nav-item">
-                <a href="{{ url('/warga') }}" class="nav-link {{ $activeMenu == 'warga' ? 'active' : '' }} ">
+                <a href="{{ url('/ketua/warga') }}" class="nav-link {{ $activeMenu == 'warga' ? 'active' : '' }} ">
                     <i class="nav-icon fas  fa-users"></i>
                     <p>Data Warga</p>
                 </a>
