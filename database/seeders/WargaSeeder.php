@@ -93,6 +93,62 @@ class WargaSeeder extends Seeder
             }
         }
 
+        // Loop untuk membuat 10 data warga dengan status sementara (kk_id = null, hubungan_keluarga = null)
+        for ($k = 91; $k <= 100; $k++) {
+            $warga_id = $k; // Menggunakan offset untuk membedakan warga sementara
+            $nik = mt_rand(1000000000000000, 9999999999999999); // Nomor NIK dengan tipe data bigint 16 digit
+
+            // Membuat nama warga dengan nama awal dan akhir yang berbeda
+            $firstName = $this->generateRandomName();
+            $lastName = $this->generateRandomName();
+            $nama_warga = $firstName . ' ' . $lastName;
+
+            // Hubungan keluarga secara acak
+            $hubungan_keluarga = 'null';
+
+            // Generate tempat dan tanggal lahir
+            $tempat = ['Malang', 'Surabaya', 'Blitar', 'Probolinggo', 'Banyuwangi', 'Pasuruan'][array_rand(['Malang', 'Surabaya', 'Blitar', 'Probolinggo', 'Banyuwangi', 'Pasuruan'])];
+
+            $tempat_tgl_lahir = $tempat . $this->generateRandomDate('1980-01-01', '2007-12-31');
+
+
+            // Pilih jenis kelamin secara acak (L = Laki-laki, P = Perempuan)
+            $jenis_kelamin = ($k % 2 === 0) ? 'P' : 'L';
+
+            // RT/RW dari data kk
+            $rt_rw = ['01/01', '02/06', '04/03', '02/01', '10/01', '07/08'][array_rand(['01/01', '02/06', '04/03', '02/01', '10/01', '07/08'])];
+
+            // Data untuk kelurahan/desa, kecamatan, agama, status perkawinan, pekerjaan
+            $kel_desa = ['Jorongan', 'Jatisari', 'Kademangan', 'Sumber', 'Karanganyar', 'Banyuanyar'][array_rand(['Jorongan', 'Jatisari', 'Kademangan', 'Sumber', 'Karanganyar', 'Banyuanyar'])];
+            $kecamatan = ['Leces', 'Jabung', 'Triwung', 'Gondanglegi', 'Karangkates', 'Alaspati'][array_rand(['Leces', 'Jabung', 'Triwung', 'Gondanglegi', 'Karangkates', 'Alaspati'])];
+
+            $agama = ['Islam', 'Kristen', 'Hindu', 'Katolik'][array_rand(['Islam', 'Kristen', 'Hindu', 'Katolik'])];
+
+            // Tentukan status perkawinan berdasarkan hubungan keluarga
+            $status_perkawinan = ['Belum Kawin', 'Cerai'][array_rand(['Belum Kawin', 'Cerai'])];
+
+            $pekerjaan = ['PNS', 'Swasta', 'Wiraswasta', 'Petani', 'Buruh', 'Pelajar'][array_rand(['PNS', 'Swasta', 'Wiraswasta', 'Petani', 'Buruh', 'Pelajar'])];
+
+            $status_warga = 'sementara';
+
+            $wargaData[] = [
+                'warga_id' => $warga_id,
+                'nik' => $nik,
+                'kk_id' => null, // Set kk_id menjadi null untuk status warga sementara
+                'nama_warga' => $nama_warga,
+                'tempat_tgl_lahir' => $tempat_tgl_lahir, // Untuk status sementara, tempat dan tanggal lahir dapat diisi null
+                'hubungan_keluarga' => null, // Hubungan keluarga diisi null untuk status sementara
+                'jenis_kelamin' => $jenis_kelamin,
+                'rt_rw' => $rt_rw, // RT/RW diisi null untuk status sementara
+                'kel_desa' => $kel_desa,
+                'kecamatan' => $kecamatan,
+                'agama' => $agama,
+                'status_perkawinan' => $status_perkawinan, // Status perkawinan diisi null untuk status sementara
+                'pekerjaan' => $pekerjaan, // Pekerjaan diisi null untuk status sementara
+                'status_warga' => $status_warga,
+            ];
+        }
+
         // Insert data warga ke dalam tabel warga menggunakan DB facade
         DB::table('warga')->insert($wargaData);
     }
