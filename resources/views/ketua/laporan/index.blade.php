@@ -41,7 +41,7 @@
 @endsection
 
 @push('css')
-    {{-- <style>
+    <style>
         #table_laporan_keuangan {
             border-radius: 10px;
             /* Menambahkan radius */
@@ -53,7 +53,7 @@
             color: #7F643C;
             /* Warna teks putih */
         }
-    </style> --}}
+    </style>
 @endpush
 
 @push('js')
