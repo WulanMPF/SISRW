@@ -22,8 +22,7 @@
                             <small class="form-text text-muted">Status Kependudukan</small>
                         </div>
                         <div class="col-md-8 text-right">
-                            <a class="btn btn-sm mt-1 btn-tambah" href="{{ url('sekretaris/warga/create') }}">+ Tambah
-                                Warga</a>
+                            <a class="btn btn-sm mt-1 btn-tambah" href="{{ url('sekretaris/warga/create') }}">+ Tambah Warga</a>
                         </div>
                     </div>
                 </div>
