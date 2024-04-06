@@ -9,6 +9,7 @@ use App\Http\Controllers\Ketua\BansosController;
 use App\Http\Controllers\Ketua\LapkeuController;
 use App\Http\Controllers\Sekretaris\DashboardController as SekretarisDashboardController;
 use App\Http\Controllers\Sekretaris\PengumumanController;
+use App\Http\Controllers\Sekretaris\UmkmController as SekretarisUmkmController;
 use App\Http\Controllers\Sekretaris\WargaController as SekretarisWargaController;
 use App\Http\Controllers\WelcomeController;
 use Illuminate\Support\Facades\Route;
@@ -76,6 +77,11 @@ Route::group(['prefix' => 'sekretaris/warga'], function () {
 Route::group(['prefix' => 'sekretaris/pengumuman'], function () {
     Route::get('/', [PengumumanController::class, 'index']);
     Route::get('/{id}', [PengumumanController::class, 'show']);
+});
+Route::group(['prefix' => 'sekretaris/umkm'], function () {
+    Route::get('/', [SekretarisUmkmController::class, 'index']);
+    Route::post('/list', [SekretarisUmkmController::class, 'list']);
+    Route::get('/{id}', [SekretarisUmkmController::class, 'show']);
 });
 Route::group(['prefix' => 'sekretaris/bansos'], function () {
     Route::get('/', [BansosController::class, 'index']);
