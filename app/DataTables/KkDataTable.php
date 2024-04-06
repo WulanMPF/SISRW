@@ -3,6 +3,7 @@
 namespace App\DataTables;
 
 use App\Models\Kk;
+use App\Models\KkModel;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
@@ -29,7 +30,7 @@ class KkDataTable extends DataTable
     /**
      * Get the query source of dataTable.
      */
-    public function query(Kk $model): QueryBuilder
+    public function query(KkModel $model): QueryBuilder
     {
         return $model->newQuery();
     }
@@ -62,13 +63,11 @@ class KkDataTable extends DataTable
     public function getColumns(): array
     {
         return [
-            Column::computed('action')
-                  ->exportable(false)
-                  ->printable(false)
-                  ->width(60)
-                  ->addClass('text-center'),
-            Column::make('id'),
-            Column::make('add your columns'),
+            Column::make('kk_id'),
+            Column::make('no_kk'),
+            Column::make('nama_kepala_keluarga'),
+            Column::make('rt_rw'),
+            Column::make('alamat'),
             Column::make('created_at'),
             Column::make('updated_at'),
         ];
