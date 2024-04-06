@@ -3,7 +3,7 @@
     <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
             <li class="nav-item">
-                <a href="{{ url('/') }}" class="nav-link {{ $activeMenu == 'dashboard' ? 'active' : '' }} ">
+                <a href="{{ url('/ketua/') }}" class="nav-link {{ $activeMenu == 'dashboard' ? 'active' : '' }} ">
                     <i class="nav-icon fas fa-th-large"></i>
                     <p>Dashboard</p>
                 </a>
@@ -14,37 +14,37 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="{{ url('/surat') }}" class="nav-link {{ $activeMenu == 'surat' ? 'active' : '' }}">
+                <a href="{{ url('/ketua/surat') }}" class="nav-link {{ $activeMenu == 'surat' ? 'active' : '' }}">
                     <i class="nav-icon fas fa-envelope"></i>
                     <p>Arsip Surat</p>
                 </a>
             </li>
             <li class="nav-item">
-                <a href="{{ url('/umkm') }}" class="nav-link {{ $activeMenu == 'umkm' ? 'active' : '' }} ">
+                <a href="{{ url('/ketua/umkm') }}" class="nav-link {{ $activeMenu == 'umkm' ? 'active' : '' }} ">
                     <i class="nav-icon fas fa-store"></i>
                     <p>Data UMKM</p>
                 </a>
             </li>
             <li class="nav-item">
-                <a href="{{ url('/bansos') }}" class="nav-link {{ $activeMenu == 'bansos' ? 'active' : '' }} ">
+                <a href="{{ url('/ketua/bansos') }}" class="nav-link {{ $activeMenu == 'bansos' ? 'active' : '' }} ">
                     <i class="nav-icon fas fa-hands-helping"></i>
                     <p>Penerima BANSOS</p>
                 </a>
             </li>
             <li class="nav-item">
-                <a href="{{ url('/iuran') }}" class="nav-link {{ $activeMenu == 'iuran' ? 'active' : '' }} ">
+                <a href="{{ url('/ketua/iuran') }}" class="nav-link {{ $activeMenu == 'iuran' ? 'active' : '' }} ">
                     <i class="nav-icon fas fa-money-bill-wave"></i>
                     <p>Data Iuran</p>
                 </a>
             </li>
             <li class="nav-item">
-                <a href="{{ url('/laporan') }}" class="nav-link {{ $activeMenu == 'laporan' ? 'active' : '' }} ">
+                <a href="{{ url('/ketua/laporan') }}" class="nav-link {{ $activeMenu == 'laporan' ? 'active' : '' }} ">
                     <i class="nav-icon fas fa-file-invoice-dollar"></i>
                     <p>Laporan Keuangan</p>
                 </a>
             </li>
             <li class="nav-item">
-                <a href="{{ url('/pengaduan') }}" class="nav-link {{ $activeMenu == 'pengaduan' ? 'active' : '' }} ">
+                <a href="{{ url('/ketua/pengaduan') }}" class="nav-link {{ $activeMenu == 'pengaduan' ? 'active' : '' }} ">
                     <i class="nav-icon fas fa-exclamation-triangle"></i>
                     <p>Pengaduan</p>
                 </a>
