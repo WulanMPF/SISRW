@@ -70,7 +70,6 @@ class KKSeeder extends Seeder
         $firstName = $names[$randomIndex1];
         $lastName = $names[$randomIndex2];
 
-        // Gabungkan nama awal dan akhir menjadi nama lengkap
         $fullName = $firstName . ' ' . $lastName;
 
         return $fullName;
