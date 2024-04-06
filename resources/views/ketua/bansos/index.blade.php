@@ -29,7 +29,7 @@
                     </div>
                 </div>
             </div>
-            <table class="table table-bordered table-striped table-hover table-sm" id="table_bansos">
+            <table class="table table-bordered table-striped table-hover table-sm" id="table_bansos" style="text-align: center;">
                 <thead>
                     <tr>
                         <th>No</th>
@@ -46,10 +46,10 @@
 @endsection
 
 @push('css')
-    {{-- <style>
+    <style>
         #table_bansos {
             border-radius: 10px;
-            /* Menambahkan radius */
+            overflow: hidden;
         }
 
         #table_bansos thead {
@@ -58,7 +58,7 @@
             color: #7F643C;
             /* Warna teks putih */
         }
-    </style> --}}
+    </style>
 @endpush
 
 @push('js')
