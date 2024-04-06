@@ -43,13 +43,14 @@ class WelcomeController extends Controller
     public function bendahara()
     {
         $breadcrumb = (object) [
-            'title' => 'Selamat Datang',
+            'title' => 'Selamat Datang, Bendahara RW',
+            'date' => date('l, d F Y'),
             'list' => ['Home', 'Welcome']
         ];
 
         $activeMenu = 'dashboard';
 
-        return view('bendahara.index', ['breadcrumb' => $breadcrumb, 'activeMenu' => $activeMenu]);
+        return view('bendahara.dashboard', ['breadcrumb' => $breadcrumb, 'activeMenu' => $activeMenu]);
     }
 
     public function warga()
