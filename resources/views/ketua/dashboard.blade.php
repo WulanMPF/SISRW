@@ -1,7 +1,7 @@
 @extends('layout.ketua.template')
 
 @section('content')
-    <div class="row justify-content-center">
+    <div class="row justify-content-center" style="font-family: Poppins;">
         <!-- Card Pertama dan Kedua -->
         <div class="col-lg-6 mb-4">
             <!-- Card Pertama -->
@@ -18,7 +18,7 @@
             </div>
         </div>
 
-        <div class="col-lg-6 mb-4">
+        <div class="col-lg-6 mb-4" style="font-family: Poppins;">
             <!-- Card Kedua -->
             <div class="card mx-auto">
                 <div class="card-body text-center">
@@ -34,7 +34,7 @@
         </div>
 
         <!-- Card Ketiga dan Keempat -->
-        <div class="col-lg-6 mb-4">
+        <div class="col-lg-6 mb-4" style="font-family: Poppins;">
             <!-- Card Ketiga -->
             <div class="card mx-auto">
                 <div class="card-body text-center">
@@ -49,7 +49,7 @@
             </div>
         </div>
 
-        <div class="col-lg-6 mb-4">
+        <div class="col-lg-6 mb-4" style="font-family: Poppins;">
             <!-- Card Keempat -->
             <div class="card mx-auto">
                 <div class="card-body text-center">
@@ -65,3 +65,16 @@
         </div>
     </div>
 @endsection
+
+@push('css')
+    <style>
+        .card {
+            background-color: #E5E2DE; /* Warna latar belakang card */
+            color: #463720; /* Warna font */
+        }
+
+        .card-body i {
+            color: #463720; /* Warna ikon */
+        }
+    </style>
+@endpush
