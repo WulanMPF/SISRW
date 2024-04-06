@@ -99,7 +99,7 @@
             });
 
             S('#kk_id').on('change', function() {
-                dataBarang.ajax.reload();
+                dataWarga.ajax.reload();
             });
 
         });
