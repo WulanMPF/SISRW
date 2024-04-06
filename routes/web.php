@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Ketua\DashboardController;
 use App\Http\Controllers\Ketua\WargaController;
 use App\Http\Controllers\WelcomeController;
 use Illuminate\Support\Facades\Route;
@@ -19,9 +20,9 @@ Route::get('/', [WelcomeController::class, 'index']);
 Route::get('/login', [WelcomeController::class, 'login']);
 
 Route::get('/ketua', [WelcomeController::class, 'ketua']);
-// Route::group(['prefix' => 'dashboard'], function () {
-//     Route::get('/', [DashboardController::class, 'index']);
-// });
+Route::group(['prefix' => 'ketua/dashboard'], function () {
+    Route::get('/', [DashboardController::class, 'index']);
+});
 Route::group(['prefix' => 'ketua/warga'], function () {
     Route::get('/', [WargaController::class, 'index']);
     Route::post('/list', [WargaController::class, 'list']);
