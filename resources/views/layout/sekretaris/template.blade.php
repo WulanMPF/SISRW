@@ -31,16 +31,16 @@
         .brand-link {
             padding-bottom: 10px !important;
             border-bottom: none !important;
-            font-family: Poppins;
         }
 
         .brand-link img {
-            width: 40px;
-            height: 40px;
+            width: 65px;
+            height: 65px;
         }
 
         .brand-text {
             color: #463720;
+            font-family: Poppins;
         }
     </style>
 </head>
@@ -57,7 +57,7 @@
             <!-- Brand Logo -->
             <div class="brand-link">
                 <img src="{{ asset('adminlte/dist/img/logo3.png') }}" alt="SISRW Logo">
-                <span class="brand-text font-weight-bold" style="font-size: 16px;">SISTEM INFORMASI RW 05</span>
+                <span class="brand-text font-weight-bold" style="font-size: 12px;">SISTEM INFORMASI RW 05</span>
             </div>
 
             <!-- Sidebar -->
