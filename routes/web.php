@@ -3,6 +3,7 @@
 use App\Http\Controllers\Ketua\DashboardController;
 use App\Http\Controllers\Ketua\WargaController;
 use App\Http\Controllers\Ketua\UmkmController;
+use App\Http\Controllers\Ketua\PengaduanController;
 use App\Http\Controllers\Ketua\BansosController;
 use App\Http\Controllers\Sekretaris\DashboardController as SekretarisDashboardController;
 use App\Http\Controllers\Sekretaris\PengumumanController;
@@ -36,6 +37,10 @@ Route::group(['prefix' => 'ketua/warga'], function () {
     Route::get('/', [WargaController::class, 'index']);
     Route::post('/list', [WargaController::class, 'list']);
     Route::get('/{id}', [WargaController::class, 'show']);
+});
+Route::group(['prefix' => 'ketua/pengaduan'], function () {
+    Route::get('/', [PengaduanController::class, 'index']);
+    Route::post('/list', [PengaduanController::class, 'list']);
 });
 
 // Route Halaman Sekretaris RW
