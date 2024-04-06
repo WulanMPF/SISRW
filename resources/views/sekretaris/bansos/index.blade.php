@@ -1,4 +1,4 @@
-@extends('layout.ketua.template')
+@extends('layout.sekretaris.template')
 
 @section('content')
     <div class="card card-outline card-light">
@@ -67,7 +67,7 @@
             var dataBansos = $('#table_bansos').DataTable({
                 serverSide: true,
                 ajax: {
-                    "url": "{{ url('ketua/bansos/list') }}",
+                    "url": "{{ url('sekretaris/bansos/list') }}",
                     "dataType": "json",
                     "type": "POST",
                     "data": function(d) {

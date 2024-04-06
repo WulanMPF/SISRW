@@ -10,6 +10,7 @@ use App\Http\Controllers\Ketua\LapkeuController;
 use App\Http\Controllers\Sekretaris\DashboardController as SekretarisDashboardController;
 use App\Http\Controllers\Sekretaris\PengumumanController;
 use App\Http\Controllers\Sekretaris\UmkmController as SekretarisUmkmController;
+use App\Http\Controllers\Sekretaris\BansosController as SekretarisBansosController;
 use App\Http\Controllers\Sekretaris\WargaController as SekretarisWargaController;
 use App\Http\Controllers\WelcomeController;
 use Illuminate\Support\Facades\Route;
@@ -85,8 +86,9 @@ Route::group(['prefix' => 'sekretaris/umkm'], function () {
     Route::get('/{id}', [SekretarisUmkmController::class, 'show']);
 });
 Route::group(['prefix' => 'sekretaris/bansos'], function () {
-    Route::get('/', [BansosController::class, 'index']);
-    Route::get('/{id}', [BansosController::class, 'show']);
+    Route::get('/', [SekretarisBansosController::class, 'index']);
+    Route::get('/list', [SekretarisBansosController::class, 'list']);
+    Route::get('/{id}', [SekretarisBansosController::class, 'show']);
 });
 
 // Route Halaman Bendahara RW
