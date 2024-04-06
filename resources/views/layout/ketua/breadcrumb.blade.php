@@ -2,8 +2,8 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1>Selamat Datang, Ketua RW</h1> 
-                <p>{{ date('l, d F Y') }}</p>
+                <h1>{{ $breadcrumb->title }}</h1>
+                <p>{{ $breadcrumb->date }}</p>
                 <button onclick="history.go(-1)" class="btn btn-back">Back</button>
             </div>
             <div class="col-sm-6">
