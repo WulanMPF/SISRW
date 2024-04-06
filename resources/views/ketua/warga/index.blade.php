@@ -62,22 +62,22 @@
                     orderable: false,
                     searchable: false
                 }, {
-                    data: "kk.no_kk",
+                    data: "no_kk",
                     className: "",
                     orderable: true,
                     searchable: true
                 }, {
-                    data: "kk.nama_kepala_keluarga",
+                    data: "nama_kepala_keluarga",
                     className: "",
                     orderable: true,
                     searchable: true
                 }, {
-                    data: "kk.alamat",
+                    data: "alamat",
                     className: "",
                     orderable: true,
                     searchable: true
                 }, {
-                    data: "kk.rt_rw",
+                    data: "rt_rw",
                     className: "",
                     orderable: true,
                     searchable: true
