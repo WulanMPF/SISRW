@@ -73,7 +73,7 @@
             font-family: Poppins;
             font-size: 15.005px;
             font-style: normal;
-            font-weight: 5000;
+            font-weight: 800;
             line-height: normal;
         }
 
