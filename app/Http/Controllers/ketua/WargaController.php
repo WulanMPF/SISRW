@@ -22,7 +22,7 @@ class WargaController extends Controller
             'list'  => ['Home', 'Data Warga']
         ];
 
-        $activeMenu = 'warga';
+        $activeMenu = 'kk';
 
         $warga = WargaModel::all();
         $kk = KkModel::all();
@@ -32,27 +32,20 @@ class WargaController extends Controller
 
     public function list(Request $request)
     {
-        $warga = WargaModel::select(
+        $kk = kkModel::select(
             'kk_id',
-            'nik',
-            'nama_warga',
-            'tempat_tgl_lahir',
-            'jenis_kelamin',
+            'no_kk',
+            'nama_kepala_keluarga',
             'rt_rw',
-            'kel_desa',
-            'kecamatan',
-            'agama',
-            'status_perkawinan',
-            'pekerjaan',
-            'hubungan_keluarga'
+            'alamat'
         )
             ->with('kk');
 
         if ($request->kk_id) {
-            $warga->where('kk_id', $request->kk_id);
+            $kk->where('kk_id', $request->kk_id);
         }
 
-        return DataTables::of($warga)
+        return DataTables::of($kk)
             ->addIndexColumn()
             ->addColumn('Anggota Keluarga', function ($warga) {
                 $btn = '<a href="' . url('/warga/' . $warga->warga_id) . '" class="btn btn-info btn-sm">Lihat</a> ';
