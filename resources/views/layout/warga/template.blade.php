@@ -12,6 +12,8 @@
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
     <!-- Font Awesome -->
     <link rel="stylesheet" href="{{ asset('adminlte/plugins/fontawesome-free/css/all.min.css') }}">
 
@@ -25,33 +27,48 @@
     <link rel="stylesheet" href="{{ asset('adminlte/dist/css/adminlte.min.css') }}">
 
     @stack('css') <!-- Digunakan untuk memanggil custom css dari perintah push('css') pada masing-masing view -->
+    <style>
+        .brand-link {
+            padding-bottom: 10px !important;
+            border-bottom: none !important;
+        }
+
+        .brand-link img {
+            width: 65px;
+            height: 65px;
+        }
+
+        .brand-text {
+            color: #463720;
+            font-family: Poppins;
+        }
+    </style>
 </head>
 
 <body class="hold-transition sidebar-mini">
     <!-- Site wrapper -->
     <div class="wrapper">
         <!-- Navbar -->
-        @include('layout.header')
+        @include('layout.warga.header')
         <!-- /.navbar -->
 
         <!-- Main Sidebar Container -->
         <aside class="main-sidebar sidebar-light elevation-4">
             <!-- Brand Logo -->
-            <a href="{{ url('/') }}" class="brand-link">
-                <img src="{{ asset('adminlte/dist/img/AdminLTELogo.png') }}" alt="AdminLTE Logo"
-                    class="brand-image img-circle elevation-3" style="opacity: .8">
-                <span class="brand-text font-weight-light">SISTEM INFORMASI RW 05</span>
-            </a>
+            <div class="brand-link">
+                <img src="{{ asset('adminlte/dist/img/logo3.png') }}" alt="SISRW Logo">
+                <span class="brand-text font-weight-bold" style="font-size: 12px;">SISTEM INFORMASI RW 05</span>
+            </div>
 
             <!-- Sidebar -->
-            @include('layout.sidebar')
+            @include('layout.warga.sidebar')
             <!-- /.sidebar -->
         </aside>
 
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
             <!-- Content Header (Page header) -->
-            @include('layout.breadcrumb')
+            @include('layout.warga.breadcrumb')
 
             <!-- Main content -->
             <section class="content">
@@ -61,7 +78,7 @@
         </div>
         <!-- /.content-wrapper -->
 
-        @include('layout.footer')
+        @include('layout.warga.footer')
     </div>
     <!-- ./wrapper -->
 
