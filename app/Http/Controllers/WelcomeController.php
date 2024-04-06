@@ -30,12 +30,14 @@ class WelcomeController extends Controller
     public function sekretaris()
     {
         $breadcrumb = (object) [
-            'title' => 'Selamat Datang'
+            'title' => 'Selamat Datang, Sekretaris RW',
+            'date' => date('l, d F Y'),
+            'list' => ['Home', 'Dashboard']
         ];
 
         $activeMenu = 'dashboard';
 
-        return view('sekretaris.index', ['breadcrumb' => $breadcrumb, 'activeMenu' => $activeMenu]);
+        return view('sekretaris.dashboard', ['breadcrumb' => $breadcrumb, 'activeMenu' => $activeMenu]);
     }
 
     public function bendahara()
