@@ -28,7 +28,7 @@
             <div class="row">
                 <div class="col-md-6">
                     <h3>Pengajuan UMKM</h3>
-                    <table class="table table-bordered table-hover table-sm" id="table_ajukan_umkm">
+                    <table class="table table-bordered table-hover table-sm" id="table_ajukan_umkm" style="text-align: center;">
                         <thead>
                             <tr>
                                 <th>ID</th>
@@ -42,7 +42,7 @@
                 </div>
                 <div class="col-md-6">
                     <h3>UMKM Terdaftar</h3>
-                    <table class="table table-bordered table-hover table-sm" id="table_umkm">
+                    <table class="table table-bordered table-hover table-sm" id="table_umkm" style="text-align: center;">
                         <thead>
                             <tr>
                                 <th>ID</th>
@@ -64,7 +64,7 @@
         #table_ajukan_umkm,
         #table_umkm {
             border-radius: 10px;
-            /* Menambahkan radius */
+            overflow: hidden;
         }
 
         h3 {
