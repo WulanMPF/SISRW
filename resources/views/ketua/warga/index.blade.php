@@ -25,7 +25,7 @@
                 </div>
             </div>
             <table class="table table-bordered table-striped table-hover table-sm" id="table_warga">
-                <thead>
+                <thead style="text-align: center;">
                     <tr>
                         <th>No</th>
                         <th>Nomor Kartu Keluarga</th>
@@ -41,6 +41,29 @@
 @endsection
 
 @push('css')
+    <style>
+        #table_warga {
+            border-radius: 10px;
+            /* Menambahkan radius */
+        }
+
+        h3 {
+            /* width: 497px; */
+            color: #463720;
+            font-family: Poppins;
+            font-size: 15.005px;
+            font-style: normal;
+            font-weight: 800;
+            line-height: normal;
+        }
+
+        #table_warga thead {
+            background-color: #d9d2c7;
+            /* Warna latar belakang coklat */
+            color: #7F643C;
+            /* Warna teks putih */
+        }
+    </style>
 @endpush
 
 @push('js')
@@ -83,14 +106,14 @@
                     searchable: true
                 }, {
                     data: "Anggota Keluarga",
-                    className: "",
+                    className: "text-center",
                     orderable: false,
                     searchable: false
                 }]
             });
 
             S('#kk_id').on('change', function() {
-                dataBarang.ajax.reload();
+                dataWarga.ajax.reload();
             });
 
         });
