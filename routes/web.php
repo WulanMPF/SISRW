@@ -49,7 +49,7 @@ Route::group(['prefix' => 'ketua/bansos'], function () {
     Route::post('/list', [BansosController::class, 'list']);
     Route::get('/{id}', [BansosController::class, 'show']);
 });
-Route::group(['prefix' => 'ketua/lapkeu'], function () {
+Route::group(['prefix' => 'ketua/laporan'], function () {
     Route::get('/', [LapkeuController::class, 'index']);
     Route::post('/list', [LapkeuController::class, 'list']);
     Route::get('/{id}', [LapkeuController::class, 'show']);
