@@ -41,6 +41,19 @@
 @endsection
 
 @push('css')
+    <style>
+        #table_iuran {
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        #table_iuran thead {
+            background-color: #d9d2c7;
+            /* Warna latar belakang coklat */
+            color: #7F643C;
+            /* Warna teks putih */
+        }
+    </style>
 @endpush
 
 @push('js')
