@@ -16,20 +16,17 @@
                         <div class="col-3">
                             <select class="form-control" id="jenis_bansos" name="jenis_bansos" required>
                                 <option value="">- Tampilkan Semua -</option>
-                                <option value="PKH">Program Keluarga Harapan (PKH)</option>
-                                <option value="BLT">Bantuan Langsung Tunai (BLT)</option>
-                                <option value="BPNT">Bantuan Pangan Non-Tunai (BPNT)</option>
-                                <option value="BST">Bantuan Sosial Tunai (BST)</option>
-                                <option value="Sembako">Program Sembako</option>
-                                <option value="PIP">Program Indonesia Pintar (PIP)</option>
-                                <option value="BSM">Bantuan Siswa Miskin (BSM)</option>
-                                <option value="BPUM">Bantuan Modal Usaha Mikro (BPUM)</option>
+                                <option value="Bansos Beras 10kg">Bansos Beras 10kg</option>
+                                <option value="Bansos DTKS">Bansos DTKS</option>
+                                <option value="Bansos PKH">Bansos PKH</option>
+                                <option value="Bansos Tunai Akibat Covid 19">Bansos Tunai Akibat Covid 19</option>
                             </select>
                         </div>
                     </div>
                 </div>
             </div>
-            <table class="table table-bordered table-striped table-hover table-sm" id="table_bansos" style="text-align: center;">
+            <table class="table table-bordered table-striped table-hover table-sm" id="table_bansos"
+                style="text-align: center;">
                 <thead>
                     <tr>
                         <th>No</th>
