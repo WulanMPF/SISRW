@@ -63,6 +63,7 @@ Route::group(['prefix' => 'ketua/iuran'], function () {
     Route::get('/', [IuranController::class, 'index']);
     Route::post('/list', [IuranController::class, 'list']);
 });
+
 // Route Halaman Sekretaris RW
 Route::get('/sekretaris', [WelcomeController::class, 'sekretaris']);
 Route::group(['prefix' => 'sekretaris/dashboard'], function () {
