@@ -14,6 +14,7 @@ use App\Http\Controllers\Sekretaris\UmkmController as SekretarisUmkmController;
 use App\Http\Controllers\Sekretaris\BansosController as SekretarisBansosController;
 use App\Http\Controllers\Sekretaris\WargaController as SekretarisWargaController;
 use App\Http\Controllers\Bendahara\IuranController as BendaharaIuranController;
+use App\Http\Controllers\Sekretaris\SuratController as SekretarisSuratController;
 use App\Http\Controllers\WelcomeController;
 use Illuminate\Support\Facades\Route;
 
@@ -82,6 +83,11 @@ Route::group(['prefix' => 'sekretaris/warga'], function () {
     Route::get('/', [SekretarisWargaController::class, 'index']);
     Route::post('/list', [SekretarisWargaController::class, 'list']);
     Route::get('/{id}', [SekretarisWargaController::class, 'show']);
+});
+Route::group(['prefix' => 'sekretaris/surat'], function () {
+    Route::get('/', [SekretarisSuratController::class, 'index']);
+    Route::post('/list', [SekretarisSuratController::class, 'list']);
+    Route::get('/{id}', [SekretarisSuratController::class, 'show']);
 });
 Route::group(['prefix' => 'sekretaris/pengumuman'], function () {
     Route::get('/', [PengumumanController::class, 'index']);
