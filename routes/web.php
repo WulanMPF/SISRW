@@ -7,6 +7,7 @@ use App\Http\Controllers\Ketua\PengaduanController;
 use App\Http\Controllers\Ketua\IuranController;
 use App\Http\Controllers\Ketua\BansosController;
 use App\Http\Controllers\Ketua\LapkeuController;
+use App\Http\Controllers\Ketua\SuratController;
 use App\Http\Controllers\Sekretaris\DashboardController as SekretarisDashboardController;
 use App\Http\Controllers\Sekretaris\PengumumanController;
 use App\Http\Controllers\Sekretaris\UmkmController as SekretarisUmkmController;
@@ -42,6 +43,11 @@ Route::group(['prefix' => 'ketua/warga'], function () {
     Route::get('/', [WargaController::class, 'index']);
     Route::post('/list', [WargaController::class, 'list']);
     Route::get('/{id}', [WargaController::class, 'show']);
+});
+Route::group(['prefix' => 'ketua/surat'], function () {
+    Route::get('/', [SuratController::class, 'index']);
+    Route::post('/list', [SuratController::class, 'list']);
+    Route::get('/{id}', [SuratController::class, 'show']);
 });
 Route::group(['prefix' => 'ketua/umkm'], function () {
     Route::get('/', [UmkmController::class, 'index']);
