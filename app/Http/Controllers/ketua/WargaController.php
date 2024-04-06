@@ -110,7 +110,7 @@ class WargaController extends Controller
             'hubungan_keluarga'       => $request->hubungan_keluarga
         ]);
 
-        return redirect('/ketua/warga')->with('success', 'Data warga berhasil disimpan');
+        return redirect('/ketua/warga.index')->with('success', 'Data warga berhasil disimpan');
     }
 
     public function show(string $id)
@@ -176,22 +176,22 @@ class WargaController extends Controller
             'hubungan_keluarga'       => $request->hubungan_keluarga
         ]);
 
-        return redirect('/ketua/warga')->with('success', 'Data warga berhasil diubah');
+        return redirect('/ketua/warga.index')->with('success', 'Data warga berhasil diubah');
     }
 
     public function destroy(string $id)
     {
         $check = WargaModel::find($id);
         if (!$check) {
-            return redirect('/ketua/warga')->with('error', 'Data warga tidak ditemukan');
+            return redirect('/ketua/warga.index')->with('error', 'Data warga tidak ditemukan');
         }
 
         try {
             WargaModel::destroy($id);
 
-            return redirect('/ketua/warga')->with('success', 'Data warga berhasil dihapus');
+            return redirect('/ketua/warga.index')->with('success', 'Data warga berhasil dihapus');
         } catch (\Illuminate\Database\QueryException $e) {
-            return redirect('/ketua/warga')->with('error', 'Data warga gagal dihapus karena masih terdapat tabel lain yang terkait dengan data ini');
+            return redirect('/ketua/warga.index')->with('error', 'Data warga gagal dihapus karena masih terdapat tabel lain yang terkait dengan data ini');
         }
     }
 }
