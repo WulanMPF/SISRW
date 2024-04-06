@@ -1,4 +1,4 @@
-<div class="sidebar">
+<div class="sidebar" style="font-family: Poppins; color: #463720;" >
     <!-- Sidebar Menu -->
     <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
@@ -47,7 +47,7 @@
     .nav-pills .show>.nav-link {
         background-color: #FFE6C0;
         border-radius: 20px;
-        color: #463720;
+        color: #463720 !important;
     }
 
     .nav-pills .nav-link {
