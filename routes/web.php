@@ -14,6 +14,7 @@ use App\Http\Controllers\Sekretaris\UmkmController as SekretarisUmkmController;
 use App\Http\Controllers\Sekretaris\BansosController as SekretarisBansosController;
 use App\Http\Controllers\Sekretaris\WargaController as SekretarisWargaController;
 use App\Http\Controllers\Bendahara\IuranController as BendaharaIuranController;
+use App\Http\Controllers\Bendahara\LapkeuController as BendaharaLapkeuController;
 use App\Http\Controllers\Sekretaris\SuratController as SekretarisSuratController;
 use App\Http\Controllers\WelcomeController;
 use Illuminate\Support\Facades\Route;
@@ -112,6 +113,11 @@ Route::group(['prefix' => 'bendahara/iuran'], function () {
     Route::get('/', [BendaharaIuranController::class, 'index'])->name('bendahara.iuran.index');
     Route::post('/list', [BendaharaIuranController::class, 'list'])->name('bendahara.iuran.list');
     Route::get('/{id}', [BendaharaIuranController::class, 'show'])->name('bendahara.iura.show');
+});
+Route::group(['prefix' => 'bendahara/laporan'], function () {
+    Route::get('/', [BendaharaLapkeuController::class, 'index']);
+    Route::post('/list', [BendaharaLapkeuController::class, 'list']);
+    Route::get('/{id}', [BendaharaLapkeuController::class, 'show']);
 });
 // Route Halaman Warga
 Route::get('/warga', [WelcomeController::class, 'warga']);
