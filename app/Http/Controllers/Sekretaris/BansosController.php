@@ -27,7 +27,7 @@ class BansosController extends Controller
         $bansos = BanSosModel::all();
         $warga = WargaModel::all();
 
-        return view('ketua.bansos.index', ['breadcrumb' => $breadcrumb, 'bansos' => $bansos, 'warga' => $warga, 'activeMenu' => $activeMenu]);
+        return view('sekretaris.bansos.index', ['breadcrumb' => $breadcrumb, 'bansos' => $bansos, 'warga' => $warga, 'activeMenu' => $activeMenu]);
     }
 
     public function list(Request $request)

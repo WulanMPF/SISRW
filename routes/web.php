@@ -86,10 +86,12 @@ Route::group(['prefix' => 'sekretaris/umkm'], function () {
     Route::get('/{id}', [SekretarisUmkmController::class, 'show']);
 });
 Route::group(['prefix' => 'sekretaris/bansos'], function () {
-    Route::get('/', [SekretarisBansosController::class, 'index']);
-    Route::get('/list', [SekretarisBansosController::class, 'list']);
-    Route::get('/{id}', [SekretarisBansosController::class, 'show']);
+    Route::get('/', [SekretarisBansosController::class, 'index'])->name('sekretaris.bansos.index');
+    Route::post('/list', [SekretarisBansosController::class, 'list'])->name('sekretaris.bansos.list');
+    Route::get('/{id}', [SekretarisBansosController::class, 'show'])->name('sekretaris.bansos.show');
 });
+
+
 
 // Route Halaman Bendahara RW
 Route::get('/bendahara', [WelcomeController::class, 'bendahara']);
