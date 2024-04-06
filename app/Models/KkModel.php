@@ -17,5 +17,10 @@ class KkModel extends Model
      * 
      * @var array
      */
-    protected $fillable = ['no_kk'];
+    protected $fillable = ['no_kk', 'nama_kepala_keluarga', 'rt_rw', 'alamat'];
+
+    public function kk(): BelongsTo
+    {
+        return $this->belongsTo(KkModel::class, 'kk_id', 'kk_id');
+    }
 }
