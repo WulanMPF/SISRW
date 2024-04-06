@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Ketua;
+namespace App\Http\Controllers\Sekretaris;
 
 use App\DataTables\WargaDataTable;
 use App\Http\Controllers\Controller;
@@ -11,9 +11,6 @@ use Yajra\DataTables\DataTables;
 
 class WargaController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index(WargaDataTable $dataTable)
     {
         $breadcrumb = (object) [
@@ -27,7 +24,7 @@ class WargaController extends Controller
         $warga = WargaModel::all();
         $kk = KkModel::all();
 
-        return view('ketua.warga.index', ['breadcrumb' => $breadcrumb, 'warga' => $warga, 'kk' => $kk, 'activeMenu' => $activeMenu]);
+        return view('sekretaris.warga.index', ['breadcrumb' => $breadcrumb, 'warga' => $warga, 'kk' => $kk, 'activeMenu' => $activeMenu]);
     }
 
     public function list(Request $request)
@@ -75,7 +72,7 @@ class WargaController extends Controller
 
         $activeMenu = 'warga';
 
-        return view('ketua.warga.index', ['breadcrumb' => $breadcrumb, 'kk' => $kk, 'activeMenu' => $activeMenu]);
+        return view('sekretaris.warga.index', ['breadcrumb' => $breadcrumb, 'kk' => $kk, 'activeMenu' => $activeMenu]);
     }
 
     public function store(Request $request)
@@ -110,7 +107,7 @@ class WargaController extends Controller
             'hubungan_keluarga'       => $request->hubungan_keluarga
         ]);
 
-        return redirect('/ketua/warga.index')->with('success', 'Data warga berhasil disimpan');
+        return redirect('/sekretaris/warga.index')->with('success', 'Data warga berhasil disimpan');
     }
 
     public function show(string $id)
@@ -125,7 +122,7 @@ class WargaController extends Controller
 
         $activeMenu = 'warga';
 
-        return view('ketua.warga.show', ['breadcrumb' => $breadcrumb, 'warga' => $warga, 'activeMenu' => $activeMenu]);
+        return view('sekretaris.warga.show', ['breadcrumb' => $breadcrumb, 'warga' => $warga, 'activeMenu' => $activeMenu]);
     }
 
     public function edit(string $id)
@@ -141,7 +138,7 @@ class WargaController extends Controller
 
         $activeMenu = 'warga';
 
-        return view('ketua.warga.edit', ['breadcrumb' => $breadcrumb, 'warga' => $warga, 'kk' => $kk, 'activeMenu' => $activeMenu]);
+        return view('sekretaris.warga.edit', ['breadcrumb' => $breadcrumb, 'warga' => $warga, 'kk' => $kk, 'activeMenu' => $activeMenu]);
     }
 
     public function update(Request $request, string $id)
@@ -176,22 +173,22 @@ class WargaController extends Controller
             'hubungan_keluarga'       => $request->hubungan_keluarga
         ]);
 
-        return redirect('/ketua/warga.index')->with('success', 'Data warga berhasil diubah');
+        return redirect('/sekretaris/warga.index')->with('success', 'Data warga berhasil diubah');
     }
 
     public function destroy(string $id)
     {
         $check = WargaModel::find($id);
         if (!$check) {
-            return redirect('/ketua/warga.index')->with('error', 'Data warga tidak ditemukan');
+            return redirect('/sekretaris/warga.index')->with('error', 'Data warga tidak ditemukan');
         }
 
         try {
             WargaModel::destroy($id);
 
-            return redirect('/ketua/warga.index')->with('success', 'Data warga berhasil dihapus');
+            return redirect('/sekretaris/warga.index')->with('success', 'Data warga berhasil dihapus');
         } catch (\Illuminate\Database\QueryException $e) {
-            return redirect('/ketua/warga.index')->with('error', 'Data warga gagal dihapus karena masih terdapat tabel lain yang terkait dengan data ini');
+            return redirect('/sekretaris/warga.index')->with('error', 'Data warga gagal dihapus karena masih terdapat tabel lain yang terkait dengan data ini');
         }
     }
 }

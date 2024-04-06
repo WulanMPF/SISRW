@@ -1,63 +1,74 @@
 <div class="sidebar">
-    <!-- SidebarSearch Form -->
-    <div class="form-inline mt-2">
-        <div class="input-group" data-widget="sidebar-search">
-            <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
-            <div class="input-group-append">
-                <button class="btn btn-sidebar">
-                    <i class="fas fa-search fa-fw"></i>
-                </button>
-            </div>
-        </div>
-    </div>
     <!-- Sidebar Menu -->
     <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
             <li class="nav-item">
-                <a href="{{ url('/') }}" class="nav-link {{ $activeMenu == 'dashboard' ? 'active' : '' }} ">
-                    <i class="nav-icon fas fa-tachometer-alt"></i>
+                <a href="{{ url('/sekretaris/') }}" class="nav-link {{ $activeMenu == 'dashboard' ? 'active' : '' }} ">
+                    <i class="nav-icon fas fa-th-large"></i>
                     <p>Dashboard</p>
                 </a>
-            </li>
-            <li class="nav-header">Data Pengguna</li>
             <li class="nav-item">
-                <a href="{{ url('/level') }}" class="nav-link {{ $activeMenu == 'level' ? 'active' : '' }} ">
-                    <i class="nav-icon fas fa-layer-group"></i>
-                    <p>Level User</p>
+                <a href="{{ url('/sekretaris/warga') }}" class="nav-link {{ $activeMenu == 'warga' ? 'active' : '' }} ">
+                    <i class="nav-icon fas  fa-users"></i>
+                    <p>Data Warga</p>
                 </a>
             </li>
             <li class="nav-item">
-                <a href="{{ url('/user') }}" class="nav-link {{ $activeMenu == 'user' ? 'active' : '' }}">
-                    <i class="nav-icon far fa-user"></i>
-                    <p>Data User</p>
-                </a>
-            </li>
-            <li class="nav-header">Data Barang</li>
-            <li class="nav-item">
-                <a href="{{ url('/kategori') }}" class="nav-link {{ $activeMenu == 'kategori' ? 'active' : '' }} ">
-                    <i class="nav-icon far fa-bookmark"></i>
-                    <p>Kategori Barang</p>
+                <a href="{{ url('/sekretaris/surat') }}" class="nav-link {{ $activeMenu == 'surat' ? 'active' : '' }}">
+                    <i class="nav-icon fas fa-envelope"></i>
+                    <p>Persuratan</p>
                 </a>
             </li>
             <li class="nav-item">
-                <a href="{{ url('/barang') }}" class="nav-link {{ $activeMenu == 'barang' ? 'active' : '' }} ">
-                    <i class="nav-icon far fa-list-alt"></i>
-                    <p>Data Barang</p>
-                </a>
-            </li>
-            <li class="nav-header">Data Transaksi</li>
-            <li class="nav-item">
-                <a href="{{ url('/stok') }}" class="nav-link {{ $activeMenu == 'stok' ? 'active' : '' }} ">
-                    <i class="nav-icon fas fa-cubes"></i>
-                    <p>Stok Barang</p>
+                <a href="{{ url('/sekretaris/pengumuman') }}" class="nav-link {{ $activeMenu == 'pengumuman' ? 'active' : '' }} ">
+                    <i class="nav-icon fas fa-bullhorn"></i>
+                    <p>Pengumuman</p>
                 </a>
             </li>
             <li class="nav-item">
-                <a href="{{ url('/transaksi') }}" class="nav-link {{ $activeMenu == 'transaksi' ? 'active' : '' }} ">
-                    <i class="nav-icon fas fa-cash-register"></i>
-                    <p>Transaksi Penjualan</p>
+                <a href="{{ url('/sekretaris/umkm') }}" class="nav-link {{ $activeMenu == 'umkm' ? 'active' : '' }} ">
+                    <i class="nav-icon fas fa-store"></i>
+                    <p>Data UMKM</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="{{ url('/sekretaris/bansos') }}" class="nav-link {{ $activeMenu == 'bansos' ? 'active' : '' }} ">
+                    <i class="nav-icon fas fa-hands-helping"></i>
+                    <p>Penerima BANSOS</p>
                 </a>
             </li>
         </ul>
     </nav>
 </div>
+
+<!-- sidebar.blade.php -->
+<style>
+    .nav-pills .nav-link.active,
+    .nav-pills .show>.nav-link {
+        background-color: #FFE6C0;
+        border-radius: 20px;
+        color: #463720;
+    }
+
+    .nav-pills .nav-link {
+        color: #463720;
+    }
+</style>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const currentUrl = window.location.href;
+
+        // Ambil semua link di sidebar
+        const navLinks = document.querySelectorAll('.nav-pills .nav-link');
+
+        // Loop melalui setiap link
+        navLinks.forEach(link => {
+            // Jika URL link sama dengan URL saat ini
+            if (link.href === currentUrl) {
+                // Tambahkan kelas 'active' ke link tersebut
+                link.classList.add('active');
+            }
+        });
+    });
+</script>
