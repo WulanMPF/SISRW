@@ -2,13 +2,10 @@
 
 use App\Http\Controllers\Ketua\DashboardController;
 use App\Http\Controllers\Ketua\WargaController;
-<<<<<<< Updated upstream
 use App\Http\Controllers\Ketua\UmkmController;
-=======
 use App\Http\Controllers\Sekretaris\DashboardController as SekretarisDashboardController;
 use App\Http\Controllers\Sekretaris\PengumumanController;
 use App\Http\Controllers\Sekretaris\WargaController as SekretarisWargaController;
->>>>>>> Stashed changes
 use App\Http\Controllers\WelcomeController;
 use Illuminate\Support\Facades\Route;
 
