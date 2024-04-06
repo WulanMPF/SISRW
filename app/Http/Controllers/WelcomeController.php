@@ -45,7 +45,7 @@ class WelcomeController extends Controller
         $breadcrumb = (object) [
             'title' => 'Selamat Datang, Bendahara RW',
             'date' => date('l, d F Y'),
-            'list' => ['Home', 'Welcome']
+            'list' => ['Home', 'Dashboard']
         ];
 
         $activeMenu = 'dashboard';
@@ -56,12 +56,13 @@ class WelcomeController extends Controller
     public function warga()
     {
         $breadcrumb = (object) [
-            'title' => 'Selamat Datang',
-            'list' => ['Home', 'Welcome']
+            'title' => 'Selamat Datang, Warga',
+            'date' => date('l, d F Y'),
+            'list' => ['Home', 'Dashboard']
         ];
 
         $activeMenu = 'dashboard';
 
-        return view('warga.index', ['breadcrumb' => $breadcrumb, 'activeMenu' => $activeMenu]);
+        return view('warga.dashboard', ['breadcrumb' => $breadcrumb, 'activeMenu' => $activeMenu]);
     }
 }
