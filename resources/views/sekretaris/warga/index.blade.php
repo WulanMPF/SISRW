@@ -22,7 +22,8 @@
                             <small class="form-text text-muted">Status Kependudukan</small>
                         </div>
                         <div class="col-md-8 text-right">
-                            <a class="btn btn-sm btn-primary mt-1 btn-tambah" href="{{ url('sekretaris/warga/create') }}">+ Tambah Warga</a>
+                            <a class="btn btn-sm mt-1 btn-tambah" href="{{ url('sekretaris/warga/create') }}">+ Tambah
+                                Warga</a>
                         </div>
                     </div>
                 </div>
@@ -44,12 +45,35 @@
 @endsection
 
 @push('css')
-<style>
-    .btn-tambah {
-        background-color: #BB955C;
-        border-color: #BB955C;
-    }
-</style>
+    <style>
+        #table_warga {
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        h3 {
+            /* width: 497px; */
+            color: #463720;
+            font-family: Poppins;
+            font-size: 15.005px;
+            font-style: normal;
+            font-weight: 800;
+            line-height: normal;
+        }
+
+        #table_warga thead {
+            background-color: #d9d2c7;
+            /* Warna latar belakang coklat */
+            color: #7F643C;
+            /* Warna teks putih */
+        }
+
+        .btn-tambah {
+            background-color: #BB955C;
+            border-color: #BB955C;
+            color: #ffffff;
+        }
+    </style>
 @endpush
 
 @push('js')
