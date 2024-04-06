@@ -25,7 +25,7 @@
                     </div>
                 </div>
             </div>
-            <table class="table table-bordered table-striped table-hover table-sm" id="table_pengaduan">
+            <table class="table table-bordered table-striped table-hover table-sm" id="table_pengaduan" style="text-align: center;">
                 <thead>
                     <tr>
                         <th>No</th>
@@ -43,6 +43,19 @@
 @endsection
 
 @push('css')
+    <style>
+        #table_pengaduan {
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        #table_pengaduan thead {
+            background-color: #d9d2c7;
+            /* Warna latar belakang coklat */
+            color: #7F643C;
+            /* Warna teks putih */
+        }
+    </style>
 @endpush
 
 @push('js')
@@ -58,13 +71,42 @@
                         d._status_pengaduan = $('#status_pengaduan').val();
                     }
                 },
-                columns: [
-                    { data: "DT_RowIndex", className: "text-center", orderable: false, searchable: false },
-                    { data: "nama_pelapor", className: "", orderable: true, searchable: true },
-                    { data: "jenis_pengaduan", className: "", orderable: true, searchable: true },
-                    { data: "tanggal_pengaduan", className: "", orderable: true, searchable: true },
-                    { data: "prioritas", className: "", orderable: true, searchable: true },
-                    { data: "status", className: "", orderable: false, searchable: false }
+                columns: [{
+                        data: "DT_RowIndex",
+                        className: "text-center",
+                        orderable: false,
+                        searchable: false
+                    },
+                    {
+                        data: "nama_pelapor",
+                        className: "",
+                        orderable: true,
+                        searchable: true
+                    },
+                    {
+                        data: "jenis_pengaduan",
+                        className: "",
+                        orderable: true,
+                        searchable: true
+                    },
+                    {
+                        data: "tanggal_pengaduan",
+                        className: "",
+                        orderable: true,
+                        searchable: true
+                    },
+                    {
+                        data: "prioritas",
+                        className: "",
+                        orderable: true,
+                        searchable: true
+                    },
+                    {
+                        data: "status",
+                        className: "",
+                        orderable: false,
+                        searchable: false
+                    }
                 ]
             });
 
