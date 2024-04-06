@@ -18,7 +18,7 @@ class WargaModel extends Model
      * @var array
      */
     protected $fillable = [
-        'kk_id', 'nik', 'nama_warga', 'tempat_tanggal_lahir', 
+        'kk_id', 'nik', 'nama_warga', 'tempat_tgl_lahir', 
         'jenis_kelamin', 'rt_rw', 'kel_desa', 'kecamatan', 
         'agama', 'status_perkawinan', 'pekerjaan', 'hubungan_keluarga'
     ];
