@@ -1,7 +1,7 @@
 @extends('layout.sekretaris.template')
 
 @section('content')
-    <div class="row justify-content-center">
+    <div class="row justify-content-center" style="font-family: Poppins;">
         <!-- Card Pertama dan Kedua -->
         <div class="col-lg-6 mb-4">
             <!-- Card Pertama -->
@@ -65,3 +65,16 @@
         </div>
     </div>
 @endsection
+
+@push('css')
+    <style>
+        .card {
+            background-color: #E5E2DE; /* Warna latar belakang card */
+            color: #463720; /* Warna font */
+        }
+
+        .card-body i {
+            color: #463720; /* Warna ikon */
+        }
+    </style>
+@endpush
