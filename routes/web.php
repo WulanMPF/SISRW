@@ -77,6 +77,10 @@ Route::group(['prefix' => 'sekretaris/pengumuman'], function () {
     Route::get('/', [PengumumanController::class, 'index']);
     Route::get('/{id}', [PengumumanController::class, 'show']);
 });
+Route::group(['prefix' => 'sekretaris/bansos'], function () {
+    Route::get('/', [BansosController::class, 'index']);
+    Route::get('/{id}', [BansosController::class, 'show']);
+});
 
 // Route Halaman Bendahara RW
 Route::get('/bendahara', [WelcomeController::class, 'bendahara']);
