@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Sekretaris;
 
 use App\Http\Controllers\Controller;
-use App\Models\BanSosModel;
+use App\Models\BansosModel;
 use App\Models\KkModel;
 use App\Models\WargaModel;
 use Illuminate\Http\Request;
@@ -24,7 +24,7 @@ class BansosController extends Controller
 
         $activeMenu = 'bansos';
 
-        $bansos = BanSosModel::all();
+        $bansos = BansosModel::all();
         $warga = WargaModel::all();
 
         return view('sekretaris.bansos.index', ['breadcrumb' => $breadcrumb, 'bansos' => $bansos, 'warga' => $warga, 'activeMenu' => $activeMenu]);
@@ -32,7 +32,7 @@ class BansosController extends Controller
 
     public function list(Request $request)
     {
-        $bansoss = BanSosModel::select('bansos_id', 'kk_id', 'jenis_bansos')
+        $bansoss = BansosModel::select('bansos_id', 'kk_id', 'jenis_bansos')
             ->with('kk_id');
 
 
@@ -71,7 +71,7 @@ class BansosController extends Controller
             'kk_id'         => 'required|integer',
             'jenis_bansos'  => 'required|string|max:25'
         ]);
-        BanSosModel::create([
+        BansosModel::create([
             'kk_id'           => $request->kk_id,
             'jenis_bansos'    => $request->jenis_bansos
         ]);
@@ -80,7 +80,7 @@ class BansosController extends Controller
     }
     public function show(string $id)
     {
-        $bansos = BanSosModel::with('kk')->find($id);
+        $bansos = BansosModel::with('kk')->find($id);
         $warga = WargaModel::with('kk')->find($id);
         $kk = KkModel::all();
 
@@ -100,7 +100,7 @@ class BansosController extends Controller
     }
     public function edit(string $id)
     {
-        $bansos = BanSosModel::find($id);
+        $bansos = BansosModel::find($id);
         $kk = KkModel::all();
 
         $breadcrumb = (object)[
@@ -123,7 +123,7 @@ class BansosController extends Controller
             'kk_id'         => 'required|integer',
             'jenis_bansos'  => 'required|string|max:25',
         ]);
-        BanSosModel::find($id)->update([
+        BansosModel::find($id)->update([
             'kk_id'         => $request->kk_id,
             'jenis_bansos'  => $request->jenis_bansos
         ]);
@@ -133,7 +133,7 @@ class BansosController extends Controller
 
     public function destroy(string $id)
     {
-        $check = BanSosModel::find($id);
+        $check = BansosModel::find($id);
         if (!$check) {
             return redirect('/ketua/bansos')->with('error', 'Data penerima bansos tidak ditemukan');
         }
