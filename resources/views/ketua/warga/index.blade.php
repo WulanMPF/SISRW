@@ -1,7 +1,7 @@
 @extends('layout.ketua.template')
 
 @section('content')
-    <div class="card card-outline card-primary">
+    <div class="card card-outline card-light">
         <div class="card-body">
             @if (session('success'))
                 <div class="alert alert-success">{{ session('success') }}</div>
@@ -14,10 +14,10 @@
                     <div class="form-group row">
                         <label class="col-1 control-label col-form-label">Filter:</label>
                         <div class="col-3">
-                            <select class="form-control" id="level_id" name="level_id" required>
-                                <option value="">Tampilkan</option>
-                                <option">Tinggal Tetap</option>
-                                    <option">Tinggal Sementara</option>
+                            <select class="form-control" id="status_warga" name="status_warga" required>
+                                <option value="Tampilkan"></option>
+                                <option>Tinggal Tetap</option>
+                                <option>Tinggal Sementara</option>
                             </select>
                             <small class="form-text text-muted">Status Kependudukan</small>
                         </div>
@@ -49,11 +49,11 @@
             var dataWarga = $('#table_warga').DataTable({
                 serverSide: true,
                 ajax: {
-                    "url": "{{ url('warga/list') }}",
+                    "url": "{{ url('ketua/warga/list') }}",
                     "dataType": "json",
                     "type": "POST",
                     "data": function(d) {
-                        d._id = $('#kategori_id').val();
+                        d._status_warga = $('#status_warga').val();
                     }
                 },
                 columns: [{
@@ -62,34 +62,34 @@
                     orderable: false,
                     searchable: false
                 }, {
-                    data: "barang_id",
+                    data: "kk.no_kk",
                     className: "",
                     orderable: true,
                     searchable: true
                 }, {
-                    data: "kategori.kategori_nama",
+                    data: "kk.nama_kepala_keluarga",
                     className: "",
                     orderable: true,
                     searchable: true
                 }, {
-                    data: "barang_kode",
+                    data: "kk.alamat",
                     className: "",
                     orderable: true,
                     searchable: true
                 }, {
-                    data: "barang_nama",
+                    data: "kk.rt_rw",
                     className: "",
                     orderable: true,
                     searchable: true
                 }, {
-                    data: "aksi",
+                    data: "Anggota Keluarga",
                     className: "",
                     orderable: false,
                     searchable: false
                 }]
             });
 
-            S('#kategori_id').on('change', function() {
+            S('#kk_id').on('change', function() {
                 dataBarang.ajax.reload();
             });
 
