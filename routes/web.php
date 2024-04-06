@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Ketua\DashboardController;
 use App\Http\Controllers\Ketua\WargaController;
+use App\Http\Controllers\Ketua\UmkmController;
 use App\Http\Controllers\WelcomeController;
 use Illuminate\Support\Facades\Route;
 
@@ -34,3 +35,9 @@ Route::get('/sekretaris', [WelcomeController::class, 'sekretaris']);
 Route::get('/bendahara', [WelcomeController::class, 'bendahara']);
 
 Route::get('/warga', [WelcomeController::class, 'warga']);
+
+Route::group(['prefix' => 'ketua/umkm'], function () {
+    Route::get('/', [UmkmController::class, 'index']);
+    Route::post('/list', [UmkmController::class, 'list']);
+    Route::get('/{id}', [UmkmController::class, 'show']);
+});
