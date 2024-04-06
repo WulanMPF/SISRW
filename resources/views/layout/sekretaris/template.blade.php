@@ -31,6 +31,7 @@
         .brand-link {
             padding-bottom: 10px !important;
             border-bottom: none !important;
+            font-family: Poppins;
         }
 
         .brand-link img {
