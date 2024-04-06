@@ -44,7 +44,7 @@
     <style>
         #table_warga {
             border-radius: 10px;
-            /* Menambahkan radius */
+            overflow: hidden;
         }
 
         h3 {
@@ -115,7 +115,6 @@
             S('#kk_id').on('change', function() {
                 dataWarga.ajax.reload();
             });
-
         });
     </script>
 @endpush
