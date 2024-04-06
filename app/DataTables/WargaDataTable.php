@@ -2,7 +2,7 @@
 
 namespace App\DataTables;
 
-use App\Models\Warga;
+use App\Models\WargaModel;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Yajra\DataTables\EloquentDataTable;
 use Yajra\DataTables\Html\Builder as HtmlBuilder;
@@ -29,7 +29,7 @@ class WargaDataTable extends DataTable
     /**
      * Get the query source of dataTable.
      */
-    public function query(Warga $model): QueryBuilder
+    public function query(WargaModel $model): QueryBuilder
     {
         return $model->newQuery();
     }
@@ -62,15 +62,27 @@ class WargaDataTable extends DataTable
     public function getColumns(): array
     {
         return [
-            Column::computed('action')
-                  ->exportable(false)
-                  ->printable(false)
-                  ->width(60)
-                  ->addClass('text-center'),
-            Column::make('id'),
-            Column::make('add your columns'),
+            Column::make('warga_id'),
+            Column::make('nik'),
+            Column::make('kk_id'),
+            Column::make('nama_warga'),
+            Column::make('tempat_tgl_lahir'),
+            Column::make('hubungan_keluarga'),
+            Column::make('jenis_kelamin'),
+            Column::make('rt_rw'),
+            Column::make('kel_desa'),
+            Column::make('kecamatan'),
+            Column::make('agama'),
+            Column::make('status_perkawinan'),
+            Column::make('pekerjaan'),
+            Column::make('status_warga'),
             Column::make('created_at'),
             Column::make('updated_at'),
+            Column::computed('action')
+                ->exportable(false)
+                ->printable(false)
+                ->width(150)
+                ->addClass('text-center')
         ];
     }
 
