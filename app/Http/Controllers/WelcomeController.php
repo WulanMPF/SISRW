@@ -17,7 +17,8 @@ class WelcomeController extends Controller
     public function ketua()
     {
         $breadcrumb = (object) [
-            'title' => 'Selamat Datang',
+            'title' => 'Selamat Datang, Ketua RW',
+            'date' => date('l, d F Y'),
             'list' => ['Home', 'Dashboard']
         ];
 
