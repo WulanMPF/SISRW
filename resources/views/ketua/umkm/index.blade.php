@@ -15,11 +15,12 @@
                         <label class="col-1 control-label col-form-label">Filter:</label>
                         <div class="col-3">
                             <select name="jenis_usaha" id="jenis_usaha" class="form-control" required>
-                                <option value="">- Semua -</option>
+                                <option value="">- Tampilkan Semua -</option>
                                 @foreach ($umkm as $item)
                                     <option value="{{ $item->umkm_id }}">{{ $item->jenis_usaha }}</option>
                                 @endforeach
                             </select>
+                            <small class="form-text text-muted">Jenis Usaha</small>
                         </div>
                     </div>
                 </div>
@@ -28,7 +29,8 @@
             <div class="row">
                 <div class="col-md-6">
                     <h3>Pengajuan UMKM</h3>
-                    <table class="table table-bordered table-hover table-sm" id="table_ajukan_umkm" style="text-align: center;">
+                    <table class="table table-bordered table-hover table-sm" id="table_ajukan_umkm"
+                        style="text-align: center;">
                         <thead>
                             <tr>
                                 <th>ID</th>

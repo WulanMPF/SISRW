@@ -21,6 +21,7 @@
                                 <option value="Bansos PKH">Bansos PKH</option>
                                 <option value="Bansos Tunai Akibat Covid 19">Bansos Tunai Akibat Covid 19</option>
                             </select>
+                            <small class="form-text text-muted">Jenis Bansos</small>
                         </div>
                     </div>
                 </div>

@@ -15,10 +15,11 @@
                         <label class="col-1 control-label col-form-label">Filter:</label>
                         <div class="col-3">
                             <select class="form-control" id="jenis_laporan" name="jenis_laporan" required>
-                                <option value="">Tampilkan Semua</option>
+                                <option value="">- Tampilkan Semua -</option>
                                 <option value="Pemasukan">Pemasukan</option>
                                 <option value="Pengeluaran">Pengeluaran</option>
                             </select>
+                            <small class="form-text text-muted">Jenis Laporan</small>
                         </div>
                     </div>
                 </div>
