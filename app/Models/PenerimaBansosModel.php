@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class BansosModel extends Model
+class PenerimaBansosModel extends Model
 {
     use HasFactory;
     protected $table = 'penerima_bansos'; //mendefinisikan nama tabel yg digunakan oleh model
