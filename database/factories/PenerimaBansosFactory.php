@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\PenerimaBansos;
+use App\Models\PenerimaBansosModel;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\DB;
 
@@ -13,7 +14,7 @@ class PenerimaBansosFactory extends Factory
      *
      * @var string
      */
-    protected $model = PenerimaBansos::class;
+    protected $model = PenerimaBansosModel::class;
 
     /**
      * Define the model's default state.
