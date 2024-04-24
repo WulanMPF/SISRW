@@ -26,21 +26,21 @@
                     <div class="inner">
                         <h4>Iuran Bulanan</h4>
 
-                        <p>Rp 20.000,-</p>
+                        <p><span style="color: green;">Rp. 10.000,-</span></p>
                     </div>
                 </div>
                 <div class="small-box bg-light">
                     <div class="inner">
                         <h4>Iuran Sampah</h4>
 
-                        <p>Rp 10.000,-</p>
+                        <p><span style="color: green;">Rp. 10.000,-</span></p>
                     </div>
                 </div>
                 <div class="small-box bg-light">
                     <div class="inner">
                         <h4>Iuran Keamanan</h4>
 
-                        <p>Rp 10.000,-</p>
+                        <p><span style="color: green;">Rp. 10.000,-</span></p>
                     </div>
                 </div>
             </div>
@@ -76,6 +76,12 @@
        
     .small-box {
         margin-right: 50px; /* Menambahkan margin kanan sebesar 10 piksel */
+        color: #463720;
+        font-family: Poppins;
+        font-size: 23.95px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: normal;
     }
 
     </style>
