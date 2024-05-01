@@ -56,7 +56,7 @@
         <aside class="main-sidebar sidebar-light elevation-4">
             <!-- Brand Logo -->
             <div class="brand-link">
-                <img src="{{ asset('adminlte/dist/img/logo3.png') }}" alt="SISRW Logo">
+                <img src="{{ asset('adminlte/dist/img/sisrw/logo3.png') }}" alt="SISRW Logo">
                 <span class="brand-text font-weight-bold" style="font-size: 12px;">SISTEM INFORMASI RW 05</span>
             </div>
 
