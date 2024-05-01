@@ -15,9 +15,13 @@ use App\Http\Controllers\Sekretaris\BansosController as SekretarisBansosControll
 use App\Http\Controllers\Sekretaris\WargaController as SekretarisWargaController;
 use App\Http\Controllers\Bendahara\IuranController as BendaharaIuranController;
 use App\Http\Controllers\Bendahara\LapkeuController as BendaharaLapkeuController;
+use App\Http\Controllers\Bendahara\ProfileController as BendaharaProfileController;
+use App\Http\Controllers\Ketua\ProfileController;
+use App\Http\Controllers\Sekretaris\ProfileController as SekretarisProfileController;
 use App\Http\Controllers\Sekretaris\SuratController as SekretarisSuratController;
 use App\Http\Controllers\Warga\IuranController as WargaIuranController;
 use App\Http\Controllers\Warga\PengaduanController as WargaPengaduanController;
+use App\Http\Controllers\Warga\ProfileController as WargaProfileController;
 use App\Http\Controllers\WelcomeController;
 use Illuminate\Support\Facades\Route;
 
@@ -76,6 +80,10 @@ Route::group(['prefix' => 'ketua/iuran'], function () {
     Route::get('/', [IuranController::class, 'index']);
     Route::post('/list', [IuranController::class, 'list']);
 });
+Route::group(['prefix' => 'ketua/profile'], function () {
+    Route::get('/', [ProfileController::class, 'index']);
+    // Route::post('/list', [ProfileController::class, 'list']);
+});
 
 // Route Halaman Sekretaris RW
 Route::get('/sekretaris', [WelcomeController::class, 'sekretaris']);
@@ -106,8 +114,9 @@ Route::group(['prefix' => 'sekretaris/bansos'], function () {
     Route::post('/list', [SekretarisBansosController::class, 'list'])->name('sekretaris.bansos.list');
     Route::get('/{id}', [SekretarisBansosController::class, 'show'])->name('sekretaris.bansos.show');
 });
-
-
+Route::group(['prefix' => 'sekretaris/profile'], function () {
+    Route::get('/', [SekretarisProfileController::class, 'index']);
+});
 
 // Route Halaman Bendahara RW
 Route::get('/bendahara', [WelcomeController::class, 'bendahara']);
@@ -121,13 +130,18 @@ Route::group(['prefix' => 'bendahara/laporan'], function () {
     Route::post('/list', [BendaharaLapkeuController::class, 'list']);
     Route::get('/{id}', [BendaharaLapkeuController::class, 'show']);
 });
+Route::group(['prefix' => 'bendahara/profile'], function () {
+    Route::get('/', [BendaharaProfileController::class, 'index']);
+});
+
 // Route Halaman Warga
 Route::get('/warga', [WelcomeController::class, 'warga']);
-
 Route::group(['prefix' => 'warga/iuran'], function () {
     Route::get('/', [WargaIuranController::class, 'index']);
     Route::post('/list', [WargaIuranController::class, 'list']);
     Route::get('/{id}', [WargaIuranController::class, 'show']);
 
 });
-
+Route::group(['prefix' => 'warga/profile'], function () {
+    Route::get('/', [WargaProfileController::class, 'index']);
+});
