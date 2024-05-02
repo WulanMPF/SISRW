@@ -66,7 +66,7 @@
         </aside>
 
         <!-- Content Wrapper. Contains page content -->
-        <div class="content-wrapper">
+        <div class="content-wrapper" style="background-color: #FFFFFF">
             <!-- Content Header (Page header) -->
             @include('layout.bendahara.breadcrumb')
 
