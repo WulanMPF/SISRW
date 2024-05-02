@@ -15,11 +15,22 @@
                         <label class="col-1 control-label col-form-label">Filter:</label>
                         <div class="col-3">
                             <select class="form-control" id="status_warga" name="status_warga" required>
-                                <option value="Tampilkan"></option>
+                                <option value="Tampilkan">Semua</option>
                                 <option>Tinggal Tetap</option>
                                 <option>Tinggal Sementara</option>
                             </select>
                             <small class="form-text text-muted">Status Kependudukan</small>
+                        </div>
+                        <div class="col-md-8 text-right">
+                            <a class="btn btn-sm mt-1 btn-tambah" data-toggle="dropdown">+ Tambah Warga</a>
+                            <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                                <a href="{{ url('/ketua/warga/create-tetap') }}" class="dropdown-item">
+                                    Tinggal Tetap
+                                </a>
+                                <a href="{{ url('/ketua/warga/create-sementara') }}" class="dropdown-item">
+                                    Tinggal Sementara
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -62,6 +73,12 @@
             /* Warna latar belakang coklat */
             color: #7F643C;
             /* Warna teks putih */
+        }
+
+        .btn-tambah {
+            background-color: #BB955C;
+            border-color: #BB955C;
+            color: #ffffff;
         }
     </style>
 @endpush
