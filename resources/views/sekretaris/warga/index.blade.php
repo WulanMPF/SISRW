@@ -15,7 +15,7 @@
                         <label class="col-1 control-label col-form-label">Filter:</label>
                         <div class="col-3">
                             <select class="form-control" id="status_warga" name="status_warga" required>
-                                <option value="Tampilkan"></option>
+                                <option value="Tampilkan">Semua</option>
                                 <option>Tinggal Tetap</option>
                                 <option>Tinggal Sementara</option>
                             </select>
