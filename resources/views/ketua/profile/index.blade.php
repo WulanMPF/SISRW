@@ -61,7 +61,7 @@
                     Ketua RW
                 </li>
             </ul>
-            <button class="btn-logout">Log Out</button>
+            <a class ="btn-logout" href="{{ url('/') }}">Log Out</a>
         </div>
     </div>
 @endsection
