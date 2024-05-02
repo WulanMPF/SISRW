@@ -68,7 +68,7 @@ class WargaController extends Controller
 
         $activeMenu = 'warga';
 
-        return view('ketua.warga.index', ['breadcrumb' => $breadcrumb, 'kk' => $kk, 'activeMenu' => $activeMenu]);
+        return view('ketua.warga.create', ['breadcrumb' => $breadcrumb, 'kk' => $kk, 'activeMenu' => $activeMenu]);
     }
 
     public function store(Request $request)
