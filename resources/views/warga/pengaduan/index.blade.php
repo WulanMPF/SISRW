@@ -24,7 +24,7 @@
                     <div class="form-group row">
                         <label for="kategori" class="col-sm-3 col-form-label">Kategori:</label>
                         <div class="col-sm-9">
-                            <select id="kategori" name="kategori" class="form-control" required>
+                            <select id="kategori" name="kategori" class="form-control" style="font-family: 'Poppins', sans-serif;"required>
                                 <option value="">Pilih Kategori</option>
                                 <option value="Tinggi">Tinggi</option>
                                 <option value="Sedang">Sedang</option>
@@ -62,14 +62,20 @@
 
 @push('css')
 <style>
+    body {
+    font-family: 'Poppins', sans-serif;
+}
+
     .form-group  {
         color: #463720;
         font-family: Poppins;
         font-size: 15px;
         font-style: normal;
-        font-weight: 500;
+        font-weight: 100;
         line-height: normal;
     }
+    
+  
     
     .btn-submit {
         background-color: #BB955C;
@@ -78,9 +84,10 @@
         font-family: Poppins;
         font-size: 15px;
         font-style: normal;
-        font-weight: 600;
+        font-weight: 400;
         line-height: normal;
         margin-left: 50%;
+        border-radius: 10px;
 
     }
     .form-horizontal .form-group {
