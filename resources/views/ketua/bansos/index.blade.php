@@ -2,6 +2,12 @@
 
 @section('content')
     <div class="card card-outline card-light">
+        <div class="card-header">
+            {{-- <h3 class="card-title">{{ $page->title }}</h3> --}}
+            <div class="card-tools">
+                <a class="btn btn-sm mt-1" id="tambah" href="{{ url('ketua/bansos/create') }}">Tambah</a>
+            </div>
+        </div>
         <div class="card-body">
             @if (session('success'))
                 <div class="alert alert-success">{{ session('success') }}</div>
@@ -55,6 +61,14 @@
             /* Warna latar belakang coklat */
             color: #7F643C;
             /* Warna teks putih */
+        }
+
+        #tambah {
+            background-color: #d9d2c7;
+            margin: 15%;
+            margin-left: 0;
+            color: black;
+            border-radius: 15%;
         }
     </style>
 @endpush

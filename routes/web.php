@@ -66,6 +66,8 @@ Route::group(['prefix' => 'ketua/umkm'], function () {
 Route::group(['prefix' => 'ketua/bansos'], function () {
     Route::get('/', [BansosController::class, 'index']);
     Route::post('/list', [BansosController::class, 'list']);
+    Route::get('/create', [BansosController::class, 'create']);
+    Route::post('/', [BansosController::class, 'store']);
     Route::get('/{id}', [BansosController::class, 'show']);
 });
 Route::group(['prefix' => 'ketua/laporan'], function () {
@@ -141,7 +143,6 @@ Route::group(['prefix' => 'warga/iuran'], function () {
     Route::get('/', [WargaIuranController::class, 'index']);
     Route::post('/list', [WargaIuranController::class, 'list']);
     Route::get('/{id}', [WargaIuranController::class, 'show']);
-
 });
 Route::group(['prefix' => 'warga/profile'], function () {
     Route::get('/', [WargaProfileController::class, 'index']);

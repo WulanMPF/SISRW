@@ -5,6 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+
 
 class PenerimaBansosModel extends Model
 {
@@ -18,8 +20,8 @@ class PenerimaBansosModel extends Model
         'kk_id',
         'jenis_bansos'
     ];
-    public function kk(): BelongsTo
+    public function kk(): HasMany
     {
-        return $this->belongsTo(KkModel::class, 'kk_id', 'kk_id');
+        return $this->HasMany(KkModel::class, 'kk_id', 'kk_id');
     }
 }

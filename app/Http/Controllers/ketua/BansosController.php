@@ -54,6 +54,7 @@ class BansosController extends Controller
     {
         $breadcrumb = (object)[
             'title' => 'Tambah Data Penerima Bansos',
+            'date' => date('l, d F Y'),
             'list' => ['Home', 'Penerima Bansos', 'Tambah']
         ];
         $page = (object)[
