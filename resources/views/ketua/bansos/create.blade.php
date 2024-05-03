@@ -41,8 +41,8 @@
                 <div class="form-group row">
                     <label class="col-1 control-label col-form-label"></label>
                     <div class="col-11">
-                        <button type="submit" class="btn btn-primary btn-sm">Simpan</button>
-                        <a class="btn btn-sm btn-default ml-1" href="{{ url('barang') }}">Kembali</a>
+                        <button type="submit" class="btn btn-sm btn-simpan">Simpan</button>
+                        {{-- <a class="btn btn-sm btn-default ml-1" href="{{ url('bansos') }}">Kembali</a> --}}
                     </div>
                 </div>
             </form>
@@ -61,6 +61,13 @@
             /* Warna latar belakang coklat */
             color: #7F643C;
             /* Warna teks putih */
+        }
+
+        .btn-simpan {
+            background-color: #d9d2c7;
+            margin-left: 0;
+            color: black;
+            border-radius: 15%;
         }
     </style>
 @endpush
