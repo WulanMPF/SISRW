@@ -27,7 +27,7 @@ class UmkmController extends Controller
         return view('warga.umkm.index', ['breadcrumb' => $breadcrumb, 'umkm' => $umkm, 'warga' => $warga, 'activeMenu' => $activeMenu]);
     }
 
-    public function list(Request $request)
+    /*public function list(Request $request)
     {
         $umkm = UmkmModel::select('nama_usaha', 'alamat_usaha', 'jenis_usaha', 'status_usaha', 'deskripsi', 'lampiran')
             ->with('warga_id');
@@ -46,7 +46,7 @@ class UmkmController extends Controller
 
             ->rawColumns(['aksi'])
             ->make(true);
-    }
+    }*/
     public function create()
     {
         $breadcrumb = (object) [
