@@ -31,7 +31,7 @@
                     <div class="card-body">
                         <h5 class="card-title"><strong>{{ $item->nama_usaha }}</strong></h5>
                         <p class="card-text">{{ $item->deskripsi }}</p>
-                        <a href="/umkm/{{ $item->id }}" class="btn" id="button">Baca selengkapnya</a>
+                        <a href="umkm/{{ $item->umkm_id }}" class="btn" id="button">Baca selengkapnya</a>
                     </div>
                 </div>
             @endforeach
