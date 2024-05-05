@@ -40,7 +40,7 @@ class UmkmController extends Controller
         return DataTables::of($umkm)
             ->addIndexColumn() // Menambahkan kolom index / no urut (default nmaa kolom: DT_RowINdex)
             ->addColumn('aksi', function ($umkm) {
-                $btn = '<a href="' . url('/bansos/' . $umkm->umkm_id) . '" class="btn btn-info btn-sm">Lihat Detail</a>  &nbsp;';
+                $btn = '<a href="' . url('/umkm/' . $umkm->umkm_id) . '" class="btn btn-info btn-sm">Lihat Detail</a>  &nbsp;';
                 return $btn;
             })
 
@@ -84,7 +84,7 @@ class UmkmController extends Controller
             'lampiran' => $request->image->hashName()
         ]);
 
-        return redirect('/warga/bansos')->with('success', 'Data UMKM berhasil diajukans');
+        return redirect('/warga/umkm')->with('success', 'Data UMKM berhasil diajukans');
     }
     public function show(string $id)
     {
