@@ -21,6 +21,7 @@ use App\Http\Controllers\Sekretaris\ProfileController as SekretarisProfileContro
 use App\Http\Controllers\Sekretaris\SuratController as SekretarisSuratController;
 use App\Http\Controllers\Warga\IuranController as WargaIuranController;
 use App\Http\Controllers\Warga\PengaduanController as WargaPengaduanController;
+use App\Http\Controllers\Warga\UmkmController as WargaUmkmController;
 use App\Http\Controllers\Warga\ProfileController as WargaProfileController;
 use App\Http\Controllers\WelcomeController;
 use Illuminate\Support\Facades\Route;
@@ -149,8 +150,14 @@ Route::group(['prefix' => 'warga/pengaduan'], function () {
     Route::get('/', [WargaPengaduanController::class, 'index']);
     Route::post('/list', [WargaPengaduanController::class, 'list']);
     Route::post('/pengaduan', [PengaduanController::class, 'store'])->name('pengaduan.store');
+});
 
-
+Route::group(['prefix' => 'warga/umkm'], function () {
+    Route::get('/', [WargaUmkmController::class, 'index']);
+    Route::post('/list', [WargaUmkmController::class, 'list']);
+    Route::get('/create', [WargaUmkmController::class, 'create']);
+    Route::post('/', [WargaUmkmController::class, 'store']);
+    Route::get('/{id}', [WargaUmkmController::class, 'show']);
 });
 
 Route::group(['prefix' => 'warga/profile'], function () {
