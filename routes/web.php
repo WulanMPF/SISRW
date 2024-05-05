@@ -156,7 +156,7 @@ Route::group(['prefix' => 'warga/umkm'], function () {
     Route::get('/', [WargaUmkmController::class, 'index']);
     Route::post('/list', [WargaUmkmController::class, 'list']);
     Route::get('/create', [WargaUmkmController::class, 'create']);
-    Route::post('/', [WargaUmkmController::class, 'store']);
+    Route::post('/', [WargaUmkmController::class, 'store'])->name('umkm.store');
     Route::get('/{id}', [WargaUmkmController::class, 'show']);
 });
 

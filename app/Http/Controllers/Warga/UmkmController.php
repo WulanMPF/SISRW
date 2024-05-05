@@ -69,10 +69,10 @@ class UmkmController extends Controller
             'warga_id'    => 'required|integer',
             'nama_usaha'  => 'required|string|max:20',
             'alamat_usaha' => 'required|string|max:50',
-            'jenis_usaha' => 'required|string|max:10',
+            'jenis_usaha' => 'required|string|max:30',
             'status_usaha' => 'required',
             'deskripsi' => 'required|string|max:200',
-            'lampiran' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
+            'lampiran' => 'required|image|mimes:jpeg,png,jpg,svg|max:2048'
         ]);
         UmkmModel::create([
             'warga_id'    => $request->warga_id,
@@ -81,7 +81,7 @@ class UmkmController extends Controller
             'jenis_usaha' => $request->jenis_usaha,
             'status_usaha' => $request->status_usaha,
             'deskripsi' => $request->deskripsi,
-            'lampiran' => $request->image->hashName()
+            'lampiran' => $request->lampiran->hashName()
         ]);
 
         return redirect('/warga/umkm')->with('success', 'Data UMKM berhasil diajukans');

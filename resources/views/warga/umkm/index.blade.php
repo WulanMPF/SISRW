@@ -22,7 +22,7 @@
         </div>
         {{-- END OF TESTING VIEW --}}
 
-        {{-- Code disesuaikan dengan pemgambilan data dari database - masih perlu perbaikan --}}
+        {{-- Code disesuaikan dengan pemgambilan data dari database - masih perlu perbaikan PADA SOURCE IMG --}}
         <div class="d-flex flex-wrap overflow-auto flex-container">
             @foreach ($umkm as $item)
                 <div class="card">

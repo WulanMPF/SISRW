@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 
 class UmkmModel extends Model
 {
@@ -16,5 +17,11 @@ class UmkmModel extends Model
     public function warga(): HasMany
     {
         return $this->hasMany(WargaModel::class, 'warga_id', 'warga_id');
+    }
+    protected function image(): Attribute
+    {
+        return Attribute::make(
+            get: fn ($lampiran) => url('/storage/posts/' . $lampiran),
+        );
     }
 }
