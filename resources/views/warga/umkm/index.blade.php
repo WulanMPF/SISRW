@@ -49,27 +49,33 @@
 
             .card {
                 width: 18rem;
-                margin-right: 2.5rem
+                margin-right: 2.75rem;
+                margin-bottom: 2.5rem;
             }
 
             #tambah {
-                background-color: #d9d2c7;
+                background-color: #cbbeab;
                 margin-left: 0;
                 padding-left: 2rem;
                 color: black;
                 border-radius: 1rem;
                 font-size: 13px;
                 padding-right: 2rem;
+                margin-right: 3.2rem;
             }
 
             #button {
-                background-color: #d9d2c7;
+                background-color: #E2D4BF;
                 margin-left: auto;
                 padding-left: 1rem;
                 color: black;
                 border-radius: 1rem;
                 font-size: 11px;
                 padding-right: 1rem;
+            }
+
+            a {
+                float: right;
             }
         </style>
     @endpush
