@@ -13,7 +13,7 @@
                 <img src="https://asset.kompas.com/crops/BUpR77ytcXFkAaUjxUZtgAgSYCA=/54x0:661x405/1200x800/data/photo/2024/04/26/662b7b4be821d.jpg"
                     class="card-img-top" alt="...">
                 <div class="card-body">
-                    <h5 class="card-title">Toko Madura Bik Eem</h5>
+                    <h5 class="card-title"><strong>Toko Madura Bik Eem</strong></h5>
                     <p class="card-text">Toko Madura Bik Eem adalah tempat yang sempurna untuk memenuhi segala ...
                     </p>
                     <a href="umkm/1" class="btn" id="button">Baca selengkapnya</a>
@@ -29,7 +29,7 @@
                     {{-- insert src img  --}}
                     <img src="..." class="card-img-top" alt="...">
                     <div class="card-body">
-                        <h5 class="card-title">{{ $item->nama_usaha }}</h5>
+                        <h5 class="card-title"><strong>{{ $item->nama_usaha }}</strong></h5>
                         <p class="card-text">{{ $item->deskripsi }}</p>
                         <a href="/umkm/{{ $item->id }}" class="btn" id="button">Baca selengkapnya</a>
                     </div>
@@ -40,6 +40,19 @@
 
     @push('css')
         <style>
+            body {
+                font-family: 'Poppins', sans-serif;
+            }
+
+            h5 {
+                font-weight: bold;
+                padding-bottom: 1rem;
+            }
+
+            .card-body {
+                /* padding-left: 1rem */
+            }
+
             .flex-container {
                 display: flex;
                 flex-wrap: wrap;
