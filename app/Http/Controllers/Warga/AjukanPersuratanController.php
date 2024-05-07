@@ -28,7 +28,11 @@ class AjukanPersuratanController extends Controller
             (object) ['id' => 1, 'name' => 'Surat Keterangan Belum Menikah', 'size' => 345],
             (object) ['id' => 2, 'name' => 'Surat Kehilangan', 'size' => 1234],
             (object) ['id' => 3, 'name' => 'Surat Pindah Domisili', 'size' => 645],
-            (object) ['id' => 4, 'name' => 'Surat Keterangan Warga Tidak Mampu', 'size' => 987]
+            (object) ['id' => 4, 'name' => 'Surat Keterangan Warga Tidak Mampu', 'size' => 987],
+            (object) ['id' => 5, 'name' => 'Surat Keterangan Warga Tidak Mampu', 'size' => 987],
+            (object) ['id' => 6, 'name' => 'Surat Keterangan Warga Tidak Mampu', 'size' => 987],
+            (object) ['id' => 7, 'name' => 'Surat Keterangan Warga Tidak Mampu', 'size' => 987],
+            (object) ['id' => 8, 'name' => 'Surat Keterangan Warga Tidak Mampu', 'size' => 987],
         ];
 
         return view('warga.ajukanpersuratan.index', compact('breadcrumb', 'activeMenu', 'documents'));

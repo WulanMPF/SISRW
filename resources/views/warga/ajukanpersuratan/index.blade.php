@@ -44,8 +44,9 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        margin-bottom: 10px;
-        background : #908475:
+        margin-bottom: 20px;
+        background : #E5E2DE;
+        border-radius: 10px;
     }
 
     .btn-primary {
@@ -75,5 +76,7 @@
         border-radius: 20px;
 
     }
+
+
 </style>
 @endpush
