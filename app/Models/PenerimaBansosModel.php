@@ -20,8 +20,8 @@ class PenerimaBansosModel extends Model
         'kk_id',
         'jenis_bansos'
     ];
-    public function kk(): HasMany
+    public function kk(): BelongsTo
     {
-        return $this->HasMany(KkModel::class, 'kk_id', 'kk_id');
+        return $this->belongsTo(KkModel::class, 'kk_id', 'kk_id');
     }
 }
