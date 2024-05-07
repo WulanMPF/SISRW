@@ -22,6 +22,7 @@ use App\Http\Controllers\Sekretaris\SuratController as SekretarisSuratController
 use App\Http\Controllers\Warga\IuranController as WargaIuranController;
 use App\Http\Controllers\Warga\PengaduanController as WargaPengaduanController;
 use App\Http\Controllers\Warga\AjukanPersuratanController as AjukanPersuratanController;
+use App\Http\Controllers\Warga\SyaratBansosController as WargaSyaratBansosController;
 use App\Http\Controllers\Warga\UmkmController as WargaUmkmController;
 use App\Http\Controllers\Warga\ProfileController as WargaProfileController;
 use App\Http\Controllers\WelcomeController;
@@ -157,8 +158,6 @@ Route::group(['prefix' => 'warga/surat'], function () {
     Route::get('/', [AjukanPersuratanController::class, 'index']);
     Route::get('/create', [AjukanPersuratanController::class, 'create'])->name('ajukanpersuratan.create');
     Route::post('/list', [AjukanPersuratanController::class, 'list']);
-
-
 });
 
 Route::group(['prefix' => 'warga/umkm'], function () {
@@ -167,6 +166,11 @@ Route::group(['prefix' => 'warga/umkm'], function () {
     Route::get('/create', [WargaUmkmController::class, 'create']);
     Route::post('/', [WargaUmkmController::class, 'store'])->name('umkm.store');
     Route::get('/{id}', [WargaUmkmController::class, 'show']);
+});
+
+Route::group(['prefix' => 'warga/bansos'], function () {
+    Route::get('/', [WargaSyaratBansosController::class, 'index']);
+    Route::get('/{id}', [WargaSyaratBansosController::class, 'show']);
 });
 
 Route::group(['prefix' => 'warga/profile'], function () {
