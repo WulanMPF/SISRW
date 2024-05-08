@@ -15,6 +15,27 @@
             </p>
             <a href="bansos/1" class="btn" id="button">Baca Persyaratan</a>
         </div>
+        <div class="list-group-item d-flex justify-content-between">
+            <p class="card-text ml-2">09/07/2023
+            </p>
+            <p class="card-text">Bantuan Sosial DTKS
+            </p>
+            <a href="bansos/1" class="btn" id="button">Baca Persyaratan</a>
+        </div>
+        <div class="list-group-item d-flex justify-content-between">
+            <p class="card-text ml-2">28/12/2021
+            </p>
+            <p class="card-text">Bantuan Sosial Tunai akibat Covid-19
+            </p>
+            <a href="bansos/1" class="btn" id="button">Baca Persyaratan</a>
+        </div>
+        <div class="list-group-item d-flex justify-content-between">
+            <p class="card-text ml-2">17/02/2024
+            </p>
+            <p class="card-text">Bantuan Sosial PKH
+            </p>
+            <a href="bansos/1" class="btn" id="button">Baca Persyaratan</a>
+        </div>
         {{-- END OF TESTING VIEW --}}
 
         {{-- Code disesuaikan dengan pemgambilan data dari database - masih perlu perbaikan PADA SOURCE IMG --}}
