@@ -2,12 +2,12 @@
 
 @section('content')
     <div class="card card-outline card-light">
-        <div class="card-header">
-            {{-- <h3 class="card-title">{{ $page->title }}</h3> --}}
+        {{-- <div class="card-header">
+            <h3 class="card-title">{{ $page->title }}</h3>
             <div class="card-tools">
                 <a class="btn btn-sm mt-1" id="tambah" href="{{ url('ketua/bansos/create') }}">Tambah</a>
             </div>
-        </div>
+        </div> --}}
         <div class="card-body">
             @if (session('success'))
                 <div class="alert alert-success">{{ session('success') }}</div>
