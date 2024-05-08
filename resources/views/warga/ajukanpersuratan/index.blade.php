@@ -76,6 +76,9 @@
         border-radius: 20px;
 
     }
+    .list-group-item:last-child {
+        border-radius: 10px; /* Ensures that the last item has rounded corners */
+    }
 
 
 </style>
