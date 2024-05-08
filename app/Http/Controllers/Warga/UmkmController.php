@@ -74,6 +74,10 @@ class UmkmController extends Controller
             'deskripsi' => 'required|string|max:200',
             'lampiran' => 'required|image|mimes:jpeg,png,jpg,svg|max:2048'
         ]);
+        // Mendapatkan nama file yang diacak menggunakan hashName()
+        $namaFile = $request->file('lampiran')->hashName();
+
+        // Buat entri di database dengan nama file yang dihasilkan oleh hashName()
         UmkmModel::create([
             'warga_id'    => $request->warga_id,
             'nama_usaha'  => $request->nama_usaha,
@@ -81,8 +85,11 @@ class UmkmController extends Controller
             'jenis_usaha' => $request->jenis_usaha,
             'status_usaha' => $request->status_usaha,
             'deskripsi' => $request->deskripsi,
-            'lampiran' => $request->lampiran->hashName()
+            'lampiran' => $namaFile
         ]);
+
+        // Simpan gambar ke dalam direktori storage/umkm dengan nama yang dihasilkan oleh hashName()
+        $lampiranPath = $request->file('lampiran')->storeAs('public/umkm', $namaFile);
 
         return redirect('/warga/umkm')->with('success', 'Data UMKM berhasil diajukans');
     }

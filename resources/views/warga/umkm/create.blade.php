@@ -43,12 +43,21 @@
                     </div>
 
                     {{-- Mengambil ID pengguna dari sesi atau database setelah login (KEPERLUAN UNTUK INSERT DATA) --}}
-                    <input type="hidden" id="warga_id" name="warga_id" value="???">
+                    {{-- <input type="hidden" id="warga_id" name="warga_id" value="???"> --}}
 
                     {{-- Data Usaha --}}
 
                     <div class="form-group row">
                         <label for="data_usaha" class="col-sm-4 col-form-label" id="data">Data Usaha</label>
+                    </div>
+
+                    {{-- INI CUMA BUAT TESTING AJUKAN AJA -- aslinya ambil id pengguna dari session (line 46) --}}
+                    <div class="form-group row">
+                        <label for="nama_usaha" class="col-sm-2 col-form-label">Warga ID:</label>
+                        <div class="col-sm-9">
+                            <input type="text" id="warga_id" name="warga_id" class="form-control" rows="5"
+                                required>
+                        </div>
                     </div>
 
                     <div class="form-group row">
@@ -91,8 +100,8 @@
                     <div class="form-group row">
                         <label for="status_usaha" class="col-sm-2 col-form-label">Status Usaha:</label>
                         <div class="col-sm-9">
-                            <input type="text" id="status_usaha" name="status_usaha" class="form-control" rows="5"
-                                value="Aktif" required readonly>
+                            <input type="text" id="status_usaha" name="status_usaha" class="form-control"
+                                rows="5" value="Aktif" required readonly>
                         </div>
                     </div>
 

@@ -27,7 +27,7 @@
             @foreach ($umkm as $item)
                 <div class="card">
                     {{-- insert src img  --}}
-                    <img src="..." class="card-img-top" alt="...">
+                    <img src="{{ asset('storage/app/public/umkm/' . $item->lampiran) }}" class="card-img-top">
                     <div class="card-body">
                         <h5 class="card-title"><strong>{{ $item->nama_usaha }}</strong></h5>
                         <p class="card-text">{{ $item->deskripsi }}</p>
