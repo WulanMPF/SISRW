@@ -17,7 +17,7 @@ class AjukanPersuratanController extends Controller
         $breadcrumb = (object) [
             'title' => 'Ajukan Persuratan',
             'date' => date('l, d F Y'),
-            'list' => ['Home', 'Ajukan Persuratan']
+            'list' => ['Home', 'Daftar Template Surat']
         ];
 
         // Active menu identifier
@@ -37,27 +37,36 @@ class AjukanPersuratanController extends Controller
 
     public function create()
     {
-        return view('warga.ajukanpersuratan.create');  // Ensure this view file exists
-    }
+        $breadcrumb = (object) [
+            'title' => 'Formulir Pengajuan Surat',
+            'date' => date('l, d F Y'),
+            'list'  => ['Home', 'Daftar Template Surat', 'Pengajuan']
+        ];
 
-    // Method to store the new document data
-    public function store(Request $request)
-    {
-        // Validate and store the document
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'file' => 'required|file'
-        ]);
+        // $surats = persuratanmodel::all();
+        $activeMenu = 'surat'; //set menu yang sedang aktif
+        return view('warga.ajukanpersuratan.create', ['breadcrumb' => $breadcrumb,  'activeMenu' => $activeMenu]);
+    }  
+    
 
-        // Assume you have a Document model set up correctly
-        $document = new Document([
-            'name' => $request->name,
-            'file_path' => $request->file('file')->store('documents', 'public')
-        ]);
-        $document->save();
+    // store the new document data
+    // public function store(Request $request)
+    // {
+    //     // Validate and store the document
+    //     $request->validate([
+    //         'name' => 'required|string|max:255',
+    //         'file' => 'required|file'
+    //     ]);
 
-        return redirect()->route('ajukan-persuratan.index')->with('success', 'Document uploaded successfully.');
-    }
+    //     // Assume you have a Document model set up correctly
+    //     $document = new Document([
+    //         'name' => $request->name,
+    //         'file_path' => $request->file('file')->store('documents', 'public')
+    //     ]);
+    //     $document->save();
+
+    //     return redirect()->route('ajukanpersuratan.index')->with('success', 'Document uploaded successfully.');
+    // }
 
     public function download($id)
     {
