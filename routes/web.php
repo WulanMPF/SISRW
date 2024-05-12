@@ -56,6 +56,7 @@ Route::group(['prefix' => 'ketua/warga'], function () {
     Route::get('/create-tetap', [WargaController::class, 'createTetap']);
     Route::post('/', [WargaController::class, 'storeTetap']);
     Route::get('/create-sementara', [WargaController::class, 'createSementara']);
+    Route::post('/', [WargaController::class, 'storeSementara']);
     Route::get('/{id}', [WargaController::class, 'show']);
 });
 Route::group(['prefix' => 'ketua/surat'], function () {
@@ -101,6 +102,10 @@ Route::group(['prefix' => 'sekretaris/dashboard'], function () {
 Route::group(['prefix' => 'sekretaris/warga'], function () {
     Route::get('/', [SekretarisWargaController::class, 'index']);
     Route::post('/list', [SekretarisWargaController::class, 'list']);
+    Route::get('/create-tetap', [SekretarisWargaController::class, 'createTetap']);
+    Route::post('/', [SekretarisWargaController::class, 'storeTetap']);
+    Route::get('/create-sementara', [SekretarisWargaController::class, 'createSementara']);
+    Route::post('/', [SekretarisWargaController::class, 'storeSementara']);
     Route::get('/{id}', [SekretarisWargaController::class, 'show']);
 });
 Route::group(['prefix' => 'sekretaris/surat'], function () {
