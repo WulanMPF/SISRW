@@ -60,22 +60,72 @@ class WargaController extends Controller
             ->make(true);
     }
 
-    public function create()
+    public function createTetap()
     {
         $breadcrumb = (object) [
             'title' => 'Tambah Data Warga',
             'date' => date('l, d F Y'),
-            'list'  => ['Home', 'Data Warga', 'Tambah']
+            'list'  => ['Home', 'Data Warga', 'Tambah Data Warga Tetap']
         ];
 
         $kk = KkModel::all();
 
         $activeMenu = 'warga';
 
-        return view('sekretaris.warga.index', ['breadcrumb' => $breadcrumb, 'kk' => $kk, 'activeMenu' => $activeMenu]);
+        return view('sekretaris.warga.create-tetap', ['breadcrumb' => $breadcrumb, 'kk' => $kk, 'activeMenu' => $activeMenu]);
     }
 
-    public function store(Request $request)
+    public function createSementara()
+    {
+        $breadcrumb = (object) [
+            'title' => 'Tambah Data Warga',
+            'date' => date('l, d F Y'),
+            'list'  => ['Home', 'Data Warga', 'Tambah Data Warga Sementara']
+        ];
+
+        $kk = KkModel::all();
+
+        $activeMenu = 'warga';
+
+        return view('sekretaris.warga.create-sementara', ['breadcrumb' => $breadcrumb, 'kk' => $kk, 'activeMenu' => $activeMenu]);
+    }
+
+    public function storeTetap(Request $request)
+    {
+        $request->validate([
+            'kk_id'                   => 'required|integer',
+            'nik'                     => 'required|integer|unique:warga,nik',
+            'nama_warga'              => 'required|string|max:100',
+            'tempat_tgl_lahir'        => 'required|string|max:100',
+            'jenis_kelamin'           => 'required|in:L,P',
+            'rt_rw'                   => 'required|string|max:10',
+            'kel_desa'                => 'required|string|max:50',
+            'kecamatan'               => 'required|string|max:50',
+            'agama'                   => 'required|string|max:20',
+            'status_perkawinan'       => 'required|string|max:50',
+            'pekerjaan'               => 'required|string|max:50',
+            'hubungan_keluarga'       => 'required|string|max:100',
+        ]);
+
+        WargaModel::create([
+            'kk_id'                   => $request->kk_id,
+            'nik'                     => $request->nik,
+            'nama_warga'              => $request->nama_warga,
+            'tempat_tgl_lahir'        => $request->tempat_tanggal_lahir,
+            'jenis_kelamin'           => $request->jenis_kelamin,
+            'rt_rw'                   => $request->rt_rw,
+            'kel_desa'                => $request->kel_desa,
+            'kecamatan'               => $request->kecamatan,
+            'agama'                   => $request->agama,
+            'status_perkawinan'       => $request->status_perkawinan,
+            'pekerjaan'               => $request->pekerjaan,
+            'hubungan_keluarga'       => $request->hubungan_keluarga
+        ]);
+
+        return redirect('/sekretaris/warga.index')->with('success', 'Data warga berhasil disimpan');
+    }
+
+    public function storeSementara(Request $request)
     {
         $request->validate([
             'kk_id'                   => 'required|integer',
