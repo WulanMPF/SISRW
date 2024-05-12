@@ -15,9 +15,9 @@
                         <label class="col-1 control-label col-form-label">Filter:</label>
                         <div class="col-3">
                             <select class="form-control" id="status_warga" name="status_warga" required>
-                                <option value="Tampilkan">Semua</option>
-                                <option>Tinggal Tetap</option>
-                                <option>Tinggal Sementara</option>
+                                <option>Semua</option>
+                                <option value="menetap">Tinggal Tetap</option>
+                                <option value="sementara">Tinggal Sementara</option>
                             </select>
                             <small class="form-text text-muted">Status Kependudukan</small>
                         </div>
@@ -129,7 +129,7 @@
                 }]
             });
 
-            S('#kk_id').on('change', function() {
+            S('#status_warga').on('change', function() {
                 dataWarga.ajax.reload();
             });
         });
