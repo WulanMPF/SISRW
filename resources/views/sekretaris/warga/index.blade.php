@@ -22,7 +22,15 @@
                             <small class="form-text text-muted">Status Kependudukan</small>
                         </div>
                         <div class="col-md-8 text-right">
-                            <a class="btn btn-sm mt-1 btn-tambah" href="{{ url('sekretaris/warga/create') }}">+ Tambah Warga</a>
+                            <a class="btn btn-sm mt-1 btn-tambah" data-toggle="dropdown">+ Tambah Warga</a>
+                            <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                                <a href="{{ url('/sekretaris/warga/create-tetap') }}" class="dropdown-item">
+                                    Tinggal Tetap
+                                </a>
+                                <a href="{{ url('/sekretaris/warga/create-sementara') }}" class="dropdown-item">
+                                    Tinggal Sementara
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
