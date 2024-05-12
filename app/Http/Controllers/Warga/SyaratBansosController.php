@@ -20,11 +20,12 @@ class SyaratBansosController extends Controller
         $bansos = SyaratBansosModel::all();
         return view('warga.bansos.index', ['breadcrumb' => $breadcrumb, 'bansos' => $bansos, 'activeMenu' => $activeMenu]);
     }
+
     public function show(string $id)
     {
         $bansos = SyaratBansosModel::find($id);
         $breadcrumb = (object)[
-            'title' => 'S&K dalam Menerima {{bansos->jenis_bansos}}',
+            'title' => 'S&K dalam Menerima ' . $bansos->jenis_bansos,
             'date' => date('l, d F Y'),
             'list' => ['Home', 'Bansos', 'Detail']
         ];

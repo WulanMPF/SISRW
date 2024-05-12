@@ -41,10 +41,8 @@
         {{-- Code disesuaikan dengan pemgambilan data dari database - masih perlu perbaikan PADA SOURCE IMG --}}
         @foreach ($bansos as $item)
             <div class="list-group-item d-flex justify-content-between">
-                <p class="card-text ml-2">{{ $item->tgl_syarat_ketentuan }}
-                </p>
-                <p class="card-text">{{ $item->jenis_bansos }}
-                </p>
+                <p class="card-text ml-2">{{ \Carbon\Carbon::parse($item->tgl_syarat_ketentuan)->format('d/m/Y') }} </p>
+                <p class="card-text">{{ $item->jenis_bansos }} </p>
                 <a href="bansos/{{ $item->syarat_bansos_id }}" class="btn" id="button">Baca Persyaratan</a>
             </div>
         @endforeach
