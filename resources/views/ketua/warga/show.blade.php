@@ -6,7 +6,12 @@
             <div class="row mb-3">
                 <label class="no_kk col-sm-2 col-form-label mt-1" for="no_kk">Nomor Kartu Keluarga</label>
                 <label class="col-sm-2 col-form-label mt-1" for="no_kk"
-                    style="font-weight: 500">{{ $warga->kk->no_kk }}</label>
+                    style="font-weight: 500">{{ $kepalaKeluarga->kk->no_kk }}</label>
+            </div>
+            <!-- Tombol edit dan delete -->
+            <div class="table-buttons">
+                <button class="btn btn-primary btn-edit"><i class="fas fa-edit"></i></button>
+                <button class="btn btn-danger btn-delete"><i class="fas fa-trash-alt"></i></button>
             </div>
             <div class="table-responsive">
                 <table class="table table-bordered table-striped table-hover table-sm" id="table_warga"
@@ -28,20 +33,23 @@
                         </tr>
                     </thead>
                     <tbody style="max-width: fit-content; max-height: fit-content">
-                        <tr>
-                            <td class="col-number" style="text-align: center; vertical-align:middle;">1</td>
-                            <td>{{ $warga->nik }}</td>
-                            <td>{{ $warga->nama_warga }}</td>
-                            <td>{{ $warga->hubungan_keluarga }}</td>
-                            <td>{{ $warga->tempat_tgl_lahir }}</td>
-                            <td>{{ $warga->jenis_kelamin }}</td>
-                            <td>{{ $warga->rt_rw }}</td>
-                            <td>{{ $warga->kel_desa }}</td>
-                            <td>{{ $warga->kecamatan }}</td>
-                            <td>{{ $warga->agama }}</td>
-                            <td>{{ $warga->status_perkawinan }}</td>
-                            <td>{{ $warga->pekerjaan }}</td>
-                        </tr>
+                        @foreach ($anggotaKeluarga as $index => $member)
+                            <tr>
+                                <td class="col-number" style="text-align: center; vertical-align:middle;">
+                                    {{ $index + 1 }}</td>
+                                <td>{{ $member->nik }}</td>
+                                <td>{{ $member->nama_warga }}</td>
+                                <td>{{ $member->hubungan_keluarga }}</td>
+                                <td>{{ $member->tempat_tgl_lahir }}</td>
+                                <td>{{ $member->jenis_kelamin }}</td>
+                                <td>{{ $member->rt_rw }}</td>
+                                <td>{{ $member->kel_desa }}</td>
+                                <td>{{ $member->kecamatan }}</td>
+                                <td>{{ $member->agama }}</td>
+                                <td>{{ $member->status_perkawinan }}</td>
+                                <td>{{ $member->pekerjaan }}</td>
+                            </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>
@@ -51,17 +59,6 @@
 
 @push('css')
     <style>
-        .no_kk {
-            font-family: Poppins;
-            color: #BB955C;
-            margin-top: 7px;
-        }
-
-        #table_warga {
-            border-radius: 10px;
-            overflow: hidden;
-        }
-
         h3 {
             /* width: 497px; */
             color: #463720;
@@ -70,6 +67,30 @@
             font-style: normal;
             font-weight: 800;
             line-height: normal;
+        }
+
+        .no_kk {
+            font-family: Poppins;
+            color: #BB955C;
+            margin-top: 7px;
+            position: relative;
+        }
+
+        #table_warga {
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .table-buttons {
+            position: absolute;
+            top: 0;
+            right: 0;
+            margin-top: 20px;
+            margin-right: 20px;
+        }
+
+        .table-buttons .btn {
+            margin-left: 5px;
         }
 
         #table_warga thead {
@@ -82,84 +103,41 @@
             /* border-radius: 10px; */
         }
 
-        .btn-add-row {
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
+        .btn-edit {
+            width: 40px;
+            height: 40px;
+            border-radius: 5px;
             background-color: #d9d2c7;
-            color: #7F643C;
+            color: #463720;
             border: none;
             cursor: pointer;
             position: relative;
+            padding: 8px 10px;
         }
 
-        .btn-add-row span {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-        }
-
-        .btn-add-row:hover {
-            background-color: #7F643C;
-            color: #d9d2c7;
-        }
-
-        .btn-success {
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            color: #fff;
-            border: none;
-            cursor: pointer;
-            position: relative;
-        }
-
-        .btn-success span {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-        }
-
-        .btn-success:hover {
-            background-color: #218838;
-        }
-
-        .btn-danger {
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            color: #fff;
-            border: none;
-            cursor: pointer;
-            position: relative;
-        }
-
-        .btn-danger span {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-        }
-
-        .btn-danger:hover {
-            background-color: #B51929;
-            ;
-        }
-
-        .btn-tambah {
-            background-color: #BB955C;
-            color: #FFFFFF;
-            border: none;
-            border-radius: 10px;
-            padding: 8px 20px;
-            transition: background-color 0.3s ease;
-        }
-
-        .btn-tambah:hover {
-            background-color: #463720;
+        .btn-delete {
+            width: 40px;
+            height: 40px;
+            border-radius: 5px;
             color: #ffffff;
+            border: none;
+            cursor: pointer;
+            position: relative;
+            padding: 8px 10px;
+        }
+
+        .btn-edit i,
+        .btn-delete i {
+            margin-top: -2px;
+        }
+
+        .btn-edit:hover {
+            background-color: #a39989;
+            color: #463720;
+        }
+
+        .btn-delete:hover {
+            background-color: #B51929;
         }
     </style>
 @endpush
@@ -170,88 +148,23 @@
             // Fungsi untuk menambahkan baris baru
             function addRow() {
                 // Ambil nomor dari baris terakhir dan tambahkan 1
-                var lastNumber = parseInt(newRow.find('.col-number').text());
-                newRow.find('.col-number').text(lastNumber + 1);
+                var lastNumber = parseInt($('#table_warga tbody tr:last .col-number').text());
+                $('#table_warga tbody').append('<tr>' +
+                    '<td class="col-number" style="text-align: center; vertical-align:middle;">' + (lastNumber +
+                        1) + '</td>' +
+                    '<td></td>' +
+                    '<td></td>' +
+                    '<td></td>' +
+                    '<td></td>' +
+                    '<td></td>' +
+                    '<td></td>' +
+                    '<td></td>' +
+                    '<td></td>' +
+                    '<td></td>' +
+                    '<td></td>' +
+                    '<td></td>' +
+                    '</tr>');
             }
         });
     </script>
-
-    {{-- <script>
-        $(document).ready(function() {
-            var dataWarga = $('#table_warga').DataTable({
-                serverSide: true,
-                ajax: {
-                    "url": "{{ url('ketua/warga/list') }}",
-                    "dataType": "json",
-                    "type": "POST",
-                    "data": function(d) {}
-                },
-                columns: [{
-                    data: "DT_RowIndex",
-                    className: "text-center",
-                    orderable: false,
-                    searchable: false
-                }, {
-                    data: "nik",
-                    className: "",
-                    orderable: true,
-                    searchable: true
-                }, {
-                    data: "nama_warga",
-                    className: "",
-                    orderable: true,
-                    searchable: true
-                }, {
-                    data: "hubungan_keluarga",
-                    className: "",
-                    orderable: true,
-                    searchable: true
-                }, {
-                    data: "tempat_tanggal_lahir",
-                    className: "",
-                    orderable: true,
-                    searchable: true
-                }, {
-                    data: "jenis_kelamin",
-                    className: "",
-                    orderable: true,
-                    searchable: true
-                }, {
-                    data: "rt_rw",
-                    className: "",
-                    orderable: true,
-                    searchable: true
-                }, {
-                    data: "kel_desa",
-                    className: "",
-                    orderable: true,
-                    searchable: true
-                }, {
-                    data: "kecamatan",
-                    className: "",
-                    orderable: true,
-                    searchable: true
-                }, {
-                    data: "agama",
-                    className: "",
-                    orderable: true,
-                    searchable: true
-                }, {
-                    data: "status_perkawinan",
-                    className: "",
-                    orderable: true,
-                    searchable: true
-                }, {
-                    data: "pekerjaan",
-                    className: "",
-                    orderable: true,
-                    searchable: true
-                }]
-            });
-
-            S('#status_warga').on('change', function() {
-                dataWarga.ajax.reload();
-            });
-        });
-    </script> --}}
 @endpush
