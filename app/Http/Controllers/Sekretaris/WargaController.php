@@ -162,8 +162,8 @@ class WargaController extends Controller
 
     public function show(string $id)
     {
-        $warga = WargaModel::with('kk')->find($id);
-        $warga = WargaModel::where('kk_id', $warga->kk_id)->get();
+        $kepalaKeluarga = WargaModel::with('kk')->find($id);
+        $anggotaKeluarga = WargaModel::where('kk_id', $kepalaKeluarga->kk_id)->get();
 
         $breadcrumb = (object) [
             'title' => 'Anggota Keluarga',
@@ -173,7 +173,7 @@ class WargaController extends Controller
 
         $activeMenu = 'warga';
 
-        return view('sekretaris.warga.show', ['breadcrumb' => $breadcrumb, 'warga' => $warga, 'activeMenu' => $activeMenu]);
+        return view('sekretaris.warga.show', ['breadcrumb' => $breadcrumb, 'kepalaKeluarga' => $kepalaKeluarga, 'anggotaKeluarga' => $anggotaKeluarga, 'activeMenu' => $activeMenu]);
     }
 
     public function edit(string $id)
