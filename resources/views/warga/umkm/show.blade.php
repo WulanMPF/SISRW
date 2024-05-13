@@ -40,8 +40,11 @@
         <div class="card">
             <div class="card-body">
                 <p class="card-text clearfix">
-                    {{-- insert src img  --}}
-                    <img src="{{ asset('storage/umkm/' . $umkm->lampiran) }}" class="card-img-top img-umkm center">
+                    {{-- di folder storage --}}
+                    {{-- <img src="{{ asset('storage/umkm/' . $umkm->lampiran) }}" class="card-img-top img-umkm center"> --}}
+
+                    {{-- di folder public --}}
+                    <img src="{{ asset('lampiran_umkm/' . $umkm->lampiran) }}" class="card-img-top img-umkm center">
                     {{ $umkm->deskripsi }}
                 </p>
             </div>

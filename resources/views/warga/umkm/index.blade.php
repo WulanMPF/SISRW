@@ -26,7 +26,11 @@
         <div class="d-flex flex-wrap overflow-auto flex-container">
             @foreach ($umkm as $item)
                 <div class="card">
-                    <img src="{{ asset('storage/umkm/' . $item->lampiran) }}" class="card-img-top">
+                    {{-- di folder storage --}}
+                    {{-- <img src="{{ asset('storage/umkm/' . $item->lampiran) }}" class="card-img-top"> --}}
+
+                    {{-- di folder public --}}
+                    <img src="{{ asset('lampiran_umkm/' . $item->lampiran) }}" class="card-img-top center">
                     <div class="card-body">
                         <h5 class="card-title"><strong>{{ $item->nama_usaha }}</strong></h5>
                         <p class="card-text">{{ $item->deskripsi }}</p>

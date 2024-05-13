@@ -88,8 +88,10 @@ class UmkmController extends Controller
             'lampiran' => $namaFile
         ]);
 
-        // Simpan gambar ke dalam direktori storage/umkm dengan nama yang dihasilkan oleh hashName()
-        $lampiranPath = $request->file('lampiran')->storeAs('public/umkm', $namaFile);
+        // Simpan gambar ke dalam direktori lampiran_umkm dengan nama yang dihasilkan oleh hashName()
+        // $lampiranPath = $request->file('lampiran')->storeAs('umkm', $namaFile); // direktori storage/umkm
+        $path = $request->file('lampiran')->move('lampiran_umkm', $namaFile);
+        $path = str_replace("\\", "//", $path);
 
         return redirect('/warga/umkm')->with('success', 'Data UMKM berhasil diajukans');
     }
