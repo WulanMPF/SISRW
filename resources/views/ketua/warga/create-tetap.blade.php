@@ -11,13 +11,13 @@
             @endif
             <form method="POST" action="{{ url('ketua/warga') }}">
                 @csrf
-                <div class="form-group row">
-                    <label for="no_kk" class="col-sm-2 col-form-label">Nomor Kartu Keluarga:</label>
+                <div class="row mb-3">
+                    <label class="no_kk col-sm-2 col-form-label mt-1" for="no_kk">Nomor Kartu Keluarga</label>
                     <div class="col-sm-3">
                         <input type="text" class="form-control" id="no_kk" name="no_kk"
                             placeholder="Nomor Kartu Keluarga" required>
                     </div>
-                </div>
+                </div>                
             </form>
             <hr>
             <div class="table-responsive">
@@ -195,6 +195,12 @@
 
 @push('css')
     <style>
+        .no_kk {
+            font-family: Poppins;
+            color: #BB955C;
+            margin-top: 7px;
+        }
+
         #table_warga {
             border-radius: 10px;
             overflow: hidden;
