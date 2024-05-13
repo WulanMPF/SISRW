@@ -83,7 +83,7 @@ class WargaController extends Controller
 
         $activeMenu = 'warga';
 
-        return view('ketua.warga.create-tetap', ['breadcrumb' => $breadcrumb, 'kk' => $kk, 'activeMenu' => $activeMenu]);
+        return view('ketua.warga.create-sementara', ['breadcrumb' => $breadcrumb, 'kk' => $kk, 'activeMenu' => $activeMenu]);
     }
 
     public function storeTetap(Request $request)
