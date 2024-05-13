@@ -46,7 +46,11 @@
         <div class="card">
             <div class="card-body">
                 <p class="card-text clearfix">
-                    <img src="{{ asset('storage/syarat_bansos/' . $bansos->gambar) }}" class="card-img-top img-bansos center">
+                    {{-- direktori storage/syarat_bansos --}}
+                    {{-- <img src="{{ asset('storage/syarat_bansos/' . $bansos->gambar) }}" class="card-img-top img-bansos center"> --}}
+
+                    {{-- direktori public/syarat_bansos --}}
+                    <img src="{{ asset('syarat_bansos/' . $bansos->gambar) }}" class="card-img-top img-bansos center">
                     {{ $bansos->deskripsi }}
                 </p>
             </div>
