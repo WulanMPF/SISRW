@@ -16,7 +16,8 @@ class SyaratBansosModel extends Model
     protected function image(): Attribute
     {
         return Attribute::make(
-            get: fn ($gambar) => url('/storage/posts/' . $gambar),
+            // get: fn ($gambar) => url('/storage/syarat_bansos/' . $gambar), //pakai storage
+            get: fn ($gambar) => url('syarat_bansos/' . $gambar),
         );
     }
 }

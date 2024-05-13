@@ -21,7 +21,8 @@ class UmkmModel extends Model
     protected function image(): Attribute
     {
         return Attribute::make(
-            get: fn ($lampiran) => url('/storage/umkm/' . $lampiran),
+            // get: fn ($lampiran) => url('/storage/umkm/' . $lampiran), //pakai storage
+            get: fn ($lampiran) => url('umkm/' . $lampiran),
         );
     }
 }
