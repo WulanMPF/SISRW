@@ -48,7 +48,7 @@ class WargaController extends Controller
         return DataTables::of($kk)
             ->addIndexColumn()
             ->addColumn('Anggota Keluarga', function ($warga) {
-                $btn = '<a href="' . url('/ketua/warga/{id}' . $warga->warga_id) . '" class="btn btn-sm" style="background-color: #BB955C; color: white;">Lihat</a> ';
+                $btn = '<a href="' . url('/ketua/warga/' . $warga->kk_id) . '" class="btn btn-sm" style="background-color: #BB955C; color: white;">Lihat</a> ';
 
                 return $btn;
             })
