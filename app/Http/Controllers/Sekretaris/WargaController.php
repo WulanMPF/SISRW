@@ -52,7 +52,7 @@ class WargaController extends Controller
         return DataTables::of($warga)
             ->addIndexColumn()
             ->addColumn('Anggota Keluarga', function ($warga) {
-                $btn = '<a href="' . url('/warga/' . $warga->warga_id) . '" class="btn btn-info btn-sm">Lihat</a> ';
+                $btn = '<a href="' . url('/sekretaris/warga/' . $warga->kk_id) . '" class="btn btn-info btn-sm">Lihat</a> ';
 
                 return $btn;
             })
@@ -163,6 +163,7 @@ class WargaController extends Controller
     public function show(string $id)
     {
         $warga = WargaModel::with('kk')->find($id);
+        $warga = WargaModel::where('kk_id', $warga->kk_id)->get();
 
         $breadcrumb = (object) [
             'title' => 'Anggota Keluarga',
