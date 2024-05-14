@@ -115,7 +115,10 @@ Route::group(['prefix' => 'sekretaris/warga'], function () {
 Route::group(['prefix' => 'sekretaris/surat'], function () {
     Route::get('/', [SekretarisSuratController::class, 'index']);
     Route::post('/list', [SekretarisSuratController::class, 'list']);
+    Route::get('/create', [SekretarisSuratController::class, 'create']);
+    Route::post('/', [SekretarisSuratController::class, 'store']);
     Route::get('/{id}', [SekretarisSuratController::class, 'show']);
+    Route::delete('/{id}', [SekretarisSuratController::class, 'destroy']);
 });
 Route::group(['prefix' => 'sekretaris/pengumuman'], function () {
     Route::get('/', [PengumumanController::class, 'index']);
