@@ -13,11 +13,15 @@ class PengaduanModel extends Model
     protected $primaryKey = 'pengaduan_id';
 
     protected $fillable = [
+        'warga_id',
         'nama_pelapor',
-        'jenis_pengaduan',
-        'tanggal_pengaduan',
+        'jenis_pengaduan', // Include 'jenis_pengaduan' in fillable attributes
+        'tgl_pengaduan',
         'prioritas',
-        'status',
+        'status_pengaduan',
+        'deskripsi',
+        'lampiran',
+        'tindakan_diambil',
     ];
     
 }

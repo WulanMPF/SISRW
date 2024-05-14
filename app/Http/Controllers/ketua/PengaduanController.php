@@ -31,15 +31,16 @@ class PengaduanController extends Controller
     public function list(Request $request)
     {
         $pengaduan = PengaduanModel::query();
-
+    
         return DataTables::of($pengaduan)
+            ->addIndexColumn()
             ->addColumn('action', function ($row) {
-                return '<a href="' . route('pengaduan.show', $row->id) . '" class="btn btn-info btn-sm">Detail</a>';
+                return '<a href="' . route('pengaduan.show', $row->pengaduan_id) . '" class="btn btn-info btn-sm">Detail</a>';
             })
             ->rawColumns(['action'])
             ->make(true);
     }
-
+    
     /**
      * Menampilkan halaman detail pengaduan.
      */

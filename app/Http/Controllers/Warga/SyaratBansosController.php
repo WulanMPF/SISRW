@@ -11,31 +11,41 @@ class SyaratBansosController extends Controller
     public function index()
     {
         $breadcrumb = (object) [
-            'title' => 'Syarat  & Ketentuan Penerima Bansos',
+            'title' => 'Syarat & Ketentuan Penerima Bansos',
             'date' => date('l, d F Y'),
-            'list'  => ['Home', 'S&K Penerima Bansos']
+            'list' => ['Home', 'S&K Penerima Bansos']
         ];
 
         $activeMenu = 'bansos';
         $bansos = SyaratBansosModel::all();
-        return view('warga.bansos.index', ['breadcrumb' => $breadcrumb, 'bansos' => $bansos, 'activeMenu' => $activeMenu]);
+        return view('warga.bansos.index', [
+            'breadcrumb' => $breadcrumb, 
+            'bansos' => $bansos, 
+            'activeMenu' => $activeMenu
+        ]);
     }
 
     public function show(string $id)
     {
-        $bansos = SyaratBansosModel::find($id);
-        $breadcrumb = (object)[
+        $bansos = SyaratBansosModel::findOrFail($id); // Menggunakan findOrFail agar error 404 jika tidak ditemukan
+
+        $breadcrumb = (object) [
             'title' => 'S&K dalam Menerima ' . $bansos->jenis_bansos,
             'date' => date('l, d F Y'),
             'list' => ['Home', 'Bansos', 'Detail']
         ];
 
-        $page = (object)[
+        $page = (object) [
             'title' => 'Detail S&K Bansos RW 05'
         ];
 
         $activeMenu = 'bansos';
 
-        return view('warga.bansos.show', ['breadcrumb' => $breadcrumb, 'page' => $page, 'bansos' => $bansos, 'activeMenu' => $activeMenu]);
+        return view('warga.bansos.show', [
+            'breadcrumb' => $breadcrumb, 
+            'page' => $page, 
+            'bansos' => $bansos, 
+            'activeMenu' => $activeMenu
+        ]);
     }
 }

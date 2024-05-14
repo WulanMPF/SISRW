@@ -60,17 +60,16 @@
 
 @push('js')
     <script>
-        $(document).ready(function() {
-            var dataPengaduan = $('#table_pengaduan').DataTable({
-                serverSide: true,
-                ajax: {
-                    "url": "{{ url('ketua/pengaduan/list') }}",
-                    "dataType": "json",
-                    "type": "POST",
-                    "data": function(d) {
-                        d._status_pengaduan = $('#status_pengaduan').val();
-                    }
-                },
+        var dataPengaduan = $('#table_pengaduan').DataTable({
+    serverSide: true,
+    ajax: {
+        "url": "{{ url('ketua/pengaduan/list') }}",
+        "dataType": "json",
+        "type": "POST",
+        "data": function(d) {
+            d._status_pengaduan = $('#status_pengaduan').val();
+        }
+    },
                 columns: [{
                         data: "DT_RowIndex",
                         className: "text-center",
