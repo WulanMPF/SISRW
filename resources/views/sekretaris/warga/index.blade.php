@@ -89,7 +89,7 @@
             var dataWarga = $('#table_warga').DataTable({
                 serverSide: true,
                 ajax: {
-                    "url": "{{ url('ketua/warga/list') }}",
+                    "url": "{{ url('sekretaris/warga/list') }}",
                     "dataType": "json",
                     "type": "POST",
                     "data": function(d) {
