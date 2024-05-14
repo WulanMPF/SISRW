@@ -70,52 +70,21 @@
                         d.jenis_laporan = $('#jenis_laporan').val();
                     }
                 },
-                columns: [{
-                        data: "DT_RowIndex",
-                        className: "text-center",
-                        orderable: false,
-                        searchable: false
-                    },
-                    {
-                        data: "tgl_laporan",
-                        className: "",
-                        orderable: true,
-                        searchable: true
-                    },
-                    {
-                        data: "keterangan",
-                        className: "",
-                        orderable: true,
-                        searchable: true
-                    },
-                    {
-                        data: "jenis_laporan",
-                        className: "",
-                        orderable: true,
-                        searchable: true
-                    },
-                    {
-                        data: "jenis_laporan",
-                        className: "",
-                        orderable: true,
-                        searchable: true
-                    },
+                columns: [
+                    { data: "DT_RowIndex", className: "text-center", orderable: false, searchable: false },
+                    { data: "tgl_laporan", className: "", orderable: true, searchable: true },
+                    { data: "keterangan", className: "", orderable: true, searchable: true },
+                    { data: "pemasukan", className: "text-right", orderable: true, searchable: false },
+                    { data: "pengeluaran", className: "text-right", orderable: true, searchable: false },
                     {
                         data: function(row) {
-                            // Menghitung saldo berdasarkan nilai pemasukan dan pengeluaran
-                            return row.datawal + (row.jenis_laporan === 'Pengeluaran' ? -row
-                                .pengeluaran : row.pemasukan);
+                            return row.pemasukan - row.pengeluaran;
                         },
-                        className: "",
+                        className: "text-right",
                         orderable: true,
-                        searchable: true
-                    },
-                    {
-                        data: "aksi",
-                        className: "",
-                        orderable: false,
                         searchable: false
-                    }
+                    },
+                    { data: "aksi", className: "text-center", orderable: false, searchable: false }
                 ]
             });
 
