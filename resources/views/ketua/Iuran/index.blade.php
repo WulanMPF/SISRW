@@ -72,10 +72,10 @@
                 columns: [
                     { data: "DT_RowIndex", className: "text-center", orderable: false, searchable: false },
                     { data: "tgl_pembayaran", className: "", orderable: true, searchable: true },
-                    { data: "kk.no_kk", className: "", orderable: true, searchable: true },
-                    { data: "jenis_iuran", className: "", orderable: true, searchable: true },
-                    { data: "jumlah_bayar", className: "", orderable: true, searchable: false },
-                    { data: "status_pembayaran", className: "", orderable: true, searchable: false }
+                    { data: "kk_no_kk", className: "", orderable: true, searchable: true },
+                    { data: "iuran_sampah", className: "", orderable: true, searchable: false },
+                    { data: "iuran_keamanan", className: "", orderable: true, searchable: false },
+                    { data: "iuran_bulanan", className: "", orderable: true, searchable: false }
                     
                    
                 ]
