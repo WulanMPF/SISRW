@@ -33,16 +33,31 @@ class IuranController extends Controller
 
     public function list(Request $request)
     {
-        $iurans = IuranModel::select('iuran_id', 'kk_id', 'tgl_pembayaran', 'jenis_iuran', 'jumlah_bayar', 'status_pembayaran');
+        $iurans = IuranModel::select('kk_id', 'tgl_pembayaran', 'jenis_iuran', 'status_pembayaran')
+            ->with('kk')
+            ->get()
+            ->groupBy('kk_id');
 
-        if ($request->jenis_iuran) {
-            $iurans->where('jenis_iuran', $request->jenis_iuran);
+        $data = [];
+        foreach ($iurans as $kk_id => $iuranGroup) {
+            $iuranSampah = $iuranGroup->where('jenis_iuran', 'sampah')->first();
+            $iuranKeamanan = $iuranGroup->where('jenis_iuran', 'keamanan')->first();
+            $iuranBulanan = $iuranGroup->where('jenis_iuran', 'bulanan')->first();
+
+            $data[] = [
+                'DT_RowIndex' => $kk_id,
+                'tgl_pembayaran' => optional($iuranGroup->first())->tgl_pembayaran,
+                'kk_no_kk' => optional($iuranGroup->first()->kk)->no_kk,
+                'iuran_sampah' => optional($iuranSampah)->status_pembayaran ?? 'Belum Lunas',
+                'iuran_keamanan' => optional($iuranKeamanan)->status_pembayaran ?? 'Belum Lunas',
+                'iuran_bulanan' => optional($iuranBulanan)->status_pembayaran ?? 'Belum Lunas',
+            ];
         }
 
-        return DataTables::of($iurans)
-            ->addIndexColumn() // Menambahkan kolom index / no urut (default nama kolom: DT_RowIndex)
-            ->addColumn('aksi', function ($iuran) {
-                $btn = '<a href="' . url('/iuran/' . $iuran->iuran_id) . '" class="btn btn-info btn-sm">Lihat Detail</a>  &nbsp;';
+        return DataTables::of(collect($data))
+            ->addIndexColumn()
+            ->addColumn('aksi', function ($row) {
+                $btn = '<a href="' . url('/iuran/' . $row['DT_RowIndex']) . '" class="btn btn-info btn-sm">Lihat Detail</a>';
                 return $btn;
             })
             ->rawColumns(['aksi'])
