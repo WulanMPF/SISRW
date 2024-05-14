@@ -21,7 +21,7 @@ class IuranModel extends Model
 
     public function kk()
     {
-        return $this->belongsTo(KkModel::class, 'kk_id');
+        return $this->belongsTo(KkModel::class, 'kk_id', 'kk_id');
     }
 
     // public function laporanKeuangan()
