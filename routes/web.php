@@ -7,7 +7,6 @@ use App\Http\Controllers\Ketua\PengaduanController;
 use App\Http\Controllers\Ketua\IuranController;
 use App\Http\Controllers\Ketua\BansosController;
 use App\Http\Controllers\Ketua\LapkeuController;
-use App\Http\Controllers\Ketua\SuratController;
 use App\Http\Controllers\Sekretaris\DashboardController as SekretarisDashboardController;
 use App\Http\Controllers\Sekretaris\PengumumanController;
 use App\Http\Controllers\Sekretaris\UmkmController as SekretarisUmkmController;
@@ -16,6 +15,7 @@ use App\Http\Controllers\Sekretaris\WargaController as SekretarisWargaController
 use App\Http\Controllers\Bendahara\IuranController as BendaharaIuranController;
 use App\Http\Controllers\Bendahara\LapkeuController as BendaharaLapkeuController;
 use App\Http\Controllers\Bendahara\ProfileController as BendaharaProfileController;
+use App\Http\Controllers\Ketua\ArsipSuratController;
 use App\Http\Controllers\Ketua\ProfileController;
 use App\Http\Controllers\Sekretaris\ProfileController as SekretarisProfileController;
 use App\Http\Controllers\Sekretaris\SuratController as SekretarisSuratController;
@@ -60,9 +60,12 @@ Route::group(['prefix' => 'ketua/warga'], function () {
     Route::get('/{id}', [WargaController::class, 'show']);
 });
 Route::group(['prefix' => 'ketua/surat'], function () {
-    Route::get('/', [SuratController::class, 'index']);
-    Route::post('/list', [SuratController::class, 'list']);
-    Route::get('/{id}', [SuratController::class, 'show']);
+    Route::get('/', [ArsipSuratController::class, 'index']);
+    Route::post('/list', [ArsipSuratController::class, 'list']);
+    Route::get('/create', [ArsipSuratController::class, 'create']);
+    Route::post('/', [ArsipSuratController::class, 'store']);
+    Route::get('/{id}', [ArsipSuratController::class, 'show']);
+    Route::delete('/{id}', [ArsipSuratController::class, 'destroy']);
 });
 Route::group(['prefix' => 'ketua/umkm'], function () {
     Route::get('/', [UmkmController::class, 'index']);
