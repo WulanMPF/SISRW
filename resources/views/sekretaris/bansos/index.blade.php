@@ -29,7 +29,8 @@
                     </div>
                 </div>
             </div>
-            <table class="table table-bordered table-striped table-hover table-sm" id="table_bansos" style="text-align: center;">
+            <table class="table table-bordered table-striped table-hover table-sm" id="table_bansos"
+                style="text-align: center;">
                 <thead>
                     <tr>
                         <th>No</th>
@@ -95,7 +96,7 @@
                     orderable: true,
                     searchable: true
                 }, {
-                    data: "jenis_bantuan",
+                    data: "jenis_bansos",
                     className: "",
                     orderable: true,
                     searchable: true

@@ -33,7 +33,7 @@ class BansosController extends Controller
     public function list(Request $request)
     {
         $bansoss = PenerimaBansosModel::select('bansos_id', 'kk_id', 'jenis_bansos')
-            ->with('kk_id');
+            ->with('kk');
 
 
         if ($request->jenis_bansos) {
