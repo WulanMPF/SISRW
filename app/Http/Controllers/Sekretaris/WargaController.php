@@ -11,6 +11,9 @@ use Yajra\DataTables\DataTables;
 
 class WargaController extends Controller
 {
+    /**
+     * Display a listing of the resource.
+     */
     public function index(WargaDataTable $dataTable)
     {
         $breadcrumb = (object) [
@@ -19,7 +22,7 @@ class WargaController extends Controller
             'list'  => ['Home', 'Data Warga']
         ];
 
-        $activeMenu = 'warga';
+        $activeMenu = 'kk';
 
         $warga = WargaModel::all();
         $kk = KkModel::all();
@@ -29,30 +32,23 @@ class WargaController extends Controller
 
     public function list(Request $request)
     {
-        $warga = WargaModel::select(
+        $kk = kkModel::select(
             'kk_id',
-            'nik',
-            'nama_warga',
-            'tempat_tgl_lahir',
-            'jenis_kelamin',
+            'no_kk',
+            'nama_kepala_keluarga',
             'rt_rw',
-            'kel_desa',
-            'kecamatan',
-            'agama',
-            'status_perkawinan',
-            'pekerjaan',
-            'hubungan_keluarga'
+            'alamat'
         )
             ->with('kk');
 
         if ($request->kk_id) {
-            $warga->where('kk_id', $request->kk_id);
+            $kk->where('kk_id', $request->kk_id);
         }
 
-        return DataTables::of($warga)
+        return DataTables::of($kk)
             ->addIndexColumn()
             ->addColumn('Anggota Keluarga', function ($warga) {
-                $btn = '<a href="' . url('/sekretaris/warga/' . $warga->kk_id) . '" class="btn btn-info btn-sm">Lihat</a> ';
+                $btn = '<a href="' . url('/sekretaris/warga/' . $warga->kk_id) . '" class="btn btn-sm" style="background-color: #BB955C; color: white;">Lihat</a> ';
 
                 return $btn;
             })
@@ -65,7 +61,7 @@ class WargaController extends Controller
         $breadcrumb = (object) [
             'title' => 'Tambah Data Warga',
             'date' => date('l, d F Y'),
-            'list'  => ['Home', 'Data Warga', 'Tambah Data Warga Tetap']
+            'list'  => ['Home', 'Data Warga', 'Tambah Warga Tetap']
         ];
 
         $kk = KkModel::all();
@@ -80,7 +76,7 @@ class WargaController extends Controller
         $breadcrumb = (object) [
             'title' => 'Tambah Data Warga',
             'date' => date('l, d F Y'),
-            'list'  => ['Home', 'Data Warga', 'Tambah Data Warga Sementara']
+            'list'  => ['Home', 'Data Warga', 'Tambah Warga Sementara']
         ];
 
         $kk = KkModel::all();
