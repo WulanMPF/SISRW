@@ -107,7 +107,7 @@
                     orderable: true,
                     searchable: true
                 }, {
-                    data: "jenis_bantuan",
+                    data: "jenis_bansos",
                     className: "",
                     orderable: true,
                     searchable: true
