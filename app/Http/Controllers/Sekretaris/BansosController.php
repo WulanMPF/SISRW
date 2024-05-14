@@ -43,7 +43,7 @@ class BansosController extends Controller
         return DataTables::of($bansoss)
             ->addIndexColumn() // Menambahkan kolom index / no urut (default nmaa kolom: DT_RowINdex)
             ->addColumn('aksi', function ($bansos) {
-                $btn = '<a href="' . url('/bansos/' . $bansos->bansos_id) . '" class="btn btn-info btn-sm">Lihat Detail</a>  &nbsp;';
+                $btn = '<a href="' . url('/sekretaris/bansos/' . $bansos->bansos_id) . '" class="btn btn-info btn-sm">Lihat Detail</a>  &nbsp;';
                 return $btn;
             })
 
@@ -63,7 +63,7 @@ class BansosController extends Controller
         $kk = KkModel::all(); // ambil data kk untuk ditampilkan di form
         $activeMenu = 'bansos'; //set menu yang sedang aktif
 
-        return view('ketua.bansos.create', ['breadcrumb' => $breadcrumb, 'page' => $page, 'kk' => $kk, 'activeMenu' => $activeMenu]);
+        return view('sekretaris.bansos.create', ['breadcrumb' => $breadcrumb, 'page' => $page, 'kk' => $kk, 'activeMenu' => $activeMenu]);
     }
     public function store(Request $request)
     {
@@ -76,12 +76,13 @@ class BansosController extends Controller
             'jenis_bansos'    => $request->jenis_bansos
         ]);
 
-        return redirect('/ketua/bansos')->with('success', 'Data barang berhasil disimpan');
+        return redirect('/sekretaris/bansos')->with('success', 'Data barang berhasil disimpan');
     }
     public function show(string $id)
     {
         $bansos = PenerimaBansosModel::with('kk')->find($id);
-        $warga = WargaModel::with('kk')->find($id);
+        $warga = WargaModel::where('kk_id', $bansos->kk_id)->get();
+        // $warga = WargaModel::with('kk')->find($id);
         $kk = KkModel::all();
 
         $breadcrumb = (object)[
@@ -96,7 +97,7 @@ class BansosController extends Controller
 
         $activeMenu = 'bansos';
 
-        return view('ketua.bansos.show', ['breadcrumb' => $breadcrumb, 'page' => $page, 'bansos' => $bansos, 'kk' => $kk, 'warga' => $warga, 'activeMenu' => $activeMenu]);
+        return view('sekretaris.bansos.show', ['breadcrumb' => $breadcrumb, 'page' => $page, 'bansos' => $bansos, 'kk' => $kk, 'warga' => $warga, 'activeMenu' => $activeMenu]);
     }
     public function edit(string $id)
     {
@@ -114,7 +115,7 @@ class BansosController extends Controller
 
         $activeMenu = 'bansos';
 
-        return view('ketua.bansos.edit', ['breadcrumb' => $breadcrumb, 'page' => $page, 'bansos' => $bansos, 'kk' => $kk, 'activeMenu' => $activeMenu]);
+        return view('sekretaris.bansos.edit', ['breadcrumb' => $breadcrumb, 'page' => $page, 'bansos' => $bansos, 'kk' => $kk, 'activeMenu' => $activeMenu]);
     }
 
     public function update(Request $request, string $id)
@@ -128,22 +129,22 @@ class BansosController extends Controller
             'jenis_bansos'  => $request->jenis_bansos
         ]);
 
-        return redirect('/ketua/bansos')->with('success', 'Data penerima bansos berhasil diubah');
+        return redirect('/sekretaris/bansos')->with('success', 'Data penerima bansos berhasil diubah');
     }
 
     public function destroy(string $id)
     {
         $check = PenerimaBansosModel::find($id);
         if (!$check) {
-            return redirect('/ketua/bansos')->with('error', 'Data penerima bansos tidak ditemukan');
+            return redirect('/sekretaris/bansos')->with('error', 'Data penerima bansos tidak ditemukan');
         }
 
         try {
             WargaModel::destroy($id);
 
-            return redirect('/ketua/bansos')->with('success', 'Data penerima bansos berhasil dihapus');
+            return redirect('/sekretaris/bansos')->with('success', 'Data penerima bansos berhasil dihapus');
         } catch (\Illuminate\Database\QueryException $e) {
-            return redirect('/ketua/bansos')->with('error', 'Data penerima bansos gagal dihapus karena masih terdapat tabel lain yang terkait dengan data ini');
+            return redirect('/sekretaris/bansos')->with('error', 'Data penerima bansos gagal dihapus karena masih terdapat tabel lain yang terkait dengan data ini');
         }
     }
 }

@@ -3,57 +3,64 @@
 @section('content')
     <div class="card card-outline card-light">
         <div class="card-body">
-            @empty($bansos)
-                <div class="alert alert-danger alert-dismissible">
-                    <h5><i class="icon fas fa-ban"></i> Kesalahan!</h5>
-                    Data yang Anda cari tidak ditemukan.
-                </div>
-            @else
-                <table class="table table-bordered table-striped table-hover table-sm" id="table_bansos">
-                    <thead>
+            <table class="table table-bordered table-striped table-hover table-sm" id="table_detail_bansos">
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Nomor Induk Kependudukan</th>
+                        <th>Nama Lengkap</th>
+                        <th>Status Hubungan</th>
+                        <th>Pekerjaan</th>
+                        <th>Pendapatan per bulan</th>
+                    </tr>
+                </thead>
+                <tbody style="max-width:
+                    fit-content; max-height: fit-content">
+                    @foreach ($warga as $index => $member)
                         <tr>
-                            <th>No</th>
-                            <th>Nomor Induk Kependudukan</th>
-                            <th>Nama Lengkap</th>
-                            <th>Status Hubungan</th>
-                            <th>Pekerjaan</th>
-                            <th>Pendapatan per bulan</th>
-                            <th>Aksi</th>
+                            <td class="col-number" style="text-align: center; vertical-align:middle;">
+                                {{ $index + 1 }}</td>
+                            <td>{{ $member->nik }}</td>
+                            <td>{{ $member->nama_warga }}</td>
+                            <td>{{ $member->hubungan_keluarga }}</td>
+                            <td>{{ $member->pekerjaan }}</td>
+                            <td>{{ $member->pekerjaan }}</td>
                         </tr>
-                    </thead>
-                </table>
-            @endempty
+                    @endforeach
+                </tbody>
+            </table>
         </div>
     </div>
 @endsection
 
 @push('css')
-    {{-- <style>
-        #table_bansos {
+    <style>
+        #table_detail_bansos {
             border-radius: 10px;
             /* Menambahkan radius */
         }
 
-        #table_bansos thead {
+        #table_detail_bansos thead {
             background-color: #d9d2c7;
             /* Warna latar belakang coklat */
             color: #7F643C;
             /* Warna teks putih */
         }
-    </style> --}}
+    </style>
 @endpush
 
 @push('js')
-    <script>
+    {{-- <script>
         $(document).ready(function() {
-            var dataBansos = $('#table_bansos').DataTable({
+            var dataBansos = $('#table_detail_bansos').DataTable({
                 serverSide: true,
                 ajax: {
                     "url": "{{ url('sekretaris/bansos/list') }}",
                     "dataType": "json",
                     "type": "POST",
                     "data": function(d) {
-                        d.kk_id = $('#jenis_bansos').val();
+                        d.jenis_bansos = $('#jenis_bansos').val();
+                        d.kk_id = $('#kk_id').val();
                     }
                 },
                 columns: [{
@@ -99,5 +106,5 @@
             });
 
         });
-    </script>
+    </script> --}}
 @endpush
