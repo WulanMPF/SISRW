@@ -63,6 +63,11 @@ class KkDataTable extends DataTable
     public function getColumns(): array
     {
         return [
+            Column::computed('action')
+                  ->exportable(false)
+                  ->printable(false)
+                  ->width(60)
+                  ->addClass('text-center'),
             Column::make('kk_id'),
             Column::make('no_kk'),
             Column::make('nama_kepala_keluarga'),
