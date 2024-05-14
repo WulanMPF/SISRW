@@ -43,7 +43,7 @@ class BansosController extends Controller
         return DataTables::of($bansoss)
             ->addIndexColumn() // Menambahkan kolom index / no urut (default nmaa kolom: DT_RowINdex)
             ->addColumn('aksi', function ($bansos) {
-                $btn = '<a href="' . url('/bansos/' . $bansos->bansos_id) . '" class="btn btn-info btn-sm">Lihat Detail</a>  &nbsp;';
+                $btn = '<a href="' . url('/ketua/bansos/' . $bansos->bansos_id) . '" class="btn btn-info btn-sm">Lihat Detail</a>  &nbsp;';
                 return $btn;
             })
 
@@ -82,7 +82,8 @@ class BansosController extends Controller
     public function show(string $id)
     {
         $bansos = PenerimaBansosModel::with('kk')->find($id);
-        $warga = WargaModel::with('kk')->find($id);
+        $warga = WargaModel::where('kk_id', $bansos->kk_id)->get();
+        // $warga = WargaModel::with('kk')->find($id);
         $kk = KkModel::all();
 
         $breadcrumb = (object)[

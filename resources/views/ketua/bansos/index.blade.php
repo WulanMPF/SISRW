@@ -119,7 +119,7 @@
                 }]
             });
 
-            S('#kk_id').on('change', function() {
+            S('#jenis_bansos').on('change', function() {
                 dataBansos.ajax.reload();
             });
 
