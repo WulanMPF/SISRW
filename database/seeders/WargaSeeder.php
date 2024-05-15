@@ -146,7 +146,20 @@ class WargaSeeder extends Seeder
                 'status_perkawinan' => $status_perkawinan, // Status perkawinan diisi null untuk status sementara
                 'pekerjaan' => $pekerjaan, // Pekerjaan diisi null untuk status sementara
                 'status_warga' => $status_warga,
+                'level_id' => null,
             ];
+        }
+
+        // Setiap data warga ke-5 dan seterusnya akan memiliki level_id 5
+        $currentLevel = 1; // Mulai dengan level 1
+        foreach ($wargaData as $index => &$warga) {
+            // Jika warga_id adalah 1 sampai 4, atur level_id sesuai dengan warga_id
+            if ($warga['warga_id'] >= 1 && $warga['warga_id'] <= 4) {
+                $warga['level_id'] = $warga['warga_id'];
+            } else {
+                // Jika warga_id lebih dari 4, maka beri level_id 5
+                $warga['level_id'] = 5;
+            }
         }
 
         // Insert data warga ke dalam tabel warga menggunakan DB facade
