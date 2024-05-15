@@ -10,7 +10,7 @@
             @if (session('error'))
                 <div class="alert alert-danger">{{ session('error') }}</div>
             @endif
-            
+
             <!-- Filter Section -->
             <div class="row mb-3">
                 <div class="col-md-12">
@@ -28,7 +28,7 @@
             </div>
 
             <!-- Information Boxes -->
-            <div class="d-flex">
+            <div class="d-flex justify-content-start">
                 <div class="small-box bg-light">
                     <div class="inner">
                         <h4>Iuran Bulanan</h4>
@@ -47,6 +47,11 @@
                         <p><span style="color: green;">Rp. 10.000,-</span></p>
                     </div>
                 </div>
+            </div>
+            
+            <!-- Call Box -->
+            <div class="call-box bg-light">
+                <p>Silakan hubungi bendahara untuk pembayaran iuran.</p>
             </div>
 
             <!-- Table -->
@@ -84,6 +89,16 @@
         background-color: #d9d2c7;
         color: #7F643C;
     }
+
+    .call-box {
+        display: inline-block;
+        padding: 0.0em 0.4em; /* Setinggi dan sepanjang font */
+        font-size: 16px; 
+        background-color: #cccccc; 
+        box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        margi
+    }
+
 </style>
 @endpush
 
