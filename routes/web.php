@@ -190,3 +190,4 @@ Route::group(['prefix' => 'warga/bansos'], function () {
 Route::group(['prefix' => 'warga/profile'], function () {
     Route::get('/', [WargaProfileController::class, 'index']);
 });
+
