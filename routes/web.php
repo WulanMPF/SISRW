@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Bendahara\DashboardController as BendaharaDashboardController;
 use App\Http\Controllers\Ketua\DashboardController;
 use App\Http\Controllers\Ketua\WargaController;
 use App\Http\Controllers\Ketua\UmkmController;
@@ -17,11 +18,13 @@ use App\Http\Controllers\Bendahara\LapkeuController as BendaharaLapkeuController
 use App\Http\Controllers\Bendahara\ProfileController as BendaharaProfileController;
 use App\Http\Controllers\Ketua\ArsipSuratController;
 use App\Http\Controllers\Ketua\ProfileController;
+use App\Http\Controllers\Login\LoginController;
 use App\Http\Controllers\Sekretaris\ProfileController as SekretarisProfileController;
 use App\Http\Controllers\Sekretaris\SuratController as SekretarisSuratController;
 use App\Http\Controllers\Warga\IuranController as WargaIuranController;
 use App\Http\Controllers\Warga\PengaduanController as WargaPengaduanController;
 use App\Http\Controllers\Warga\AjukanPersuratanController as AjukanPersuratanController;
+use App\Http\Controllers\Warga\DashboardController as WargaDashboardController;
 use App\Http\Controllers\Warga\SyaratBansosController as WargaSyaratBansosController;
 use App\Http\Controllers\Warga\UmkmController as WargaUmkmController;
 use App\Http\Controllers\Warga\ProfileController as WargaProfileController;
@@ -43,10 +46,31 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [WelcomeController::class, 'index']);
 
 //Route Login Page
-Route::get('/login', [WelcomeController::class, 'login']);
+Route::get('/login', [LoginController::class, 'index'])->name('login');
+// Route::post('proses_login', [LoginController::class, 'proses_login'])->name('proses_login');
+// Route::get('logout', [LoginController::class, 'logout'])->name('logout');
+
+//Middleware Login
+// Route::group(['middleware' => ['auth']], function () {
+
+//     // Route::group(['middleware' => ['cek_login:1']], function () {
+//     //     Route::resource('admin', AdminController::class);
+//     // });
+//     Route::group(['middleware' => ['cek_login:2']], function () {
+//         Route::resource('ketua', WelcomeController:: class);
+//     });
+//     Route::group(['middleware' => ['cek_login:3']], function () {
+//         Route::resource('sekretaris', WelcomeController:: class);
+//     });
+//     Route::group(['middleware' => ['cek_login:4']], function () {
+//         Route::resource('bendahara', WelcomeController:: class);
+//     });
+//     Route::group(['middleware' => ['cek_login:5']], function () {
+//         Route::resource('warga', WelcomeController:: class);
+//     });
+// });
 
 //Route Halaman Ketua RW
-Route::get('/ketua', [WelcomeController::class, 'ketua']);
 Route::group(['prefix' => 'ketua/dashboard'], function () {
     Route::get('/', [DashboardController::class, 'index']);
 });
@@ -99,7 +123,6 @@ Route::group(['prefix' => 'ketua/profile'], function () {
 });
 
 // Route Halaman Sekretaris RW
-Route::get('/sekretaris', [WelcomeController::class, 'sekretaris']);
 Route::group(['prefix' => 'sekretaris/dashboard'], function () {
     Route::get('/', [SekretarisDashboardController::class, 'index']);
 });
@@ -139,7 +162,9 @@ Route::group(['prefix' => 'sekretaris/profile'], function () {
 });
 
 // Route Halaman Bendahara RW
-Route::get('/bendahara', [WelcomeController::class, 'bendahara']);
+Route::group(['prefix' => 'bendahara/dashboard'], function () {
+    Route::get('/', [BendaharaDashboardController::class, 'index']);
+});
 Route::group(['prefix' => 'bendahara/iuran'], function () {
     Route::get('/', [BendaharaIuranController::class, 'index'])->name('bendahara.iuran.index');
     Route::post('/list', [BendaharaIuranController::class, 'list'])->name('bendahara.iuran.list');
@@ -155,7 +180,9 @@ Route::group(['prefix' => 'bendahara/profile'], function () {
 });
 
 // Route Halaman Warga
-Route::get('/warga', [WelcomeController::class, 'warga']);
+Route::group(['prefix' => 'warga/dashboard'], function () {
+    Route::get('/', [WargaDashboardController::class, 'index']);
+});
 Route::group(['prefix' => 'warga/iuran'], function () {
     Route::get('/', [WargaIuranController::class, 'index']);
     Route::post('/list', [WargaIuranController::class, 'list']);
