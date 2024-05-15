@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('umkm', function (Blueprint $table) {
             $table->id('umkm_id');
             $table->unsignedBigInteger('warga_id')->index();
-            $table->string('nama_usaha', 20);
+            $table->string('nama_usaha', 50);
             $table->string('alamat_usaha', 50);
             $table->string('jenis_usaha', 10);
             $table->enum('status_usaha', ['Aktif', 'Nonaktif']);
