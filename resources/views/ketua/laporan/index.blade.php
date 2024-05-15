@@ -60,13 +60,15 @@
 @push('js')
     <script>
         $(document).ready(function() {
+            var saldoAwal = 0; // Ensure this is set to the correct initial saldo value
+
             var dataLaporan = $('#table_laporan_keuangan').DataTable({
                 serverSide: true,
                 ajax: {
-                    "url": "{{ url('ketua/laporan/list') }}",
-                    "dataType": "json",
-                    "type": "POST",
-                    "data": function(d) {
+                    url: "{{ url('ketua/laporan/list') }}",
+                    dataType: "json",
+                    type: "POST",
+                    data: function(d) {
                         d.jenis_laporan = $('#jenis_laporan').val();
                     }
                 },
@@ -77,21 +79,26 @@
                     { data: "pemasukan", className: "text-right", orderable: true, searchable: false },
                     { data: "pengeluaran", className: "text-right", orderable: true, searchable: false },
                     {
-                        data: function(row) {
-                            return row.pemasukan - row.pengeluaran;
-                        },
+                        data: null,
                         className: "text-right",
                         orderable: true,
-                        searchable: false
+                        searchable: false,
+                        render: function(data, type, row, meta) {
+                            var previousSaldo = saldoAwal;
+                            if (meta.row > 0) {
+                                previousSaldo = parseFloat(dataLaporan.cell(meta.row - 1, 5).data());
+                            }
+                            var currentSaldo = previousSaldo + parseFloat(row.pemasukan || 0) - parseFloat(row.pengeluaran || 0);
+                            return currentSaldo.toFixed(2);
+                        }
                     },
                     { data: "aksi", className: "text-center", orderable: false, searchable: false }
                 ]
             });
 
-            $('#status_pengaduan').on('change', function() {
+            $('#jenis_laporan').on('change', function() {
                 dataLaporan.ajax.reload();
             });
-
         });
     </script>
 @endpush
