@@ -53,7 +53,7 @@
     <style>
         body {
             font-family: 'Poppins', sans-serif;
-            font-size: 15px;
+            /* font-size: 15px; */
         }
 
         #tambah {
