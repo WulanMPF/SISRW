@@ -76,20 +76,26 @@
         padding: 15px;
         
     }
+    .card-title {
+    font-weight: bold; /* This will make the text bold */
+}
+
 
     .btn-primary, .btn-secondary {
         border-radius: 5px;
     }
-    h2{
-        font: #BB955C;
+
+    h2 {
+        color: #BB955C; 
         font-family: Poppins;
         font-size: 20px;
         font-style: normal;
         font-weight: 800;
         line-height: normal;
         text-decoration: underline;
-        margin-left: 40%
-        }
+        margin-left: 40%;  
+    }
+
 
         .btn-primary {
         background-color: #BB955C;
