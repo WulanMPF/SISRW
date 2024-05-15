@@ -96,87 +96,40 @@
             var dataAjukanUmkm = $('#table_ajukan_umkm').DataTable({
                 serverSide: true,
                 ajax: {
-                    "url": "{{ url('ketua/umkm/list') }}",
-                    "dataType": "json",
-                    "type": "POST",
-                    "data": function(d) {
+                    url: "{{ url('ketua/umkm/list') }}",
+                    dataType: "json",
+                    type: "POST",
+                    data: function(d) {
                         d.jenis_usaha = $('#jenis_usaha').val();
+                        d.status_usaha = 'diproses';
                     }
                 },
-                columns: [{
-                        data: "DT_RowIndex",
-                        className: "text-center",
-                        orderable: false,
-                        searchable: false
-                    },
-                    {
-                        data: "nama_usaha",
-                        className: "",
-                        orderable: true,
-                        searchable: true
-                    },
-                    {
-                        data: "jenis_usaha",
-                        className: "",
-                        orderable: true,
-                        searchable: true
-                    },
-                    {
-                        data: "status_usaha",
-                        className: "",
-                        orderable: true,
-                        searchable: true
-                    },
-                    {
-                        data: "aksi",
-                        className: "",
-                        orderable: false,
-                        searchable: false
-                    }
+                columns: [
+                    { data: "DT_RowIndex", className: "text-center", orderable: false, searchable: false },
+                    { data: "nama_usaha", className: "", orderable: true, searchable: true },
+                    { data: "jenis_usaha", className: "", orderable: true, searchable: true },
+                    { data: "status_usaha", className: "", orderable: true, searchable: true },
+                    { data: "aksi", className: "", orderable: false, searchable: false }
                 ]
             });
 
-            // DataTable untuk UMKM
             var dataUmkm = $('#table_umkm').DataTable({
                 serverSide: true,
                 ajax: {
-                    "url": "{{ url('ketua/umkm/list') }}",
-                    "dataType": "json",
-                    "type": "POST",
-                    "data": function(d) {
+                    url: "{{ url('ketua/umkm/list') }}",
+                    dataType: "json",
+                    type: "POST",
+                    data: function(d) {
                         d.jenis_usaha = $('#jenis_usaha').val();
+                        d.status_usaha = 'aktif';
                     }
                 },
-                columns: [{
-                        data: "DT_RowIndex",
-                        className: "text-center",
-                        orderable: false,
-                        searchable: false
-                    },
-                    {
-                        data: "nama_usaha",
-                        className: "",
-                        orderable: true,
-                        searchable: true
-                    },
-                    {
-                        data: "jenis_usaha",
-                        className: "",
-                        orderable: true,
-                        searchable: true
-                    },
-                    {
-                        data: "status_usaha",
-                        className: "",
-                        orderable: true,
-                        searchable: true
-                    },
-                    {
-                        data: "aksi",
-                        className: "",
-                        orderable: false,
-                        searchable: false
-                    }
+                columns: [
+                    { data: "DT_RowIndex", className: "text-center", orderable: false, searchable: false },
+                    { data: "nama_usaha", className: "", orderable: true, searchable: true },
+                    { data: "jenis_usaha", className: "", orderable: true, searchable: true },
+                    { data: "status_usaha", className: "", orderable: true, searchable: true },
+                    { data: "aksi", className: "", orderable: false, searchable: false }
                 ]
             });
 
