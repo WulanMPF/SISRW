@@ -77,6 +77,12 @@
                         searchable: false
                     },
                     {
+                        data: "tgl_pengaduan",
+                        className: "",
+                        orderable: true,
+                        searchable: true
+                    },
+                    {
                         data: "nama_pelapor",
                         className: "",
                         orderable: true,
@@ -84,12 +90,6 @@
                     },
                     {
                         data: "jenis_pengaduan",
-                        className: "",
-                        orderable: true,
-                        searchable: true
-                    },
-                    {
-                        data: "tgl_pengaduan",
                         className: "",
                         orderable: true,
                         searchable: true
