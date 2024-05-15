@@ -9,6 +9,7 @@ use App\Http\Controllers\Ketua\BansosController;
 use App\Http\Controllers\Ketua\LapkeuController;
 use App\Http\Controllers\Sekretaris\DashboardController as SekretarisDashboardController;
 use App\Http\Controllers\Sekretaris\PengumumanController;
+use App\Http\Controllers\sekretaris\SyaratBansosController as SekretarisSyaratBansosController;
 use App\Http\Controllers\Sekretaris\UmkmController as SekretarisUmkmController;
 use App\Http\Controllers\Sekretaris\BansosController as SekretarisBansosController;
 use App\Http\Controllers\Sekretaris\WargaController as SekretarisWargaController;
@@ -124,6 +125,14 @@ Route::group(['prefix' => 'sekretaris/pengumuman'], function () {
     Route::get('/', [PengumumanController::class, 'index']);
     Route::get('/{id}', [PengumumanController::class, 'show']);
 });
+Route::group(['prefix' => 'sekretaris/skBansos'], function () {
+    Route::get('/', [SekretarisSyaratBansosController::class, 'index']);
+    Route::post('/list', [SekretarisSyaratBansosController::class, 'list']);
+    Route::get('/create', [SekretarisSyaratBansosController::class, 'create']);
+    Route::post('/', [SekretarisSyaratBansosController::class, 'store'])->name('sk_bansos.store');
+    Route::get('/{id}', [SekretarisSyaratBansosController::class, 'show']);
+});
+
 Route::group(['prefix' => 'sekretaris/umkm'], function () {
     Route::get('/', [SekretarisUmkmController::class, 'index']);
     Route::post('/list', [SekretarisUmkmController::class, 'list']);
@@ -190,4 +199,3 @@ Route::group(['prefix' => 'warga/bansos'], function () {
 Route::group(['prefix' => 'warga/profile'], function () {
     Route::get('/', [WargaProfileController::class, 'index']);
 });
-
