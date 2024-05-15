@@ -93,5 +93,10 @@
             a {
                 float: right;
             }
+
+            img {
+                width: 288px;
+                height: 192px;
+            }
         </style>
     @endpush
