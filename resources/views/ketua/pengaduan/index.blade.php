@@ -89,7 +89,7 @@
                         searchable: true
                     },
                     {
-                        data: "tanggal_pengaduan",
+                        data: "tgl_pengaduan",
                         className: "",
                         orderable: true,
                         searchable: true
@@ -101,8 +101,14 @@
                         searchable: true
                     },
                     {
-                        data: "status",
+                        data: "status_pengaduan",
                         className: "",
+                        orderable: true,
+                        searchable: true
+                    },
+                    {
+                        data: "action",
+                        className: "text-center",
                         orderable: false,
                         searchable: false
                     }
@@ -113,6 +119,5 @@
                 dataPengaduan.ajax.reload();
             });
 
-        });
     </script>
 @endpush
