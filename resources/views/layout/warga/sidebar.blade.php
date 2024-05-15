@@ -45,7 +45,7 @@
 <style>
     .nav-pills .nav-link.active,
     .nav-pills .show>.nav-link {
-        background-color: #FFE6C0;
+        background-color: #c6ad86;
         border-radius: 20px;
         color: #463720 !important;
     }

@@ -1,4 +1,4 @@
-<div class="sidebar" style="font-family: Poppins; color: #463720;" >
+<div class="sidebar" style="font-family: Poppins; color: #463720;">
     <!-- Sidebar Menu -->
     <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
@@ -20,11 +20,13 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="{{ url('/sekretaris/pengumuman') }}" class="nav-link {{ $activeMenu == 'pengumuman' ? 'active' : '' }} ">
+                <a href="{{ url('/sekretaris/pengumuman') }}"
+                    class="nav-link {{ $activeMenu == 'pengumuman' ? 'active' : '' }} ">
                     <i class="nav-icon fas fa-bullhorn"></i>
                     <p>Pengumuman</p>
                 </a>
             </li>
+
             <li class="nav-item">
                 <a href="{{ url('/sekretaris/umkm') }}" class="nav-link {{ $activeMenu == 'umkm' ? 'active' : '' }} ">
                     <i class="nav-icon fas fa-store"></i>
@@ -32,7 +34,15 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="{{ url('/sekretaris/bansos') }}" class="nav-link {{ $activeMenu == 'bansos' ? 'active' : '' }} ">
+                <a href="{{ url('/sekretaris/skBansos') }}"
+                    class="nav-link {{ $activeMenu == 'skBansos' ? 'active' : '' }} ">
+                    <i class="nav-icon fas fa-hands-helping"></i>
+                    <p>S&K BANSOS</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="{{ url('/sekretaris/bansos') }}"
+                    class="nav-link {{ $activeMenu == 'bansos' ? 'active' : '' }} ">
                     <i class="nav-icon fas fa-hands-helping"></i>
                     <p>Penerima BANSOS</p>
                 </a>
