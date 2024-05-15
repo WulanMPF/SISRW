@@ -2,59 +2,68 @@
 
 namespace Database\Seeders;
 
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Str;
-use Carbon\Carbon;
 
-class UMKMSeeder extends Seeder
+class UmkmSeeder extends Seeder
 {
     /**
      * Run the database seeds.
-     *
-     * @return void
      */
-    public function run()
+    public function run(): void
     {
-        // Get list of warga IDs
-        $warga_ids = DB::table('warga')->pluck('warga_id')->toArray();
-
-        // Insert sample data
         DB::table('umkm')->insert([
             [
-                'warga_id' => $warga_ids[array_rand($warga_ids)],
-                'nama_usaha' => 'Warung Sederhana',
-                'alamat_usaha' => 'Jl. Pahlawan No. 1',
-                'jenis_usaha' => 'Kuliner',
-                'status_usaha' => 'Aktif',
-                'deskripsi' => 'Menyediakan makanan rumahan dengan harga terjangkau',
-                'lampiran' => 'warung_makan_sederhana.jpg',
-                'created_at' => Carbon::now(),
-                'updated_at' => Carbon::now(),
-            ],
-            [
-                'warga_id' => $warga_ids[array_rand($warga_ids)],
-                'nama_usaha' => 'Bengkel Motor Jaya',
-                'alamat_usaha' => 'Jl. Merdeka No. 20',
-                'jenis_usaha' => 'Otomotif',
-                'status_usaha' => 'Aktif',
-                'deskripsi' => 'Melayani perbaikan dan servis motor',
-                'lampiran' => 'bengkel_motor_jaya.jpg',
-                'created_at' => Carbon::now(),
-                'updated_at' => Carbon::now(),
-            ],
-            [
-                'warga_id' => $warga_ids[array_rand($warga_ids)],
-                'nama_usaha' => 'Toko Buku Pintar',
-                'alamat_usaha' => 'Jl. Pendidikan No. 3',
+                'umkm_id' => 1,
+                'warga_id' => 1,
+                'nama_usaha' => 'Toko Baju Indah',
+                'alamat_usaha' => 'Jl. Merdeka No. 1',
                 'jenis_usaha' => 'Retail',
                 'status_usaha' => 'Aktif',
-                'deskripsi' => 'Menjual buku-buku pendidikan dan alat tulis',
-                'lampiran' => 'toko_buku_pintar.jpg',
-                'created_at' => Carbon::now(),
-                'updated_at' => Carbon::now(),
+                'deskripsi' => 'Menjual berbagai macam pakaian',
+                'lampiran' => 'lampiran1.pdf',
             ],
-            // Tambahkan data lain sesuai kebutuhan
+            [
+                'umkm_id' => 2,
+                'warga_id' => 2,
+                'nama_usaha' => 'Warung Makan Sederhana',
+                'alamat_usaha' => 'Jl. Kenangan No. 12',
+                'jenis_usaha' => 'Kuliner',
+                'status_usaha' => 'diproses',
+                'deskripsi' => 'Warung makan dengan menu khas Indonesia',
+                'lampiran' => 'lampiran2.pdf',
+            ],
+            [
+                'umkm_id' => 3,
+                'warga_id' => 3,
+                'nama_usaha' => 'Bengkel Motor Jaya',
+                'alamat_usaha' => 'Jl. Raya Selatan No. 5',
+                'jenis_usaha' => 'Jasa',
+                'status_usaha' => 'diproses',
+                'deskripsi' => 'Melayani perbaikan dan servis motor',
+                'lampiran' => 'lampiran3.pdf',
+            ],
+            [
+                'umkm_id' => 4,
+                'warga_id' => 4,
+                'nama_usaha' => 'Kedai Kopi Nusantara',
+                'alamat_usaha' => 'Jl. Kopi No. 22',
+                'jenis_usaha' => 'Kuliner',
+                'status_usaha' => 'Aktif',
+                'deskripsi' => 'Kedai kopi dengan cita rasa nusantara',
+                'lampiran' => 'lampiran4.pdf',
+            ],
+            [
+                'umkm_id' => 5,
+                'warga_id' => 5,
+                'nama_usaha' => 'Salon Cantik',
+                'alamat_usaha' => 'Jl. Kecantikan No. 9',
+                'jenis_usaha' => 'Jasa',
+                'status_usaha' => 'Aktif',
+                'deskripsi' => 'Menyediakan layanan kecantikan',
+                'lampiran' => 'lampiran5.pdf',
+            ],
         ]);
     }
 }
