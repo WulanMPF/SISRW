@@ -43,7 +43,7 @@ class LapkeuController extends Controller
                 return $laporan->jenis_laporan == 'pengeluaran' ? $laporan->nominal : 0;
             })
             ->addColumn('aksi', function ($laporan) {
-                $btn = '<a href="' . url('/laporan/' . $laporan->laporan_id) . '" class="btn btn-info btn-sm">Lihat Detail</a>';
+                $btn = '<a href="' . url('/laporan/' . $laporan->laporan_id) . '" class="btn btn-sm" style="background-color: #BB955C; color: white; border-radius: 9px;">Lihat Detail</a>';
                 return $btn;
             })
             ->rawColumns(['aksi'])

@@ -42,7 +42,7 @@ class UmkmController extends Controller
         return DataTables::of($umkms)
             ->addIndexColumn() // Menambahkan kolom index / no urut (default nmaa kolom: DT_RowINdex)
             ->addColumn('aksi', function ($umkm) {
-                $btn = '<a href="' . url('/umkm/' . $umkm->umkm_id) . '" class="btn btn-info btn-sm">Lihat Detail</a>  &nbsp;';
+                $btn = '<a href="' . url('/umkm/' . $umkm->umkm_id) . '" class="btn btn-sm" style="background-color: #BB955C; color: white; border-radius: 9px;">Lihat Detail</a>  &nbsp;';
 
                 return $btn;
             })

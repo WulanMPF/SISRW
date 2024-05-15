@@ -42,7 +42,7 @@ class IuranController extends Controller
         return DataTables::of($iurans)
             ->addIndexColumn() // Menambahkan kolom index / no urut (default nama kolom: DT_RowIndex)
             ->addColumn('aksi', function ($iuran) {
-                $btn = '<a href="' . url('/iuran/' . $iuran->iuran_id) . '" class="btn btn-info btn-sm">Lihat Detail</a>  &nbsp;';
+                $btn = '<a href="' . url('/iuran/' . $iuran->iuran_id) . '" class="btn btn-sm" style="background-color: #BB955C; color: white; border-radius: 9px;">Lihat Detail</a>  &nbsp;';
                 return $btn;
             })
             ->rawColumns(['aksi'])
