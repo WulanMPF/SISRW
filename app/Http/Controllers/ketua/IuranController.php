@@ -57,7 +57,7 @@ class IuranController extends Controller
         return DataTables::of(collect($data))
             ->addIndexColumn()
             ->addColumn('aksi', function ($row) {
-                $btn = '<a href="' . url('/iuran/' . $row['DT_RowIndex']) . '" class="btn btn-info btn-sm">Lihat Detail</a>';
+                $btn = '<a href="' . url('/iuran/' . $row['DT_RowIndex']) . '" class="btn btn-sm" style="background-color: #BB955C; color: white; border-radius: 9px;">Lihat Detail</a>';
                 return $btn;
             })
             ->rawColumns(['aksi'])

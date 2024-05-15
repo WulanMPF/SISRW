@@ -39,7 +39,7 @@ class PengaduanController extends Controller
         return DataTables::of($pengaduan)
             ->addIndexColumn()
             ->addColumn('action', function ($row) {
-                return '<a href="' . route('pengaduan.show', $row->pengaduan_id) . '" class="btn btn-info btn-sm">Detail</a>';
+                return '<a href="' . route('pengaduan.show', $row->pengaduan_id) . '" class="btn btn-sm" style="background-color: #BB955C; color: white; border-radius: 9px;">Detail</a>';
             })
             ->rawColumns(['action'])
             ->make(true);
