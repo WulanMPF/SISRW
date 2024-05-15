@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class PengaduanModel extends Model
 {
@@ -14,7 +15,7 @@ class PengaduanModel extends Model
 
     protected $fillable = [
         'warga_id',
-        'nama_pelapor',
+        //'nama_pelapor',
         'jenis_pengaduan', // Include 'jenis_pengaduan' in fillable attributes
         'tgl_pengaduan',
         'prioritas',
@@ -23,5 +24,9 @@ class PengaduanModel extends Model
         'lampiran',
         'tindakan_diambil',
     ];
-    
+
+    public function warga(): BelongsTo
+    {
+        return $this->belongsTo(WargaModel::class, 'warga_id', 'warga_id');
+    }
 }
