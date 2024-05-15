@@ -39,11 +39,14 @@ class UmkmController extends Controller
             $umkms->where('jenis_usaha', $request->jenis_usaha);
         }
 
-        return DataTables::of($umkms)
-            ->addIndexColumn() // Menambahkan kolom index / no urut (default nmaa kolom: DT_RowINdex)
-            ->addColumn('aksi', function ($umkm) {
-                $btn = '<a href="' . url('/umkm/' . $umkm->umkm_id) . '" class="btn btn-info btn-sm">Lihat Detail</a>  &nbsp;';
+        if ($request->status_usaha) {
+            $umkms->where('status_usaha', $request->status_usaha);
+        }
 
+        return DataTables::of($umkms)
+            ->addIndexColumn()
+            ->addColumn('aksi', function ($umkm) {
+                $btn = '<a href="' . url('/umkm/' . $umkm->umkm_id) . '" class="btn btn-info btn-sm">Lihat Detail</a>';
                 return $btn;
             })
             ->rawColumns(['aksi'])
