@@ -108,7 +108,12 @@
         font-size: 15px;
         font-weight: 400;
         line-height: normal;
-        border-radius: 10px;
+        border-radius: 20px;
     }
+
+    .list-group-item:last-child {
+            border-bottom-left-radius: 0.75rem;
+            border-bottom-right-radius: 0.75rem;
+        }
 </style>
 @endpush
