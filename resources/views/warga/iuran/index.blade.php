@@ -56,7 +56,7 @@
                         <th>No</th>
                         <th>Periode Pembayaran</th>
                         <th>No. KK</th>
-                        <th>Iuran Bukanan</th>
+                        <th>Iuran Bulanan</th>
                         <th>Iuran Sampah</th>
                         <th>Iuran Keamanan</th>
                     </tr>
