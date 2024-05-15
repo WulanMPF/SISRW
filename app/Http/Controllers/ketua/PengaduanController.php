@@ -30,8 +30,12 @@ class PengaduanController extends Controller
      */
     public function list(Request $request)
     {
-        $pengaduan = PengaduanModel::query();
-    
+        $pengaduan = PengaduanModel::join('warga', 'warga.warga_id', '=', 'pengaduan.warga_id')
+            ->select([
+                'pengaduan.*',
+                'warga.nama_warga as nama_pelapor',
+            ]);
+
         return DataTables::of($pengaduan)
             ->addIndexColumn()
             ->addColumn('action', function ($row) {
@@ -40,7 +44,7 @@ class PengaduanController extends Controller
             ->rawColumns(['action'])
             ->make(true);
     }
-    
+
     /**
      * Menampilkan halaman detail pengaduan.
      */
