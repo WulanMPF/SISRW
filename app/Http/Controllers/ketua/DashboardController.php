@@ -12,7 +12,15 @@ class DashboardController extends Controller
      */
     public function index()
     {
-        //
+        $breadcrumb = (object) [
+            'title' => 'Selamat Datang, Ketua RW',
+            'date' => date('l, d F Y'),
+            'list' => ['Home', 'Dashboard']
+        ];
+
+        $activeMenu = 'dashboard';
+
+        return view('ketua.dashboard', ['breadcrumb' => $breadcrumb, 'activeMenu' => $activeMenu]);
     }
 
     /**
