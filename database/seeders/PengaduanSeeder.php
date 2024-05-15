@@ -19,7 +19,7 @@ class PengaduanSeeder extends Seeder
         $faker = Faker::create();
 
         // Ambil semua ID dari model WargaModel
-        $wargaIds = WargaModel::pluck('id')->toArray();
+        $wargaIds = WargaModel::pluck('warga_id')->toArray();
 
         $data = [];
 
