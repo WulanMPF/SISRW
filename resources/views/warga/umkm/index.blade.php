@@ -8,7 +8,7 @@
     </div>
     <div class="card-body" style="padding-left: 1rem;">
         {{-- HANYA UNTUK KEPERLUAN TESTING VIEW SAJA --}}
-        <div class="d-flex flex-wrap overflow-auto flex-container">
+        {{-- <div class="d-flex flex-wrap overflow-auto flex-container">
             <div class="card">
                 <img src="https://asset.kompas.com/crops/BUpR77ytcXFkAaUjxUZtgAgSYCA=/54x0:661x405/1200x800/data/photo/2024/04/26/662b7b4be821d.jpg"
                     class="card-img-top" alt="...">
@@ -19,7 +19,7 @@
                     <a href="umkm/1" class="btn" id="button">Baca selengkapnya</a>
                 </div>
             </div>
-        </div>
+        </div> --}}
         {{-- END OF TESTING VIEW --}}
 
         {{-- Code disesuaikan dengan pemgambilan data dari database - masih perlu perbaikan PADA SOURCE IMG --}}

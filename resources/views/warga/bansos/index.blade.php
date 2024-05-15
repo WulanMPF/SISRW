@@ -8,7 +8,7 @@
         </h3>
 
         {{-- HANYA UNTUK KEPERLUAN TESTING VIEW SAJA --}}
-        <div class="list-group-item d-flex justify-content-between">
+        {{-- <div class="list-group-item d-flex justify-content-between">
             <p class="card-text ml-2">13/03/2024
             </p>
             <p class="card-text">Bantuan Sosial Beras 10 kg
@@ -35,11 +35,11 @@
             <p class="card-text">Bantuan Sosial PKH
             </p>
             <a href="bansos/1" class="btn" id="button">Baca Persyaratan</a>
-        </div>
+        </div> --}}
         {{-- END OF TESTING VIEW --}}
 
         {{-- Code disesuaikan dengan pemgambilan data dari database - masih perlu perbaikan PADA SOURCE IMG --}}
-         
+
     </div>
 @endsection
 
