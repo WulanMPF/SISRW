@@ -98,6 +98,9 @@ Route::group(['prefix' => 'ketua/umkm'], function () {
     Route::get('/create', [UmkmController::class, 'create']);
     Route::post('/', [UmkmController::class, 'store'])->name('tambahUMKM');
     Route::get('/{id}', [UmkmController::class, 'show']);
+    Route::get('/{id}/edit', [UmkmController::class, 'edit']);  // halaman form edit kategori
+    Route::put('/{id}', [UmkmController::class, 'update']);     // simpan perubahan data kategori
+    Route::delete('/{id}', [UmkmController::class, 'destroy']); // hapus data level
 });
 Route::group(['prefix' => 'ketua/bansos'], function () {
     Route::get('/', [BansosController::class, 'index']);

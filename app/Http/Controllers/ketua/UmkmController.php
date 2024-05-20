@@ -98,7 +98,7 @@ class UmkmController extends Controller
         $path = $request->file('lampiran')->move('lampiran_umkm', $namaFile);
         $path = str_replace("\\", "//", $path);
 
-        return redirect('/ketua/umkm')->with('success', 'Data UMKM berhasil diajukans');
+        return redirect('/ketua/umkm')->with('success', 'Data UMKM berhasil ditambahkan');
     }
     public function show(string $id)
     {
@@ -114,5 +114,69 @@ class UmkmController extends Controller
         $activeMenu = 'umkm';
 
         return view('ketua.umkm.show', ['breadcrumb' => $breadcrumb, 'warga' => $warga, 'umkm' => $umkm, 'activeMenu' => $activeMenu]);
+    }
+    public function edit(string $id)
+    {
+        $umkm = UmkmModel::find($id);
+        $warga = WargaModel::all();
+
+        $breadcrumb = (object)[
+            'title' => 'Edit Data UMKM RW 05',
+            'date' => date('l, d F Y'),
+            'list' => ['Home', 'UMKM RW 05', 'Edit']
+        ];
+
+        $page = (object)[
+            'title' => 'Edit UMKM RW 05'
+        ];
+
+        $activeMenu = 'umkm';
+
+        return view('ketua.umkm.edit', ['breadcrumb' => $breadcrumb, 'page' => $page, 'umkm' => $umkm, 'warga' => $warga, 'activeMenu' => $activeMenu]);
+    }
+
+    public function update(Request $request, string $id)
+    {
+        $request->validate([
+            'warga_id'    => 'nullable|integer',
+            'nama_usaha'  => 'required|string|max:20',
+            'alamat_usaha' => 'required|string|max:50',
+            'jenis_usaha' => 'required|string|max:30',
+            'status_usaha' => 'required',
+            'deskripsi' => 'required|string|max:200',
+            'lampiran' => 'nullable|image|mimes:jpeg,png,jpg,svg|max:2048'
+        ]);
+
+        if ($request->image) {
+            $namaFile = $request->file('lampiran')->hashName();
+            $path = $request->file('lampiran')->move('lampiran_umkm', $namaFile);
+            $path = str_replace("\\", "//", $path);
+        }
+
+        UmkmModel::find($id)->update([
+            'warga_id'    => $request->warga_id,
+            'nama_usaha'  => $request->nama_usaha,
+            'alamat_usaha' => $request->alamat_usaha,
+            'jenis_usaha' => $request->jenis_usaha,
+            'status_usaha' => $request->status_usaha,
+            'deskripsi' => $request->deskripsi,
+            'lampiran' => $request->file('lampiran') ? $namaFile : basename(UmkmModel::find($id)->lampiran)
+        ]);
+
+        return redirect('/ketua/umkm')->with('success', 'Data UMKM berhasil diupdate');
+    }
+
+    public function destroy(string $id)
+    {
+        $check = UmkmModel::find($id);
+        if (!$check) {
+            return redirect('/ketua/umkm')->with('error', 'Data UMKM Warga 05 tidak ditemukan');
+        }
+        try {
+            UmkmModel::destroy($id);
+            return redirect('/ketua/umkm')->with('success', 'Data UMKM Warga 05 berhasil dihapus');
+        } catch (\Illuminate\Database\QueryException $e) {
+            return redirect('/ketua/umkm')->with('error', 'Data UMKM Warga 05 gagal dihapus karena masih terdapat tabel lain yang terkait dengan data ini');
+        }
     }
 }
