@@ -16,36 +16,30 @@
 </head>
 
 <body>
-    <nav class="mb-70 navbar navbar-expand-lg">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
         <div class="container">
-            <a class="navbar-brand" href="#">
-                <img src="images/logo.png" height="48" alt="">
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#">Explore</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Categories</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Testimonials</a>
-                    </li>
-                </ul>
-                <ul class="navbar-nav mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="btn btn-secondary" href="#">Sign In</a>
-                    </li>
-                </ul>
-            </div>
+                    <a class="navbar-brand" href="#">
+                        <img src="{{ asset('adminlte/dist/img/sisrw/logo3.png') }}"height="48" alt="SISRW Logo">
+                        <span class="brand-text" >SISTEM INFORMASI RW 05</span>
+                    </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+              data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
+              aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav mx-auto mb 5 mb-lg-0">
+              <li class="nav-item active"><a class="nav-link" href="#">Home</a></li>
+              <li class="nav-item"><a class="nav-link" href="#">About Us</a></li>
+              <li class="nav-item"><a class="nav-link" href="#">Kegiatan</a></li>
+              <li class="nav-item"><a class="nav-link" href="#">UMKM</a></li>
+            </ul>
+            <ul class="navbar-nav mb-2 mb-lg-0">
+              <li class="nav-item"><a class="btn btn-secondary" href="#"> Log In</a></li>
+            </ul>
+          </div>
         </div>
-    </nav>
+      </nav>
     <section class="header mb-70">
         <div class="container">
             <div class="row align-items-center">
@@ -55,8 +49,8 @@
                         Nyaman & Murmer
                     </h1>
                     <p class="paragraph mb-30">
-                        Lorem house ipsum could be a reall good home<br>
-                        without thinking si amet dolor safety around.
+                        Kami adalah platform digital untuk memperkuat keterlibatan antara warga dan pengurus setempat di RW 05. Dengan berbagai fitur yang intuitif, kami memungkinkan warga untuk dengan mudah mengakses informasi terkini tentang kegiatan, pengumuman penting, serta memberikan sarana untuk menyampaikan masukan dan aspirasi.
+                        Selamat berpartisipasi!
                     </p>
                     <p class="mb-50"><a href="#" class="btn btn-primary">Explore Houses</a></p>
                     <div class="row stats text-center">
