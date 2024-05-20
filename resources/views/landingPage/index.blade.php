@@ -45,8 +45,8 @@
             <div class="row align-items-center">
                 <div class="col-lg-6">
                     <h1 class="jumbo-header mb-30">
-                        Cari Kos Kosan<br>
-                        Nyaman & Murmer
+                        SISTEM INFORMASI <br>
+                        WARGA RW 05
                     </h1>
                     <p class="paragraph mb-30">
                         Kami adalah platform digital untuk memperkuat keterlibatan antara warga dan pengurus setempat di RW 05. Dengan berbagai fitur yang intuitif, kami memungkinkan warga untuk dengan mudah mengakses informasi terkini tentang kegiatan, pengumuman penting, serta memberikan sarana untuk menyampaikan masukan dan aspirasi.
