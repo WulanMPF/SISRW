@@ -95,6 +95,8 @@ Route::group(['prefix' => 'ketua/surat'], function () {
 Route::group(['prefix' => 'ketua/umkm'], function () {
     Route::get('/', [UmkmController::class, 'index']);
     Route::post('/list', [UmkmController::class, 'list']);
+    Route::get('/create', [UmkmController::class, 'create']);
+    Route::post('/', [UmkmController::class, 'store'])->name('tambahUMKM');
     Route::get('/{id}', [UmkmController::class, 'show']);
 });
 Route::group(['prefix' => 'ketua/bansos'], function () {
