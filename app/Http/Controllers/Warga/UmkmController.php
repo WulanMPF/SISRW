@@ -94,7 +94,7 @@ class UmkmController extends Controller
         $path = $request->file('lampiran')->move('lampiran_umkm', $namaFile);
         $path = str_replace("\\", "//", $path);
 
-        return redirect('/warga/umkm')->with('success', 'Data UMKM berhasil diajukans');
+        return redirect('/warga/umkm')->with('success', 'Data UMKM berhasil diajukan');
     }
     public function show(string $id)
     {
