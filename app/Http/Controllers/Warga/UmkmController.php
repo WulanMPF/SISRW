@@ -21,7 +21,8 @@ class UmkmController extends Controller
 
         $activeMenu = 'umkm';
 
-        $umkm = UmkmModel::all();
+        // $umkm = UmkmModel::all();
+        $umkm = UmkmModel::where('status_usaha', 'Aktif')->get();
         $warga = WargaModel::all();
 
         return view('warga.umkm.index', ['breadcrumb' => $breadcrumb, 'umkm' => $umkm, 'warga' => $warga, 'activeMenu' => $activeMenu]);
