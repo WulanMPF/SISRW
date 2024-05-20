@@ -11,22 +11,19 @@ class DashboardController extends Controller
 {
     public function index()
     {
-<<<<<<< Updated upstream
-        // Ambil data kegiatan dan UMKM terbaru
-        $kegiatan = KegiatanModel::orderBy('tanggal', 'desc')->take(5)->get();
-        $umkm = UmkmModel::orderBy('created_at', 'desc')->take(5)->get();
-        
-        return view('warga.dashboard.index', compact('kegiatan', 'umkm'));
-=======
         $breadcrumb = (object) [
             'title' => 'Selamat Datang, Warga',
             'date' => date('l, d F Y'),
             'list' => ['Home', 'Dashboard']
         ];
 
+         // Ambil data kegiatan dan UMKM terbaru
+         $kegiatan = KegiatanModel::orderBy('tanggal', 'desc')->take(5)->get();
+         $umkm = UmkmModel::orderBy('created_at', 'desc')->take(5)->get();
+
         $activeMenu = 'dashboard';
 
-        return view('warga.dashboard', ['breadcrumb' => $breadcrumb, 'activeMenu' => $activeMenu]);
+        return view('warga.dashboard', ['breadcrumb' => $breadcrumb, 'activeMenu' => $activeMenu, compact('kegiatan', 'umkm')]);
     }
 
     /**
@@ -75,6 +72,5 @@ class DashboardController extends Controller
     public function destroy(string $id)
     {
         //
->>>>>>> Stashed changes
     }
 }
