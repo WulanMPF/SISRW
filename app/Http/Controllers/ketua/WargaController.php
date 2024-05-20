@@ -118,7 +118,7 @@ class WargaController extends Controller
             'hubungan_keluarga'       => $request->hubungan_keluarga
         ]);
 
-        return redirect('/ketua/warga.index')->with('success', 'Data warga berhasil disimpan');
+        return redirect('/ketua/warga')->with('success', 'Data warga berhasil disimpan');
     }
 
     public function storeSementara(Request $request)
