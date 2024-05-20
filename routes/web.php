@@ -43,6 +43,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/', function () { return view('landingpage.index');
+});
+
+// Route::get('/', [WelcomeController::class, 'index']);
+
 // Route Landing Page
 Route::get('/', [WelcomeController::class, 'index']);
 
