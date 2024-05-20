@@ -79,9 +79,9 @@ Route::group(['prefix' => 'ketua/warga'], function () {
     Route::get('/', [WargaController::class, 'index']);
     Route::post('/list', [WargaController::class, 'list']);
     Route::get('/create-tetap', [WargaController::class, 'createTetap']);
-    Route::post('/', [WargaController::class, 'storeTetap']);
+    Route::post('/tetap', [WargaController::class, 'storeTetap']);
     Route::get('/create-sementara', [WargaController::class, 'createSementara']);
-    Route::post('/', [WargaController::class, 'storeSementara']);
+    Route::post('/sementara', [WargaController::class, 'storeSementara']);
     Route::get('/{id}', [WargaController::class, 'show']);
 });
 Route::group(['prefix' => 'ketua/surat'], function () {
