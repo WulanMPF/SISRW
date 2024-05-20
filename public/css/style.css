@@ -17,7 +17,7 @@
 
 body {
     font-family: 'Poppins', sans-serif;
-    padding-top: 56px;
+    padding-top: 75px;
 }
 
 a {
@@ -34,6 +34,7 @@ a {
 
 .mb-30 {
     margin-bottom: 30px;
+    text-align: justify;
 }
 
 .mb-50 {
@@ -53,7 +54,7 @@ a {
 
 .big-header {
     font-weight: var(--fwbold);
-    color: var(--navy);
+    color: var(--gold);
     font-size: 28px;
 }
 
@@ -110,6 +111,10 @@ input.form-control {
     font-weight: var(--fwsemibold);
     font-size: 13px;
 }
+.btn-secondary:hover {
+    color: var(--white);
+    background:#e1c69c;
+}
 
 .btn-primary {
     padding: 14px 24px 14px 24px;
@@ -121,7 +126,7 @@ input.form-control {
 }
 
 .navbar {
-    padding: 10px 0 10px 0;
+    padding: 8px 0 8px 0;
     background-color: #ffffff
 }
 
@@ -132,6 +137,9 @@ input.form-control {
 
 .navbar-nav .nav-link {
     color: var(#323232);
+}
+.navbar-nav .nav-link:hover {
+    color: var(--brown);
 }
 
 .navbar-nav .nav-item .active {
@@ -159,6 +167,10 @@ input.form-control {
     border-bottom-left-radius: 16px;
     border-bottom-right-radius: 16px;
     padding: 16px;
+}
+
+.img-fluid {
+    transform: translateY(-40px); /* Adjust the value as needed */
 }
 
 .clear {

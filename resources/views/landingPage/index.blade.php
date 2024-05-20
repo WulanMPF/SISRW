@@ -19,7 +19,7 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
         <div class="container">
                     <a class="navbar-brand" href="#">
-                        <img src="{{ asset('adminlte/dist/img/sisrw/logo3.png') }}"height="48" alt="SISRW Logo">
+                        <img src="{{ asset('adminlte/dist/img/sisrw/logo3.png') }}"height="55" alt="SISRW Logo">
                         <span class="brand-text" >SISTEM INFORMASI RW 05</span>
                     </a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -35,14 +35,19 @@
               <li class="nav-item"><a class="nav-link" href="#">UMKM</a></li>
             </ul>
             <ul class="navbar-nav mb-2 mb-lg-0">
-              <li class="nav-item"><a class="btn btn-secondary" href="#"> Log In</a></li>
+              <li class="nav-item"><a class="btn btn-secondary" href="login/"> Log In</a>
             </ul>
           </div>
         </div>
       </nav>
-    <section class="header mb-70">
+      <section class="header mb-70">
         <div class="container">
             <div class="row align-items-center">
+                <!-- Image Column -->
+                <div class="col-lg-6">
+                    <img src="images/banner(2).png" alt="" class="img-fluid">
+                </div>
+
                 <div class="col-lg-6">
                     <h1 class="jumbo-header mb-30">
                         SISTEM INFORMASI <br>
@@ -53,7 +58,7 @@
                         Selamat berpartisipasi!
                     </p>
                     <p class="mb-50"><a href="#" class="btn btn-primary">Explore Houses</a></p>
-                    <div class="row stats text-center">
+                    {{-- <div class="row stats text-center">
                         <div class="col-lg-4 item">
                             <h3 class="big-header">
                                 23,491
@@ -78,11 +83,11 @@
                                 Happy People
                             </p>
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
-                <div class="col-lg-6">
-                    <img src="images/banner.png" alt="" class="img-fluid">
-                </div>
+                {{-- <div class="col-lg-6">
+                    <img src="images/banner(2).png" alt="" class="img-fluid">
+                </div> --}}
             </div>
         </div>
     </section>
@@ -92,7 +97,7 @@
                 <div class="col-lg-12">
                     <img src="images/ic_best.svg" height="42" alt="" class="mb-16">
                     <h3 class="big-header">
-                        Best of The Best
+                        Kegiatan Warga
                     </h3>
                     <p class="paragraph">
                         Dolor space comfortable moments
