@@ -43,7 +43,11 @@ class LapkeuController extends Controller
                 return $laporan->jenis_laporan == 'pengeluaran' ? $laporan->nominal : 0;
             })
             ->addColumn('aksi', function ($laporan) {
-                $btn = '<a href="' . url('/laporan/' . $laporan->laporan_id) . '" class="btn btn-sm" style="background-color: #BB955C; color: white; border-radius: 9px;">Lihat Detail</a>';
+                $btn = '<a href="' . url('/laporan/' . $laporan->laporan_id) . '" class="btn btn-sm"><i class="fas fa-eye" style="color: #BB955C; font-size: 17px;"></i></a>';
+                $btn .= '<a href="' . url('/laporan/' . $laporan->laporan_id . '/edit') . '" class="btn btn-sm"><i class="fas fa-edit" style="color: #007bff;" font-size: 17px;></i></a>'; // Blue color for edit
+                $btn .= '<form class="d-inline-block" method="POST" action="' . url('/laporan/' . $laporan->laporan_id) . '">'
+                    . csrf_field() . method_field('DELETE') .
+                    '<button type="submit" class="btn btn-sm" onclick="return confirm(\'Apakah Anda yakin menghapus data ini?\');"><i class="fas fa-trash-alt" style="color: #dc3545; font-size: 17px;"></i></button></form>'; // Red color for delete
                 return $btn;
             })
             ->rawColumns(['aksi'])

@@ -163,7 +163,7 @@
                     <br>
                 </div>
             </div>
-            <table class="table table-bordered table-striped table-hover table-sm" id="table_laporan_keuangan">
+            <table class="table table-bordered table-hover table-sm" id="table_laporan_keuangan">
                 <thead>
                     <tr>
                         <th>No</th>
@@ -175,6 +175,15 @@
                         <th>Action</th>
                     </tr>
                 </thead>
+                <tfoot>
+                    <tr>
+                        <td colspan="3" style="text-align:right;"><strong>Total:</strong></td>
+                        <td id="total_pemasukan">0</td>
+                        <td id="total_pengeluaran">0</td>
+                        <td id="total_saldo">0</td>
+                        <td></td>
+                    </tr>
+                </tfoot>
             </table>
         </div>
     </div>
@@ -208,21 +217,48 @@
             var dataLaporan = $('#table_laporan_keuangan').DataTable({
                 serverSide: true,
                 ajax: {
-                    "url": "{{ url('bendahara/laporan/list') }}",
-                    "dataType": "json",
-                    "type": "POST",
-                    "data": function(d) {
+                    url: "{{ url('bendahara/laporan/list') }}",
+                    type: "POST",
+                    dataType: "json",
+                    data: function(d) {
                         d.jenis_laporan = $('#jenis_laporan').val();
                         d.start_date = $('#dari_tanggal').val();
                         d.end_date = $('#sampai_tanggal').val();
+                    },
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     }
                 },
-                columns: [
-                    { data: "DT_RowIndex", className: "text-center", orderable: false, searchable: false },
-                    { data: "tgl_laporan", className: "", orderable: true, searchable: true },
-                    { data: "keterangan", className: "", orderable: true, searchable: true },
-                    { data: "pemasukan", className: "text-right", orderable: true, searchable: false },
-                    { data: "pengeluaran", className: "text-right", orderable: true, searchable: false },
+                columns: [{
+                        data: "DT_RowIndex",
+                        className: "text-center",
+                        orderable: false,
+                        searchable: false
+                    },
+                    {
+                        data: "tgl_laporan",
+                        className: "",
+                        orderable: true,
+                        searchable: true
+                    },
+                    {
+                        data: "keterangan",
+                        className: "",
+                        orderable: true,
+                        searchable: true
+                    },
+                    {
+                        data: "pemasukan",
+                        className: "text-right",
+                        orderable: true,
+                        searchable: false
+                    },
+                    {
+                        data: "pengeluaran",
+                        className: "text-right",
+                        orderable: true,
+                        searchable: false
+                    },
                     {
                         data: function(row) {
                             return row.pemasukan - row.pengeluaran;
@@ -231,11 +267,34 @@
                         orderable: true,
                         searchable: false
                     },
-                    { data: "aksi", className: "text-center", orderable: false, searchable: false }
-                ]
+                    {
+                        data: "aksi",
+                        className: "text-center",
+                        orderable: false,
+                        searchable: false
+                    }
+                ],
+                drawCallback: function(settings) {
+                    var totalPemasukan = 0;
+                    var totalPengeluaran = 0;
+                    var api = this.api();
+
+                    api.rows({
+                        page: 'current'
+                    }).data().each(function(row) {
+                        totalPemasukan += parseFloat(row.pemasukan);
+                        totalPengeluaran += parseFloat(row.pengeluaran);
+                    });
+
+                    var totalSaldo = totalPemasukan - totalPengeluaran;
+
+                    $('#total_pemasukan').html(totalPemasukan.toFixed(2));
+                    $('#total_pengeluaran').html(totalPengeluaran.toFixed(2));
+                    $('#total_saldo').html(totalSaldo.toFixed(2));
+                }
             });
 
-            $('#status_pengaduan').on('change', function() {
+            $('#jenis_laporan, #dari_tanggal, #sampai_tanggal').on('change', function() {
                 dataLaporan.ajax.reload();
             });
 
