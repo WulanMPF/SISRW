@@ -16,11 +16,11 @@ class SyaratBansosController extends Controller
             'list' => ['Home', 'S&K Penerima Bansos']
         ];
 
-        $activeMenu = 'bansos';
-        $bansos = SyaratBansosModel::all();
-        return view('sekretaris.bansos.index', [
+        $activeMenu = 'skBansos';
+        $skBansos = SyaratBansosModel::all();
+        return view('sekretaris.skBansos.index', [
             'breadcrumb' => $breadcrumb,
-            'bansos' => $bansos,
+            'skBansos' => $skBansos,
             'activeMenu' => $activeMenu
         ]);
     }
@@ -35,10 +35,10 @@ class SyaratBansosController extends Controller
             'title' => 'Formulir Syarat & Ketentuan dalam Menerima Bansos'
         ];
 
-        $bansos = SyaratBansosModel::all();
-        $activeMenu = 'bansos'; //set menu yang sedang aktif
+        $skBansos = SyaratBansosModel::all();
+        $activeMenu = 'skBansos'; //set menu yang sedang aktif
 
-        return view('sekretaris.bansos.create', ['breadcrumb' => $breadcrumb, 'page' => $page, 'bansos' => $bansos, 'activeMenu' => $activeMenu]);
+        return view('sekretaris.skBansos.create', ['breadcrumb' => $breadcrumb, 'page' => $page, 'skBansos' => $skBansos, 'activeMenu' => $activeMenu]);
     }
     public function store(Request $request)
     {
@@ -58,30 +58,34 @@ class SyaratBansosController extends Controller
             'deskripsi' => $request->deskripsi,
             'gambar' => $namaFile
         ]);
-        $gambarPath = $request->file('gambar')->storeAs('public/syarat_bansos', $namaFile);
 
-        return redirect('/sekretaris/bansos')->with('success', 'Data syarat dan ketentuan bansos telah berhasil diinputkan');
+        // Simpan gambar ke dalam direktori syarat_bansos dengan nama yang dihasilkan oleh hashName()
+        // $gambarPath = $request->file('gambar')->storeAs('public/syarat_bansos', $namaFile);
+        $path = $request->file('gambar')->move('syarat_bansos', $namaFile);
+        $path = str_replace("\\", "//", $path);
+
+        return redirect('/sekretaris/skBansos')->with('success', 'Data syarat dan ketentuan bansos telah berhasil diinputkan');
     }
     public function show(string $id)
     {
-        $bansos = SyaratBansosModel::findOrFail($id); // Menggunakan findOrFail agar error 404 jika tidak ditemukan
+        $skBansos = SyaratBansosModel::findOrFail($id); // Menggunakan findOrFail agar error 404 jika tidak ditemukan
 
         $breadcrumb = (object) [
-            'title' => 'S&K dalam Menerima ' . $bansos->jenis_bansos,
+            'title' => 'S&K dalam Menerima ' . $skBansos->jenis_bansos,
             'date' => date('l, d F y'),
-            'list' => ['Home', 'Bansos', 'Detail']
+            'list' => ['Home', 'S&K Bansos', 'Detail']
         ];
 
         $page = (object) [
             'title' => 'Detail S&K Bansos RW 05'
         ];
 
-        $activeMenu = 'bansos';
+        $activeMenu = 'skBansos';
 
-        return view('sekretaris.bansos.show', [
+        return view('sekretaris.skBansos.show', [
             'breadcrumb' => $breadcrumb,
             'page' => $page,
-            'bansos' => $bansos,
+            'skBansos' => $skBansos,
             'activeMenu' => $activeMenu
         ]);
     }
