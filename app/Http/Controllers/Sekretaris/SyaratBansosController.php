@@ -12,7 +12,7 @@ class SyaratBansosController extends Controller
     {
         $breadcrumb = (object) [
             'title' => 'Syarat & Ketentuan Penerima Bansos',
-            'date' => date('l, d F Y'),
+            'date' => date('l, d F y'),
             'list' => ['Home', 'S&K Penerima Bansos']
         ];
 
@@ -28,11 +28,11 @@ class SyaratBansosController extends Controller
     {
         $breadcrumb = (object) [
             'title' => 'Formulir Syarat  & Ketentuan dalam Menerima Bansos',
-            'date' => date('l, d F Y'),
+            'date' => date('l, d F y'),
             'list'  => ['Home', 'Data S&K Penerima Bansos', 'Formulir']
         ];
         $page = (object)[
-            'title' => 'Formulir Syarat  & Ketentuan dalam Menerima Bansos'
+            'title' => 'Formulir Syarat & Ketentuan dalam Menerima Bansos'
         ];
 
         $bansos = SyaratBansosModel::all();
@@ -60,7 +60,7 @@ class SyaratBansosController extends Controller
         ]);
         $gambarPath = $request->file('gambar')->storeAs('public/syarat_bansos', $namaFile);
 
-        return redirect('/sekretaris/bansos')->with('success', 'Data S&K BAnsos berhasil ditambahkan');
+        return redirect('/sekretaris/bansos')->with('success', 'Data syarat dan ketentuan bansos telah berhasil diinputkan');
     }
     public function show(string $id)
     {
@@ -68,7 +68,7 @@ class SyaratBansosController extends Controller
 
         $breadcrumb = (object) [
             'title' => 'S&K dalam Menerima ' . $bansos->jenis_bansos,
-            'date' => date('l, d F Y'),
+            'date' => date('l, d F y'),
             'list' => ['Home', 'Bansos', 'Detail']
         ];
 
