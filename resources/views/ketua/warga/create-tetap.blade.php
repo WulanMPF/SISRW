@@ -9,7 +9,7 @@
             @if (session('error'))
                 <div class="alert alert-danger">{{ session('error') }}</div>
             @endif
-            <form method="POST" action="{{ url('ketua/warga') }}">
+            <form method="POST" action="{{ url('ketua/warga/tetap') }}">
                 @csrf
                 <div class="row mb-3">
                     <label class="no_kk col-sm-2 col-form-label mt-1" for="no_kk">Nomor Kartu Keluarga</label>
@@ -17,7 +17,7 @@
                         <input type="text" class="form-control" id="no_kk" name="no_kk"
                             placeholder="Nomor Kartu Keluarga" required>
                     </div>
-                </div>                
+                </div>
             </form>
             <hr>
             <div class="table-responsive">
@@ -38,7 +38,6 @@
                             <th style="min-width: 200px;">Agama</th>
                             <th style="min-width: 200px;">Status Perkawinan</th>
                             <th style="min-width: 300px;">Pekerjaan</th>
-                            <th style="min-width: 150px;">Simpan</th>
                         </tr>
                     </thead>
                     <tbody style="text-align: center; max-width: fit-content; max-height: fit-content">
@@ -50,144 +49,176 @@
                             </td>
                             <td class="col-number" style="vertical-align:middle;">1</td>
                             <td style="text-align: center;">
-                                <form method="POST" action="{{ url('ketua/warga') }}">
+                                <form method="POST" action="{{ url('ketua/warga/tetap') }}">
                                     @csrf
                                     <div class="form-group row">
                                         <div class="col-sm-12">
                                             <input type="text" class="form-control" id="nik" name="nik"
-                                                placeholder="Nomor Induk Kependudukan" required style="width: 100%;">
+                                                placeholder="Nomor Induk Kependudukan" required style="width: 100%;"
+                                                value="{{ old('nik') }}">
+                                            @error('nik')
+                                                <small class="form-text text-danger">{{ $message }}</small>
+                                            @enderror
                                         </div>
                                     </div>
                                 </form>
                             </td>
                             <td style="text-align: center;">
-                                <form method="POST" action="{{ url('ketua/warga') }}">
+                                <form method="POST" action="{{ url('ketua/warga/tetap') }}">
                                     @csrf
                                     <div class="form-group row">
                                         <div class="col-sm-12">
                                             <input type="text" class="form-control" id="nama_warga" name="nama_warga"
-                                                placeholder="Nama Lengkap" required style="width: 100%;">
+                                                placeholder="Nama Lengkap" required style="width: 100%;"
+                                                value="{{ old('nama_warga') }}">
+                                            @error('nama_warga')
+                                                <small class="form-text text-danger">{{ $message }}</small>
+                                            @enderror
                                         </div>
                                     </div>
                                 </form>
                             </td>
                             <td style="text-align: center;">
-                                <form method="POST" action="{{ url('ketua/warga') }}">
+                                <form method="POST" action="{{ url('ketua/warga/tetap') }}">
                                     @csrf
                                     <div class="form-group row">
                                         <div class="col-sm-12">
                                             <input type="text" class="form-control" id="hubungan_keluarga"
                                                 name="hubungan_keluarga" placeholder="Hubungan Keluarga" required
-                                                style="width: 100%;">
+                                                style="width: 100%;" value="{{ old('hubungan_keluarga') }}">
+                                            @error('hubungan_keluarga')
+                                                <small class="form-text text-danger">{{ $message }}</small>
+                                            @enderror
                                         </div>
                                     </div>
                                 </form>
                             </td>
                             <td style="text-align: center;">
-                                <form method="POST" action="{{ url('ketua/warga') }}">
+                                <form method="POST" action="{{ url('ketua/warga/tetap') }}">
                                     @csrf
                                     <div class="form-group row">
                                         <div class="col-sm-12">
                                             <input type="text" class="form-control" id="tempat_tgl_lahir"
                                                 name="tempat_tgl_lahir" placeholder="Tempat/Tanggal Lahir" required
-                                                style="width: 100%;">
+                                                style="width: 100%;" value="{{ old('tempat_tgl_lahir') }}">
+                                            @error('tempat_tgl_lahir')
+                                                <small class="form-text text-danger">{{ $message }}</small>
+                                            @enderror
                                         </div>
                                     </div>
                                 </form>
                             </td>
                             <td style="text-align: center;">
-                                <form method="POST" action="{{ url('ketua/warga') }}">
+                                <form method="POST" action="{{ url('ketua/warga/tetap') }}">
                                     @csrf
                                     <div class="form-group row">
                                         <div class="col-sm-12">
                                             <input type="text" class="form-control" id="jenis_kelamin"
                                                 name="jenis_kelamin" placeholder="Jenis Kelamin" required
-                                                style="width: 100%;">
+                                                style="width: 100%;" value="{{ old('jenis_kelamin') }}">
+                                            @error('jenis_kelamin')
+                                                <small class="form-text text-danger">{{ $message }}</small>
+                                            @enderror
                                         </div>
                                     </div>
                                 </form>
                             </td>
                             <td style="text-align: center;">
-                                <form method="POST" action="{{ url('ketua/warga') }}">
+                                <form method="POST" action="{{ url('ketua/warga/tetap') }}">
                                     @csrf
                                     <div class="form-group row">
                                         <div class="col-sm-12">
                                             <input type="text" class="form-control" id="rt_rw" name="rt_rw"
-                                                placeholder="Nama RT/RW" required style="width: 100%;">
+                                                placeholder="Nama RT/RW" required style="width: 100%;"
+                                                value="{{ old('rt_rw') }}">
+                                            @error('rt_rw')
+                                                <small class="form-text text-danger">{{ $message }}</small>
+                                            @enderror
                                         </div>
                                     </div>
                                 </form>
                             </td>
                             <td style="text-align: center;">
-                                <form method="POST" action="{{ url('ketua/warga') }}">
+                                <form method="POST" action="{{ url('ketua/warga/tetap') }}">
                                     @csrf
                                     <div class="form-group row">
                                         <div class="col-sm-12">
                                             <input type="text" class="form-control" id="kel_desa" name="kel_desa"
-                                                placeholder="Kel/Desa" required style="width: 100%;">
+                                                placeholder="Kel/Desa" required style="width: 100%;"
+                                                value="{{ old('kel_desa') }}">
+                                            @error('kel_desa')
+                                                <small class="form-text text-danger">{{ $message }}</small>
+                                            @enderror
                                         </div>
                                     </div>
                                 </form>
                             </td>
                             <td style="text-align: center;">
-                                <form method="POST" action="{{ url('ketua/warga') }}">
+                                <form method="POST" action="{{ url('ketua/warga/tetap') }}">
                                     @csrf
                                     <div class="form-group row">
                                         <div class="col-sm-12">
                                             <input type="text" class="form-control" id="kecamatan" name="kecamatan"
-                                                placeholder="Kecamatan" required style="width: 100%;">
+                                                placeholder="Kecamatan" required style="width: 100%;"
+                                                value="{{ old('kecamatan') }}">
+                                            @error('kecamatan')
+                                                <small class="form-text text-danger">{{ $message }}</small>
+                                            @enderror
                                         </div>
                                     </div>
                                 </form>
                             </td>
                             <td style="text-align: center;">
-                                <form method="POST" action="{{ url('ketua/warga') }}">
+                                <form method="POST" action="{{ url('ketua/warga/tetap') }}">
                                     @csrf
                                     <div class="form-group row">
                                         <div class="col-sm-12">
                                             <input type="text" class="form-control" id="agama" name="agama"
-                                                placeholder="Agama" required style="width: 100%;">
+                                                placeholder="Agama" required style="width: 100%;"
+                                                value="{{ old('agama') }}">
+                                            @error('agama')
+                                                <small class="form-text text-danger">{{ $message }}</small>
+                                            @enderror
                                         </div>
                                     </div>
                                 </form>
                             </td>
                             <td style="text-align: center;">
-                                <form method="POST" action="{{ url('ketua/warga') }}">
+                                <form method="POST" action="{{ url('ketua/warga/tetap') }}">
                                     @csrf
                                     <div class="form-group row">
                                         <div class="col-sm-12">
                                             <input type="text" class="form-control" id="status_perkawinan"
                                                 name="status_perkawinan" placeholder="Status Perkawinan" required
-                                                style="width: 100%;">
+                                                style="width: 100%;" value="{{ old('status_perkawinan') }}">
+                                            @error('status_perkawinan')
+                                                <small class="form-text text-danger">{{ $message }}</small>
+                                            @enderror
                                         </div>
                                     </div>
                                 </form>
                             </td>
                             <td style="text-align: center;">
-                                <form method="POST" action="{{ url('ketua/warga') }}">
+                                <form method="POST" action="{{ url('ketua/warga/tetap') }}">
                                     @csrf
                                     <div class="form-group row">
                                         <div class="col-sm-12">
                                             <input type="text" class="form-control" id="pekerjaan" name="pekerjaan"
-                                                placeholder="Pekerjaan" required style="width: 100%;">
+                                                placeholder="Pekerjaan" required style="width: 100%;"
+                                                value="{{ old('pekerjaan') }}">
+                                            @error('pekerjaan')
+                                                <small class="form-text text-danger">{{ $message }}</small>
+                                            @enderror
                                         </div>
                                     </div>
                                 </form>
-                            </td>
-                            <td style="vertical-align:middle;">
-                                <button class="btn btn-success">
-                                    <span>&check;</span>
-                                </button>
-                                <button class="btn btn-danger">
-                                    <span>&cross;</span>
-                                </button>
                             </td>
                         </tr>
                     </tbody>
                 </table>
             </div>
             <div class="text-left mt-3">
-                <button class="btn btn-tambah">Tambah</button>
+                <button type="submit" class="btn btn-tambah">Tambah</button>
             </div>
         </div>
     </div>

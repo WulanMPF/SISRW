@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Bendahara\DashboardController as BendaharaDashboardController;
 use App\Http\Controllers\Ketua\DashboardController;
 use App\Http\Controllers\Ketua\WargaController;
 use App\Http\Controllers\Ketua\UmkmController;
@@ -18,11 +19,13 @@ use App\Http\Controllers\Bendahara\LapkeuController as BendaharaLapkeuController
 use App\Http\Controllers\Bendahara\ProfileController as BendaharaProfileController;
 use App\Http\Controllers\Ketua\ArsipSuratController;
 use App\Http\Controllers\Ketua\ProfileController;
+use App\Http\Controllers\Login\LoginController;
 use App\Http\Controllers\Sekretaris\ProfileController as SekretarisProfileController;
 use App\Http\Controllers\Sekretaris\SuratController as SekretarisSuratController;
 use App\Http\Controllers\Warga\IuranController as WargaIuranController;
 use App\Http\Controllers\Warga\PengaduanController as WargaPengaduanController;
 use App\Http\Controllers\Warga\AjukanPersuratanController as AjukanPersuratanController;
+use App\Http\Controllers\Warga\DashboardController as WargaDashboardController;
 use App\Http\Controllers\Warga\SyaratBansosController as WargaSyaratBansosController;
 use App\Http\Controllers\Warga\UmkmController as WargaUmkmController;
 use App\Http\Controllers\Warga\ProfileController as WargaProfileController;
@@ -40,14 +43,41 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/', function () {
+    return view('landingpage.index');
+});
+
+// Route::get('/', [WelcomeController::class, 'index']);
+
 // Route Landing Page
 Route::get('/', [WelcomeController::class, 'index']);
 
 //Route Login Page
-Route::get('/login', [WelcomeController::class, 'login']);
+Route::get('/login', [LoginController::class, 'index'])->name('login');
+// Route::post('proses_login', [LoginController::class, 'proses_login'])->name('proses_login');
+// Route::get('logout', [LoginController::class, 'logout'])->name('logout');
+
+//Middleware Login
+// Route::group(['middleware' => ['auth']], function () {
+
+//     // Route::group(['middleware' => ['cek_login:1']], function () {
+//     //     Route::resource('admin', AdminController::class);
+//     // });
+//     Route::group(['middleware' => ['cek_login:2']], function () {
+//         Route::resource('ketua', WelcomeController:: class);
+//     });
+//     Route::group(['middleware' => ['cek_login:3']], function () {
+//         Route::resource('sekretaris', WelcomeController:: class);
+//     });
+//     Route::group(['middleware' => ['cek_login:4']], function () {
+//         Route::resource('bendahara', WelcomeController:: class);
+//     });
+//     Route::group(['middleware' => ['cek_login:5']], function () {
+//         Route::resource('warga', WelcomeController:: class);
+//     });
+// });
 
 //Route Halaman Ketua RW
-Route::get('/ketua', [WelcomeController::class, 'ketua']);
 Route::group(['prefix' => 'ketua/dashboard'], function () {
     Route::get('/', [DashboardController::class, 'index']);
 });
@@ -55,9 +85,9 @@ Route::group(['prefix' => 'ketua/warga'], function () {
     Route::get('/', [WargaController::class, 'index']);
     Route::post('/list', [WargaController::class, 'list']);
     Route::get('/create-tetap', [WargaController::class, 'createTetap']);
-    Route::post('/', [WargaController::class, 'storeTetap']);
+    Route::post('/tetap', [WargaController::class, 'storeTetap']);
     Route::get('/create-sementara', [WargaController::class, 'createSementara']);
-    Route::post('/', [WargaController::class, 'storeSementara']);
+    Route::post('/sementara', [WargaController::class, 'storeSementara']);
     Route::get('/{id}', [WargaController::class, 'show']);
 });
 Route::group(['prefix' => 'ketua/surat'], function () {
@@ -71,7 +101,12 @@ Route::group(['prefix' => 'ketua/surat'], function () {
 Route::group(['prefix' => 'ketua/umkm'], function () {
     Route::get('/', [UmkmController::class, 'index']);
     Route::post('/list', [UmkmController::class, 'list']);
+    Route::get('/create', [UmkmController::class, 'create']);
+    Route::post('/', [UmkmController::class, 'store'])->name('tambahUMKM');
     Route::get('/{id}', [UmkmController::class, 'show']);
+    Route::get('/{id}/edit', [UmkmController::class, 'edit']);
+    Route::put('/{id}', [UmkmController::class, 'update']);
+    Route::delete('/{id}', [UmkmController::class, 'destroy']);
 });
 Route::group(['prefix' => 'ketua/bansos'], function () {
     Route::get('/', [BansosController::class, 'index']);
@@ -100,7 +135,6 @@ Route::group(['prefix' => 'ketua/profile'], function () {
 });
 
 // Route Halaman Sekretaris RW
-Route::get('/sekretaris', [WelcomeController::class, 'sekretaris']);
 Route::group(['prefix' => 'sekretaris/dashboard'], function () {
     Route::get('/', [SekretarisDashboardController::class, 'index']);
 });
@@ -136,7 +170,11 @@ Route::group(['prefix' => 'sekretaris/skBansos'], function () {
 Route::group(['prefix' => 'sekretaris/umkm'], function () {
     Route::get('/', [SekretarisUmkmController::class, 'index']);
     Route::post('/list', [SekretarisUmkmController::class, 'list']);
+    Route::get('/create', [SekretarisUmkmController::class, 'create']);
+    Route::post('/', [SekretarisUmkmController::class, 'store'])->name('tambahSekreUMKM');
     Route::get('/{id}', [SekretarisUmkmController::class, 'show']);
+    Route::get('/{id}/edit', [SekretarisUmkmController::class, 'edit']);
+    Route::put('/{id}', [SekretarisUmkmController::class, 'update']);
 });
 Route::group(['prefix' => 'sekretaris/bansos'], function () {
     Route::get('/', [SekretarisBansosController::class, 'index'])->name('sekretaris.bansos.index');
@@ -148,7 +186,9 @@ Route::group(['prefix' => 'sekretaris/profile'], function () {
 });
 
 // Route Halaman Bendahara RW
-Route::get('/bendahara', [WelcomeController::class, 'bendahara']);
+Route::group(['prefix' => 'bendahara/dashboard'], function () {
+    Route::get('/', [BendaharaDashboardController::class, 'index']);
+});
 Route::group(['prefix' => 'bendahara/iuran'], function () {
     Route::get('/', [BendaharaIuranController::class, 'index'])->name('bendahara.iuran.index');
     Route::post('/list', [BendaharaIuranController::class, 'list'])->name('bendahara.iuran.list');
@@ -164,7 +204,9 @@ Route::group(['prefix' => 'bendahara/profile'], function () {
 });
 
 // Route Halaman Warga
-Route::get('/warga', [WelcomeController::class, 'warga']);
+Route::group(['prefix' => 'warga/dashboard'], function () {
+    Route::get('/', [WargaDashboardController::class, 'index']);
+});
 Route::group(['prefix' => 'warga/iuran'], function () {
     Route::get('/', [WargaIuranController::class, 'index']);
     Route::post('/list', [WargaIuranController::class, 'list']);

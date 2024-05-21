@@ -21,7 +21,8 @@ class UmkmController extends Controller
 
         $activeMenu = 'umkm';
 
-        $umkm = UmkmModel::all();
+        // $umkm = UmkmModel::all();
+        $umkm = UmkmModel::where('status_usaha', 'Aktif')->get();
         $warga = WargaModel::all();
 
         return view('warga.umkm.index', ['breadcrumb' => $breadcrumb, 'umkm' => $umkm, 'warga' => $warga, 'activeMenu' => $activeMenu]);
@@ -93,7 +94,7 @@ class UmkmController extends Controller
         $path = $request->file('lampiran')->move('lampiran_umkm', $namaFile);
         $path = str_replace("\\", "//", $path);
 
-        return redirect('/warga/umkm')->with('success', 'Data UMKM berhasil diajukans');
+        return redirect('/warga/umkm')->with('success', 'Data UMKM berhasil diajukan');
     }
     public function show(string $id)
     {

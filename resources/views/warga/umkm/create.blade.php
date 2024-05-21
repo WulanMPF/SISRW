@@ -101,7 +101,7 @@
                         <label for="status_usaha" class="col-sm-2 col-form-label">Status Usaha:</label>
                         <div class="col-sm-9">
                             <input type="text" id="status_usaha" name="status_usaha" class="form-control"
-                                rows="5" value="Aktif" required readonly>
+                                rows="5" value="Diproses" required readonly>
                         </div>
                     </div>
 

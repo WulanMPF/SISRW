@@ -2,6 +2,11 @@
 
 @section('content')
     <div class="card card-outline card-light">
+        <div class="card-header">
+            <div class="card-tools">
+                <a class="btn btn-sm mt-1" id="tambah" href="{{ url('sekretaris/umkm/create') }}">Tambah UMKM</a>
+            </div>
+        </div>
         <div class="card-body">
             @if (session('success'))
                 <div class="alert alert-success">{{ session('success') }}</div>
@@ -84,6 +89,17 @@
             color: #7F643C;
             /* Warna teks putih */
         }
+
+        #tambah {
+            background-color: #BB955C;
+            margin-left: 0;
+            padding-left: 2rem;
+            color: white;
+            border-radius: 9px;
+            font-size: 13px;
+            padding-right: 2rem;
+            margin-right: 1.2rem;
+        }
     </style>
 @endpush
 
@@ -99,6 +115,7 @@
                     "type": "POST",
                     "data": function(d) {
                         d.jenis_usaha = $('#jenis_usaha').val();
+                        d.status_usaha = 'diproses';
                     }
                 },
                 columns: [{
@@ -143,6 +160,7 @@
                     "type": "POST",
                     "data": function(d) {
                         d.jenis_usaha = $('#jenis_usaha').val();
+                        d.status_usaha = 'aktif';
                     }
                 },
                 columns: [{
