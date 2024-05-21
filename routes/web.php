@@ -43,7 +43,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () { return view('landingpage.index');
+Route::get('/', function () {
+    return view('landingpage.index');
 });
 
 // Route::get('/', [WelcomeController::class, 'index']);
@@ -169,7 +170,11 @@ Route::group(['prefix' => 'sekretaris/skBansos'], function () {
 Route::group(['prefix' => 'sekretaris/umkm'], function () {
     Route::get('/', [SekretarisUmkmController::class, 'index']);
     Route::post('/list', [SekretarisUmkmController::class, 'list']);
+    Route::get('/create', [SekretarisUmkmController::class, 'create']);
+    Route::post('/', [SekretarisUmkmController::class, 'store'])->name('tambahSekreUMKM');
     Route::get('/{id}', [SekretarisUmkmController::class, 'show']);
+    Route::get('/{id}/edit', [SekretarisUmkmController::class, 'edit']);
+    Route::put('/{id}', [SekretarisUmkmController::class, 'update']);
 });
 Route::group(['prefix' => 'sekretaris/bansos'], function () {
     Route::get('/', [SekretarisBansosController::class, 'index'])->name('sekretaris.bansos.index');
