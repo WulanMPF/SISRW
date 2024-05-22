@@ -210,6 +210,59 @@ transition: all 0.3s ease;
     color: var(--blue);
     font-weight: var(--fwbold);
 }
+.umkm {
+    padding: 70px 0 70px 0;
+    background: var(--white);
+
+}
+
+.umkm .item .info {
+    background:#e1c69c;
+    border-bottom-left-radius: 16px;
+    border-bottom-right-radius: 16px;
+    padding: 16px;
+}
+
+.img-fluid {
+    transform: translateY(-40px); /* Adjust the value as needed */
+}
+
+.clear {
+    clear: both;
+}
+
+.umkm .item {
+    margin-bottom: 30px;
+
+}
+
+.umkm .row {
+    justify-content: center; /* Center flex items on the row */
+}
+
+.umkm .item .info {
+transition: all 0.3s ease;
+}
+
+.umkm .item:hover .info {
+    -webkit-box-shadow: 10px 10px 63px 0px rgba(199,205,227,0.65);
+-moz-box-shadow: 10px 10px 63px 0px rgba(199,205,227,0.65);
+box-shadow: 10px 10px 63px 0px rgba(199,205,227,0.65);
+transition: all 0.3s ease;
+}
+
+.umkm .item .info .footer .location {
+    float: left;
+}
+
+.umkm .item .info .footer .price {
+    float: right;
+}
+
+.umkm .item .info .footer .price p {
+    color: var(--blue);
+    font-weight: var(--fwbold);
+}
 
 .house-details .header .rating {
     float: right;
