@@ -28,11 +28,11 @@
               <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav mx-auto mb 5 mb-lg-0">
-              <li class="nav-item active"><a class="nav-link" href="#">Home</a></li>
-              <li class="nav-item"><a class="nav-link" href="#">Kegiatan</a></li>
-              <li class="nav-item"><a class="nav-link" href="#">UMKM</a></li>
-              <li class="nav-item"><a class="nav-link" href="#">About Us</a></li>
+            <ul class="navbar-nav mx-auto mb-5 mb-lg-0">
+                <li class="nav-item active"><a class="nav-link" href="#">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="#kegiatan">Kegiatan</a></li>
+                <li class="nav-item"><a class="nav-link" href="#umkm">UMKM</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">About Us</a></li>
             </ul>
             <ul class="navbar-nav mb-2 mb-lg-0">
               <li class="nav-item"><a class="btn btn-secondary" href="login/""> Log In</a>
@@ -66,16 +66,17 @@
             </div>
         </div>
     </section>
-    <section class="best-items">
+    <section id="kegiatan" class="kegiatan">
         <div class="container">
             <div class="row text-center mb-50">
                 <div class="col-lg-12">
+
                     {{-- <img src="images/ic_best.svg" height="42" alt="" class="mb-16"> --}}
-                    <h3 class="big-header">
+                    <h3 class="kegiatan-header">
                         Kegiatan Warga RW 05
                     </h3>
                     <p class="paragraph">
-
+                        {{--  --}}
                     </p>
                 </div>
             </div>
@@ -173,12 +174,12 @@
 
 
 
-    <section class="umkm">
+    <section id="umkm" class="umkm">
         <div class="container">
             <div class="row text-center mb-50">
                 <div class="col-lg-12">
                     {{-- <img src="images/ic_best.svg" height="42" alt="" class="mb-16"> --}}
-                    <h3 class="big-header">
+                    <h3 class="umkm-header">
                         UMKM WARGA RW 05
                     </h3>
                     <p class="paragraph">
