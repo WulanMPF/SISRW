@@ -17,7 +17,7 @@
 
 body {
     font-family: 'Poppins', sans-serif;
-    padding-top: 75px;
+    padding-top: 150px;
 }
 
 a {
@@ -49,7 +49,7 @@ a {
 .jumbo-header {
     font-weight: var(--fwextrabold);
     color: var(--gold);
-    font-size: 48px;
+    font-size: 45px;
 }
 
 .big-header {
@@ -91,7 +91,7 @@ input.form-control {
 
 .small-paragraph {
     color: var(--gray);
-    font-size: 14px;
+    font-size: 10px;
     font-weight: var(--fwsemibold);
 }
 
@@ -160,6 +160,7 @@ input.form-control {
 .best-items {
     padding: 70px 0 70px 0;
     background: var(--softgray);
+
 }
 
 .best-items .item .info {
@@ -179,6 +180,11 @@ input.form-control {
 
 .best-items .item {
     margin-bottom: 30px;
+
+}
+
+.best-items .row {
+    justify-content: center; /* Center flex items on the row */
 }
 
 .best-items .item .info {
@@ -230,3 +236,7 @@ transition: all 0.3s ease;
 
 }
 
+
+
+
+/* carousel */
