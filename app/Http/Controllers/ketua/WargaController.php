@@ -88,37 +88,52 @@ class WargaController extends Controller
 
     public function storeTetap(Request $request)
     {
+        // Validasi input
         $request->validate([
-            'kk_id'                   => 'required|integer',
-            'nik'                     => 'required|integer|unique:warga,nik',
-            'nama_warga'              => 'required|string|max:100',
-            'tempat_tgl_lahir'        => 'required|string|max:100',
-            'jenis_kelamin'           => 'required|in:L,P',
-            'rt_rw'                   => 'required|string|max:10',
-            'kel_desa'                => 'required|string|max:50',
-            'kecamatan'               => 'required|string|max:50',
-            'agama'                   => 'required|string|max:20',
-            'status_perkawinan'       => 'required|string|max:50',
-            'pekerjaan'               => 'required|string|max:50',
-            'hubungan_keluarga'       => 'required|string|max:100',
+            'no_kk' => 'required|string|max:20',
+            'nama_kepala_keluarga' => 'required|string|max:100',
+            'alamat' => 'required|string|max:255',
+            'rt_rw' => 'required|string|max:10',
+            'nik.*' => 'required|string|max:16',
+            'nama_warga.*' => 'required|string|max:100',
+            'hubungan_keluarga.*' => 'required|string|max:50',
+            'tempat_tgl_lahir.*' => 'required|string|max:100',
+            'jenis_kelamin.*' => 'required|string|max:10',
+            'rt_rw_warga.*' => 'required|string|max:10',
+            'kel_desa.*' => 'required|string|max:100',
+            'kecamatan.*' => 'required|string|max:100',
+            'agama.*' => 'required|string|max:50',
+            'status_perkawinan.*' => 'required|string|max:50',
+            'pekerjaan.*' => 'required|string|max:100',
         ]);
 
-        WargaModel::create([
-            'kk_id'                   => $request->kk_id,
-            'nik'                     => $request->nik,
-            'nama_warga'              => $request->nama_warga,
-            'tempat_tgl_lahir'        => $request->tempat_tanggal_lahir,
-            'jenis_kelamin'           => $request->jenis_kelamin,
-            'rt_rw'                   => $request->rt_rw,
-            'kel_desa'                => $request->kel_desa,
-            'kecamatan'               => $request->kecamatan,
-            'agama'                   => $request->agama,
-            'status_perkawinan'       => $request->status_perkawinan,
-            'pekerjaan'               => $request->pekerjaan,
-            'hubungan_keluarga'       => $request->hubungan_keluarga
-        ]);
+        // Simpan data KK
+        $kk = new KKModel();
+        $kk->no_kk = $request->no_kk;
+        $kk->nama_kepala_keluarga = $request->nama_kepala_keluarga;
+        $kk->alamat = $request->alamat;
+        $kk->rt_rw = $request->rt_rw;
+        $kk->save();
 
-        return redirect('/ketua/warga')->with('success', 'Data warga berhasil disimpan');
+        // Simpan data Warga
+        foreach ($request->nik as $index => $nik) {
+            $warga = new WargaModel();
+            $warga->kk_id = $kk->id;
+            $warga->nik = $nik;
+            $warga->nama_warga = $request->nama_warga[$index];
+            $warga->hubungan_keluarga = $request->hubungan_keluarga[$index];
+            $warga->tempat_tgl_lahir = $request->tempat_tgl_lahir[$index];
+            $warga->jenis_kelamin = $request->jenis_kelamin[$index];
+            $warga->rt_rw = $request->rt_rw_warga[$index];
+            $warga->kel_desa = $request->kel_desa[$index];
+            $warga->kecamatan = $request->kecamatan[$index];
+            $warga->agama = $request->agama[$index];
+            $warga->status_perkawinan = $request->status_perkawinan[$index];
+            $warga->pekerjaan = $request->pekerjaan[$index];
+            $warga->save();
+        }
+
+        return redirect()->back()->with('success', 'Data berhasil ditambahkan.');
     }
 
     public function storeSementara(Request $request)
