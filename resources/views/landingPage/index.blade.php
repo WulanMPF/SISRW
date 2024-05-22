@@ -12,7 +12,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
-    >
+
 </head>
 
 <body>
@@ -30,12 +30,12 @@
           <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav mx-auto mb 5 mb-lg-0">
               <li class="nav-item active"><a class="nav-link" href="#">Home</a></li>
-              <li class="nav-item"><a class="nav-link" href="#">About Us</a></li>
               <li class="nav-item"><a class="nav-link" href="#">Kegiatan</a></li>
               <li class="nav-item"><a class="nav-link" href="#">UMKM</a></li>
+              <li class="nav-item"><a class="nav-link" href="#">About Us</a></li>
             </ul>
             <ul class="navbar-nav mb-2 mb-lg-0">
-              <li class="nav-item"><a class="btn btn-secondary" href="login/"> Log In</a>
+              <li class="nav-item"><a class="btn btn-secondary" href="login/""> Log In</a>
             </ul>
           </div>
         </div>
@@ -57,33 +57,8 @@
                         Kami adalah platform digital untuk memperkuat keterlibatan antara warga dan pengurus setempat di RW 05. Dengan berbagai fitur yang intuitif, kami memungkinkan warga untuk dengan mudah mengakses informasi terkini tentang kegiatan, pengumuman penting, serta memberikan sarana untuk menyampaikan masukan dan aspirasi.
                         Selamat berpartisipasi!
                     </p>
-                    <p class="mb-50"><a href="#" class="btn btn-primary">Explore Houses</a></p>
-                    {{-- <div class="row stats text-center">
-                        <div class="col-lg-4 item">
-                            <h3 class="big-header">
-                                23,491
-                            </h3>
-                            <p class="paragraph">
-                                Koskosan
-                            </p>
-                        </div>
-                        <div class="col-lg-4 item">
-                            <h3 class="big-header">
-                                983
-                            </h3>
-                            <p class="paragraph">
-                                Awards
-                            </p>
-                        </div>
-                        <div class="col-lg-4 item">
-                            <h3 class="big-header">
-                                182M+
-                            </h3>
-                            <p class="paragraph">
-                                Happy People
-                            </p>
-                        </div>
-                    </div> --}}
+
+
                 </div>
                 {{-- <div class="col-lg-6">
                     <img src="images/banner(2).png" alt="" class="img-fluid">
@@ -95,12 +70,119 @@
         <div class="container">
             <div class="row text-center mb-50">
                 <div class="col-lg-12">
-                    <img src="images/ic_best.svg" height="42" alt="" class="mb-16">
+                    {{-- <img src="images/ic_best.svg" height="42" alt="" class="mb-16"> --}}
                     <h3 class="big-header">
-                        Kegiatan Warga
+                        Kegiatan Warga RW 05
                     </h3>
                     <p class="paragraph">
-                        Dolor space comfortable moments
+
+                    </p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="item">
+                        <a href="details.html">
+                            <img src="images/kegiatan1.png" alt="" class="img-fluid">
+                        </a>
+                        <div class="info">
+                            <a href="details.html">
+                                <h3 class="small-header mb-2">
+                                    KEGIATAN KARNAVAL OLEH WARGA RW 05
+                                </h3>
+                            </a>
+                            <div class="footer">
+                                <div class="location d-flex flex-row ">
+                                    {{-- <img src="images/ic_loc.svg" height="20" alt=""> --}}
+                                    <p class="small-paragraph mb-0">
+                                        Dalam merayakan Hari Ulang Tahun ke-78 Republik Indonesia, warga RW 05 menghadirkan keindahan tradisi dengan mengenakan busana adat Jawa yang memukau. Jalanan yang biasanya sunyi kini dipenuhi dengan keindahan warna-warni dan gemerlap kain-kain batik...
+                                    </p>
+                                </div>
+                                {{-- <div class="price">
+                                    <p class="mb-0">
+                                        $28,109<span class="extra-small-paragraph">/mo</span>
+                                    </p>
+                                </div> --}}
+                                <div class="clear"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="item">
+                        <a href="">
+                            <img src="images/kegiatan2.png" alt="" class="img-fluid">
+                        </a>
+                        <div class="info">
+                            <a href="">
+                                <h3 class="small-header mb-2">
+                                    PERINGATAN 78 TAHUN KEMERDEKAAN INDONESIA
+                                </h3>
+                            </a>
+                            <div class="footer">
+                                <div class="location d-flex flex-row ">
+                                    {{-- <img src="images/ic_loc.svg" height="20" alt=""> --}}
+                                    <p class="small-paragraph mb-0">
+                                        Dalam rangka memperingati 78 tahun Indonesia Merdeka, warga RW 05 mengikuti sebuah karnaval dengan penuh semangat dan kreativitas. Jalanan yang biasanya sunyi kini dipenuhi dengan keriuhan dan kegembiraan, dihiasi dengan pernak-pernik merah putih yang mempesona...
+                                    </p>
+                                </div>
+                                <div class="price">
+                                    {{-- <p class="mb-0">
+                                        $28,109<span class="extra-small-paragraph">/mo</span>
+                                    </p> --}}
+                                </div>
+                                <div class="clear"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="item">
+                        <a href="">
+                            <img src="images/kegiatan3.png" alt="" class="img-fluid">
+                        </a>
+                        <div class="info">
+                            <a href="">
+                                <h3 class="small-header mb-2">
+                                    PERSIAPAN PERINGATAN 78 TAHUN KEMERDEKAAN INDONESIA
+                                </h3>
+                            </a>
+                            <div class="footer">
+                                <div class="location d-flex flex-row ">
+                                    {{-- <img src="images/ic_loc.svg" height="20" alt=""> --}}
+                                    <p class="small-paragraph mb-0">
+
+                                        Warga RW 05 dengan penuh semangat mempersiapkan  untuk merayakan kemerdekaan Republik Indonesia dengan berbagai persiapan yang matang. Mulai dari menyusun jadwal acara hingga menyiapkan dekorasi, setiap langkah dilakukan dengan...
+                                    </p>
+                                </div>
+                                <div class="price">
+                                    {{-- <p class="mb-0">
+                                        $28,109<span class="extra-small-paragraph">/mo</span>
+                                    </p> --}}
+                                </div>
+                                <div class="clear"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+
+
+    <section class="best-items">
+        <div class="container">
+            <div class="row text-center mb-50">
+                <div class="col-lg-12">
+                    {{-- <img src="images/ic_best.svg" height="42" alt="" class="mb-16"> --}}
+                    <h3 class="big-header">
+                        UMKM WARGA RW 05
+                    </h3>
+                    <p class="paragraph">
+
                     </p>
                 </div>
             </div>
@@ -217,120 +299,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3">
-                    <div class="item">
-                        <a href="">
-                            <img src="images/house5.png" alt="" class="img-fluid">
-                        </a>
-                        <div class="info">
-                            <a href="">
-                                <h3 class="small-header mb-2">
-                                    Coral Brown
-                                </h3>
-                            </a>
-                            <div class="footer">
-                                <div class="location d-flex flex-row ">
-                                    <img src="images/ic_loc.svg" height="20" alt="">
-                                    <p class="small-paragraph mb-0">
-                                        Exnoparty
-                                    </p>
-                                </div>
-                                <div class="price">
-                                    <p class="mb-0">
-                                        $28,109<span class="extra-small-paragraph">/mo</span>
-                                    </p>
-                                </div>
-                                <div class="clear"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3">
-                    <div class="item">
-                        <a href="">
-                            <img src="images/house6.png" alt="" class="img-fluid">
-                        </a>
-                        <div class="info">
-                            <a href="">
-                                <h3 class="small-header mb-2">
-                                    Coral Brown
-                                </h3>
-                            </a>
-                            <div class="footer">
-                                <div class="location d-flex flex-row ">
-                                    <img src="images/ic_loc.svg" height="20" alt="">
-                                    <p class="small-paragraph mb-0">
-                                        Exnoparty
-                                    </p>
-                                </div>
-                                <div class="price">
-                                    <p class="mb-0">
-                                        $28,109<span class="extra-small-paragraph">/mo</span>
-                                    </p>
-                                </div>
-                                <div class="clear"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3">
-                    <div class="item">
-                        <a href="">
-                            <img src="images/house7.png" alt="" class="img-fluid">
-                        </a>
-                        <div class="info">
-                            <a href="">
-                                <h3 class="small-header mb-2">
-                                    Coral Brown
-                                </h3>
-                            </a>
-                            <div class="footer">
-                                <div class="location d-flex flex-row ">
-                                    <img src="images/ic_loc.svg" height="20" alt="">
-                                    <p class="small-paragraph mb-0">
-                                        Exnoparty
-                                    </p>
-                                </div>
-                                <div class="price">
-                                    <p class="mb-0">
-                                        $28,109<span class="extra-small-paragraph">/mo</span>
-                                    </p>
-                                </div>
-                                <div class="clear"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3">
-                    <div class="item">
-                        <a href="">
-                            <img src="images/house8.png" alt="" class="img-fluid">
-                        </a>
-                        <div class="info">
-                            <a href="">
-                                <h3 class="small-header mb-2">
-                                    Coral Brown
-                                </h3>
-                            </a>
-                            <div class="footer">
-                                <div class="location d-flex flex-row ">
-                                    <img src="images/ic_loc.svg" height="20" alt="">
-                                    <p class="small-paragraph mb-0">
-                                        Exnoparty
-                                    </p>
-                                </div>
-                                <div class="price">
-                                    <p class="mb-0">
-                                        $28,109<span class="extra-small-paragraph">/mo</span>
-                                    </p>
-                                </div>
-                                <div class="clear"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+
     </section>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
