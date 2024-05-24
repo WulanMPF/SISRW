@@ -4,11 +4,21 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class ArsipSuratModel extends Model
 {
     use HasFactory;
     protected $table = 'arsip_surat';
-    protected $primaryKey = 'arsip_surat_id';
-    protected $fillable = ['nama_surat', 'jenis_surat'];
+    protected $primaryKey = 'arsip_id';
+    protected $fillable = ['undangan_id', 'pengantar_id'];
+
+    public function undangan(): BelongsTo
+    {
+        return $this->belongsTo(SuratUndanganModel::class, 'undangan_id', 'undangan_id');
+    }
+    public function pengantar(): BelongsTo
+    {
+        return $this->belongsTo(SuratPengantarModel::class, 'pengantar_id', 'pengantar_id');
+    }
 }
