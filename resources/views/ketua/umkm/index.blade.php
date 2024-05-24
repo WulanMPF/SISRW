@@ -16,39 +16,19 @@
             @endif
             <div class="row">
                 <div class="col-md-12">
-                    <div class="form-group row">
-                        <label class="col-1 control-label col-form-label">Filter:</label>
-                        <div class="col-3">
-                            <select name="jenis_usaha" id="jenis_usaha" class="form-control" required>
-                                <option value="">- Tampilkan Semua -</option>
-                                @foreach ($umkm as $item)
-                                    <option value="{{ $item->umkm_id }}">{{ $item->jenis_usaha }}</option>
-                                @endforeach
-                            </select>
-                            <small class="form-text text-muted">Jenis Usaha</small>
+                    <h3>UMKM Warga RW 05</h3>
+                    <div class="col-sm-12 col-md-5">
+                        <div class="form-group row">
+                            <div class="col-4">
+                                <select name="status_usaha" id="status_usaha" class="form-control rounded-select" required>
+                                    <option value="">- Semua -</option>
+                                    <option value="Aktif">- Aktif -</option>
+                                    <option value="Nonaktif">- Nonaktif -</option>
+                                    <option value="Diproses">- Diproses -</option>
+                                </select>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </div>
-            <br>
-            <div class="row">
-                <div class="col-md-6">
-                    <h3>Pengajuan UMKM</h3>
-                    <table class="table table-bordered table-hover table-sm" id="table_ajukan_umkm"
-                        style="text-align: center;">
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Nama Usaha</th>
-                                <th>Jenis Usaha</th>
-                                <th>Status Usaha</th>
-                                <th>Aksi</th>
-                            </tr>
-                        </thead>
-                    </table>
-                </div>
-                <div class="col-md-6">
-                    <h3>UMKM Terdaftar</h3>
                     <table class="table table-bordered table-hover table-sm" id="table_umkm" style="text-align: center;">
                         <thead>
                             <tr>
@@ -68,6 +48,20 @@
 
 @push('css')
     <style>
+        .rounded-select {
+            border-radius: 20px;
+        }
+
+        select.rounded-select:hover {
+            background-color: #f0f0f0;
+        }
+
+        select.rounded-select:focus {
+            outline: none;
+            border-color: #cacaca;
+            box-shadow: none;
+        }
+
         #table_ajukan_umkm,
         #table_umkm {
             border-radius: 10px;
@@ -75,7 +69,6 @@
         }
 
         h3 {
-            /* width: 497px; */
             color: #463720;
             font-family: Poppins;
             font-size: 15.005px;
@@ -87,19 +80,16 @@
         #table_ajukan_umkm thead,
         #table_umkm thead {
             background-color: #d9d2c7;
-            /* Warna latar belakang coklat */
             color: #7F643C;
-            /* Warna teks putih */
         }
 
         #tambah {
             background-color: #BB955C;
             margin-left: 0;
-            padding-left: 2rem;
+            padding-left: 1rem;
             color: white;
             border-radius: 9px;
-            font-size: 13px;
-            padding-right: 2rem;
+            padding-right: 1rem;
             margin-right: 1.2rem;
         }
     </style>
@@ -108,51 +98,7 @@
 @push('js')
     <script>
         $(document).ready(function() {
-            // DataTable untuk UMKM Terdaftar
-            var dataAjukanUmkm = $('#table_ajukan_umkm').DataTable({
-                serverSide: true,
-                ajax: {
-                    url: "{{ url('ketua/umkm/list') }}",
-                    dataType: "json",
-                    type: "POST",
-                    data: function(d) {
-                        d.jenis_usaha = $('#jenis_usaha').val();
-                        d.status_usaha = 'diproses';
-                    }
-                },
-                columns: [{
-                        data: "DT_RowIndex",
-                        className: "text-center",
-                        orderable: false,
-                        searchable: false
-                    },
-                    {
-                        data: "nama_usaha",
-                        className: "",
-                        orderable: true,
-                        searchable: true
-                    },
-                    {
-                        data: "jenis_usaha",
-                        className: "",
-                        orderable: true,
-                        searchable: true
-                    },
-                    {
-                        data: "status_usaha",
-                        className: "",
-                        orderable: true,
-                        searchable: true
-                    },
-                    {
-                        data: "aksi",
-                        className: "",
-                        orderable: false,
-                        searchable: false
-                    }
-                ]
-            });
-
+            // DataTable untuk UMKM
             var dataUmkm = $('#table_umkm').DataTable({
                 serverSide: true,
                 ajax: {
@@ -160,8 +106,8 @@
                     dataType: "json",
                     type: "POST",
                     data: function(d) {
-                        d.jenis_usaha = $('#jenis_usaha').val();
-                        d.status_usaha = 'aktif';
+                        // d.jenis_usaha = $('#jenis_usaha').val();
+                        d.status_usaha = $('#status_usaha').val();
                     }
                 },
                 columns: [{
@@ -198,9 +144,8 @@
             });
 
             // Memuat ulang data ketika filter jenis usaha berubah
-            $('#jenis_usaha').on('change', function() {
+            $('#status_usaha').on('change', function() {
                 dataUmkm.ajax.reload();
-                dataUmkmLainnya.ajax.reload();
             });
         });
     </script>
