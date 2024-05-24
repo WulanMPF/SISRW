@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\ArsipSuratModel;
+use App\Models\SuratUndanganModel;
 use Illuminate\Database\Seeder;
 
 class ArsipSuratSeeder extends Seeder
@@ -12,11 +13,17 @@ class ArsipSuratSeeder extends Seeder
      */
     public function run(): void
     {
+        $suratUndanganRecords = SuratUndanganModel::all();
+
         // Membuat 20 data dummy untuk jenis surat 'Masuk'
         for ($i = 0; $i < 20; $i++) {
+            // Randomly assign a surat_undangan_id for undangan-related records
+            $suratUndangan = $suratUndanganRecords->random();
+
             ArsipSuratModel::create([
-                'nama_surat' => $this->generateRandomSuratName(),
+                'nama_surat' => 'Undangan ' . ($i + 1),
                 'jenis_surat' => 'Masuk',
+                'surat_undangan_id' => $suratUndangan->surat_undangan_id,
             ]);
         }
 
@@ -37,10 +44,7 @@ class ArsipSuratSeeder extends Seeder
         // Daftar kata yang bisa digunakan sebagai nama surat
         $possibleNames = [
             'Surat Undangan',
-            'Surat Pemberitahuan',
-            'Surat Izin',
-            'Surat Pengumuman',
-            'Surat Keputusan',
+            'Surat Pengantar'
             // Tambahkan kata-kata lain sesuai kebutuhan
         ];
 
