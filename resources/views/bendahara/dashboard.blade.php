@@ -1,122 +1,104 @@
 @extends('layout.bendahara.template')
 @section('content')
-    <div class="content">
-        <div class="container-fluid">
-            <!-- Small boxes (Stat box) -->
-            <div class="row">
-                <div class="col-lg-3 col-6">
-                    <!-- small box -->
-                    <div class="small-box bg-light">
-                        <div class="inner">
-                            <h3>150</h3>
-
-                            <p>New Orders</p>
-                        </div>
-                        <div class="icon">
-                            <img src="path_to_your_image" alt=" ">
-                        </div>
-                        <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-                    </div>
+    <ul class="box-info">
+        <li class="card">
+            <i class="fas fa-solid fa-user"></i>
+            <span class="text">
+                <h3>1030</h3>
+                <p>New Order</p>
+            </span>
+        </li>
+        <li class="card">
+            <i class="fas fa-solid fa-user"></i>
+            <span class="text">
+                <h3>1030</h3>
+                <p>New Order</p>
+            </span>
+        </li>
+        <li class="card">
+            <i class="fas fa-solid fa-user"></i>
+            <span class="text">
+                <h3>1030</h3>
+                <p>New Order</p>
+            </span>
+        </li>
+        <li class="card">
+            <i class="fas fa-solid fa-user"></i>
+            <span class="text">
+                <h3>1030</h3>
+                <p>New Order</p>
+            </span>
+        </li>
+    </ul>
+    <div class="row">
+        <div class="col-md-7 ml-4">
+            <div class="card">
+                <div class="p-6 m-20 bg-white rounded shadow">
+                    {!! $ppChart->container() !!}
                 </div>
-                <!-- ./col -->
-                <div class="col-lg-3 col-6">
-                    <!-- small box -->
-                    <div class="small-box bg-light">
-                        <div class="inner">
-                            <h3>53<sup style="font-size: 20px">%</sup></h3>
-
-                            <p>Bounce Rate</p>
-                        </div>
-                        <div class="icon">
-                            <img src="path_to_your_image" alt=" ">
-                        </div>
-                        <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-                    </div>
+            </div>
+        </div>
+        <div class="col-md-4 ml-4">
+            <div class="card">
+                <div class="p-6 m-20 bg-white rounded shadow">
+                    {!! $lapKeuChart->container() !!}
                 </div>
-                <!-- ./col -->
-                <div class="col-lg-3 col-6">
-                    <!-- small box -->
-                    <div class="small-box bg-light">
-                        <div class="inner">
-                            <h3>44</h3>
-
-                            <p>User Registrations</p>
-                        </div>
-                        <div class="icon">
-                            <img src="path_to_your_image" alt=" ">
-                        </div>
-                        <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-                    </div>
-                </div>
-                <!-- ./col -->
-                <div class="col-lg-3 col-6">
-                    <!-- small box -->
-                    <div class="small-box bg-light">
-                        <div class="inner">
-                            <h3>65</h3>
-
-                            <p>Unique Visitors</p>
-                        </div>
-                        <div class="icon">
-                            <img src="path_to_your_image" alt=" ">
-                        </div>
-                        <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-                    </div>
-                </div>
-                <!-- ./col -->
             </div>
         </div>
     </div>
 @endsection
 @push('css')
     <style>
-        .card {
-            background-color: #F2F2F2;
-            /* Warna latar belakang card */
-            color: #463720;
-            /* Warna font */
+        .rounded {
+            border-radius: 5rem;
         }
 
-        .card-body i {
-            color: #463720;
-            /* Warna ikon */
+        .box-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-gap: 24px;
+            margin-top: 36px;
+            margin-left: 1rem;
         }
 
-        .small-box {
+        .box-info li {
+            padding: 20px;
+            background: var(--light);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            grid-gap: 24px;
+        }
+
+        .box-info li .bx {
+            width: 80px;
+            height: 80x;
             border-radius: 10px;
-            /* Mengatur sudut kotak */
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            /* Efek bayangan kotak */
+            font-size: 36px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
-        .small-box .icon {
-            text-align: center;
-            margin-top: 20px;
-        }
-
-        .small-box img {
-            width: 50px;
-            height: 50px;
-            /* Ukuran gambar */
-        }
-
-        .small-box p {
-            text-align: center;
-        }
-
-        .small-box-footer {
-            text-align: center;
-            display: block;
-            padding: 10px 0;
-            color: #333;
-            text-decoration: none;
-            background-color: rgba(255, 255, 255, 0.8);
-            border-radius: 0 0 10px 10px;
-            /* Mengatur sudut bawah kotak */
-        }
-
-        .small-box-footer:hover {
-            background-color: rgba(255, 255, 255, 0.9);
+        .box-info li:nth-child(1) .bx {
+            background: lightblue;
+            color: blue;
         }
     </style>
+@endpush
+@push('js')
+    <script src="{{ $ppChart->cdn() }}"></script>
+    {{ $ppChart->script() }}
+    <script src="{{ $lapKeuChart->cdn() }}"></script>
+    {{ $lapKeuChart->script() }}
+    {{-- <script>
+        var options = {
+            colors: ['#77B6EA', '#545454'],
+            stroke: {
+                curve: 'smooth'
+            }
+        };
+        var chart = new ApexCharts(document.querySelector("#chart"), options);
+        chart.render();
+    </script> --}}
 @endpush
