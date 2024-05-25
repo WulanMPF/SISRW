@@ -216,7 +216,7 @@ Route::group(['prefix' => 'warga/iuran'], function () {
 Route::group(['prefix' => 'warga/pengaduan'], function () {
     Route::get('/', [WargaPengaduanController::class, 'index']);
     Route::post('/list', [WargaPengaduanController::class, 'list']);
-    Route::post('/pengaduan', [PengaduanController::class, 'store'])->name('pengaduan.store');
+    Route::post('/pengaduan', [WargaPengaduanController::class, 'store'])->name('pengaduan.store');
 });
 
 Route::group(['prefix' => 'warga/surat'], function () {
