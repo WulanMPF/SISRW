@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Bendahara;
 use App\Http\Controllers\Controller;
 use App\Models\IuranModel;
 use App\Models\KkModel;
+use App\Models\LapkeuModel;
 use App\Models\LaporanKeuanganModel;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
@@ -47,5 +48,22 @@ class IuranController extends Controller
             })
             ->rawColumns(['aksi'])
             ->make(true);
+    }
+    public function detail($bulan)
+    {
+        $breadcrumb = (object) [
+            'title' => 'Data Pembayaran Iuran RW 05 Bulan',
+            'date' => date('l, d F Y'),
+            'list'  => ['Home', 'Data Pembayaran Iuran']
+        ];
+
+        $activeMenu = 'iuran';
+
+        // Ambil nilai bulan dari URL
+        $bulan = request()->input('bulan');
+
+        $iurans = IuranModel::all();
+        $kk = KkModel::all();
+        return view('bendahara.iuran.detail', compact('breadcrumb', 'iurans', 'kk', 'bulan', 'activeMenu'));
     }
 }
