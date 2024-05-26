@@ -10,9 +10,12 @@
         <link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css'>
         <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.3/owl.carousel.min.css'>
         <link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'>
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
-        rel="stylesheet">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+Knujsl5/8j1/2Cp4/8jZw5g0P5j1z6KNi1Jh7K+Bo6U8+8" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+            rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
 
 </head>
@@ -51,7 +54,7 @@
                 </div>
 
                 <div class="col-lg-6">
-                    <h1 class="jumbo-header mb-30">
+                    <h1 class="jumbo-header mb-10">
                         SISTEM INFORMASI <br>
                         WARGA RW 05
                     </h1>
@@ -59,7 +62,6 @@
                         Kami adalah platform digital untuk memperkuat keterlibatan antara warga dan pengurus setempat di RW 05. Dengan berbagai fitur yang intuitif, kami memungkinkan warga untuk dengan mudah mengakses informasi terkini tentang kegiatan, pengumuman penting, serta memberikan sarana untuk menyampaikan masukan dan aspirasi.
                         Selamat berpartisipasi!
                     </p>
-
 
                 </div>
                 {{-- <div class="col-lg-6">
@@ -69,10 +71,15 @@
         </div>
     </section>
 
+
+
+
+
+
 <section id="kegiatan" class="kegiatan">
     <div class="container">
-        <div class="row text-center mb-50">
-            <div class="col-lg-12">
+        <div class="row justify-content-center text-center mb-30">
+            <div class="col-lg-8">
                 <h3 class="kegiatan-header">Kegiatan Warga RW 05</h3>
                 <div id="carouselExampleCaptions" class="carousel slide">
                     <div class="carousel-indicators">
@@ -82,23 +89,23 @@
                     </div>
                     <div class="carousel-inner">
                       <div class="carousel-item active">
-                        <img src="images/kegiatan1.png" class="d-block w-100" alt="...">
+                        <img src="images/kegiatan2.png" class="d-block w-100" alt="...">
                         <div class="carousel-caption d-none d-md-block">
                           <h5>KEGIATAN KARNAVAL OLEH WARGA RW 05</h5>
                           <p>Some representative placeholder content for the first slide.</p>
                         </div>
                       </div>
                       <div class="carousel-item">
-                        <img src="images/kegiatan2.png" class="d-block w-100" alt="...">
+                        <img src="images/kegiatan3.png" class="d-block w-100" alt="...">
                         <div class="carousel-caption d-none d-md-block">
                           <h5>PERINGATAN 78 TAHUN KEMERDEKAAN INDONESIA</h5>
                           <p>Some representative placeholder content for the second slide.</p>
                         </div>
                       </div>
                       <div class="carousel-item">
-                        <img src="images/kegiatan3.png" class="d-block w-100" alt="...">
+                        <img src="images/kegiatan1.png" class="d-block w-100" alt="...">
                         <div class="carousel-caption d-none d-md-block">
-                          <h5>Third slide label</h5>
+                          <h5>PERSIAPAN PERINGATAN 78 TAHUN KEMERDEKAAN INDONESIA </h5>
                           <p>Some representative placeholder content for the third slide.</p>
                         </div>
                       </div>
@@ -119,9 +126,6 @@
 
 
 
-
-
-
     <section id="umkm" class="umkm">
         <div class="container">
             <div class="row text-center mb-20">
@@ -134,6 +138,10 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div id="news-slider" class="owl-carousel">
+                            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Previous</span>
+                              </button>
                             <div class="post-slide">
                                 <div class="post-img">
                                     <img src="https://images.unsplash.com/photo-1596265371388-43edbaadab94?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=301&ixid=eyJhcHBfaWQiOjF9&ixlib=rb-1.2.1&q=80&w=501" alt="">
@@ -141,7 +149,7 @@
                                 </div>
                                 <div class="post-content">
                                     <h3 class="post-title">
-                                        <a href="#">Lorem ipsum dolor sit amet.</a>
+                                        <a href="#umkm ">Lorem ipsum dolor sit amet.</a>
                                     </h3>
                                     <p class="post-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam consectetur cumque dolorum, ex incidunt ipsa laudantium necessitatibus neque quae tempora......</p>
                                     <a href="#" class="read-more">read more</a>
@@ -155,7 +163,7 @@
                                 </div>
                                 <div class="post-content">
                                     <h3 class="post-title">
-                                        <a href="#">Lorem ipsum dolor sit amet.</a>
+                                        <a href="#umkm">Lorem ipsum dolor sit amet.</a>
                                     </h3>
                                     <p class="post-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam consectetur cumque dolorum, ex incidunt ipsa laudantium necessitatibus neque quae tempora......</p>
 
@@ -170,58 +178,18 @@
                                 </div>
                                 <div class="post-content">
                                     <h3 class="post-title">
-                                        <a href="#">Lorem ipsum dolor sit amet.</a>
+                                        <a href="#umkm">Lorem ipsum dolor sit amet.</a>
                                     </h3>
                                     <p class="post-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam consectetur cumque dolorum, ex incidunt ipsa laudantium necessitatibus neque quae tempora......</p>
-                                    <span class="post-date"><i class="fa fa-clock-o"></i>Out 27, 2019</span>
+
                                     <a href="#" class="read-more">read more</a>
                                 </div>
                             </div>
 
-                            <div class="post-slide">
-                                <div class="post-img">
-                                    <img src="https://images.unsplash.com/photo-1576659531892-0f4991fca82b?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=301&ixid=eyJhcHBfaWQiOjF9&ixlib=rb-1.2.1&q=80&w=501" alt="">
-                                    <a href="#" class="over-layer"><i class="fa fa-link"></i></a>
-                                </div>
-                                <div class="post-content">
-                                    <h3 class="post-title">
-                                        <a href="#">Lorem ipsum dolor sit amet.</a>
-                                    </h3>
-                                    <p class="post-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam consectetur cumque dolorum, ex incidunt ipsa laudantium necessitatibus neque quae tempora......</p>
-                                    <span class="post-date"><i class="fa fa-clock-o"></i>Out 27, 2019</span>
-                                    <a href="#" class="read-more">read more</a>
-                                </div>
-                            </div>
-
-                            <div class="post-slide">
-                                <div class="post-img">
-                                    <img src="https://images.unsplash.com/photo-1586083702768-190ae093d34d?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=305&ixid=eyJhcHBfaWQiOjF9&ixlib=rb-1.2.1&q=80&w=505" alt="">
-                                    <a href="#" class="over-layer"><i class="fa fa-link"></i></a>
-                                </div>
-                                <div class="post-content">
-                                    <h3 class="post-title">
-                                        <a href="#">Lorem ipsum dolor sit amet.</a>
-                                    </h3>
-                                    <p class="post-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam consectetur cumque dolorum, ex incidunt ipsa laudantium necessitatibus neque quae tempora......</p>
-                                    <span class="post-date"><i class="fa fa-clock-o"></i>Out 27, 2019</span>
-                                    <a href="#" class="read-more">read more</a>
-                                </div>
-                            </div>
-
-                            <div class="post-slide">
-                                <div class="post-img">
-                                    <img src="https://images.unsplash.com/photo-1484656551321-a1161420a2a0?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=306&ixid=eyJhcHBfaWQiOjF9&ixlib=rb-1.2.1&q=80&w=506" alt="">
-                                    <a href="#" class="over-layer"><i class="fa fa-link"></i></a>
-                                </div>
-                                <div class="post-content">
-                                    <h3 class="post-title">
-                                        <a href="#">Lorem ipsum dolor sit amet.</a>
-                                    </h3>
-                                    <p class="post-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam consectetur cumque dolorum, ex incidunt ipsa laudantium necessitatibus neque quae tempora......</p>
-                                    <span class="post-date"><i class="fa fa-clock-o"></i>Out 27, 2019</span>
-                                    <a href="#" class="read-more">read more</a>
-                                </div>
-                            </div>
+                              <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Next</span>
+                              </button>
                         </div>
                     </div>
                 </div>
@@ -258,31 +226,7 @@
     </section>
 
 
-    <footer class="text-center text-lg-start bg-light text-muted">
-        <section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
-            <div class="me-5 d-none d-lg-block">
-                <span>Get connected with us on social networks:</span>
-            </div>
-            <div>
-                <a href="" class="me-4 text-reset">
-                    <i class="fab fa-facebook-f"></i>
-                </a>
-                <a href="" class="me-4 text-reset">
-                    <i class="fab fa-twitter"></i>
-                </a>
-                <a href="" class="me-4 text-reset">
-                    <i class="fab fa-google"></i>
-                </a>
-                <a href="" class="me-4 text-reset">
-                    <i class="fab fa-instagram"></i>
-                </a>
-                <a href="" class="me-4 text-reset">
-                    <i class="fab fa-linkedin"></i>
-                </a>
-                <a href="" class="me-4 text-reset">
-                    <i class="fab fa-github"></i>
-                </a>
-            </div>
+
         </section>
 
         <section class="">
@@ -364,12 +308,15 @@
         integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
         crossorigin="anonymous"></script>
 <script>
-    $(document).ready(function() {
+$(document).ready(function() {
     $("#news-slider").owlCarousel({
         items: 3,
         loop: true,
-        nav: true, // Ensure navigation is true
-        navText: ["<i class='fa fa-chevron-left'></i>", "<i class='fa fa-chevron-right'></i>"], // Optional: Custom navigation buttons
+        nav: true, // Enables navigation buttons
+        navText: [
+            "<i class='fa fa-chevron-left'></i>",
+            "<i class='fa fa-chevron-right'></i>"
+        ], // Custom navigation buttons (make sure Font Awesome is loaded)
         autoplay: true,
         autoplayTimeout: 3000, // Autoplay interval (in milliseconds)
         responsive: {
@@ -379,7 +326,6 @@
         }
     });
 });
-
 </script>
 
 
