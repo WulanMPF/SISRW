@@ -18,12 +18,12 @@ class DashboardController extends Controller
         ];
 
          // Ambil data kegiatan dan UMKM terbaru
-         $kegiatan = KegiatanModel::orderBy('tanggal', 'desc')->take(5)->get();
-         $umkm = UmkmModel::orderBy('created_at', 'desc')->take(5)->get();
+        //  $kegiatan = KegiatanModel::orderBy('tanggal', 'desc')->take(5)->get();
+        //  $umkm = UmkmModel::orderBy('created_at', 'desc')->take(5)->get();
 
         $activeMenu = 'dashboard';
 
-        return view('warga.dashboard', ['breadcrumb' => $breadcrumb, 'activeMenu' => $activeMenu, compact('kegiatan', 'umkm')]);
+        return view('warga.dashboard', ['breadcrumb' => $breadcrumb, 'activeMenu' => $activeMenu]);
     }
 
     /**

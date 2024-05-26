@@ -34,10 +34,10 @@
           </button>
           <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav mx-auto mb-5 mb-lg-0">
-                <li class="nav-item active"><a class="nav-link" href="#">Home</a></li>
-                <li class="nav-item"><a class="nav-link" href="#kegiatan">Kegiatan</a></li>
-                <li class="nav-item"><a class="nav-link" href="#umkm">UMKM</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">About Us</a></li>
+                <li class="nav-item "><a class="nav-link" href="#">Home</a></li>
+                <li class="nav-item "><a class="nav-link" href="#kegiatan">Kegiatan</a></li>
+                <li class="nav-item "><a class="nav-link" href="#umkm">UMKM</a></li>
+                <li class="nav-item"><a class="nav-link" href="#aboutus">About Us</a></li>
             </ul>
             <ul class="navbar-nav mb-2 mb-lg-0">
               <li class="nav-item"><a class="btn btn-secondary" href="login/""> Log In</a>
@@ -96,7 +96,7 @@
                         </div>
                       </div>
                       <div class="carousel-item">
-                        <img src="images/kegiatan3.png" class="d-block w-100" alt="...">
+                        <img src=trf class="d-block w-100" alt="...">
                         <div class="carousel-caption d-none d-md-block">
                           <h5>PERINGATAN 78 TAHUN KEMERDEKAAN INDONESIA</h5>
                           <p>Some representative placeholder content for the second slide.</p>
@@ -203,12 +203,12 @@
         <section class="py-5">
             <div class="container">
                 <div class="row align-items-center gx-4">
-                    <div class="col-md-5">
+                    <div class="col-md-3">
                         <div class="ms-md-2 ms-lg-5"><img class="img-fluid round-5" src="https://freefrontend.dev/assets/square.png"></div>
                     </div>
                     <div class="col-md-6 offset-md-1">
                         <div class="ms-md-2 ms-lg-5">
-                            <h2 class="display-7 fw-bold">About Us</h2>
+                            <h2 class="display-8 fw-bold">About Us</h2>
                             <span class="text-muted">SUDARMAJI</span>
                             <p class="lead">Halo! Kami  sangat senang bisa berbagi sedikit tentang diri kami. Kami adalah komunitas yang hidup di jantung lingkungan yang penuh semangat dan kebersamaan. Dipimpin oleh Pak Sudarmaji, kami adalah tim yang kompak, siap memberikan yang terbaik untuk semua warga kami.<br><br>
 
