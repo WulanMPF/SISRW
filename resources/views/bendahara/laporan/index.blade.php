@@ -245,30 +245,7 @@
                             },
                             {
                                 extend: 'pdfHtml5',
-                                text: '<span><i class="fas fa-file-pdf"></i>&emsp;PDF</span>',
-                                customize: function(doc) {
-                                    var totalPemasukan = $('#total_pemasukan').text();
-                                    var totalPengeluaran = $('#total_pengeluaran').text();
-                                    var totalSaldo = $('#total_saldo').text();
-
-                                    // Add a footer to the PDF
-                                    doc.content.push({
-                                        table: {
-                                            widths: ['*', '*', '*', '*', '*', '*', '*'],
-                                            body: [
-                                                ['', '', 'Total', totalPemasukan,
-                                                    totalPengeluaran, totalSaldo, ''
-                                                ]
-                                            ]
-                                        },
-                                        // margin: [0, 10, 0, 10]
-                                    });
-
-                                    // Center the footer text
-                                    doc.styles.tableFooter = {
-                                        alignment: 'right'
-                                    };
-                                }
+                                text: '<span><i class="fas fa-file-pdf"></i>&emsp;PDF</span>'
                             }
                         ],
                         className: 'export-button'
