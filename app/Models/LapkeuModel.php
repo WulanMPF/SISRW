@@ -10,5 +10,5 @@ class LapkeuModel extends Model
     use HasFactory;
     protected $table = 'laporan_keuangan';
     protected $primaryKey = 'laporan_id';
-    protected $fillable = ['nominal', 'keterangan', 'jenis_laporan', 'tanggal_laporan'];
+    protected $fillable = ['nominal', 'keterangan', 'jenis_laporan', 'tgl_laporan'];
 }
