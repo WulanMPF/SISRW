@@ -46,12 +46,10 @@ class LapkeuController extends Controller
                 $btn = '<a href="' . url('/bendahara/laporan/' . $laporan->laporan_id) . '" class="btn btn-sm"><i class="fas fa-eye" style="color: #BB955C; font-size: 17px;"></i></a>';
                 $btn .= '<a href="' . url('/bendahara/laporan/' . $laporan->laporan_id . '/edit') . '" class="btn btn-sm"><i class="fas fa-edit" style="color: #007bff;" font-size: 17px;></i></a>';
                 $btn .= '<button type="button" class="btn btn-sm" onclick="showConfirmationModal(' . $laporan->laporan_id . ')"><i class="fas fa-trash-alt" style="color: #dc3545; font-size: 17px;"></i></button>';
-
                 // delete default -- localhost
-                /* $btn .= '<form class="d-inline-block" method="POST" action="' . url('/bendahara/laporan/' . $laporan->laporan_id) . '">'
-                 . csrf_field() . method_field('DELETE') .
-                 '<button type="submit" class="btn btn-sm" onclick="return confirm(\'Apakah Anda yakin menghapus data ini?\');"><i class="fas fa-trash-alt" style="color: #dc3545; font-size: 17px;"></i></button></form>'; */
-
+                /*$btn .= '<form class="d-inline-block" method="POST" action="' . url('/bendahara/laporan/' . $laporan->laporan_id) . '">'
+                    . csrf_field() . method_field('DELETE') .
+                    '<button type="submit" class="btn btn-sm" onclick="return confirm(\'Apakah Anda yakin menghapus data ini?\');"><i class="fas fa-trash-alt" style="color: #dc3545; font-size: 17px;"></i></button></form>';*/
                 return $btn;
             })
             ->rawColumns(['aksi'])
@@ -104,6 +102,42 @@ class LapkeuController extends Controller
         $activeMenu = 'laporan';
 
         return view('bendahara.laporan.show', ['breadcrumb' => $breadcrumb, 'laporan' => $laporan, 'activeMenu' => $activeMenu]);
+    }
+    public function edit(string $id)
+    {
+        $laporan = LapkeuModel::find($id);
+
+        $breadcrumb = (object)[
+            'title' => 'Edit Laporan Keuangan',
+            'date' => date('l, d F Y'),
+            'list' => ['Home', 'Laporan Keuangan', 'Edit']
+        ];
+
+        $page = (object)[
+            'title' => 'Edit Laporan Keuangan'
+        ];
+
+        $activeMenu = 'laporan';
+
+        return view('bendahara.laporan..edit', ['breadcrumb' => $breadcrumb, 'page' => $page, 'laporan' => $laporan, 'activeMenu' => $activeMenu]);
+    }
+
+    public function update(Request $request, string $id)
+    {
+        $request->validate([
+            'nominal'    => 'required|integer',
+            'keterangan'  => 'required|string|max:200',
+            'jenis_laporan' => 'required|string|max:50',
+            'tgl_laporan' => 'required|date',
+        ]);
+
+        LapkeuModel::find($id)->update([
+            'nominal'    => $request->nominal,
+            'keterangan'  => $request->keterangan,
+            'jenis_laporan' => $request->jenis_laporan,
+            'tgl_laporan' => $request->tgl_laporan,
+        ]);
+        return redirect('/bendahara/laporan')->with('success', 'Data laporan berhasil diubah');
     }
     public function destroy(string $id)
     {

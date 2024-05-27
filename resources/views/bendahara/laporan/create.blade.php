@@ -19,14 +19,14 @@
                     @csrf
                     <div class="form-group row">
                         <label for="tgl_laporan" class="col-sm-2 col-form-label"> Tanggal :</label>
-                        <div class="col-sm-9">
+                        <div class="col-sm-8">
                             <input type="date" id="9" name="tgl_laporan" class="form-control" rows="5"
                                 required>
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label"> Jenis Laporan : </label>
-                        <div class="col-sm-9">
+                        <div class="col-sm-8">
                             <select class="form-control" id="jenis_laporan" name="jenis_laporan" required>
                                 <option value="">- Pilih Jenis Pelaporan -</option>
                                 <option value="pemasukan">Pemasukan</option>
@@ -40,7 +40,7 @@
 
                     <div class="form-group row">
                         <label for="keterangan" class="col-sm-2 col-form-label">Keterangan :</label>
-                        <div class="col-sm-9">
+                        <div class="col-sm-8">
                             <input type="text" id="keterangan" name="keterangan" class="form-control" rows="5"
                                 required>
                         </div>
@@ -48,14 +48,14 @@
 
                     <div class="form-group row">
                         <label for="nominal" class="col-sm-2 col-form-label">Nominal :</label>
-                        <div class="col-sm-9">
+                        <div class="col-sm-8">
                             <input type="number" id="nominal" name="nominal" class="form-control" rows="5"
                                 required>
                         </div>
                     </div>
 
                     <div class="form-group row">
-                        <div class="col-sm-9 offset-sm-3">
+                        <div class="col-sm-8 offset-sm-3">
                             <button type="submit" class="btn btn-sm btn-submit">Submit</button>
                         </div>
                     </div>
