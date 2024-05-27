@@ -50,6 +50,7 @@ a {
     color: var(--gold);
     font-size: 35px;
 
+
 }
 
 .big-header {
@@ -162,10 +163,17 @@ input.form-control {
 .header .img-fluid {
     max-width: 80%;
     height: 50%;
-  }
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 1); /* Menambahkan bayangan */
+    border-radius: 20px;
+}
+
 .header {
     margin-bottom: 30px;
+
   }
+
+
+
 
 
 
@@ -181,6 +189,7 @@ input.form-control {
     color: var(--navy);
     font-size: 28px;
     text-align: center;
+    margin-bottom: 30px;
 }
 
 .carousel-caption h5 {
