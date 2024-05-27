@@ -201,6 +201,7 @@ Route::group(['prefix' => 'bendahara/laporan'], function () {
     Route::get('/create', [BendaharaLapkeuController::class, 'create'])->name('laporan.create');
     Route::post('/', [BendaharaLapkeuController::class, 'store'])->name('laporan.store');
     Route::get('/{id}', [BendaharaLapkeuController::class, 'show']);
+    Route::delete('/{id}', [BendaharaLapkeuController::class, 'destroy']);
 });
 Route::group(['prefix' => 'bendahara/profile'], function () {
     Route::get('/', [BendaharaProfileController::class, 'index']);

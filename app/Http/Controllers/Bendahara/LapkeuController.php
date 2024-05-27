@@ -45,10 +45,13 @@ class LapkeuController extends Controller
             ->addColumn('aksi', function ($laporan) {
                 $btn = '<a href="' . url('/bendahara/laporan/' . $laporan->laporan_id) . '" class="btn btn-sm"><i class="fas fa-eye" style="color: #BB955C; font-size: 17px;"></i></a>';
                 $btn .= '<a href="' . url('/bendahara/laporan/' . $laporan->laporan_id . '/edit') . '" class="btn btn-sm"><i class="fas fa-edit" style="color: #007bff;" font-size: 17px;></i></a>';
-                $btn .= '<button type="button" class="btn btn-sm" onclick="showConfirmationModal()"><i class="fas fa-trash-alt" style="color: #dc3545; font-size: 17px;"></i></button>';
-                // $btn .= '<form class="d-inline-block" method="POST" action="' . url('/bendahara/laporan/' . $laporan->laporan_id) . '">'
-                // . csrf_field() . method_field('DELETE') .
-                // '<button type="submit" class="btn btn-sm" onclick="return confirm(\'Apakah Anda yakin menghapus data ini?\');"><i class="fas fa-trash-alt" style="color: #dc3545; font-size: 17px;"></i></button></form>';
+                $btn .= '<button type="button" class="btn btn-sm" onclick="showConfirmationModal(' . $laporan->laporan_id . ')"><i class="fas fa-trash-alt" style="color: #dc3545; font-size: 17px;"></i></button>';
+
+                // delete default -- localhost
+                /* $btn .= '<form class="d-inline-block" method="POST" action="' . url('/bendahara/laporan/' . $laporan->laporan_id) . '">'
+                 . csrf_field() . method_field('DELETE') .
+                 '<button type="submit" class="btn btn-sm" onclick="return confirm(\'Apakah Anda yakin menghapus data ini?\');"><i class="fas fa-trash-alt" style="color: #dc3545; font-size: 17px;"></i></button></form>'; */
+
                 return $btn;
             })
             ->rawColumns(['aksi'])
