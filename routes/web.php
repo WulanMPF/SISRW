@@ -198,6 +198,8 @@ Route::group(['prefix' => 'bendahara/iuran'], function () {
 Route::group(['prefix' => 'bendahara/laporan'], function () {
     Route::get('/', [BendaharaLapkeuController::class, 'index']);
     Route::post('/list', [BendaharaLapkeuController::class, 'list']);
+    Route::get('/create', [BendaharaLapkeuController::class, 'create'])->name('laporan.create');
+    Route::post('/', [BendaharaLapkeuController::class, 'store'])->name('laporan.store');
     Route::get('/{id}', [BendaharaLapkeuController::class, 'show']);
 });
 Route::group(['prefix' => 'bendahara/profile'], function () {
