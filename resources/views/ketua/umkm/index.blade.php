@@ -1,6 +1,27 @@
 @extends('layout.ketua.template')
 
 @section('content')
+    <!-- Tempatkan modal ini di dalam struktur HTML Anda -->
+    <div class="modal fade" id="deactiveUMKM" tabindex="-1" role="dialog" aria-labelledby="deactiveUMKMLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deactiveUMKMLabel">Konfirmasi Nonaktifkan UMKM</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Apakah Anda yakin ingin menonaktifkan UMKM ini?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                    <button type="submit" class="btn btn-danger">Nonaktifkan</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="card card-outline card-light">
         <div class="card-header">
             <div class="card-tools">
