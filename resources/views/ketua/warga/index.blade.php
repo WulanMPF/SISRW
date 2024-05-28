@@ -12,19 +12,25 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="form-group row">
-                        <label class="col-1 control-label col-form-label">Filter:</label>
-                        <div class="col-3">
-                            <select class="form-control" id="status_warga" name="status_warga" required>
-                                <option>Semua</option>
-                                <option value="menetap">Tinggal Tetap</option>
-                                <option value="sementara">Tinggal Sementara</option>
-                            </select>
-                            <small class="form-text text-muted">Status Kependudukan</small>
-                        </div>
+                            <label class="col-1 control-label col-form-label">Filter:</label>
+                            <div class="col-3">
+                                <div class="dropdown">
+                                    <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Status Kependudukan
+                                    </button>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        {{-- <a class="dropdown-item" href="{{ url('/ketua/warga/') }}">Semua</a> --}}
+                                        <a class="dropdown-item" href="{{ url('/ketua/warga/') }}">Tinggal Tetap</a>
+                                        <a class="dropdown-item" href="{{ url('/ketua/warga/sementara') }}">Tinggal Sementara</a>
+                                    </div>
+                                </div>
+                                <small class="form-text text-muted">Status Kependudukan</small>
+                            </div>
+                     
                         <div class="col-md-8 text-right">
                             <a class="btn btn-sm mt-1 btn-tambah" data-toggle="dropdown">+ Tambah Warga</a>
                             <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                                <a href="{{ url('/ketua/warga/create-tetap') }}" class="dropdown-item">
+                                <a href="{{ url('/ketua/warga/create-kk') }}" class="dropdown-item">
                                     Tinggal Tetap
                                 </a>
                                 <a href="{{ url('/ketua/warga/create-sementara') }}" class="dropdown-item">
@@ -129,9 +135,19 @@
                 }]
             });
 
-            S('#status_warga').on('change', function() {
-                dataWarga.ajax.reload();
+            $('#status_warga').change(function() {
+                var selectedStatus = $(this).val(); // Mendapatkan nilai opsi yang dipilih
+                if (selectedStatus !== '') {
+                    // Redirect ke URL sesuai dengan nilai yang dipilih
+                    window.location.href = "{{ url('ketua/warga/') }}/" + selectedStatus;
+                } else {
+                    // Jika opsi yang dipilih adalah "Semua", ubah teks pada tombol dropdown menjadi "Semua"
+                    $('#dropdownMenuButton').text('Semua');
+                }
             });
+        
         });
+
+        
     </script>
 @endpush
