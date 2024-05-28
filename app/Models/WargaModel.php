@@ -4,11 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class WargaModel extends Model
 {
-    use HasFactory;
+    use HasFactory,  SoftDeletes;
 
     protected $table = 'warga';
     protected $primaryKey = 'warga_id';
@@ -20,8 +21,10 @@ class WargaModel extends Model
     protected $fillable = [
         'kk_id', 'nik', 'nama_warga', 'tempat_tgl_lahir',
         'jenis_kelamin', 'rt_rw', 'kel_desa', 'kecamatan',
-        'agama', 'status_perkawinan', 'pekerjaan', 'hubungan_keluarga'
+        'agama', 'status_perkawinan', 'pekerjaan', 'hubungan_keluarga', 'status_warga'
     ];
+
+    protected $dates = ['deleted_at'];
 
     public function kk(): BelongsTo
     {
