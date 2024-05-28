@@ -45,31 +45,19 @@ class UmkmController extends Controller
 
         return DataTables::of($umkms)
             ->addIndexColumn()
-            // ->addColumn('aksi', function ($umkm) {
-            //     if (strcasecmp($umkm->status_usaha, 'Aktif') == 0) {
-            //         $btn = ' <a href="' . url('/ketua/umkm/' . $umkm->umkm_id . '/edit') . '" class="btn btn-sm"><i class="fas fa-edit" style="color: #ffc107;" font-size: 17px;></i></a>';
-            //         $btn .= ' <a href="' . url('/ketua/umkm/' . $umkm->umkm_id . '/delete') . '" class="btn btn-sm" onclick="return confirm(\'Apakah anda yakin ingin menghapus?\')"><i class="fas fa-trash-alt" style="color: #dc3545; font-size: 17px;"></i></a>';
-            //     } elseif (strcasecmp($umkm->status_usaha, 'Nonaktif') == 0) {
-            //         // Tidak ada button tambahan untuk nonaktif
-            //     } elseif (strcasecmp($umkm->status_usaha, 'Diproses') == 0) {
-            //         $btn = ' <a href="' . url('/ketua/umkm/' . $umkm->umkm_id . '/accept') . '" class="btn btn-sm btn-success" style="border-radius: 9px;">Terima</a>';
-            //         $btn .= ' <a href="' . url('/ketua/umkm/' . $umkm->umkm_id . '/reject') . '" class="btn btn-sm btn-danger" style="border-radius: 9px;">Tolak</a>';
-            //     }
-
-            //     $btn .= ' <br><a href="' . url('/ketua/umkm/' . $umkm->umkm_id) . '" class="btn btn-sm"><i class="fas fa-eye" style="color: #BB955C; font-size: 17px;"></i></a>';
-
-            //     return $btn;
-            // })
             ->addColumn('aksi', function ($umkm) {
                 $btn = '';
-
                 if ($umkm->status_usaha == 'Aktif') {
                     $btn .= '<div class="btn-group mr-2">';
                     $btn .= '<a href="' . url('/ketua/umkm/' . $umkm->umkm_id . '/edit') . '" class="btn btn-xs btn-warning mr-2" style="border-radius: 6px;"><i class="fas fa-edit fa-lg"></i></a>';
-                    $btn .= '<form class="d-inline-block" method="POST" action="' . url('/ketua/umkm/' . $umkm->umkm_id . '/deactive') . '">'
-                        . csrf_field() . method_field('PUT') .
-                        '<button type="submit" class="btn btn-xs btn-danger" style="border-radius: 6px;" onclick="return confirm(\'Apakah anda yakin ingin menonaktifkan UMKM?\')"><i class="fas fa-trash fa-lg"></i></button>';
-                    $btn .= '</form>';
+                    $btn .= '<button type="button" class="btn btn-xs btn-danger" style="border-radius: 6px;" data-toggle="modal" data-target="#deactiveUMKM"><i class="fas fa-trash fa-lg"></i></button>';
+
+                    // Tampilan localhost
+                    // $btn .= '<form class="d-inline-block" method="POST" action="' . url('/ketua/umkm/' . $umkm->umkm_id . '/deactive') . '">'
+                    // . csrf_field() . method_field('PUT') .
+                    // '<button type="submit" class="btn btn-xs btn-danger" style="border-radius: 6px;" onclick="return confirm(\'Apakah anda yakin ingin menonaktifkan UMKM?\')"><i class="fas fa-trash fa-lg"></i></button>';
+                    // $btn .= '</form>';
+
                     $btn .= '</div>';
                 } elseif ($umkm->status_usaha == 'Diproses') {
                     $btn .= '<div class="btn-group mr-2">';
