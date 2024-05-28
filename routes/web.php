@@ -168,10 +168,16 @@ Route::group(['prefix' => 'sekretaris/surat'], function () {
     Route::delete('/{id}', [SekretarisSuratController::class, 'destroy']);
 });
 Route::group(['prefix' => 'sekretaris/pengumuman'], function () {
-    Route::get('/', [PengumumanController::class, 'index']);
-    Route::get('/create', [PengumumanController::class, 'create']); // Tambahkan rute untuk menampilkan formulir tambah data baru
-    Route::post('/', [PengumumanController::class, 'store']); // Tambahkan rute untuk menyimpan data baru
-    Route::get('/{id}', [PengumumanController::class, 'show']);
+    Route::group(['prefix' => 'sekretaris/pengumuman'], function () {
+    Route::get('/', [PengumumanController::class, 'index'])->name('sekretaris.pengumuman.index');
+    Route::get('/create', [PengumumanController::class, 'create'])->name('sekretaris.pengumuman.create');
+    Route::post('/', [PengumumanController::class, 'store'])->name('sekretaris.pengumuman.store');
+    Route::get('/{id}', [PengumumanController::class, 'show'])->name('sekretaris.pengumuman.show');
+    Route::get('/{id}/edit', [PengumumanController::class, 'edit'])->name('sekretaris.pengumuman.edit');
+    Route::put('/{id}', [PengumumanController::class, 'update'])->name('sekretaris.pengumuman.update');
+    Route::delete('/{id}', [PengumumanController::class, 'destroy'])->name('sekretaris.pengumuman.destroy');
+    });
+    
 });
 
 Route::group(['prefix' => 'sekretaris/skBansos'], function () {

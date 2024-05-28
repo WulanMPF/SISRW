@@ -30,7 +30,12 @@
                                 <div class="card-body">
                                     <h5 class="card-title">{{ $item->judul }}</h5>
                                     <p class="card-text">{{ $item->isi_pengumuman }}</p>
-                                    <p class="picture">{{ $item->gambar}}</p>
+                                    <p class="picture">{{ $item->gambar }}</p>
+                                    <a href="{{ url('sekretaris/pengumuman/edit', $item->id) }}" class="btn btn-sm btn-warning">+ Edit Pengumuman</a>
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')">Delete</button>
+                                    </form>
                                 </div>
                             </div>
                         </div>
@@ -55,22 +60,30 @@
     <script>
         $(document).ready(function() {
             $('#searchButton').click(function() {
-                // Ambil data pengumuman dari controller menggunakan AJAX
                 $.ajax({
-                    url: '/sekretaris/pengumuman/search', // Sesuaikan URL jika perlu
+                    url: '/sekretaris/pengumuman/search',
                     type: 'POST',
                     data: {
                         keyword: $('#searchInput').val()
                     },
                     success: function(response) {
-                        // Generate struktur kartu untuk setiap pengumuman
                         var html = '';
                         $.each(response, function(index, item) {
-                            html +=
-                            '<div class="col-md-4">'; // Gunakan card-columns untuk tampilan yang lebih baik
+                            html += '<div class="col-md-4">';
                             html += '<div class="card">';
-                            // ... sisa konten kartu (img, judul, isi_pengumuman, tombol)
-                            html += '</div></div>';
+                            html += '<div class="card-body">';
+                            html += '<h5 class="card-title">' + item.judul + '</h5>';
+                            html += '<p class="card-text">' + item.isi_pengumuman + '</p>';
+                            html += '<p class="picture">' + item.gambar + '</p>';
+                            html += '<a href="/sekretaris/pengumuman/' + item.id + '/edit" class="btn btn-sm btn-warning">Edit</a>';
+                            html += '<form action="/sekretaris/pengumuman/' + item.id + '" method="POST" style="display:inline;">';
+                            html += '@csrf';
+                            html += '@method("DELETE")';
+                            html += '<button type="submit" class="btn btn-sm btn-danger" onclick="return confirm(\'Are you sure?\')">Delete</button>';
+                            html += '</form>';
+                            html += '</div>';
+                            html += '</div>';
+                            html += '</div>';
                         });
                         $('#searchResults').html(html);
                     }
