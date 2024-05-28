@@ -14,7 +14,23 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            background-color: #f8f9fa;
+            background: url('images/bglogin.jpg') no-repeat center center fixed; /* Ganti dengan path gambar latar belakang Anda */
+            background-size: cover;
+            font-family: 'Poppins', sans-serif;
+            position: relative;
+            z-index: 1;
+        }
+
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: inherit;
+            filter: blur(10px); /* Adjust the blur level as needed */
+            z-index: -1;
         }
 
         .container-fluid {
@@ -64,6 +80,7 @@
             padding: 10px;
             border: none;
             width: 100%;
+            margin-top: 20px;
         }
 
         .bg-image {
@@ -80,6 +97,12 @@
             background-color: #f8f9fa; /* warna background sesuaikan dengan halaman Anda */
             padding: 20px 0;
             color:#a8a8a8;
+        }
+
+        .form-links {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
         }
 
     </style>
@@ -100,7 +123,11 @@
                         <div class="form-group mb-3">
                             <input id="inputPassword" type="password" placeholder="Masukkan Password" required class="form-control shadow-sm px-4">
                         </div>
-                        <button type="submit" class="btn btn-block shadow-sm" >Login</button>
+                        <div class="form-links">
+                            <a href="#!" class="link-secondary text-decoration-none">Forgot password</a>
+                            <a href="{{ route('register') }}" class="text-center">Register Account</a>
+                        </div>
+                        <button type="submit" class="btn btn-block shadow-sm">Login</button>
                     </form>
                 </div>
             </div>
@@ -111,8 +138,9 @@
     <footer>
         <div class="container">
             <div class="row">
-                <div class="col-md-12 text-center" style="font-family: Poppins;">
+                <div class="col-md-12 text-center">
                     <strong>Copyright &copy; Jurusan Teknologi Informasi Politeknik Negeri Malang</strong>
+                </div>
             </div>
         </div>
     </footer>

@@ -49,6 +49,7 @@ a {
     font-weight: var(--fwextrabold);
     color: var(--gold);
     font-size: 35px;
+    
 
 
 }
@@ -361,6 +362,8 @@ input.form-control {
 .owl-carousel .owl-nav .owl-next {
     right: -25px;
 }
+
+
 
 
 @media only screen and (max-width:1280px) {
