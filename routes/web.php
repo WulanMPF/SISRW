@@ -136,6 +136,8 @@ Route::group(['prefix' => 'ketua/pengaduan'], function () {
     Route::get('/', [PengaduanController::class, 'index']);
     Route::post('/list', [PengaduanController::class, 'list']);
     Route::get('/{id}', [PengaduanController::class, 'show'])->name('pengaduan.show');
+    Route::get('/{id}/show', [PengaduanController::class, 'show'])->name('pengaduan.show');
+
 });
 Route::group(['prefix' => 'ketua/iuran'], function () {
     Route::get('/', [IuranController::class, 'index']);

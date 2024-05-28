@@ -44,10 +44,6 @@ class PengaduanController extends Controller
             ->rawColumns(['action'])
             ->make(true);
     }
-
-    /**
-     * Menampilkan halaman detail pengaduan.
-     */
     public function show($id)
     {
         $pengaduan = PengaduanModel::findOrFail($id);
