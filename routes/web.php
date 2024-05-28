@@ -118,7 +118,7 @@ Route::group(['prefix' => 'ketua/umkm'], function () {
     Route::get('/{id}', [UmkmController::class, 'show']);
     Route::get('/{id}/edit', [UmkmController::class, 'edit']);
     Route::put('/{id}', [UmkmController::class, 'update']);
-    Route::delete('/{id}', [UmkmController::class, 'destroy']);
+    Route::put('/{id}/deactive', [UmkmController::class, 'deactive'])->name('umkm.deactive');
 });
 Route::group(['prefix' => 'ketua/bansos'], function () {
     Route::get('/', [BansosController::class, 'index']);

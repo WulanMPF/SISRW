@@ -62,12 +62,14 @@ class UmkmController extends Controller
             // })
             ->addColumn('aksi', function ($umkm) {
                 $btn = '';
-                $status_usaha = strtolower($umkm->status_usaha); // Mengubah status_usaha menjadi huruf kecil
 
                 if ($umkm->status_usaha == 'Aktif') {
                     $btn .= '<div class="btn-group mr-2">';
                     $btn .= '<a href="' . url('/ketua/umkm/' . $umkm->umkm_id . '/edit') . '" class="btn btn-xs btn-warning mr-2" style="border-radius: 6px;"><i class="fas fa-edit fa-lg"></i></a>';
-                    $btn .= '<a href="' . url('/ketua/umkm/' . $umkm->umkm_id . '/delete') . '" class="btn btn-xs btn-danger" style="border-radius: 6px;" onclick="return confirm(\'Apakah anda yakin ingin menghapus?\')"><i class="fas fa-trash fa-lg"></i></a>';
+                    $btn .= '<form class="d-inline-block" method="POST" action="' . url('/ketua/umkm/' . $umkm->umkm_id . '/deactive') . '">'
+                        . csrf_field() . method_field('PUT') .
+                        '<button type="submit" class="btn btn-xs btn-danger" style="border-radius: 6px;" onclick="return confirm(\'Apakah anda yakin ingin menonaktifkan UMKM?\')"><i class="fas fa-trash fa-lg"></i></button>';
+                    $btn .= '</form>';
                     $btn .= '</div>';
                 } elseif ($umkm->status_usaha == 'Diproses') {
                     $btn .= '<div class="btn-group mr-2">';
@@ -199,17 +201,19 @@ class UmkmController extends Controller
         return redirect('/ketua/umkm')->with('success', 'Data UMKM berhasil diupdate');
     }
 
-    public function destroy(string $id)
+    public function deactive(string $id)
     {
-        $check = UmkmModel::find($id);
-        if (!$check) {
-            return redirect('/ketua/umkm')->with('error', 'Data UMKM Warga 05 tidak ditemukan');
+        $umkm = UmkmModel::find($id);
+        if (!$umkm) {
+            return redirect('/ketua/umkm')->with('error', 'Data UMKM tidak ditemukan');
         }
         try {
-            UmkmModel::destroy($id);
-            return redirect('/ketua/umkm')->with('success', 'Data UMKM Warga 05 berhasil dihapus');
+            // Ubah status UMKM menjadi 'nonaktif'
+            $umkm->update(['status_usaha' => 'Nonaktif']);
+
+            return redirect('/ketua/umkm')->with('success', 'Data UMKM berhasil dinonaktifkan');
         } catch (\Illuminate\Database\QueryException $e) {
-            return redirect('/ketua/umkm')->with('error', 'Data UMKM Warga 05 gagal dihapus karena masih terdapat tabel lain yang terkait dengan data ini');
+            return redirect('/ketua/umkm')->with('error', 'Gagal menonaktifkan data UMKM');
         }
     }
 }
