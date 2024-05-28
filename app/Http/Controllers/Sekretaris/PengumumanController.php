@@ -34,31 +34,33 @@ class PengumumanController extends Controller
             'list'  => ['Home', 'Pengumuman', 'Tambah']
         ];
 
-        $pengumuman = PengumumanModel::all();
+        //$pengumuman = PengumumanModel::all();
 
         $activeMenu = 'pengumuman';
 
-        return view('sekretaris.pengumuman.index', ['breadcrumb' => $breadcrumb, 'pengumuman' => $pengumuman, 'activeMenu' => $activeMenu]);
+        return view('sekretaris.pengumuman.create', ['breadcrumb' => $breadcrumb, //'pengumuman' => $pengumuman, 
+        'activeMenu' => $activeMenu]);
     }
 
     public function store(Request $request)
-    {
-        $request->validate([
-            'user_id'                 => 'required|integer',
-            'judul'                   => 'required|string|max:100',
-            'isi_pengumuman'          => 'required|string|max:200',
-            'gambar'                  => 'required|string|max:200',
-        ]);
+{
+    $request->validate([
+        'user_id'                 => 'required|integer',
+        'judul'                   => 'required|string|max:100',
+        'isi_pengumuman'          => 'required|string|max:200',
+        'gambar'                  => 'required|string|max:200',
+    ]);
 
-        PengumumanModel::create([
-            'user_id'                 => $request->user_id,
-            'judul'                   => $request->judul,
-            'isi_pengumuman'          => $request->isi_pengumuman,
-            'gambar'                  => $request->gambar,
-        ]);
+    PengumumanModel::create([
+        'user_id'                 => $request->user_id,
+        'judul'                   => $request->judul,
+        'isi_pengumuman'          => $request->isi_pengumuman,
+        'gambar'                  => $request->gambar,
+    ]);
 
-        return redirect('/sekretaris/pengumuman.index')->with('success', 'Data pengumuman berhasil disimpan');
-    }
+    return redirect()->route('sekretaris.pengumuman.index')->with('success', 'Data pengumuman berhasil disimpan');
+}
+
 
     public function edit(string $id)
     {
@@ -108,5 +110,15 @@ class PengumumanController extends Controller
 
     return view('sekretaris.pengumuman.show', compact('pengumuman'));
     }
+
+    public function search(Request $request)
+{
+    $keyword = $request->input('keyword');
+    $pengumuman = PengumumanModel::where('judul', 'like', "%$keyword%")
+        ->orWhere('isi_pengumuman', 'like', "%$keyword%")
+        ->get();
+
+    return response()->json($pengumuman);
+}
 
 }

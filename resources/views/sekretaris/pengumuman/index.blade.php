@@ -24,6 +24,17 @@
                     </div>
                 </div>
                 <div class="row" id="searchResults">
+                    @foreach($pengumuman as $item)
+                        <div class="col-md-4">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ $item->judul }}</h5>
+                                    <p class="card-text">{{ $item->isi_pengumuman }}</p>
+                                    <p class="picture">{{ $item->gambar}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
                 </div>
             </div>
         </div>

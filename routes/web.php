@@ -82,25 +82,13 @@ Route::group(['prefix' => 'ketua/dashboard'], function () {
     Route::get('/', [DashboardController::class, 'index']);
 });
 Route::group(['prefix' => 'ketua/warga'], function () {
-    Route::get('/', [WargaController::class, 'index'])->name('warga.index');
-    Route::get('/sementara', [WargaController::class, 'indexSementara'])->name('warga.indexSementara');
+    Route::get('/', [WargaController::class, 'index']);
     Route::post('/list', [WargaController::class, 'list']);
-    Route::post('/list-sementara', [WargaController::class, 'listSementara']);
-    Route::get('/create-kk', [WargaController::class, 'createKK']);
-    Route::get('/create-warga/{kk_id}', [WargaController::class, 'createWarga'])->name('warga.create');
-    Route::post('/tetap-kk', [WargaController::class, 'storeKK']);
-    Route::post('/tetap-warga', [WargaController::class, 'storeWarga']);
+    Route::get('/create-tetap', [WargaController::class, 'createTetap']);
+    Route::post('/tetap', [WargaController::class, 'storeTetap']);
     Route::get('/create-sementara', [WargaController::class, 'createSementara']);
     Route::post('/sementara', [WargaController::class, 'storeSementara']);
-    Route::get('/edit-warga/{kk_id}/{warga_id}', [WargaController::class, 'editWarga']);
-    Route::put('/update-warga/{warga_id}', [WargaController::class, 'updateWarga']);
-    Route::get('/edit-kk/{kk_id}', [WargaController::class, 'editKK']);
-    Route::put('/update-kk/{kk_id}', [WargaController::class, 'updateKK']);
-    Route::get('/{kk_id}', [WargaController::class, 'show'])->name('warga.show');
-    Route::get('/show/{warga_id}', [WargaController::class, 'showSementara']);
-    Route::delete('/destroy-warga/{kk_id}/{warga_id}', [WargaController::class, 'destroyWarga']);
-    Route::delete('/destroy-kk/{kk_id}', [WargaController::class, 'destroyKK']);
-    Route::delete('/destroy-wargaSementara/{warga_id}', [WargaController::class, 'destroyWargaSementara']);
+    Route::get('/{id}', [WargaController::class, 'show']);
 });
 Route::group(['prefix' => 'ketua/surat'], function () {
     Route::get('/', [ArsipSuratController::class, 'index']);
@@ -118,7 +106,7 @@ Route::group(['prefix' => 'ketua/umkm'], function () {
     Route::get('/{id}', [UmkmController::class, 'show']);
     Route::get('/{id}/edit', [UmkmController::class, 'edit']);
     Route::put('/{id}', [UmkmController::class, 'update']);
-    Route::put('/{id}/deactive', [UmkmController::class, 'deactive'])->name('umkm.deactive');
+    Route::delete('/{id}', [UmkmController::class, 'destroy']);
 });
 Route::group(['prefix' => 'ketua/bansos'], function () {
     Route::get('/', [BansosController::class, 'index']);
@@ -207,10 +195,10 @@ Route::group(['prefix' => 'bendahara/dashboard'], function () {
 Route::group(['prefix' => 'bendahara/iuran'], function () {
     Route::get('/', [BendaharaIuranController::class, 'index'])->name('bendahara.iuran.index');
     Route::post('/list', [BendaharaIuranController::class, 'list'])->name('bendahara.iuran.list');
-    Route::get('/create', [BendaharaIuranController::class, 'create'])->name('iuran.create');
-    Route::post('/', [BendaharaIuranController::class, 'store'])->name('iuran.store');
-    Route::get('/bayar/{bulan}', [BendaharaIuranController::class, 'bayar'])->name('bendahara.iuran.bayar');
+    Route::get('/detail/{bulan}', [BendaharaIuranController::class, 'detail'])->name('bendahara.iuran.detail');
     Route::get('/{id}', [BendaharaIuranController::class, 'show'])->name('bendahara.iuran.show');
+    Route::get('/bendahara/iuran/create', [IuranController::class, 'create'])->name('iuran.create');
+
 });
 Route::group(['prefix' => 'bendahara/laporan'], function () {
     Route::get('/', [BendaharaLapkeuController::class, 'index']);

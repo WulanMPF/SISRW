@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layout.bendahara.template')
 
 @section('content')
 <div class="container">
