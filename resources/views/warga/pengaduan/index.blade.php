@@ -11,7 +11,8 @@
                     </div>
                 @endif
 
-                <form method="POST" action="{{ route('pengaduan.store') }}" enctype="multipart/form-data" class="form-horizontal">
+                <form method="POST" action="{{ url('pengaduan.store') }}" enctype="multipart/form-data" class="form-horizontal">
+
                     @csrf
 
                     <div class="form-group row">
