@@ -157,8 +157,11 @@ Route::group(['prefix' => 'sekretaris/surat'], function () {
 });
 Route::group(['prefix' => 'sekretaris/pengumuman'], function () {
     Route::get('/', [PengumumanController::class, 'index']);
+    Route::get('/create', [PengumumanController::class, 'create']); // Tambahkan rute untuk menampilkan formulir tambah data baru
+    Route::post('/', [PengumumanController::class, 'store']); // Tambahkan rute untuk menyimpan data baru
     Route::get('/{id}', [PengumumanController::class, 'show']);
 });
+
 Route::group(['prefix' => 'sekretaris/skBansos'], function () {
     Route::get('/', [SekretarisSyaratBansosController::class, 'index']);
     Route::post('/list', [SekretarisSyaratBansosController::class, 'list']);

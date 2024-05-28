@@ -102,4 +102,11 @@ class PengumumanController extends Controller
             return redirect('/sekretaris/pengumuman.index')->with('error', 'Data pengumuman tidak ditemukan');
         }
     }
+    public function show($id)
+    {
+    $pengumuman = PengumumanModel::findOrFail($id);
+
+    return view('sekretaris.pengumuman.show', compact('pengumuman'));
+    }
+
 }
