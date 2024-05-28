@@ -12,21 +12,19 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="form-group row">
-                            <label class="col-1 control-label col-form-label">Filter:</label>
-                            <div class="col-3">
-                                <div class="dropdown">
-                                    <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        Status Kependudukan
-                                    </button>
-                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                        {{-- <a class="dropdown-item" href="{{ url('/ketua/warga/') }}">Semua</a> --}}
-                                        <a class="dropdown-item" href="{{ url('/ketua/warga/') }}">Tinggal Tetap</a>
-                                        <a class="dropdown-item" href="{{ url('/ketua/warga/sementara') }}">Tinggal Sementara</a>
-                                    </div>
+                        <label class="col-1 control-label col-form-label">Filter:</label>
+                        <div class="col-3">
+                            <div class="dropdown">
+                                <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Status Kependudukan
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <a class="dropdown-item" href="{{ url('/ketua/warga/') }}">Tinggal Tetap</a>
+                                    <a class="dropdown-item" href="{{ url('/ketua/warga/sementara') }}">Tinggal Sementara</a>
                                 </div>
-                                <small class="form-text text-muted">Status Kependudukan</small>
                             </div>
-                     
+                            <small class="form-text text-muted">Status Kependudukan</small>
+                        </div>
                         <div class="col-md-8 text-right">
                             <a class="btn btn-sm mt-1 btn-tambah" data-toggle="dropdown">+ Tambah Warga</a>
                             <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
@@ -45,11 +43,11 @@
                 <thead style="text-align: center;">
                     <tr>
                         <th>No</th>
-                        <th>Nomor Kartu Keluarga</th>
-                        <th>Nama Kepala Keluarga</th>
-                        <th>Alamat</th>
-                        <th>RT/RW</th>
-                        <th>Anggota Keluarga</th>
+                        <th>Nomor Induk Kependudukan</th>
+                        <th>Nama Lengkap</th>
+                        <th>Tempat Tanggal Lahir</th>
+                        <th>Jenis Kelamin</th>
+                        <th>Aksi</th>
                     </tr>
                 </thead>
             </table>
@@ -95,59 +93,32 @@
             var dataWarga = $('#table_warga').DataTable({
                 serverSide: true,
                 ajax: {
-                    "url": "{{ url('ketua/warga/list') }}",
+                    "url": "{{ url('ketua/warga/list-sementara') }}",
                     "dataType": "json",
                     "type": "POST",
                     "data": function(d) {
                         d._status_warga = $('#status_warga').val();
                     }
                 },
-                columns: [{
-                    data: "DT_RowIndex",
-                    className: "text-center",
-                    orderable: false,
-                    searchable: false
-                }, {
-                    data: "no_kk",
-                    className: "",
-                    orderable: true,
-                    searchable: true
-                }, {
-                    data: "nama_kepala_keluarga",
-                    className: "",
-                    orderable: true,
-                    searchable: true
-                }, {
-                    data: "alamat",
-                    className: "",
-                    orderable: true,
-                    searchable: true
-                }, {
-                    data: "rt_rw",
-                    className: "",
-                    orderable: true,
-                    searchable: true
-                }, {
-                    data: "Anggota Keluarga",
-                    className: "text-center",
-                    orderable: false,
-                    searchable: false
-                }]
+                columns: [
+                    { data: "DT_RowIndex", className: "text-center", orderable: false, searchable: false },
+                    { data: "nik", className: "", orderable: true, searchable: true },
+                    { data: "nama_warga", className: "", orderable: true, searchable: true },
+                    { data: "tempat_tgl_lahir", className: "", orderable: true, searchable: true },
+                    { data: "jenis_kelamin", className: "", orderable: true, searchable: true },
+                    { data: "Aksi", className: "text-center", orderable: false, searchable: false }
+                ]
             });
 
             $('#status_warga').change(function() {
-                var selectedStatus = $(this).val(); // Mendapatkan nilai opsi yang dipilih
+                var selectedStatus = $(this).val();
                 if (selectedStatus !== '') {
-                    // Redirect ke URL sesuai dengan nilai yang dipilih
                     window.location.href = "{{ url('ketua/warga/') }}/" + selectedStatus;
                 } else {
-                    // Jika opsi yang dipilih adalah "Semua", ubah teks pada tombol dropdown menjadi "Semua"
                     $('#dropdownMenuButton').text('Semua');
                 }
             });
         
         });
-
-        
     </script>
 @endpush

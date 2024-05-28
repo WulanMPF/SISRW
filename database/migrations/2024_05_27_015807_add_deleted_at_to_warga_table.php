@@ -12,11 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('warga', function (Blueprint $table) {
-
-            // Tambahkan kolom foreign key warga_id
-            $table->unsignedBigInteger('level_id')->index()->nullable();
-            // Definisikan constraint foreign key
-            $table->foreign('level_id')->references('level_id')->on('level');
+            $table->softDeletes();
         });
     }
 
@@ -26,11 +22,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('warga', function (Blueprint $table) {
-            // Hapus foreign key
-            $table->dropForeign(['level_id']);
-
-            // Hapus kolom foreign key
-            $table->dropColumn('level_id');
+            $table->dropSoftDeletes();
         });
     }
 };

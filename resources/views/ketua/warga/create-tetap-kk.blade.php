@@ -9,7 +9,7 @@
             @if (session('error'))
                 <div class="alert alert-danger">{{ session('error') }}</div>
             @endif
-            <form method="POST" action="{{ url('ketua/warga/tetap') }}">
+            <form method="POST" action="{{ url('ketua/warga/tetap-kk') }}">
                 @csrf
                 <div class="row mb-3">
                     <label class="no_kk col-sm-2 col-form-label mt-1" for="no_kk">Nomor Kartu Keluarga</label>
@@ -39,63 +39,9 @@
                             required>
                     </div>
                 </div>
-                <hr>
-                <div class="table-responsive">
-                    <table class="table table-bordered table-striped table-hover table-sm" id="table_warga"
-                        style="min-width: 100%">
-                        <thead style="text-align: center; max-width: fit-content; max-height: fit-content">
-                            <tr>
-                                <th style="min-width: 50px;"></th>
-                                <th style="min-width: 100px;">No</th>
-                                <th style="min-width: 300px;">Nomor Induk Kependudukan</th>
-                                <th style="min-width: 350px;">Nama Lengkap</th>
-                                <th style="min-width: 250px;">Hubungan Keluarga</th>
-                                <th style="min-width: 300px;">Tempat/Tanggal Lahir</th>
-                                <th style="min-width: 200px;">Jenis Kelamin</th>
-                                <th style="min-width: 200px;">RT/RW</th>
-                                <th style="min-width: 250px;">Kel/Desa</th>
-                                <th style="min-width: 250px;">Kecamatan</th>
-                                <th style="min-width: 200px;">Agama</th>
-                                <th style="min-width: 200px;">Status Perkawinan</th>
-                                <th style="min-width: 300px;">Pekerjaan</th>
-                            </tr>
-                        </thead>
-                        <tbody style="text-align: center; max-width: fit-content; max-height: fit-content">
-                            <tr>
-                                <td style="vertical-align:middle;">
-                                    <button type="button" class="btn btn-add-row">
-                                        <span>&plus;</span>
-                                    </button>
-                                </td>
-                                <td class="col-number" style="vertical-align:middle;">1</td>
-                                <td><input type="text" class="form-control" name="nik[]"
-                                        placeholder="Nomor Induk Kependudukan" required></td>
-                                <td><input type="text" class="form-control" name="nama_warga[]"
-                                        placeholder="Nama Lengkap" required></td>
-                                <td><input type="text" class="form-control" name="hubungan_keluarga[]"
-                                        placeholder="Hubungan Keluarga" required></td>
-                                <td><input type="text" class="form-control" name="tempat_tgl_lahir[]"
-                                        placeholder="Tempat/Tanggal Lahir" required></td>
-                                <td><input type="text" class="form-control" name="jenis_kelamin[]"
-                                        placeholder="Jenis Kelamin" required></td>
-                                <td><input type="text" class="form-control" name="rt_rw_warga[]" placeholder="RT/RW"
-                                        required></td>
-                                <td><input type="text" class="form-control" name="kel_desa[]" placeholder="Kel/Desa"
-                                        required></td>
-                                <td><input type="text" class="form-control" name="kecamatan[]" placeholder="Kecamatan"
-                                        required></td>
-                                <td><input type="text" class="form-control" name="agama[]" placeholder="Agama"
-                                        required></td>
-                                <td><input type="text" class="form-control" name="status_perkawinan[]"
-                                        placeholder="Status Perkawinan" required></td>
-                                <td><input type="text" class="form-control" name="pekerjaan[]"
-                                        placeholder="Pekerjaan" required></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+                
                 <div class="text-left mt-3">
-                    <button type="submit" class="btn btn-tambah">Tambah</button>
+                    <button type="submit" class="btn btn-tambah">Selanjutnya</button>
                 </div>
             </form>
         </div>
