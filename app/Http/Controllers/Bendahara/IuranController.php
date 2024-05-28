@@ -48,7 +48,7 @@ class IuranController extends Controller
             ->rawColumns(['aksi'])
             ->make(true);
     }
-    public function detail($bulan)
+    public function Bayar($bulan)
     {
         $breadcrumb = (object) [
             'title' => 'Data Pembayaran Iuran RW 05 Bulan',
@@ -63,7 +63,7 @@ class IuranController extends Controller
 
         $iurans = IuranModel::all();
         $kk = KkModel::all();
-        return view('bendahara.iuran.detail', compact('breadcrumb', 'iurans', 'kk', 'bulan', 'activeMenu'));
+        return view('bendahara.iuran.pembayaran', compact('breadcrumb', 'iurans', 'kk', 'bulan', 'activeMenu'));
     }
 
     public function create()
@@ -111,10 +111,8 @@ class IuranController extends Controller
     {
         // Mengambil data iuran berdasarkan ID
         $iuran = IuranModel::findOrFail($id);
-    
+
         // Mengembalikan view yang menampilkan detail iuran
         return view('bendahara.iuran.show', compact('iuran'));
     }
-    
-
 }
