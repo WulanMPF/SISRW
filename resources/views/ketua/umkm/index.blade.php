@@ -21,7 +21,7 @@
                         <div class="form-group row">
                             <div class="col-4">
                                 <select name="status_usaha" id="status_usaha" class="form-control rounded-select" required>
-                                    <option value="">- Semua -</option>
+                                    {{-- <option value="">- Semua -</option> --}}
                                     <option value="Aktif">- Aktif -</option>
                                     <option value="Nonaktif">- Nonaktif -</option>
                                     <option value="Diproses">- Diproses -</option>
