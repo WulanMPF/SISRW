@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::table('warga', function (Blueprint $table) {
 
             // Tambahkan kolom foreign key warga_id
-            $table->unsignedBigInteger('level_id')->index();
+            $table->unsignedBigInteger('level_id')->index()->nullable();
             // Definisikan constraint foreign key
             $table->foreign('level_id')->references('level_id')->on('level');
         });
