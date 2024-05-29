@@ -39,7 +39,7 @@
                     </div>
                 </div>
             </div>
-            <table class="table table-bordered table-striped table-hover table-sm" id="table_warga">
+            <table class="table table-bordered table-hover table-sm" id="table_warga">
                 <thead style="text-align: center;">
                     <tr>
                         <th>No</th>
