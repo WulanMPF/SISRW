@@ -50,7 +50,7 @@ class UmkmController extends Controller
                 if ($umkm->status_usaha == 'Aktif') {
                     $btn .= '<div class="btn-group mr-2">';
                     $btn .= '<a href="' . url('/ketua/umkm/' . $umkm->umkm_id . '/edit') . '" class="btn btn-xs btn-warning mr-2" style="border-radius: 6px;"><i class="fas fa-edit fa-lg"></i></a>';
-                    $btn .= '<button type="button" class="btn btn-xs btn-danger" style="border-radius: 6px;" data-toggle="modal" data-target="#deactiveUMKM"><i class="fas fa-trash fa-lg"></i></button>';
+                    $btn .= '<button type="button" class="btn btn-xs btn-danger" style="border-radius: 6px;" data-toggle="modal" data-target="#deactiveUMKM" data-umkm-id="' . $umkm->umkm_id . '"><i class="fas fa-trash fa-lg"></i></button>';
 
                     // Tampilan localhost
                     // $btn .= '<form class="d-inline-block" method="POST" action="' . url('/ketua/umkm/' . $umkm->umkm_id . '/deactive') . '">'
@@ -59,7 +59,7 @@ class UmkmController extends Controller
                     // $btn .= '</form>';
 
                     $btn .= '</div>';
-                } elseif ($umkm->status_usaha == 'Diproses') {
+                } elseif ($umkm->status_usaha == 'diproses') {
                     $btn .= '<div class="btn-group mr-2">';
                     $btn .= '<a href="' . url('/ketua/umkm/' . $umkm->umkm_id . '/accept') . '" class="btn btn-xs btn-success mr-2" style="border-radius: 6px;"><i class="fas fa-check fa-lg"></i></a>';
                     $btn .= '<a href="' . url('/ketua/umkm/' . $umkm->umkm_id . '/reject') . '" class="btn btn-xs btn-danger" style="border-radius: 6px;"><i class="fas fa-times fa-lg"></i></a>';
@@ -75,6 +75,39 @@ class UmkmController extends Controller
             ->rawColumns(['aksi'])
             ->make(true);
     }
+
+    // Method untuk mengubah status UMKM menjadi aktif
+    public function acceptUmkm($umkm_id)
+    {
+        try {
+            $umkm = UmkmModel::findOrFail($umkm_id);
+            $umkm->status_usaha = 'aktif';
+            $umkm->save();
+
+            return redirect()->route('umkm.index')->with('success', 'UMKM berhasil diaktifkan');
+        } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $ex) {
+            return redirect()->route('umkm.index')->with('error', 'Data UMKM tidak ditemukan');
+        } catch (\Exception $e) {
+            return redirect()->route('umkm.index')->with('error', 'Terjadi kesalahan saat mengaktifkan UMKM');
+        }
+    }
+
+    // Method untuk mengubah status UMKM menjadi nonaktif
+    public function rejectUmkm($umkm_id)
+    {
+        try {
+            $umkm = UmkmModel::findOrFail($umkm_id);
+            $umkm->status_usaha = 'nonaktif';
+            $umkm->save();
+
+            return redirect()->route('umkm.index')->with('success', 'UMKM berhasil dinonaktifkan');
+        } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $ex) {
+            return redirect()->route('umkm.index')->with('error', 'Data UMKM tidak ditemukan');
+        } catch (\Exception $e) {
+            return redirect()->route('umkm.index')->with('error', 'Terjadi kesalahan saat menonaktifkan UMKM');
+        }
+    }
+
     public function create()
     {
         $breadcrumb = (object) [
@@ -189,9 +222,9 @@ class UmkmController extends Controller
         return redirect('/ketua/umkm')->with('success', 'Data UMKM berhasil diupdate');
     }
 
-    public function deactive(string $id)
+    public function deactive(string $umkm_id)
     {
-        $umkm = UmkmModel::find($id);
+        $umkm = UmkmModel::find($umkm_id);
         if (!$umkm) {
             return redirect('/ketua/umkm')->with('error', 'Data UMKM tidak ditemukan');
         }
