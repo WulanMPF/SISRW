@@ -16,7 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('warga_id')->index();
             $table->string('nama_usaha', 50);
             $table->string('alamat_usaha', 50);
-            $table->string('jenis_usaha', 10);
+            $table->string('jenis_usaha', 50);
             $table->enum('status_usaha', ['Aktif', 'Nonaktif']);
             $table->string('deskripsi', 200);
             $table->string('lampiran', 200);
