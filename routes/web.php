@@ -123,14 +123,16 @@ Route::group(['prefix' => 'ketua/surat'], function () {
     Route::delete('/{id}', [ArsipSuratController::class, 'destroy']);
 });
 Route::group(['prefix' => 'ketua/umkm'], function () {
-    Route::get('/', [UmkmController::class, 'index']);
+    Route::get('/', [UmkmController::class, 'index'])->name('umkm.index');
     Route::post('/list', [UmkmController::class, 'list']);
     Route::get('/create', [UmkmController::class, 'create']);
     Route::post('/', [UmkmController::class, 'store'])->name('tambahUMKM');
     Route::get('/{id}', [UmkmController::class, 'show']);
     Route::get('/{id}/edit', [UmkmController::class, 'edit']);
     Route::put('/{id}', [UmkmController::class, 'update']);
-    Route::delete('/{id}', [UmkmController::class, 'destroy']);
+    Route::delete('/deactive/{umkm_id}', [UmkmController::class, 'deactive']);
+    Route::get('/{umkm_id}/accept', [UmkmController::class, 'acceptUmkm']);
+    Route::get('/{umkm_id}/reject', [UmkmController::class, 'rejectUmkm']);
 });
 Route::group(['prefix' => 'ketua/bansos'], function () {
     Route::get('/', [BansosController::class, 'index']);
