@@ -12,11 +12,18 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    Apakah Anda yakin ingin menonaktifkan UMKM ini?
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                    <button type="submit" class="btn btn-danger">Nonaktifkan</button>
+                    <form id="deleteForm" method="POST" action="">
+                        @csrf
+                        {!! method_field('DELETE') !!}
+                        <div class="form-group">
+                            <h3>Apakah yakin data UMKM tersebut akan dinonaktifkan?
+                            </h3>
+                        </div>
+                        <div class="text-left mt-3">
+                            <button type="submit" class="btn btn-danger">Ya, Nonaktifkan</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -167,6 +174,14 @@
             // Memuat ulang data ketika filter jenis usaha berubah
             $('#status_usaha').on('change', function() {
                 dataUmkm.ajax.reload();
+            });
+
+            // Mengatur action form ketika tombol modal diklik
+            $('#deactiveUMKM').on('show.bs.modal', function(event) {
+                var button = $(event.relatedTarget); // Button yang memicu modal
+                var umkmId = button.data('umkm-id'); // Ambil nilai data-umkm-id
+                var form = $('#deleteForm');
+                form.attr('action', '{{ url('ketua/umkm/deactive') }}/' + umkmId); // Set action form dengan ID UMKM
             });
         });
     </script>
