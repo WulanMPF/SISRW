@@ -26,7 +26,7 @@
             </div>
     
             <div class="table-responsive">
-                <table class="table table-bordered table-striped table-hover table-sm" id="table_warga" style="min-width: 100%">
+                <table class="table table-bordered table-hover table-sm" id="table_warga" style="min-width: 100%">
                     <thead style="text-align: center; max-width: fit-content; max-height: fit-content">
                         <tr>
                             <th style="min-width: 100px;">No</th>
