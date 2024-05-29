@@ -1,9 +1,10 @@
-<div class="sidebar" style="font-family: Poppins; color: #463720;" >
+<div class="sidebar" style="font-family: Poppins; color: #463720;">
     <!-- Sidebar Menu -->
     <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
             <li class="nav-item">
-                <a href="{{ url('/ketua/dashboard') }}" class="nav-link {{ $activeMenu == 'dashboard' ? 'active' : '' }} ">
+                <a href="{{ url('/ketua/dashboard') }}"
+                    class="nav-link {{ $activeMenu == 'dashboard' ? 'active' : '' }} ">
                     <i class="nav-icon fas fa-th-large"></i>
                     <p>Dashboard</p>
                 </a>
@@ -38,13 +39,15 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="{{ url('/ketua/laporan') }}" class="nav-link {{ $activeMenu == 'laporan' ? 'active' : '' }} ">
+                <a href="{{ url('/ketua/laporan') }}"
+                    class="nav-link {{ $activeMenu == 'laporan' ? 'active' : '' }} ">
                     <i class="nav-icon fas fa-file-invoice-dollar"></i>
                     <p>Laporan Keuangan</p>
                 </a>
             </li>
             <li class="nav-item">
-                <a href="{{ url('/ketua/pengaduan') }}" class="nav-link {{ $activeMenu == 'pengaduan' ? 'active' : '' }} ">
+                <a href="{{ url('/ketua/pengaduan') }}"
+                    class="nav-link {{ $activeMenu == 'pengaduan' ? 'active' : '' }} ">
                     <i class="nav-icon fas fa-exclamation-triangle"></i>
                     <p>Pengaduan</p>
                 </a>
@@ -55,7 +58,8 @@
 
 <!-- sidebar.blade.php -->
 <style>
-    .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+    .nav-pills .nav-link.active,
+    .nav-pills .show>.nav-link {
         background-color: #FFE6C0;
         border-radius: 20px;
         color: #463720 !important;
@@ -64,10 +68,15 @@
     .nav-pills .nav-link {
         color: #463720;
     }
+
+    .elevation-4 {
+        background: white;
+        box-shadow: 0 14px 28px rgba(0, 0, 0, .25), 0 10px 10px rgba(0, 0, 0, .22) !important;
+    }
 </style>
 
 <script>
-    document.addEventListener("DOMContentLoaded", function () {
+    document.addEventListener("DOMContentLoaded", function() {
         const currentUrl = window.location.href;
 
         // Ambil semua link di sidebar
