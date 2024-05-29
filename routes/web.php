@@ -137,7 +137,6 @@ Route::group(['prefix' => 'ketua/pengaduan'], function () {
     Route::post('/list', [PengaduanController::class, 'list']);
     Route::get('/{id}', [PengaduanController::class, 'show'])->name('pengaduan.show');
     Route::get('/{id}/show', [PengaduanController::class, 'show'])->name('pengaduan.show');
-
 });
 Route::group(['prefix' => 'ketua/iuran'], function () {
     Route::get('/', [IuranController::class, 'index']);
@@ -170,7 +169,6 @@ Route::group(['prefix' => 'sekretaris/surat'], function () {
     Route::delete('/{id}', [SekretarisSuratController::class, 'destroy']);
 });
 Route::group(['prefix' => 'sekretaris/pengumuman'], function () {
-    Route::group(['prefix' => 'sekretaris/pengumuman'], function () {
     Route::get('/', [PengumumanController::class, 'index'])->name('sekretaris.pengumuman.index');
     Route::get('/create', [PengumumanController::class, 'create'])->name('sekretaris.pengumuman.create');
     Route::post('/', [PengumumanController::class, 'store'])->name('sekretaris.pengumuman.store');
@@ -178,8 +176,6 @@ Route::group(['prefix' => 'sekretaris/pengumuman'], function () {
     Route::get('/{id}/edit', [PengumumanController::class, 'edit'])->name('sekretaris.pengumuman.edit');
     Route::put('/{id}', [PengumumanController::class, 'update'])->name('sekretaris.pengumuman.update');
     Route::delete('/{id}', [PengumumanController::class, 'destroy'])->name('sekretaris.pengumuman.destroy');
-    });
-    
 });
 
 Route::group(['prefix' => 'sekretaris/skBansos'], function () {
@@ -218,7 +214,6 @@ Route::group(['prefix' => 'bendahara/iuran'], function () {
     Route::get('/detail/{bulan}', [BendaharaIuranController::class, 'detail'])->name('bendahara.iuran.detail');
     Route::get('/{id}', [BendaharaIuranController::class, 'show'])->name('bendahara.iuran.show');
     Route::get('/bendahara/iuran/create', [IuranController::class, 'create'])->name('iuran.create');
-
 });
 Route::group(['prefix' => 'bendahara/laporan'], function () {
     Route::get('/', [BendaharaLapkeuController::class, 'index']);
