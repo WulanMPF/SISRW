@@ -80,38 +80,30 @@
         /* Overall container styling */
         .col-md-8 {
             background: linear-gradient(135deg, #f8f9fa, #e9ecef);
-            /* Gradient background */
             padding: 20px;
             border-radius: 10px;
-            /* Rounded corners */
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            /* Subtle shadow */
         }
 
-        /* List items */
+        /* Styling list items */
         .list-unstyled {
             padding-left: 0;
-            /* Remove default padding */
         }
 
         .list-unstyled li {
             margin-bottom: 20px;
             padding: 10px;
             border-bottom: 1px solid #e0e0e0;
-            /* Divider line between items */
             transition: background-color 0.3s ease;
             display: flex;
             flex-wrap: wrap;
             align-items: center;
-            /* Align items in the center */
         }
 
         .list-unstyled li:hover {
             background-color: #f1f1f1;
-            /* Light hover effect */
         }
 
-        /* Strong text within list items */
         .list-unstyled li strong {
             display: inline-block;
             width: 300px;
@@ -120,92 +112,80 @@
             flex-shrink: 0;
             position: relative;
             padding-left: 25px;
-            /* Space for the icon */
         }
 
         .list-unstyled li strong:before {
             content: "\2022";
-            /* Bullet point as fallback */
             color: #BB955C;
             display: inline-block;
             width: 1em;
             margin-left: -1em;
-            /* Adjust position */
             position: absolute;
             left: 0;
         }
 
-        /* Add icons for each label */
+        /* Add icons for each data */
         .list-unstyled li:nth-child(10n+1) strong:before {
             content: "\f007";
             font-family: "Font Awesome 5 Free";
             font-weight: 900;
         }
 
-        /* User Icon */
         .list-unstyled li:nth-child(10n+2) strong:before {
             content: "\f2bb";
             font-family: "Font Awesome 5 Free";
             font-weight: 900;
         }
 
-        /* Id Card Icon */
         .list-unstyled li:nth-child(10n+3) strong:before {
             content: "\f1fd";
             font-family: "Font Awesome 5 Free";
             font-weight: 900;
         }
 
-        /* Calendar Icon */
         .list-unstyled li:nth-child(10n+4) strong:before {
             content: "\f22d";
             font-family: "Font Awesome 5 Free";
             font-weight: 900;
         }
 
-        /* Gender Icon */
         .list-unstyled li:nth-child(10n+5) strong:before {
             content: "\f015";
             font-family: "Font Awesome 5 Free";
             font-weight: 900;
         }
 
-        /* Home Icon */
         .list-unstyled li:nth-child(10n+6) strong:before {
             content: "\f3c5";
             font-family: "Font Awesome 5 Free";
             font-weight: 900;
         }
 
-        /* Map Icon */
         .list-unstyled li:nth-child(10n+7) strong:before {
             content: "\f279";
             font-family: "Font Awesome 5 Free";
             font-weight: 900;
         }
 
-        /* Street View Icon */
         .list-unstyled li:nth-child(10n+8) strong:before {
             content: "\f02d";
             font-family: "Font Awesome 5 Free";
             font-weight: 900;
         }
 
-        /* Book Icon */
         .list-unstyled li:nth-child(10n+9) strong:before {
             content: "\f0f2";
             font-family: "Font Awesome 5 Free";
             font-weight: 900;
         }
 
-        /* Marriage Icon */
         .list-unstyled li:nth-child(10n+10) strong:before {
             content: "\f0b1";
             font-family: "Font Awesome 5 Free";
             font-weight: 900;
         }
 
-        /* Briefcase Icon */
+        /* End off add icons for each label */
 
         /* Mobile responsiveness */
         @media (max-width: 768px) {
@@ -216,7 +196,6 @@
 
             .list-unstyled li strong {
                 width: 100%;
-                /* Make strong elements full width on small screens */
                 margin-bottom: 5px;
             }
         }
