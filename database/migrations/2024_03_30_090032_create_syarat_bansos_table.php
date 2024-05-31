@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('syarat_bansos', function (Blueprint $table) {
             $table->id('syarat_bansos_id');
-            $table->unsignedBigInteger('bansos_id')->index();
+            $table->unsignedBigInteger('bansos_id')->nullable()->index();
             $table->date('tgl_syarat_ketentuan');
             $table->string('jenis_bansos', 50);
             $table->string('deskripsi', 200);
