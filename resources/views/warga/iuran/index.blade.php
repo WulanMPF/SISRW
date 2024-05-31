@@ -63,6 +63,76 @@
                 <p>Silakan hubungi bendahara untuk pembayaran iuran.</p>
             </div> --}}
 
+            <div class="row" style="margin: 1rem;">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title"><strong>Formulir Pembayaran Iuran</strong></h4>
+                    </div>
+                    <div class="card-content">
+                        <div class="card-body">
+                            <form class="form form-vertical">
+                                <div class="form-body">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="form-group has-icon-left">
+                                                <label for="first-name-icon">First Name</label>
+                                                <div class="position-relative">
+                                                    <input type="text" class="form-control"
+                                                        placeholder="Input with icon left" id="first-name-icon">
+                                                    <div class="form-control-icon">
+                                                        <i class="fas fa-user"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="form-group has-icon-left">
+                                                <label for="email-id-icon">Email</label>
+                                                <div class="position-relative">
+                                                    <input type="text" class="form-control" placeholder="Email"
+                                                        id="email-id-icon">
+                                                    <div class="form-control-icon">
+                                                        <i class="fas fa-envelope"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="form-group has-icon-left">
+                                                <label for="mobile-id-icon">Mobile</label>
+                                                <div class="position-relative">
+                                                    <input type="text" class="form-control" placeholder="Mobile"
+                                                        id="mobile-id-icon">
+                                                    <div class="form-control-icon">
+                                                        <i class="fas fa-phone"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="form-group has-icon-left">
+                                                <label for="password-id-icon">Password</label>
+                                                <div class="position-relative">
+                                                    <input type="password" class="form-control" placeholder="Password"
+                                                        id="password-id-icon">
+                                                    <div class="form-control-icon">
+                                                        <i class="fas fa-lock"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-12 d-flex justify-content-end">
+                                            <button type="submit" class="btn btn-sm btn-submit">Submit</button>
+                                            <button type="reset" class="btn btn-light-secondary me-1 mb-1">Reset</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <!-- Table -->
             <div class="row">
                 {{-- <div class="col-12"> --}}
@@ -105,6 +175,32 @@
 
 @push('css')
     <style>
+        .btn-submit {
+            background-color: #BB955C;
+            border-color: #BB955C;
+            color: #ffffff;
+            font-family: Poppins;
+            font-size: 15px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: normal;
+            margin-left: 30%;
+            border-radius: 10px;
+            padding-left: 1rem;
+            padding-right: 1rem;
+        }
+
+        .form-control-icon {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            left: 10px;
+        }
+
+        .form-control {
+            padding-left: 35px;
+        }
+
         body {
             font-family: 'Poppins', sans-serif;
         }
@@ -167,6 +263,16 @@
             font-size: 16px;
             background-color: #cccccc;
             box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .accordion {
+            /* --bs-accordion-active-bg: var(--bs-primary-bg-subtle); */
+            --bs-accordion-active-bg: none;
+        }
+
+        .accordion-button:focus {
+            /* border-color: var(--bs-accordion-btn-focus-border-color); */
+            border-color: none;
         }
     </style>
 @endpush
