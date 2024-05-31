@@ -15,7 +15,7 @@ class WargaModel extends Model
     protected $primaryKey = 'warga_id';
     /**
      * The attributes that are mass assignable.
-     * 
+     *
      * @var array
      */
     protected $fillable = [
@@ -29,5 +29,9 @@ class WargaModel extends Model
     public function kk(): BelongsTo
     {
         return $this->belongsTo(KkModel::class, 'kk_id', 'kk_id');
+    }
+    public function umkm()
+    {
+        return $this->hasMany(UmkmModel::class, 'warga_id');
     }
 }

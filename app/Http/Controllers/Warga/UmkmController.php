@@ -99,7 +99,12 @@ class UmkmController extends Controller
     public function show(string $id)
     {
         $umkm = UmkmModel::with('warga')->find($id);
-        $warga = WargaModel::all();
+        $warga = WargaModel::with('umkm')->find($id);
+
+        if (!$warga) {
+            // Handle case where warga is not found
+            abort(404, 'Warga not found');
+        }
 
         $breadcrumb = (object)[
             'title' => 'Detail UMKM RW 05',

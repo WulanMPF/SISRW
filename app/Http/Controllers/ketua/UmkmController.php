@@ -159,7 +159,7 @@ class UmkmController extends Controller
     public function show(string $id)
     {
         $umkm = UmkmModel::with('warga')->find($id);
-        $warga = WargaModel::all();
+        $warga = WargaModel::with('umkm')->find($id);
 
         $breadcrumb = (object) [
             'title' => 'Data UMKM',
