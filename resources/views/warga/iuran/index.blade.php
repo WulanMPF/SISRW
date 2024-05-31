@@ -73,32 +73,32 @@
                             <form class="form form-vertical">
                                 <div class="form-body">
                                     <div class="row">
-                                        <div class="col-12">
-                                            <div class="form-group has-icon-left">
-                                                <label for="first-name-icon">First Name</label>
-                                                <div class="position-relative">
-                                                    <input type="text" class="form-control"
-                                                        placeholder="Input with icon left" id="first-name-icon">
-                                                    <div class="form-control-icon">
-                                                        <i class="fas fa-user"></i>
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <div class="form-group has-icon-right">
+                                                    <label for="start-date">Start Date</label>
+                                                    <div class="position-relative">
+                                                        <input type="date" class="form-control" id="start-date">
+                                                        <div class="form-control-icon">
+                                                            <i class="fas fa-calendar"></i>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6">
+                                                <div class="form-group has-icon-right">
+                                                    <label for="end-date">End Date</label>
+                                                    <div class="position-relative">
+                                                        <input type="date" class="form-control" id="end-date">
+                                                        <div class="form-control-icon">
+                                                            <i class="fas fa-calendar"></i>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="col-12">
-                                            <div class="form-group has-icon-left">
-                                                <label for="email-id-icon">Email</label>
-                                                <div class="position-relative">
-                                                    <input type="text" class="form-control" placeholder="Email"
-                                                        id="email-id-icon">
-                                                    <div class="form-control-icon">
-                                                        <i class="fas fa-envelope"></i>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-12">
-                                            <div class="form-group has-icon-left">
+                                            <div class="form-group has-icon-right">
                                                 <label for="mobile-id-icon">Mobile</label>
                                                 <div class="position-relative">
                                                     <input type="text" class="form-control" placeholder="Mobile"
@@ -110,7 +110,7 @@
                                             </div>
                                         </div>
                                         <div class="col-12">
-                                            <div class="form-group has-icon-left">
+                                            <div class="form-group has-icon-right">
                                                 <label for="password-id-icon">Password</label>
                                                 <div class="position-relative">
                                                     <input type="password" class="form-control" placeholder="Password"
