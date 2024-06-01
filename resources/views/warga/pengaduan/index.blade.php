@@ -5,13 +5,14 @@
     <div class="card-body">
         <div class="col-md-10">
             <div class="card-body">
-                @if(session('status'))
-                    <div class="alert alert-success">
-                        {{ session('status') }}
-                    </div>
-                @endif
+                @if (session('success'))
+                <div class="alert alert-success">{{ session('success') }}</div>
+            @endif
+            @if (session('error'))
+                <div class="alert alert-danger">{{ session('error') }}</div>
+            @endif
 
-                <form method="POST" action="{{ url('pengaduan.store') }}" enctype="multipart/form-data" class="form-horizontal">
+                <form method="POST" action="{{ route('pengaduan.store') }}" enctype="multipart/form-data" class="form-horizontal">
 
                     @csrf
 
@@ -23,13 +24,30 @@
                     </div>
 
                     <div class="form-group row">
-                        <label for="kategori" class="col-sm-3 col-form-label">Kategori:</label>
+                        <label for="kategori" class="col-sm-3 col-form-label">Prioritas:</label>
                         <div class="col-sm-9">
-                            <select id="kategori" name="kategori" class="form-control" style="font-family: 'Poppins', sans-serif;"required>
-                                <option value="">Pilih Kategori</option>
+                            <select id="prioritas" name="prioritas" class="form-control" style="font-family: 'Poppins', sans-serif;"required>
+                                <option value="">Pilih Prioritas</option>
                                 <option value="Tinggi">Tinggi</option>
                                 <option value="Sedang">Sedang</option>
                                 <option value="Rendah">Rendah</option>
+                                <!-- More options as necessary -->
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="jenis_pengaduan" class="col-sm-3 col-form-label">Jenis Pengaduan:</label>
+                        <div class="col-sm-9">
+                            <select id="jenis_pengaduan" name="jenis_pengaduan" class="form-control" style="font-family: 'Poppins', sans-serif;"required>
+                                <option value="">Pilih Jenis Pengaduan</option>
+                                <option value="Kebersihan">Kebersihan</option>
+                                <option value="Keamanan">Keamanan</option>
+                                <option value="Kesehatan">Kesehatan</option>
+                                <option value="Fasilitas">Fasilitas</option>
+                                <option value="Infrastruktur">Infrastruktur</option>
+                                <option value="Pelayanan">Pelayanan</option>
+                                <option value="Lainnya">Lainnya</option>
                                 <!-- More options as necessary -->
                             </select>
                         </div>
