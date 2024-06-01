@@ -66,6 +66,9 @@ Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
 
 Route::get('/register', [LoginController::class, 'register'])->name('register');
 Route::post('/register-proses', [LoginController::class, 'register_proses'])->name('register-proses');
+
+Route::get('/reset-password', [LoginController::class, 'forgot_password'])->name('forgot-password');
+Route::post('/reset-proses', [LoginController::class, 'register_proses'])->name('register-proses');
 // Route::post('proses_login', [LoginController::class, 'proses_login'])->name('proses_login');
 // Route::get('logout', [LoginController::class, 'logout'])->name('logout');
 
