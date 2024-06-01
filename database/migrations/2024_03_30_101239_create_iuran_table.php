@@ -19,7 +19,7 @@ return new class extends Migration
             $table->date('tgl_pembayaran');
             $table->string('jenis_iuran', 20);
             $table->unsignedBigInteger('jumlah_bayar');
-            $table->enum('status_pembayaran', ['Lunas', 'Belum Lunas']);
+            $table->enum('status_pembayaran', ['Lunas', 'Diproses', 'Belum Lunas']);
             $table->timestamps();
 
             $table->foreign('periode_id')->references('periode_id')->on('periode_iuran');
