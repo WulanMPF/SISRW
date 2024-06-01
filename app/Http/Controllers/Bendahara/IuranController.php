@@ -89,25 +89,17 @@ class IuranController extends Controller
     {
         // Validasi data
         $request->validate([
-            'nama_kepala_keluarga' => 'required|string|max:255',
-            'rt_rw' => 'required|string|max:255',
+            'periode_id' => 'required|integer',
+            'kk_id' => 'required|integer',
             'tgl_pembayaran' => 'required|date',
             'jumlah_bayar' => 'required|numeric',
-            'status_pembayaran' => 'required|string|max:255',
+            'status_pembayaran' => 'required|string|max:20',
         ]);
-
-        // Temukan ID KK berdasarkan nama kepala keluarga dan RT/RW
-        $kk = KKModel::where('nama_kepala_keluarga', $request->nama_kepala_keluarga)
-            ->where('rt_rw', $request->rt_rw)
-            ->first();
-
-        if (!$kk) {
-            return redirect()->route('iuran.index')->with('error', 'Data KK tidak ditemukan.');
-        }
 
         // Simpan data ke database
         IuranModel::create([
-            'kk_id' => $kk->id,
+            'periode_id' => $request->periode_id,
+            'kk_id' => $request->kk_id,
             'tgl_pembayaran' => $request->tgl_pembayaran,
             'jumlah_bayar' => $request->jumlah_bayar,
             'status_pembayaran' => $request->status_pembayaran,
