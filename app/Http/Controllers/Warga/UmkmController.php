@@ -67,24 +67,24 @@ class UmkmController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'warga_id'    => 'required|integer',
             'nama_usaha'  => 'required|string|max:20',
             'alamat_usaha' => 'required|string|max:50',
             'jenis_usaha' => 'required|string|max:30',
-            'status_usaha' => 'required',
             'deskripsi' => 'required|string|max:200',
             'lampiran' => 'required|image|mimes:jpeg,png,jpg,svg|max:2048'
         ]);
+        // Ambil warga_id dari sesi login
+        $warga_id = auth()->user()->warga_id;
         // Mendapatkan nama file yang diacak menggunakan hashName()
         $namaFile = $request->file('lampiran')->hashName();
 
         // Buat entri di database dengan nama file yang dihasilkan oleh hashName()
         UmkmModel::create([
-            'warga_id'    => $request->warga_id,
+            'warga_id'    =>  $warga_id,
             'nama_usaha'  => $request->nama_usaha,
             'alamat_usaha' => $request->alamat_usaha,
             'jenis_usaha' => $request->jenis_usaha,
-            'status_usaha' => $request->status_usaha,
+            'status_usaha' => 'diproses', // Set status_usaha menjadi "diproses"
             'deskripsi' => $request->deskripsi,
             'lampiran' => $namaFile
         ]);
