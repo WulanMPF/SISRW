@@ -11,7 +11,7 @@ use Yajra\DataTables\Facades\DataTables;
 
 class UmkmController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $breadcrumb = (object) [
             'title' => 'Data UMKM RW 05',
@@ -21,9 +21,21 @@ class UmkmController extends Controller
 
         $activeMenu = 'umkm';
 
-        // $umkm = UmkmModel::all();
         $umkm = UmkmModel::where('status_usaha', 'Aktif')->get();
         $warga = WargaModel::all();
+
+        $jenis_usaha = $request->input('kategori');
+
+        // data UMKM berdasarkan kategori
+        if ($jenis_usaha) {
+            $umkm = UmkmModel::where('jenis_usaha', $jenis_usaha)->get();
+        } else {
+            $umkm = UmkmModel::all();
+        }
+
+        if ($umkm->isEmpty()) {
+            return back()->with('error', 'Data UMKM dengan kategori "' . $jenis_usaha . '" tidak ditemukan.');
+        }
 
         return view('warga.umkm.index', ['breadcrumb' => $breadcrumb, 'umkm' => $umkm, 'warga' => $warga, 'activeMenu' => $activeMenu]);
     }
