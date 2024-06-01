@@ -84,20 +84,21 @@
                         searchable: false
                     },
                     {
-                        data: "month",
+                        data: "bulan",
                         className: "",
                         orderable: true,
                         searchable: true,
                         render: function(data, type, row) {
-                            var monthNames = ["January", "February", "March", "April", "May",
-                                "June",
-                                "July", "August", "September", "October", "November", "December"
+                            var monthNames = ["Januari", "Februari", "Maret", "April", "Mei",
+                                "Juni",
+                                "Juli", "Agustus", "September", "Oktober", "November",
+                                "Desember"
                             ];
                             return monthNames[parseInt(data) - 1];
                         }
                     },
                     {
-                        data: "year",
+                        data: "tahun",
                         className: "",
                         orderable: true,
                         searchable: true
