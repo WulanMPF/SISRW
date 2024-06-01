@@ -21,40 +21,48 @@
                             </select>
                         </div>
                     </div>
-                    {{-- <div class="col-md-8 text-left">
-                        <a class="btn btn-sm mt-1 btn-tambah" href="{{ url('bendahara/iuran/create') }}">+ Tambah
-                            Data Iuran</a>
-                    </div> --}}
                 </div>
             </div>
-            <table class="table table-hover table-sm" id="table_iuran">
+            <table class="table table-bordered table-striped table-hover table-sm" id="table_iuran">
                 <thead>
                     <tr>
                         <th style="padding-left: 1rem; padding-right: 1rem; text-align:center">No</th>
                         <th>Periode Pembayaran</th>
                         <th>Nama Kepala Keluarga</th>
-                        <th>Iuran Bulanan</th>
-                        <th>Iuran Sampah</th>
-                        <th>Iuran Keamanan</th>
+                        <th>RT_RW</th>
+                        <th>Tanggal Bayar</th>
+                        <th>Jumlah Bayar</th>
                         <th>Status Pembayaran</th>
                         <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <form method="POST">
+                    <form action="{{ route('iuran.store') }}" method="POST">
                         @csrf
-                        @foreach ($kk as $key => $kk)
+                        <input type="hidden" name="periode_id" value="{{ $periode->periode_id }}">
+                        <?php $bulan = date('F Y', strtotime($periode->tahun . '-' . $periode->bulan . '-01')); ?>
+                        @foreach ($kk as $key => $kks)
                             <tr>
+                                <!-- Hanya tampilan di tabel -->
                                 <td>{{ $key + 1 }}</td>
-                                <td>{{ date('F', mktime(0, 0, 0, $bulan, 1)) }}</td>
-                                <td>{{ $kk->nama_kepala_keluarga }}</td>
-                                <td><input type="checkbox" name="iuran_bulanan[]" value="{{ $kk->id }}"></td>
-                                <td><input type="checkbox" name="iuran_sampah[]" value="{{ $kk->id }}"></td>
-                                <td><input type="checkbox" name="iuran_keamanan[]" value="{{ $kk->id }}"></td>
-                                <td>
-                                    <input type="text" id="status" name="status" class="status" value="Belum Lunas"
-                                        disabled>
+                                <td>{{ $bulan }}</td>
+                                <td>{{ $kks->nama_kepala_keluarga }}</td>
+                                <td>{{ $kks->rt_rw }}</td>
+                                <!-- End of tampilan-->
+
+                                <!-- Inputan form -->
+                                <input type="hidden" id="kk_id" name="kk_id" value="{{ $kks->kk_id }}">
+                                <td><input type="date" id="tgl_pembayaran" name="tgl_pembayaran" class="input-table">
                                 </td>
+                                <td><input type="text" id="jumlah_bayar" name="jumlah_bayar" class="input-table-jml">
+                                </td>
+                                <td>
+                                    <select id="status" name="status" class="input-table">
+                                        <option value="Belum Lunas">Belum Lunas</option>
+                                        <option value="Lunas">Lunas</option>
+                                    </select>
+                                </td>
+
                                 <td><button type="button" class="btn btn-simpan">Simpan</button></td>
                             </tr>
                         @endforeach
@@ -67,6 +75,10 @@
 
 @push('css')
     <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+
         #table_iuran {
             border-radius: 10px;
             overflow: hidden;
@@ -89,15 +101,11 @@
             padding-bottom: 0;
         }
 
-        .status {
+        .input-table {
             border: none;
             text-align: center;
             justify-items: center;
             background: none;
-        }
-
-        body {
-            font-family: 'Poppins', sans-serif;
         }
     </style>
 @endpush
@@ -107,25 +115,14 @@
         $(document).ready(function() {
             $('#table_iuran').DataTable();
         });
-        document.querySelectorAll('input[type="checkbox"]').forEach(function(checkbox) {
-            checkbox.addEventListener('change', function() {
-                var row = this.closest('tr');
-                var isCheckedBulanan = row.querySelector('input[name="iuran_bulanan[]"]:checked');
-                var isCheckedSampah = row.querySelector('input[name="iuran_sampah[]"]:checked');
-                var isCheckedKeamanan = row.querySelector('input[name="iuran_keamanan[]"]:checked');
-                var statusInput = row.querySelector('.status');
 
-                // Memeriksa apakah setiap jenis iuran dicentang
-                var isLunas = isCheckedBulanan && isCheckedSampah && isCheckedKeamanan;
-
-                // Menentukan nilai status dan warna teks berdasarkan hasil pemeriksaan
-                var status = isLunas ? 'Lunas' : 'Belum Lunas';
-                var textColor = isLunas ? 'green' : 'red';
-
-                // Mengatur nilai status dan warna teks
-                statusInput.value = status;
-                statusInput.style.color = textColor;
+        window.onload = function() {
+            var jumlahBayarElements = document.querySelectorAll('#jumlah_bayar');
+            jumlahBayarElements.forEach(function(element) {
+                var jumlahBayar = parseInt(element.innerText);
+                var statusElement = element.closest('tr').querySelector('#status');
+                statusElement.value = jumlahBayar === 85000 ? 'Lunas' : 'Belum Lunas';
             });
-        });
+        }
     </script>
 @endpush
