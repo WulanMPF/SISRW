@@ -7,6 +7,7 @@ use App\Models\IuranModel;
 use App\Models\KkModel;
 use App\Models\LapkeuModel;
 use App\Models\LaporanKeuanganModel;
+use App\Models\PeriodeIuranModel;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -27,28 +28,30 @@ class IuranController extends Controller
 
         $iurans = IuranModel::all();
         $kk = KkModel::all();
+        $periode = PeriodeIuranModel::all();
 
-        return view('bendahara.iuran.index', compact('breadcrumb', 'iurans', 'kk', 'activeMenu'));
+        return view('bendahara.iuran.index', compact('breadcrumb', 'iurans', 'kk', 'periode', 'activeMenu'));
     }
 
     public function list(Request $request)
     {
-        $iurans = IuranModel::select('iuran_id', 'kk_id', 'tgl_pembayaran', 'jenis_iuran', 'jumlah_bayar', 'status_pembayaran');
+        $periodes = PeriodeIuranModel::select('periode_id', 'bulan', 'tahun');
 
-        if ($request->jenis_iuran) {
-            $iurans->where('jenis_iuran', $request->jenis_iuran);
+
+        if ($request->tahun) {
+            $periodes->where('tahun', $request->tahun);
         }
 
-        return DataTables::of($iurans)
-            ->addIndexColumn() // Menambahkan kolom index / no urut (default nama kolom: DT_RowIndex)
-            ->addColumn('aksi', function ($iuran) {
-                $btn = '<a href="' . url('/iuran/' . $iuran->iuran_id) . '" class="btn btn-sm" style="background-color: #BB955C; color: white; border-radius: 9px;">Lihat Detail</a>  &nbsp;';
+        return DataTables::of($periodes)
+            ->addIndexColumn()
+            ->addColumn('aksi', function ($periode) {
+                $btn = '<a href="' . url('/bendahara/iuran/' . $periode->periode_id) . '" class="btn btn-sm" style="background-color: #BB955C; color: white; border-radius: 9px;">Lihat Detail</a>  &nbsp;';
                 return $btn;
             })
             ->rawColumns(['aksi'])
             ->make(true);
     }
-    public function Bayar($bulan)
+    public function bayar($id)
     {
         $breadcrumb = (object) [
             'title' => 'Data Pembayaran Iuran RW 05 Bulan',
@@ -58,12 +61,10 @@ class IuranController extends Controller
 
         $activeMenu = 'iuran';
 
-        // Ambil nilai bulan dari URL
-        $bulan = request()->input('bulan');
-
+        $periode = PeriodeIuranModel::findOrFail($id);
         $iurans = IuranModel::all();
         $kk = KkModel::all();
-        return view('bendahara.iuran.pembayaran', compact('breadcrumb', 'iurans', 'kk', 'bulan', 'activeMenu'));
+        return view('bendahara.iuran.pembayaran', compact('breadcrumb', 'iurans', 'periode', 'kk', 'activeMenu'));
     }
 
     public function create()
@@ -88,25 +89,34 @@ class IuranController extends Controller
     {
         // Validasi data
         $request->validate([
-            'kk_id' => 'required|exists:kk,id',
+            'nama_kepala_keluarga' => 'required|string|max:255',
+            'rt_rw' => 'required|string|max:255',
             'tgl_pembayaran' => 'required|date',
-            'jenis_iuran' => 'required|string|max:255',
             'jumlah_bayar' => 'required|numeric',
             'status_pembayaran' => 'required|string|max:255',
         ]);
 
+        // Temukan ID KK berdasarkan nama kepala keluarga dan RT/RW
+        $kk = KKModel::where('nama_kepala_keluarga', $request->nama_kepala_keluarga)
+            ->where('rt_rw', $request->rt_rw)
+            ->first();
+
+        if (!$kk) {
+            return redirect()->route('iuran.index')->with('error', 'Data KK tidak ditemukan.');
+        }
+
         // Simpan data ke database
         IuranModel::create([
-            'kk_id' => $request->kk_id,
+            'kk_id' => $kk->id,
             'tgl_pembayaran' => $request->tgl_pembayaran,
-            'jenis_iuran' => $request->jenis_iuran,
             'jumlah_bayar' => $request->jumlah_bayar,
             'status_pembayaran' => $request->status_pembayaran,
         ]);
 
         // Redirect ke halaman index dengan pesan sukses
-        return redirect()->route('iuran.index')->with('success', 'Data iuran baru berhasil ditambahkan.');
+        return redirect()->route('iuran.index')->with('success', 'Pembayaran iuran berhasil dilakukan.');
     }
+
     public function show($id)
     {
         // Mengambil data iuran berdasarkan ID
