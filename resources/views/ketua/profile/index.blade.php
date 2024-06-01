@@ -1,4 +1,4 @@
-@extends('layout.ketua.template')
+@extends('layout.warga.template')
 
 @section('content')
     <div class="row text-left" style="font-family: 'Poppins', sans-serif;">
@@ -12,19 +12,19 @@
             <ul class="list-unstyled">
                 <li style="margin-bottom: 20px;">
                     <strong style="display: inline-block; width: 300px; color: #BB955C">Nomor Induk Kependudukan</strong>
-                    3573025601357901
+                    {{ $warga->nik }}
                 </li>
                 <li style="margin-bottom: 20px;">
                     <strong style="display: inline-block; width: 300px; color: #BB955C">Nama Lengkap</strong>
-                    Sudarmaji
+                    {{ $warga->nama_warga }}
                 </li>
                 <li style="margin-bottom: 20px;">
                     <strong style="display: inline-block; width: 300px; color: #BB955C">Tempat/Tanggal Lahir</strong>
-                    Malang, 16/05/1966
+                    {{ $warga->tempat_tgl_lahir }}
                 </li>
                 <li style="margin-bottom: 20px;">
                     <strong style="display: inline-block; width: 300px; color: #BB955C">Jenis Kelamin</strong>
-                    Laki-Laki
+                    {{ $warga->jenis_kelamin }}
                 </li>
                 <li style="margin-bottom: 20px;">
                     <strong style="display: inline-block; width: 300px; color: #BB955C">Alamat</strong>
@@ -32,29 +32,29 @@
                     <ul style="list-style: none; padding-left: 40px;">
                         <li style="margin-bottom: 20px;">
                             <strong style="display: inline-block; width: 260px; color: #BB955C">RT/RW</strong>
-                            008/005
+                            {{ $warga->rt_rw }}
                         </li>
                         <li style="margin-bottom: 20px;">
                             <strong style="display: inline-block; width: 260px; color: #BB955C">Kel/Desa</strong>
-                            Purwodadi
+                            {{ $warga->kel_desa }}
                         </li>
                         <li style="margin-bottom: 20px;">
                             <strong style="display: inline-block; width: 260px; color: #BB955C">Kecamatan</strong>
-                            Blimbing
+                            {{ $warga->kecamatan }}
                         </li>
                     </ul>
                 </li>
                 <li style="margin-bottom: 20px;">
                     <strong style="display: inline-block; width: 300px; color: #BB955C">Agama</strong>
-                    Islam
+                    {{ $warga->agama }}
                 </li>
                 <li style="margin-bottom: 20px;">
                     <strong style="display: inline-block; width: 300px; color: #BB955C">Status Perkawinan</strong>
-                    Kawin
+                    {{ $warga->status_perkawinan }}
                 </li>
                 <li style="margin-bottom: 20px;">
                     <strong style="display: inline-block; width: 300px; color: #BB955C">Pekerjaan</strong>
-                    Dosen
+                    {{ $warga->pekerjaan }}
                 </li>
                 <li style="margin-bottom: 20px;">
                     <strong style="display: inline-block; width: 300px; color: #BB955C">Informasi Akun</strong>
