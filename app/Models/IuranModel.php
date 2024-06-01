@@ -28,4 +28,9 @@ class IuranModel extends Model
     // {
     //     return $this->belongsTo(LaporanKeuangan::class, 'laporan_id');
     // }
+
+    public function periode()
+    {
+        return $this->belongsTo(PeriodeIuranModel::class, 'periode_id', 'periode_id');
+    }
 }

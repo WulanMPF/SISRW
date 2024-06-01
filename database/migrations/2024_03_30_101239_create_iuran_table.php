@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('iuran', function (Blueprint $table) {
             $table->id('iuran_id');
+            $table->unsignedBigInteger('periode_id')->index();
             $table->unsignedBigInteger('kk_id')->index();
             $table->unsignedBigInteger('laporan_id')->index();
             $table->date('tgl_pembayaran');
@@ -21,6 +22,7 @@ return new class extends Migration
             $table->enum('status_pembayaran', ['Lunas', 'Belum Lunas']);
             $table->timestamps();
 
+            $table->foreign('periode_id')->references('periode_id')->on('periode_iuran');
             $table->foreign('kk_id')->references('kk_id')->on('kk');
             $table->foreign('laporan_id')->references('laporan_id')->on('laporan_keuangan');
         });
