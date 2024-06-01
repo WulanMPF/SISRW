@@ -17,7 +17,7 @@
                 <form method="POST" action="{{ route('umkm.store') }}" enctype="multipart/form-data" class="form-horizontal">
                     @csrf
                     {{-- Data Pemohon --}}
-                    <div class="form-group row">
+                    {{-- <div class="form-group row">
                         <label for="data_pemohon" class="col-sm-4 col-form-label" id="data">Data Pemohon</label>
                     </div>
                     <div class="form-group row">
@@ -33,14 +33,14 @@
                             <input type="text" id="nik" name="nik" class="form-control" rows="5"
                                 value="2241720102" readonly>
                         </div>
-                    </div>
-                    <div class="form-group row">
+                    </div> --}}
+                    {{-- <div class="form-group row">
                         <label for="alamat" class="col-sm-2 col-form-label">Alamat Pemohon:</label>
                         <div class="col-sm-9">
                             <input type="text" id="alamat" name="alamat" class="form-control" rows="5"
                                 value="Jalan Ikan sepat II no.15" readonly>
                         </div>
-                    </div>
+                    </div> --}}
 
                     {{-- Mengambil ID pengguna dari sesi atau database setelah login (KEPERLUAN UNTUK INSERT DATA) --}}
                     {{-- <input type="hidden" id="warga_id" name="warga_id" value="???"> --}}
@@ -52,13 +52,13 @@
                     </div>
 
                     {{-- INI CUMA BUAT TESTING AJUKAN AJA -- aslinya ambil id pengguna dari session (line 46) --}}
-                    <div class="form-group row">
+                    {{-- <div class="form-group row">
                         <label for="nama_usaha" class="col-sm-2 col-form-label">Warga ID:</label>
                         <div class="col-sm-9">
                             <input type="text" id="warga_id" name="warga_id" class="form-control" rows="5"
                                 required>
                         </div>
-                    </div>
+                    </div> --}}
 
                     <div class="form-group row">
                         <label for="nama_usaha" class="col-sm-2 col-form-label">Nama Usaha:</label>
@@ -97,13 +97,13 @@
                             @enderror
                         </div>
                     </div>
-                    <div class="form-group row">
+                    {{-- <div class="form-group row">
                         <label for="status_usaha" class="col-sm-2 col-form-label">Status Usaha:</label>
                         <div class="col-sm-9">
                             <input type="text" id="status_usaha" name="status_usaha" class="form-control"
                                 rows="5" value="Diproses" required readonly>
                         </div>
-                    </div>
+                    </div> --}}
 
                     <div class="form-group row">
                         <label for="deskripsi" class="col-sm-2 col-form-label">Deskripsi Usaha:</label>
