@@ -92,7 +92,8 @@
             <img src="{{ asset('adminlte/dist/img/sisrw/logo3.png') }}" height="100" alt="SISRW Logo"> <!-- Ensure this path is correct -->
             <h4>SISTEM INFORMASI RW 05</h4>
             <h3>Create Account</h3>
-            <form method="POST" action="{{ route('register') }}">
+            <form method="POST" action="{{ route('register-proses') }}">
+                @csrf
                 @csrf
                 <div class="form-group">
                     <input id="nik" type="text" name="nik" placeholder="Masukkan NIK" required class="form-control shadow-sm px-4" value="{{ old('nik') }}">
