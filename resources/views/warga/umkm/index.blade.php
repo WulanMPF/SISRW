@@ -7,6 +7,12 @@
         </div>
     </div>
     <div class="card-body" style="padding-left: 1rem;">
+        @if (session('success'))
+                <div class="alert alert-success">{{ session('success') }}</div>
+            @endif
+            @if (session('error'))
+                <div class="alert alert-danger">{{ session('error') }}</div>
+            @endif
         {{-- HANYA UNTUK KEPERLUAN TESTING VIEW SAJA --}}
         {{-- <div class="d-flex flex-wrap overflow-auto flex-container">
             <div class="card">

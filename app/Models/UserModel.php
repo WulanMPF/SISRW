@@ -10,12 +10,12 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
 
 class UserModel extends \Illuminate\Foundation\Auth\User
 {
-    
+
     use HasFactory;
 
     protected $table = 'user';
     protected $primaryKey = 'user_id';
-    protected $fillable = ['level_id', 'warga_id', 'username', 'password'];
+    protected $fillable = ['level_id', 'warga_id', 'email', 'password'];
 
     public function level(): BelongsTo
     {

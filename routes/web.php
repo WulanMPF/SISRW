@@ -91,7 +91,7 @@ Route::post('/register-proses', [LoginController::class, 'register_proses'])->na
 
 //Route Halaman Ketua RW
 Route::group(['prefix' => 'ketua/dashboard'], function () {
-    Route::get('/', [DashboardController::class, 'index']);
+    Route::get('/', [DashboardController::class, 'index'])->name('ketua.dashboard');;
 });
 Route::group(['prefix' => 'ketua/warga'], function () {
     Route::get('/', [WargaController::class, 'index'])->name('warga.index');
@@ -165,7 +165,7 @@ Route::group(['prefix' => 'ketua/profile'], function () {
 
 // Route Halaman Sekretaris RW
 Route::group(['prefix' => 'sekretaris/dashboard'], function () {
-    Route::get('/', [SekretarisDashboardController::class, 'index']);
+    Route::get('/', [SekretarisDashboardController::class, 'index'])->name('sekretaris.dashboard');;
 });
 Route::group(['prefix' => 'sekretaris/warga'], function () {
     Route::get('/', [SekretarisWargaController::class, 'index']);
@@ -222,7 +222,7 @@ Route::group(['prefix' => 'sekretaris/profile'], function () {
 
 // Route Halaman Bendahara RW
 Route::group(['prefix' => 'bendahara/dashboard'], function () {
-    Route::get('/', [BendaharaDashboardController::class, 'index']);
+    Route::get('/', [BendaharaDashboardController::class, 'index'])->name('bendahara.dashboard');;
 });
 Route::group(['prefix' => 'bendahara/iuran'], function () {
     Route::get('/', [BendaharaIuranController::class, 'index'])->name('bendahara.iuran.index');
@@ -248,7 +248,7 @@ Route::group(['prefix' => 'bendahara/profile'], function () {
 
 // Route Halaman Warga
 Route::group(['prefix' => 'warga/dashboard'], function () {
-    Route::get('/', [WargaDashboardController::class, 'index']);
+    Route::get('/', [WargaDashboardController::class, 'index'])->name('warga.dashboard');
 });
 Route::group(['prefix' => 'warga/iuran'], function () {
     Route::get('/', [WargaIuranController::class, 'index']);
@@ -257,9 +257,9 @@ Route::group(['prefix' => 'warga/iuran'], function () {
 });
 
 Route::group(['prefix' => 'warga/pengaduan'], function () {
-    Route::get('/', [WargaPengaduanController::class, 'index']);
+    Route::get('/', [WargaPengaduanController::class, 'index'])->name('pengaduan.index');
     Route::post('/list', [WargaPengaduanController::class, 'list']);
-    Route::post('/pengaduan', [WargaPengaduanController::class, 'store'])->name('pengaduan.store');
+    Route::post('/', [WargaPengaduanController::class, 'store'])->name('pengaduan.store');
 });
 
 Route::group(['prefix' => 'warga/surat'], function () {

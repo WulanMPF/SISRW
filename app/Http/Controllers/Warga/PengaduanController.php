@@ -14,8 +14,8 @@ class PengaduanController extends Controller
      */
     public function index()
     {
-          // Breadcrumbs setup
-          $breadcrumb = (object) [
+        // Breadcrumbs setup
+        $breadcrumb = (object) [
             'title' => 'Formulir Aspirasi dan Pengaduan Warga',
             'date' => date('l, d F Y'),
             'list' => ['Home', 'Pengaduan']
@@ -35,16 +35,24 @@ class PengaduanController extends Controller
     {
         $request->validate([
             'tgl_pengaduan' => 'required|date',
-            'kategori' => 'required|string|max:255', // Ensure this field exists in your form and database
+            'prioritas' => 'required|string|max:255',
             'deskripsi' => 'required|string|max:255',
-            'lampiran' => 'required|file|max:2048', // Limiting file size to 2MB
+            'jenis_pengaduan' => 'required|string|max:255', // Ensure this field exists in your form and database
+            'lampiran' => 'required|file|max:2048',
         ]);
+
+        // Ambil warga_id dari sesi login
+        $warga_id = auth()->user()->warga_id;
 
         // Create a new Pengaduan entry using the model
         $pengaduan = new PengaduanModel();
+        $pengaduan->warga_id = $warga_id; // Set warga_id from session
         $pengaduan->tgl_pengaduan = $request->tgl_pengaduan;
-        $pengaduan->kategori = $request->kategori; // Handle category field if it's part of your form
+        $pengaduan->prioritas = $request->prioritas; // Ensure this field exists in your form and database
         $pengaduan->deskripsi = $request->deskripsi;
+        $pengaduan->jenis_pengaduan = $request->jenis_pengaduan; // Set the jenis_pengaduan field
+        $pengaduan->status_pengaduan = 'Diproses'; // Set status_pengaduan to "Diproses"
+        $pengaduan->tindakan_diambil = 'belum ada tindakan'; // Set tindakan_diambil to "belum ada tindakan"
 
         // Handle file upload with Laravel's Storage facade
         if ($request->hasFile('lampiran')) {
@@ -56,6 +64,6 @@ class PengaduanController extends Controller
         $pengaduan->save();
 
         // Redirect with success message
-        return redirect()->route('pengaduan.index')->with('success', 'Pengaduan berhasil disimpan.');
+        return redirect()->route('pengaduan.index')->with('success', 'Pengaduan berhasil diajukan.');
     }
 }

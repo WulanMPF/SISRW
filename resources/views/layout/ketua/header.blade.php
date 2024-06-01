@@ -31,13 +31,13 @@
                     <a class="dropdown-item" style="font-weight: 300; font-size: 0.9rem;">
                         Masuk Sebagai
                     </a>
-                    <a href="{{ url('/sekretaris/') }}" class="dropdown-item">
+                    <a href="{{ url('/sekretaris/dashboard') }}" class="dropdown-item">
                         Sekretaris
                     </a>
-                    <a href="{{ url('/bendahara/') }}" class="dropdown-item">
+                    <a href="{{ url('/bendahara/dashboard') }}" class="dropdown-item">
                         Bendahara
                     </a>
-                    <a href="{{ url('/warga/') }}" class="dropdown-item">
+                    <a href="{{ url('/warga/dashboard') }}" class="dropdown-item">
                         Warga
                     </a>
                 </div>
