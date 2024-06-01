@@ -10,7 +10,7 @@
 
     <style>
         body {
-            height: 100vh;
+            height: 92vh;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -100,12 +100,12 @@
                         <span class="text-danger">{{ $errors->first('nik') }}</span>
                     @endif
                 </div>
-                <div class="form-group">
+                {{-- <div class="form-group">
                     <input id="name" type="text" name="name" placeholder="Nama Lengkap" required class="form-control shadow-sm px-4" value="{{ old('name') }}">
                     @if ($errors->has('name'))
                         <span class="text-danger">{{ $errors->first('name') }}</span>
                     @endif
-                </div>
+                </div> --}}
                 <div class="form-group">
                     <input id="email" type="email" name="email" placeholder="Email" required class="form-control shadow-sm px-4" value="{{ old('email') }}">
                     @if ($errors->has('email'))
