@@ -17,11 +17,10 @@
                         <option value="jasa">Pelayanan dan Layanan Jasa</option>
                     </select>
                 </div>
-                <div class="col-md-5">
+                {{-- <div class="col-md-5">
                     <a class="btn" id="tambah" href="{{ url('warga/umkm/create') }}">Ajukan UMKM</a>
-                </div>
+                </div> --}}
             </div>
-            {{-- <a class="btn btn-sm mt-1" id="tambah" href="{{ url('warga/umkm/create') }}">Ajukan UMKM</a> --}}
         </div>
     </div>
     <div class="card-body" style="padding-left: 1rem;">
@@ -36,7 +35,22 @@
                 <button type="button" class="btn-close btn-sm" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
         @endif
-        <div class="d-flex flex-wrap overflow-auto flex-container">
+        <div class="container">
+            <div class="header">
+                <div>
+                    <img src="{{ asset('images/umkm_ajukan.png') }}" alt="Store">
+                    <span style="line-height: 1.75;">
+                        <strong>Apakah Anda memiliki produk yang ingin dijual?</strong>
+                        <br>
+                        Promosikan produk dan tingkatkan penjualan Anda bersama kami
+                    </span>
+                </div>
+                <a href="{{ url('warga/umkm/create') }}" class="f14 cl-orange">
+                    <strong>Jual Produk Anda disini <i class="fa fa-arrow-right margin-left-xs"></i></strong>
+                </a>
+            </div>
+        </div>
+        <div class="d-flex flex-wrap overflow-auto flex-container" style="margin-top:1rem;">
             @foreach ($umkm as $item)
                 <div class="card">
                     {{-- di folder storage --}}
@@ -59,6 +73,131 @@
 
 @push('css')
     <style>
+        /* Style jual produk Anda */
+        .container {
+            max-width: 100%;
+            padding-top: 1rem;
+            padding-left: 0;
+            padding-right: 0;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #f8f8f8;
+            padding: 10px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .header div {
+            display: flex;
+            align-items: center;
+        }
+
+        .header img {
+            max-width: 100px;
+            /* Batasan lebar gambar */
+            height: auto;
+            margin-right: 10px;
+            /* Mengurangi margin kanan */
+        }
+
+        .header span {
+            flex: 1;
+            /* Memperluas span untuk mengisi sisa ruang */
+            text-align: left;
+            line-height: 1.5;
+            /* Menambahkan jarak antara baris */
+        }
+
+        .header a {
+            text-decoration: none;
+            color: orange;
+            font-size: 14px;
+            /* Mengurangi ukuran teks */
+        }
+
+        .header a i {
+            margin-left: 5px;
+        }
+
+        /* Untuk perangkat seluler */
+        @media (max-width: 768px) {
+            .header img {
+                max-width: 80px;
+                /* Batasan lebar gambar untuk perangkat seluler */
+            }
+
+            .header a {
+                font-size: 12px;
+                /* Menyesuaikan ukuran teks untuk perangkat seluler */
+            }
+        }
+
+
+        /* End of styling jual produk Anda */
+
+        .card-box {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 20px;
+            position: relative;
+        }
+
+        .img-card {
+            width: 150px;
+            height: auto;
+            border-radius: 5px;
+        }
+
+        .text-card {
+            display: flex;
+            align-items: center;
+        }
+
+        .content {
+            flex: 1;
+        }
+
+        .text-card h5 {
+            margin-bottom: 5px;
+            font-size: 18px;
+            color: #333;
+        }
+
+        .text-card p {
+            margin-bottom: 10px;
+            color: #666;
+        }
+
+        .center-button {
+            text-align: center;
+        }
+
+        .center-button a {
+            color: #FF4500;
+            text-decoration: none;
+        }
+
+        .center-button a:hover {
+            color: #FF8C00;
+        }
+
+        .card-box {
+            background: #E2D4BF;
+        }
+
+        .text-card img {
+            width: 5rem;
+            height: 5rem;
+            float: left;
+        }
+
         body {
             font-family: 'Poppins', sans-serif;
         }
@@ -78,7 +217,7 @@
             display: flex;
             flex-wrap: wrap;
             justify-content: left;
-
+            background: #f8f8f8;
         }
 
         .card {
@@ -87,6 +226,16 @@
             margin-bottom: 2.5rem;
         }
 
+        a {
+            float: right;
+        }
+
+        /* STyling close button for alert */
+        .alert-dismissible .btn-close {
+            padding: 1rem 1rem;
+        }
+
+        /* Styling button */
         #tambah {
             background-color: #E2D4BF;
             margin-left: 0;
@@ -106,13 +255,7 @@
             padding-right: 1rem;
         }
 
-        a {
-            float: right;
-        }
-
-        .alert-dismissible .btn-close {
-            padding: 1rem 1rem;
-        }
+        /* End of styling button */
     </style>
 @endpush
 @push('js')
