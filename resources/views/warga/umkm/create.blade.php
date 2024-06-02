@@ -78,6 +78,7 @@
                         <label class="col-sm-2 col-form-label"> Jenis Usaha: </label>
                         <div class="col-sm-9">
                             <select class="form-control" id="jenis_usaha" name="jenis_usaha" required>
+                                <option value="">- Pilih Jenis Usaha -</option>
                                 <option value="Agribisnis">Agribisnis dan Pertanian</option>
                                 <option value="Hobi-Olahraga">Hobi dan Kegiatan Olahraga</option>
                                 <option value="Fashion">Tren Fashion dan Gaya</option>

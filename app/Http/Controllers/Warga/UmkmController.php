@@ -33,10 +33,6 @@ class UmkmController extends Controller
             $umkm = UmkmModel::all();
         }
 
-        if ($umkm->isEmpty()) {
-            return back()->with('error', 'Data UMKM dengan kategori "' . $jenis_usaha . '" tidak ditemukan.');
-        }
-
         return view('warga.umkm.index', ['breadcrumb' => $breadcrumb, 'umkm' => $umkm, 'warga' => $warga, 'activeMenu' => $activeMenu]);
     }
 
