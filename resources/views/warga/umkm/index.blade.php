@@ -98,25 +98,24 @@
 
         .header img {
             max-width: 100px;
-            /* Batasan lebar gambar */
             height: auto;
             margin-right: 10px;
-            /* Mengurangi margin kanan */
         }
 
         .header span {
             flex: 1;
-            /* Memperluas span untuk mengisi sisa ruang */
             text-align: left;
             line-height: 1.5;
-            /* Menambahkan jarak antara baris */
         }
 
         .header a {
             text-decoration: none;
             color: orange;
             font-size: 14px;
-            /* Mengurangi ukuran teks */
+        }
+
+        .header a:hover {
+            color: #FF8C00;
         }
 
         .header a i {
@@ -127,15 +126,12 @@
         @media (max-width: 768px) {
             .header img {
                 max-width: 80px;
-                /* Batasan lebar gambar untuk perangkat seluler */
             }
 
             .header a {
                 font-size: 12px;
-                /* Menyesuaikan ukuran teks untuk perangkat seluler */
             }
         }
-
 
         /* End of styling jual produk Anda */
 
