@@ -4,7 +4,7 @@
     <div class="card-header">
         <div class="card-tools" style="float:left;">
             <div class="row justify-content-between">
-                <div class="col-md-7">
+                <div class="col-md-12">
                     <select class="form-control" id="jenis_usaha" name="jenis_usaha" required>
                         <option value="">Semua Kategori</option>
                         <option value="agribisnis">Agribisnis dan Pertanian</option>
@@ -24,6 +24,7 @@
         </div>
     </div>
     <div class="card-body" style="padding-left: 1rem;">
+        {{-- Alert success dan error  --}}
         @if (session('success'))
             <div class="alert alert-success alert-dismissible show fade">{{ session('success') }}
                 <button type="button" class="btn-close btn-sm" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -35,39 +36,63 @@
                 <button type="button" class="btn-close btn-sm" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
         @endif
-        <div class="container">
-            <div class="header">
-                <div>
-                    <img src="{{ asset('images/umkm_ajukan.png') }}" alt="Store">
-                    <span style="line-height: 1.75;">
-                        <strong>Apakah Anda memiliki produk yang ingin dijual?</strong>
-                        <br>
-                        Promosikan produk dan tingkatkan penjualan Anda bersama kami
-                    </span>
-                </div>
-                <a href="{{ url('warga/umkm/create') }}" class="f14 cl-orange">
-                    <strong>Jual Produk Anda disini <i class="fa fa-arrow-right margin-left-xs"></i></strong>
-                </a>
-            </div>
-        </div>
-        <div class="d-flex flex-wrap overflow-auto flex-container" style="margin-top:1rem;">
-            @foreach ($umkm as $item)
-                <div class="card">
-                    {{-- di folder storage --}}
-                    {{-- <img src="{{ asset('storage/umkm/' . $item->lampiran) }}" class="card-img-top"> --}}
 
-                    {{-- di folder public --}}
-                    <img src="{{ asset('lampiran_umkm/' . $item->lampiran) }}" class="card-img-top center">
-                    <div class="card-body">
-                        <h5 class="card-title"><strong>{{ $item->nama_usaha }}</strong></h5>
-                        <p class="card-text">{{ $item->deskripsi }}</p>
+        {{-- Filter UMKM --}}
+        @if ($umkm->isEmpty())
+            <div class="container">
+                <div class="header">
+                    <div>
+                        <img src="{{ asset('images/umkm_ajukan.png') }}" alt="Store">
+                        <span style="line-height: 1.75;">
+                            <strong>Apakah Anda memiliki produk yang ingin dijual?</strong>
+                            <br>
+                            Promosikan produk dan tingkatkan penjualan Anda bersama kami
+                        </span>
                     </div>
-                    <div class="card-footer d-flex justify-content-between">
-                        <a href="umkm/{{ $item->umkm_id }}" class="btn" id="button">Baca selengkapnya</a>
-                    </div>
+                    <a href="{{ url('warga/umkm/create') }}" class="f14 cl-orange">
+                        <strong>Jual Produk Anda disini <i class="fa fa-arrow-right margin-left-xs"></i></strong>
+                    </a>
                 </div>
-            @endforeach
-        </div>
+            </div>
+            <div class="alert alert-danger alert-dismissible">
+                <h5><i class="icon fas fa-ban"></i> UMKM tidak tersedia!</h5>
+                Data UMKM dengan kategori <strong>{{ $jenis_usaha }}</strong> tidak ditemukan.
+            </div>
+        @else
+            <div class="container">
+                <div class="header">
+                    <div>
+                        <img src="{{ asset('images/umkm_ajukan.png') }}" alt="Store">
+                        <span style="line-height: 1.75;">
+                            <strong>Apakah Anda memiliki produk yang ingin dijual?</strong>
+                            <br>
+                            Promosikan produk dan tingkatkan penjualan Anda bersama kami
+                        </span>
+                    </div>
+                    <a href="{{ url('warga/umkm/create') }}" class="f14 cl-orange">
+                        <strong>Jual Produk Anda disini <i class="fa fa-arrow-right margin-left-xs"></i></strong>
+                    </a>
+                </div>
+            </div>
+            <div class="d-flex flex-wrap overflow-auto flex-container" style="margin-top:1rem;">
+                @foreach ($umkm as $item)
+                    <div class="card">
+                        {{-- di folder storage --}}
+                        {{-- <img src="{{ asset('storage/umkm/' . $item->lampiran) }}" class="card-img-top"> --}}
+
+                        {{-- di folder public --}}
+                        <img src="{{ asset('lampiran_umkm/' . $item->lampiran) }}" class="card-img-top center">
+                        <div class="card-body">
+                            <h5 class="card-title"><strong>{{ $item->nama_usaha }}</strong></h5>
+                            <p class="card-text">{{ $item->deskripsi }}</p>
+                        </div>
+                        <div class="card-footer d-flex justify-content-between">
+                            <a href="umkm/{{ $item->umkm_id }}" class="btn" id="button">Baca selengkapnya</a>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        @endif
     </div>
 @endsection
 

@@ -33,7 +33,7 @@ class UmkmController extends Controller
             $umkm = UmkmModel::all();
         }
 
-        return view('warga.umkm.index', ['breadcrumb' => $breadcrumb, 'umkm' => $umkm, 'warga' => $warga, 'activeMenu' => $activeMenu]);
+        return view('warga.umkm.index', ['breadcrumb' => $breadcrumb, 'umkm' => $umkm, 'warga' => $warga, 'jenis_usaha' => $jenis_usaha, 'activeMenu' => $activeMenu]);
     }
 
     /*public function list(Request $request)
