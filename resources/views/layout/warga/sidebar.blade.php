@@ -3,7 +3,8 @@
     <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
             <li class="nav-item">
-                <a href="{{ url('/warga/dashboard') }}" class="nav-link {{ $activeMenu == 'dashboard' ? 'active' : '' }} ">
+                <a href="{{ url('/warga/dashboard') }}"
+                    class="nav-link {{ $activeMenu == 'dashboard' ? 'active' : '' }} ">
                     <i class="nav-icon fas fa-th-large"></i>
                     <p>Dashboard</p>
                 </a>
@@ -14,10 +15,26 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="{{ url('/warga/umkm') }}" class="nav-link {{ $activeMenu == 'umkm' ? 'active' : '' }} ">
+                <a href="{{ url('/warga/umkm') }}" class="nav-link {{ $activeMenu == 'umkm' ? 'active' : '' }}">
                     <i class="nav-icon fas fa-store"></i>
                     <p>UMKM</p>
                 </a>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="{{ url('/warga/umkm') }}" class="nav-link">
+                            <i class="nav-icon fas fa-angle-right"></i>
+                            <p>UMKM RW 05</p>
+                        </a>
+                    </li>
+                </ul>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="{{ url('/warga/umkm/') }}" class="nav-link">
+                            <i class="nav-icon fas fa-angle-right"></i>
+                            <p>UMKM Saya</p>
+                        </a>
+                    </li>
+                </ul>
             </li>
             <li class="nav-item">
                 <a href="{{ url('/warga/bansos') }}" class="nav-link {{ $activeMenu == 'bansos' ? 'active' : '' }} ">
@@ -32,7 +49,8 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="{{ url('/warga/pengaduan') }}" class="nav-link {{ $activeMenu == 'pengaduan' ? 'active' : '' }} ">
+                <a href="{{ url('/warga/pengaduan') }}"
+                    class="nav-link {{ $activeMenu == 'pengaduan' ? 'active' : '' }} ">
                     <i class="nav-icon fas fa-exclamation-triangle"></i>
                     <p>Pengaduan</p>
                 </a>
@@ -54,6 +72,10 @@
         color: #463720;
     }
 
+    .elevation-4 {
+        background: white;
+        box-shadow: 0 14px 28px rgba(0, 0, 0, .25), 0 10px 10px rgba(0, 0, 0, .22) !important;
+    }
 </style>
 
 <script>

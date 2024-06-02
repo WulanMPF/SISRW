@@ -3,7 +3,8 @@
     <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
             <li class="nav-item">
-                <a href="{{ url('/bendahara/dashboard') }}" class="nav-link {{ $activeMenu == 'dashboard' ? 'active' : '' }} ">
+                <a href="{{ url('/bendahara/dashboard') }}"
+                    class="nav-link {{ $activeMenu == 'dashboard' ? 'active' : '' }} ">
                     <i class="nav-icon fas fa-th-large"></i>
                     <p>Dashboard</p>
                 </a>
@@ -35,6 +36,11 @@
 
     .nav-pills .nav-link {
         color: #463720;
+    }
+
+    .elevation-4 {
+        background: white;
+        box-shadow: 0 14px 28px rgba(0, 0, 0, .25), 0 10px 10px rgba(0, 0, 0, .22) !important;
     }
 </style>
 
