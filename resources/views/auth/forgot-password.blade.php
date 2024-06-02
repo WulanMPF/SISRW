@@ -92,21 +92,27 @@
             <img src="{{ asset('adminlte/dist/img/sisrw/logo3.png') }}" height="100" alt="SISRW Logo"> <!-- Ensure this path is correct -->
             <h4>SISTEM INFORMASI RW 05</h4>
             <h3>Reset Password</h3>
-            <form method="POST" action="{{ route('register-proses') }}">
+            <form action="{{ route('forgot-password-act') }}" method="post">
                 @csrf
-                @csrf
-                <div class="form-group">
-                    <input id="password" type="password" name="password" placeholder="Password" required class="form-control shadow-sm px-4">
-                    @if ($errors->has('password'))
-                        <span class="text-danger">{{ $errors->first('password') }}</span>
-                    @endif
+                <div class="input-group mb-3">
+                    <input type="email" name="email" class="form-control" placeholder="Email">
+                    <div class="input-group-append">
+                        <div class="input-group-text">
+                            <span class="fas fa-envelope"></span>
+                        </div>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <input id="password_confirmation" type="password" name="password_confirmation" placeholder="Konfirmasi Password" required class="form-control shadow-sm px-4">
+                @error('email')
+                    <small>{{ $message }}</small>
+                @enderror
+                <div class="row">
+                    <div class="col-12">
+                        <button type="submit" class="btn btn-primary btn-block">Submit</button>
+                    </div>
+                    <!-- /.col -->
                 </div>
-                <button type="submit" class="btn btn-block shadow-sm">Submit</button>
-
             </form>
+
         </div>
     </div>
     <footer>
@@ -118,5 +124,18 @@
             </div>
         </div>
     </footer>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    @if ($message = Session::get('success'))
+        <script>
+            Swal.fire('{{ $message }}');
+        </script>
+    @endif
+
+    @if ($message = Session::get('failed'))
+        <script>
+            Swal.fire('{{ $message }}');
+        </script>
+    @endif
 </body>
 </html>

@@ -2,13 +2,16 @@
 
 namespace App\Http\Controllers\Login;
 
+use App\Mail\ResetPasswordMail;
 use App\Models\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use App\Models\UserModel;
 use App\Models\WargaModel;
+use App\Models\PasswordResetToken;
 
 class LoginController extends Controller
 {
@@ -24,18 +27,77 @@ class LoginController extends Controller
 
     public function forgot_password_act(Request $request)
     {
-        // (kode forgot_password_act tetap sama)
+        $customMessage = [
+            'email.required'    => 'Email tidak boleh kosong',
+            'email.email'       => 'Email tidak valid',
+            'email.exists'      => 'Email tidak terdaftar di database',
+        ];
+
+        $request->validate([
+            'email' => 'required|email|exists:user,email'
+        ], $customMessage);
+
+        $token = \Str::random(60);
+
+        PasswordResetToken::updateOrCreate(
+            [
+                'email' => $request->email
+            ],
+            [
+                'email' => $request->email,
+                'token' => $token,
+                'created_at' => now(),
+            ]
+        );
+
+        Mail ::to($request->email)->send(new ResetPasswordMail($token));
+
+        return redirect()->route('forgot-password')->with('success', 'Kami telah mengirimkan link reset password ke email anda');
     }
 
     public function validasi_forgot_password_act(Request $request)
     {
-        // (kode validasi_forgot_password_act tetap sama)
+        $customMessage = [
+            'password.required' => 'Password tidak boleh kosong',
+            'password.min'      => 'Password minimal 6 karakter',
+        ];
+
+        $request->validate([
+            'password' => 'required|min:6'
+        ], $customMessage);
+
+        $token = PasswordResetToken::where('token', $request->token)->first();
+
+        if (!$token) {
+            return redirect()->route('login')->with('failed', 'Token tidak valid');
+        }
+
+        $user = UserModel::where('email', $token->email)->first();
+
+        if (!$user) {
+            return redirect()->route('login')->with('failed', 'Email tidak terdaftar di database');
+        }
+
+        $user->update([
+            'password' => Hash::make($request->password)
+        ]);
+
+        $token->delete();
+
+        return redirect()->route('login')->with('success', 'Password berhasil direset');
     }
 
     public function validasi_forgot_password(Request $request, $token)
     {
-        // (kode validasi_forgot_password tetap sama)
+        $getToken = PasswordResetToken::where('token', $token)->first();
+
+        if (!$getToken) {
+            return redirect()->route('login')->with('failed', 'Token tidak valid');
+        }
+
+        return view('auth.validasi-token', compact('token'));
     }
+
 
     public function login_proses(Request $request)
     {
