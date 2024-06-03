@@ -204,9 +204,9 @@ Route::group(['prefix' => 'sekretaris/pengumuman'], function () {
     Route::get('/create', [PengumumanController::class, 'create'])->name('sekretaris.pengumuman.create');
     Route::post('/', [PengumumanController::class, 'store'])->name('sekretaris.pengumuman.store');
     Route::get('/{id}', [PengumumanController::class, 'show'])->name('sekretaris.pengumuman.show');
-    Route::get('/{id}/edit', [PengumumanController::class, 'edit'])->name('sekretaris.pengumuman.edit');
+    Route::get('/edit/{id}', [PengumumanController::class, 'edit'])->name('sekretaris.pengumuman.edit');
     Route::put('/{id}', [PengumumanController::class, 'update'])->name('sekretaris.pengumuman.update');
-    Route::delete('/{id}', [PengumumanController::class, 'destroy'])->name('sekretaris.pengumuman.destroy');
+    Route::delete('/destroy/{pengumuman_id}', [PengumumanController::class, 'destroy'])->name('sekretaris.pengumuman.destroy');
 });
 
 Route::group(['prefix' => 'sekretaris/skBansos'], function () {
