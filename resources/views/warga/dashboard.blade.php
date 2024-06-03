@@ -41,11 +41,9 @@
 <div class="container-fluid my-4">
     <div class="row">
         <!-- Main content for Community Activities -->
-        <div class="col-md-8">
+        <div class="col-lg-8 pr-lg-5 border-right">
             <h2 class="mb-3">Kegiatan Warga RW 05</h2>
             <div class="row">
-
-                <!-- Mock activity data -->
                 <div class="col-md-6 mb-4">
                     <div class="card h-100">
                         <img src="{{ asset('images/kegiatan3.png') }}" class="card-img-top" alt="Activity Image">
@@ -59,7 +57,6 @@
                 <div class="col-md-6 mb-4">
                     <div class="card h-100">
                         <img src="{{ asset('images/kegiatan1.png') }}" class="card-img-top" alt="Activity Image">
-
                         <div class="card-body">
                             <h5 class="card-title">Peringatan 78 Tahun Kemerdekaan Indonesia</h5>
                             <p class="card-text">Perayaan hari kemerdekaan dengan parade dan penampilan dari berbagai kelompok seni.</p>
@@ -69,45 +66,47 @@
                 </div>
             </div>
         </div>
-
-        <!-- Sidebar for UMKM -->
-        <div class="col-md-4">
+        <!-- Sidebar for UMKM aligned next to Community Activities -->
+        <div class="col-lg-4">
             <h2 class="mb-3">UMKM Warga RW 05</h2>
-            <!-- Mock UMKM data -->
-            <div class="card mb-3">
-                <img src="https://via.placeholder.com/100x30" class="card-img-top" alt="UMKM Image">
-                <div class="card-body">
-                    <h5 class="card-title">Toko Madura Bik Eem</h5>
-                    <p class="card-text">Menawarkan berbagai pilihan tekstil dan kebutuhan rumah tangga.</p>
-                    <a href="#" class="btn btn-secondary">Read more</a>
+            @foreach ($umkm as $umkm)
+                <div class="card mb-3">
+                    <img src="{{ asset('lampiran_umkm/' . $umkm->lampiran) }}" class="card-img-top" alt="UMKM Image">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ $umkm->nama_usaha }}</h5>
+                        <p class="card-text">{{ $umkm->deskripsi }}</p>
+                        <a href="#" class="btn btn-secondary">Read more</a>
+                    </div>
                 </div>
-            </div>
-            <div class="card mb-3">
-                <img src="https://via.placeholder.com/100x30" class="card-img-top" alt="UMKM Image">
-                <div class="card-body">
-                    <h5 class="card-title">Mebel Pak Yayan</h5>
-                    <p class="card-text">Spesialisasi dalam pembuatan mebel custom yang berkualitas dan tahan lama.</p>
-                    <a href="#" class="btn btn-secondary">Read more</a>
-                </div>
-            </div>
+            @endforeach
         </div>
     </div>
 </div>
 @endsection
 
+
 @push('css')
 <style>
+
+     .border-right {
+        border-right: 8px solid #ccc;
+    }
+
+    .col-lg-4 h2 {
+    margin-left: 2cm;
+}
+
     .card {
         box-shadow: 0 4px 8px rgba(0,0,0,0.1);
         transition: 0.3s;
-        border-radius: 10px; /* Rounded borders */
+        border-radius: 10px;
 
     }
     .card:hover {
         box-shadow: 0 8px 16px rgba(0,0,0,0.2);
     }
     .card img {
-        border-top-left-radius: 10px; /* Rounded top corners for images */
+        border-top-left-radius: 10px;
         border-top-right-radius: 10px;
 
     }
