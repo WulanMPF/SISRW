@@ -1,6 +1,33 @@
 @extends('layout.sekretaris.template')
 
 @section('content')
+<div class="modal fade" id="deactivePengumuman" tabindex="-1" role="dialog" aria-labelledby="deactivePengumumanLabel"
+aria-hidden="true">
+<div class="modal-dialog" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="deactivePengumumanLabel">Konfirmasi Penghapusan Pengumuman</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            </button>
+        </div>
+        <div class="modal-body">
+            <form id="deleteForm" method="POST" action="">
+                @csrf
+                {!! method_field('DELETE') !!}
+                <div class="form-group">
+                    <p>Apakah yakin pengumuman akan dihapus?
+                    </p>
+                </div>
+                <div class="text-left mt-3">
+                    <button type="submit" class="btn btn-danger">Ya, Hapus</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</div>
+
     <div class="container">
         <div class="row">
             <div class="col-md-8">
@@ -30,11 +57,13 @@
                                 <div class="card-body">
                                     <h5 class="card-title">{{ $item->judul }}</h5>
                                     <p class="card-text">{{ $item->isi_pengumuman }}</p>
-                                    <p class="picture">{{ $item->gambar }}</p>
-                                    <a href="{{ url('sekretaris/pengumuman/edit', $item->id) }}" class="btn btn-sm btn-warning">+ Edit Pengumuman</a>
+                                    <img src="{{ asset('gambar_pengumuman/' . $item->gambar) }}" class="card-img-top center">
+                                    <a href="{{ url('sekretaris/pengumuman/edit/'. $item->pengumuman_id) }}" class="btn btn-xs btn-warning mr-2" style="border-radius: 6px;"><i class="fas fa-edit fa-lg"></i></a>
+                                    {{-- <a href="{{ url('sekretaris/pengumuman/edit/'. $item->pengumuman_id) }}" class="btn btn-sm btn-warning">+ Edit Pengumuman</a> --}}
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')">Delete</button>
+                                        {{-- <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')">Delete</button> --}}
+                                        <button type="button" class="btn btn-xs btn-danger" style="border-radius: 6px;" data-toggle="modal" data-target="#deactivePengumuman" data-pengumuman-id="{{ $item->pengumuman_id }}"><i class="fas fa-trash fa-lg"></i></button>
                                     </form>
                                 </div>
                             </div>
@@ -88,6 +117,13 @@
                         $('#searchResults').html(html);
                     }
                 });
+            });
+
+            $('#deactivePengumuman').on('show.bs.modal', function(event) {
+                var button = $(event.relatedTarget); // Button yang memicu modal
+                var Id = button.data('pengumuman-id'); // Ambil nilai data-umkm-id
+                var form = $('#deleteForm');
+                form.attr('action', '{{ url('sekretaris/pengumuman/destroy') }}/' + Id); // Set action form dengan ID UMKM
             });
         });
     </script>
