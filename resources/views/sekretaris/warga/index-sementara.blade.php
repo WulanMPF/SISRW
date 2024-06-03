@@ -1,4 +1,4 @@
-@extends('layout.ketua.template')
+@extends('layout.sekretaris.template')
 
 @section('content')
 <!-- The Modal -->
@@ -52,8 +52,8 @@
                                     Status Kependudukan
                                 </button>
                                 <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                    <a class="dropdown-item" href="{{ url('/ketua/warga/') }}">Tinggal Tetap</a>
-                                    <a class="dropdown-item" href="{{ url('/ketua/warga/sementara') }}">Tinggal Sementara</a>
+                                    <a class="dropdown-item" href="{{ url('/sekretaris/warga/') }}">Tinggal Tetap</a>
+                                    <a class="dropdown-item" href="{{ url('/sekretaris/warga/sementara') }}">Tinggal Sementara</a>
                                 </div>
                             </div>
                             <small class="form-text text-muted">Status Kependudukan</small>
@@ -61,10 +61,10 @@
                         <div class="col-md-8 text-right">
                             <a class="btn btn-sm mt-1 btn-tambah" data-toggle="dropdown">+ Tambah Warga</a>
                             <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                                <a href="{{ url('/ketua/warga/create-kk') }}" class="dropdown-item">
+                                <a href="{{ url('/sekretaris/warga/create-kk') }}" class="dropdown-item">
                                     Tinggal Tetap
                                 </a>
-                                <a href="{{ url('/ketua/warga/create-sementara') }}" class="dropdown-item">
+                                <a href="{{ url('/sekretaris/warga/create-sementara') }}" class="dropdown-item">
                                     Tinggal Sementara
                                 </a>
                             </div>
@@ -126,7 +126,7 @@
             var dataWarga = $('#table_warga').DataTable({
                 serverSide: true,
                 ajax: {
-                    "url": "{{ url('ketua/warga/list-sementara') }}",
+                    "url": "{{ url('sekretaris/warga/list-sementara') }}",
                     "dataType": "json",
                     "type": "POST",
                     "data": function(d) {
@@ -146,7 +146,7 @@
             $('#status_warga').change(function() {
                 var selectedStatus = $(this).val();
                 if (selectedStatus !== '') {
-                    window.location.href = "{{ url('ketua/warga/') }}/" + selectedStatus;
+                    window.location.href = "{{ url('sekretaris/warga/') }}/" + selectedStatus;
                 } else {
                     $('#dropdownMenuButton').text('Semua');
                 }
@@ -157,7 +157,7 @@
                 var button = $(event.relatedTarget); // Button yang memicu modal
                 var wargaId = button.data('id'); // Ambil nilai data-umkm-id
                 var form = $('#deleteForm');
-                form.attr('action', '{{ url('ketua/warga/destroy-wargaSementara') }}/' + wargaId); // Set action form dengan ID UMKM
+                form.attr('action', '{{ url('sekretaris/warga/destroy-wargaSementara') }}/' + wargaId); // Set action form dengan ID UMKM
             });
         
         });

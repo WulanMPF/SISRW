@@ -9,7 +9,7 @@
             @if (session('error'))
                 <div class="alert alert-danger">{{ session('error') }}</div>
             @endif
-            <form class="form" method="POST" action="{{ url('sekretaris/warga') }}">
+            <form class="form" method="POST" action="{{ url('sekretaris/warga/sementara') }}">
                 @csrf
                 <div class="row mb-3">
                     <label class="nik col-sm-2 col-form-label mt-1" for="nik" style="margin-right: 80px;">Nomor Induk Kependudukan</label>
@@ -84,10 +84,10 @@
                             placeholder="Pekerjaan" required>
                     </div>
                 </div>
+                <div class="text-left mt-3">
+                    <button type="submit" class="btn btn-tambah">Tambah</button>
+                </div>
             </form>
-            <div class="text-left mt-3">
-                <button class="btn btn-tambah">Tambah</button>
-            </div>
         </div>
     </div>
 @endsection

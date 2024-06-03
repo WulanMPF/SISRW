@@ -100,10 +100,10 @@ class WargaController extends Controller
                 $kk_id = is_null($warga->kk_id) ? 'null' : $warga->kk_id;
                 $showBtn = '<a href="' . url('/ketua/warga/show/' . $warga->warga_id) . '" class="btn btn-sm"><i class="fas fa-eye" style="color: #BB955C; font-size: 17px;"></i></a>';
                 $editBtn = '<a href="' . url('/ketua/warga/edit-warga/' . $kk_id . '/' . $warga->warga_id) . '" class="btn btn-sm"><i class="fas fa-edit" style="color: #007bff;" font-size: 17px;></i></a>';
-                $deleteBtn = '<form class="d-inline-block" method="POST" action="' . url('ketua/warga/destroy-wargaSementara/' . $warga->warga_id) . '">'
-                    . csrf_field() . method_field('DELETE') .
-                    '<button type="submit" class="btn btn-sm" onclick="return confirm(\'Apakah Anda yakin menghapus data ini?\');"><i class="fas fa-trash-alt" style="color: #dc3545; font-size: 17px;"></i></button></form>'; // Red color for delete
-                // $deleteBtn = '<button class="btn btn-sm delete-btn" data-toggle="modal" data-target="#confirmDeleteModal" data-id="' . $warga->id . '"><i class="fas fa-trash-alt" style="color: #dc3545; font-size: 17px;"></i></button>';
+                // $deleteBtn = '<form class="d-inline-block" method="POST" action="' . url('ketua/warga/destroy-wargaSementara/' . $warga->warga_id) . '">'
+                //     . csrf_field() . method_field('DELETE') .
+                //     '<button type="submit" class="btn btn-sm" onclick="return confirm(\'Apakah Anda yakin menghapus data ini?\');"><i class="fas fa-trash-alt" style="color: #dc3545; font-size: 17px;"></i></button></form>'; // Red color for delete
+                $deleteBtn = '<button class="btn btn-sm delete-btn" data-toggle="modal" data-target="#confirmDeleteModal" data-id="' . $warga->warga_id . '"><i class="fas fa-trash-alt" style="color: #dc3545; font-size: 17px;"></i></button>';
                 return $showBtn . $editBtn . $deleteBtn;
             })
             ->rawColumns(['Aksi'])
@@ -601,12 +601,17 @@ class WargaController extends Controller
 
     public function destroyWargaSementara(Request $request, $warga_id)
     {
+        // Validasi data inputan
+        $validatedData = $request->validate([
+            'alasan_penghapusan' => 'required|in:pindah,meninggal',
+        ]);
+
         try {
             // Mendapatkan warga berdasarkan ID
             $warga = WargaModel::findOrFail($warga_id);
 
-            // Mengubah status warga menjadi 'pindah'
-            $warga->status_warga = 'pindah';
+            // Ubah status warga
+            $warga->status_warga = $validatedData['alasan_penghapusan'];
             $warga->save();
             $warga->delete();
 

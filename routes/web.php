@@ -170,13 +170,25 @@ Route::group(['prefix' => 'sekretaris/dashboard'], function () {
     Route::get('/', [SekretarisDashboardController::class, 'index'])->name('sekretaris.dashboard');;
 });
 Route::group(['prefix' => 'sekretaris/warga'], function () {
-    Route::get('/', [SekretarisWargaController::class, 'index']);
+    Route::get('/', [SekretarisWargaController::class, 'index'])->name('warga.index');
+    Route::get('/sementara', [SekretarisWargaController::class, 'indexSementara'])->name('warga.indexSementara');
     Route::post('/list', [SekretarisWargaController::class, 'list']);
-    Route::get('/create-tetap', [SekretarisWargaController::class, 'createTetap']);
-    Route::post('/', [SekretarisWargaController::class, 'storeTetap']);
+    Route::post('/list-sementara', [SekretarisWargaController::class, 'listSementara']);
+    Route::get('/create-kk', [SekretarisWargaController::class, 'createKK']);
+    Route::get('/create-warga/{kk_id}', [SekretarisWargaController::class, 'createWarga'])->name('warga.create');
+    Route::post('/tetap-kk', [SekretarisWargaController::class, 'storeKK']);
+    Route::post('/tetap-warga', [SekretarisWargaController::class, 'storeWarga']);
     Route::get('/create-sementara', [SekretarisWargaController::class, 'createSementara']);
-    Route::post('/', [SekretarisWargaController::class, 'storeSementara']);
-    Route::get('/{id}', [SekretarisWargaController::class, 'show']);
+    Route::post('/sementara', [SekretarisWargaController::class, 'storeSementara']);
+    Route::get('/edit-warga/{kk_id}/{warga_id}', [SekretarisWargaController::class, 'editWarga']);
+    Route::put('/update-warga/{warga_id}', [SekretarisWargaController::class, 'updateWarga']);
+    Route::get('/edit-kk/{kk_id}', [SekretarisWargaController::class, 'editKK']);
+    Route::put('/update-kk/{kk_id}', [SekretarisWargaController::class, 'updateKK']);
+    Route::get('/{kk_id}', [SekretarisWargaController::class, 'show'])->name('warga.show');
+    Route::get('/show/{warga_id}', [SekretarisWargaController::class, 'showSementara']);
+    Route::delete('/destroy-warga/{kk_id}/{warga_id}', [SekretarisWargaController::class, 'destroyWarga']);
+    Route::delete('/destroy-kk/{kk_id}', [SekretarisWargaController::class, 'destroyKK']);
+    Route::delete('/destroy-wargaSementara/{warga_id}', [SekretarisWargaController::class, 'destroyWargaSementara']);
 });
 Route::group(['prefix' => 'sekretaris/surat'], function () {
     Route::get('/', [SekretarisSuratController::class, 'index']);
