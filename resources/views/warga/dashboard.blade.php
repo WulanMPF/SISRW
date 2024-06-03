@@ -1,12 +1,36 @@
 @extends('layout.warga.template')
 
 @section('content')
+<ul class="box-info">
+    <li class="card">
+        <i class="fas fa-solid fa-user"></i>
+        <span class="text">
+            <h3>{{$jumlah_warga}}</h3>
+            <p>Jumlah Warga</p>
+        </span>
+    </li>
+    <li class="card">
+        <i class="fas fa-solid fa-user"></i>
+        <span class="text">
+            <h3>{{$jumlah_kk}}</h3>
+            <p>Jumlah Keluarga</p>
+        </span>
+    </li>
+    <li class="card">
+        <i class="fas fa-solid fa-user"></i>
+        <span class="text">
+            <h3>{{$jumlah_umkm}}</h3>
+            <p>Jumlah UMKM</p>
+        </span>
+    </li>
+</ul>
 <div class="container-fluid my-4">
     <div class="row">
         <!-- Main content for Community Activities -->
         <div class="col-md-8">
             <h2 class="mb-3">Kegiatan Warga RW 05</h2>
             <div class="row">
+
                 <!-- Mock activity data -->
                 <div class="col-md-6 mb-4">
                     <div class="card h-100">
@@ -111,5 +135,37 @@
     h2 {
         color: #333;
     }
+
+    .box-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-gap: 24px;
+            margin-top: 36px;
+            margin-left: 1rem;
+        }
+
+        .box-info li {
+            padding: 20px;
+            background: var(--light);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            grid-gap: 24px;
+        }
+
+        .box-info li .bx {
+            width: 80px;
+            height: 80x;
+            border-radius: 10px;
+            font-size: 36px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .box-info li:nth-child(1) .bx {
+            background: lightblue;
+            color: blue;
+        }
 </style>
 @endpush
