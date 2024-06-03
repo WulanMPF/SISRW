@@ -6,7 +6,7 @@
         <i class="fas fa-solid fa-user"></i>
         <span class="text">
             <h3 id="jumlahWargaCounter">0</h3> <!-- Initialize with 0 -->
-            <h3>Jumlah Warga</h3>
+            <h5>Jumlah Warga</h5>
         </span>
     </li>
 
@@ -14,7 +14,7 @@
         <i class="fas fa-solid fa-building"></i>
         <span class="text">
             <h3 id="jumlahKKCounter">0</h3> <!-- Initialize with 0 -->
-            <h3>Jumlah Keluarga</h3>
+            <h5>Jumlah Keluarga</h5>
         </span>
     </li>
 
@@ -22,7 +22,7 @@
         <i class="fas fa-solid fa-store"></i>
         <span class="text">
             <h3 id="jumlahUMKMCounter">0</h3> <!-- Initialize with 0 -->
-            <h3>Jumlah UMKM</h3>
+            <h5>Jumlah UMKM</h5>
         </span>
     </li>
 </ul>
@@ -115,7 +115,7 @@
 
     }
     .card-title {
-    font-weight: bold; /* This will make the text bold */
+    font-weight: bold;
 }
 
 
@@ -124,7 +124,7 @@
     }
 
     h2 {
-        color: #BB955C;
+        color: #BB955C;;
         font-family: Poppins;
         font-size: 20px;
         font-style: normal;
@@ -137,7 +137,7 @@
 
         .btn-primary {
         background-color: #BB955C;
-        border-color: #BB955C;
+        border-color: #BB955C;;
         color: #ffffff;
         font-family: Poppins;
         font-size: 15px;
@@ -145,9 +145,12 @@
         line-height: normal;
         border-radius: 10px;
     }
-    h2 {
-        color: #333;
-    }
+
+    h5 {
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+
 
     .box-info {
     display: grid;
@@ -158,22 +161,21 @@
 
 .box-info .card {
     padding: 20px;
-    background: var(--light, #fff); /* Added a fallback value for --light */
+    background: #dbdbdb;; /* Added a fallback value for --light */
     border-radius: 20px;
     display: flex;
     align-items: center;
-    justify-content: center; /* Centers content horizontally */
-    flex-direction: column; /* Stack items vertically */
-    text-align: center; /* Align text to the center for single-line items */
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
 }
 
 .box-info .card i {
-    font-size: 36px; /* Adjust size as necessary */
-    margin-bottom: 10px; /* Space between icon and text */
-}
+    font-size: 36px;
+    margin-bottom: 10px;
 
 .box-info .text h3, .box-info .text p {
-    margin: 5px 0; /* Reduces space around text for more compact card */
+    margin: 5px 0;
 }
 
 .box-info .card:hover {
