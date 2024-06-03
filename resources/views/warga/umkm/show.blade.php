@@ -29,6 +29,15 @@
                         <p>{{ $umkm->alamat_usaha }}</p>
                     </div>
                     <div class="info-item">
+                        <strong class="title">Jam Operasional:</strong>
+                        <p>{{ \Carbon\Carbon::parse($umkm->jam_buka)->format('H:i') . ' - ' . \Carbon\Carbon::parse($umkm->jam_tutup)->format('H:i') }}
+                        </p>
+                    </div>
+                    <div class="info-item">
+                        <strong class="title">No telepon:</strong>
+                        <p>{{ $umkm->no_telepon }}</p>
+                    </div>
+                    <div class="info-item">
                         <strong class="title">Deskripsi:</strong>
                         <p>{{ $umkm->deskripsi }}</p>
                     </div>

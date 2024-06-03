@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Ketua;
 use App\Http\Controllers\Controller;
 use App\Models\UmkmModel;
 use App\Models\WargaModel;
+use Carbon\CarbonPeriod;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -46,8 +47,9 @@ class UmkmController extends Controller
         return DataTables::of($umkms)
             ->addIndexColumn()
             ->addColumn('aksi', function ($umkm) {
+                $status_usaha = strtolower($umkm->status_usaha);
                 $btn = '';
-                if ($umkm->status_usaha == 'Aktif') {
+                if ($status_usaha == 'aktif') {
                     $btn .= '<div class="btn-group mr-2">';
                     $btn .= '<a href="' . url('/ketua/umkm/' . $umkm->umkm_id . '/edit') . '" class="btn btn-xs btn-warning mr-2" style="border-radius: 6px;"><i class="fas fa-edit fa-lg"></i></a>';
                     $btn .= '<button type="button" class="btn btn-xs btn-danger" style="border-radius: 6px;" data-toggle="modal" data-target="#deactiveUMKM" data-umkm-id="' . $umkm->umkm_id . '"><i class="fas fa-trash fa-lg"></i></button>';
@@ -59,7 +61,7 @@ class UmkmController extends Controller
                     // $btn .= '</form>';
 
                     $btn .= '</div>';
-                } elseif ($umkm->status_usaha == 'diproses') {
+                } elseif ($status_usaha == 'diproses') {
                     $btn .= '<div class="btn-group mr-2">';
                     $btn .= '<a href="' . url('/ketua/umkm/' . $umkm->umkm_id . '/accept') . '" class="btn btn-xs btn-success mr-2" style="border-radius: 6px;"><i class="fas fa-check fa-lg"></i></a>';
                     $btn .= '<a href="' . url('/ketua/umkm/' . $umkm->umkm_id . '/reject') . '" class="btn btn-xs btn-danger" style="border-radius: 6px;"><i class="fas fa-times fa-lg"></i></a>';
@@ -110,6 +112,13 @@ class UmkmController extends Controller
 
     public function create()
     {
+        $times = [];
+        $periods = CarbonPeriod::create('00:00', '30 minutes', '23:59');
+
+        foreach ($periods as $period) {
+            $times[] = $period->format('H:i');
+        }
+
         $breadcrumb = (object) [
             'title' => 'Formulir Pengajuan UMKM RW 05',
             'date' => date('l, d F Y'),
@@ -122,7 +131,7 @@ class UmkmController extends Controller
         $warga = WargaModel::all();
         $activeMenu = 'umkm'; //set menu yang sedang aktif
 
-        return view('ketua.umkm.create', ['breadcrumb' => $breadcrumb, 'page' => $page, 'warga' => $warga, 'activeMenu' => $activeMenu]);
+        return view('ketua.umkm.create', ['breadcrumb' => $breadcrumb, 'page' => $page, 'warga' => $warga, 'times' => $times, 'activeMenu' => $activeMenu]);
     }
     public function store(Request $request)
     {
@@ -131,10 +140,14 @@ class UmkmController extends Controller
             'nama_usaha'  => 'required|string|max:20',
             'alamat_usaha' => 'required|string|max:50',
             'jenis_usaha' => 'required|string|max:30',
+            'jam_buka' => 'required|date_format:H:i',
+            'jam_tutup' => 'required|date_format:H:i',
+            'no_telepon' => 'required|string|max:20',
             'status_usaha' => 'required',
             'deskripsi' => 'required|string|max:200',
             'lampiran' => 'required|image|mimes:jpeg,png,jpg,svg|max:2048'
         ]);
+
         // Mendapatkan nama file yang diacak menggunakan hashName()
         $namaFile = $request->file('lampiran')->hashName();
 
@@ -144,6 +157,9 @@ class UmkmController extends Controller
             'nama_usaha'  => $request->nama_usaha,
             'alamat_usaha' => $request->alamat_usaha,
             'jenis_usaha' => $request->jenis_usaha,
+            'jam_buka' => $request->jam_buka,
+            'jam_tutup' => $request->jam_tutup,
+            'no_telepon' => $request->no_telepon,
             'status_usaha' => $request->status_usaha,
             'deskripsi' => $request->deskripsi,
             'lampiran' => $namaFile

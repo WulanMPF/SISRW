@@ -12,7 +12,7 @@ class UmkmModel extends Model
     use HasFactory;
     protected $table = 'umkm';
     protected $primaryKey = 'umkm_id';
-    protected $fillable = ['warga_id', 'nama_usaha', 'alamat_usaha', 'jenis_usaha', 'status_usaha', 'deskripsi', 'lampiran'];
+    protected $fillable = ['warga_id', 'nama_usaha', 'alamat_usaha', 'jenis_usaha', 'jam_buka', 'jam_tutup', 'no_telepon', 'status_usaha', 'deskripsi', 'lampiran'];
 
     public function warga(): HasMany
     {

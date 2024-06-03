@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\KkModel;
 use App\Models\UmkmModel;
 use App\Models\WargaModel;
+use Carbon\CarbonPeriod;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -21,16 +22,16 @@ class UmkmController extends Controller
 
         $activeMenu = 'umkm';
 
-        $umkm = UmkmModel::where('status_usaha', 'Aktif')->get();
+        $umkm = UmkmModel::where('status_usaha', 'Aktif');
         $warga = WargaModel::all();
 
         $jenis_usaha = $request->input('kategori');
 
         // data UMKM berdasarkan kategori
         if ($jenis_usaha) {
-            $umkm = UmkmModel::where('jenis_usaha', $jenis_usaha)->get();
+            $umkm = $umkm->where('jenis_usaha', $jenis_usaha)->get();
         } else {
-            $umkm = UmkmModel::all();
+            $umkm = $umkm->get();
         }
 
         return view('warga.umkm.index', ['breadcrumb' => $breadcrumb, 'umkm' => $umkm, 'warga' => $warga, 'jenis_usaha' => $jenis_usaha, 'activeMenu' => $activeMenu]);
@@ -58,6 +59,13 @@ class UmkmController extends Controller
     }*/
     public function create()
     {
+        $times = [];
+        $periods = CarbonPeriod::create('00:00', '30 minutes', '23:59');
+
+        foreach ($periods as $period) {
+            $times[] = $period->format('H:i');
+        }
+
         $breadcrumb = (object) [
             'title' => 'Formulir Pengajuan UMKM RW 05',
             'date' => date('l, d F Y'),
@@ -70,7 +78,7 @@ class UmkmController extends Controller
         $warga = WargaModel::all();
         $activeMenu = 'umkm'; //set menu yang sedang aktif
 
-        return view('warga.umkm.create', ['breadcrumb' => $breadcrumb, 'page' => $page, 'warga' => $warga, 'activeMenu' => $activeMenu]);
+        return view('warga.umkm.create', ['breadcrumb' => $breadcrumb, 'page' => $page, 'warga' => $warga, 'times' => $times, 'activeMenu' => $activeMenu]);
     }
     public function store(Request $request)
     {
@@ -78,6 +86,9 @@ class UmkmController extends Controller
             'nama_usaha'  => 'required|string|max:20',
             'alamat_usaha' => 'required|string|max:50',
             'jenis_usaha' => 'required|string|max:30',
+            'jam_buka' => 'required|date_format:H:i',
+            'jam_tutup' => 'required|date_format:H:i',
+            'no_telepon' => 'required|string|max:20',
             'deskripsi' => 'required|string|max:200',
             'lampiran' => 'required|image|mimes:jpeg,png,jpg,svg|max:2048'
         ]);
@@ -92,6 +103,9 @@ class UmkmController extends Controller
             'nama_usaha'  => $request->nama_usaha,
             'alamat_usaha' => $request->alamat_usaha,
             'jenis_usaha' => $request->jenis_usaha,
+            'jam_buka' => $request->jam_buka,
+            'jam_tutup' => $request->jam_tutup,
+            'no_telepon' => $request->no_telepon,
             'status_usaha' => 'diproses', // Set status_usaha menjadi "diproses"
             'deskripsi' => $request->deskripsi,
             'lampiran' => $namaFile
