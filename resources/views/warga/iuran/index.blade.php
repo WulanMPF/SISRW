@@ -59,7 +59,8 @@
             </div>
 
             <!-- The Modal -->
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#bayarIuranModal">
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#bayarIuranModal"
+                style="margin-left:1rem;">
                 + Bayar Iuran
             </button>
             <div class="modal fade" id="bayarIuranModal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
@@ -76,12 +77,14 @@
                                 </div>
                             @endif
 
-                            <form action="{{ route('ajukanpersuratan.create') }}" method="POST" enctype="multipart/form-data">
+                            <form action="{{ route('ajukanpersuratan.create') }}" method="POST"
+                                enctype="multipart/form-data">
                                 @csrf
                                 <div class="card">
                                     <div class="card-header">
                                         <h4 class="card-title"><strong>Formulir Pembayaran Iuran</strong></h4>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
                                     </div>
                                     <div class="card-content">
                                         <div class="card-body">
@@ -116,7 +119,8 @@
                                                         <div class="position-relative">
                                                             <select class="form-control" id="start-year" required>
                                                                 @for ($year = now()->year; $year <= now()->year + 10; $year++)
-                                                                    <option value="{{ $year }}">{{ $year }}</option>
+                                                                    <option value="{{ $year }}">{{ $year }}
+                                                                    </option>
                                                                 @endfor
                                                             </select>
                                                             <div class="form-control-icon">
@@ -155,7 +159,8 @@
                                                         <div class="position-relative">
                                                             <select class="form-control" id="end-year" required>
                                                                 @for ($year = now()->year; $year <= now()->year + 10; $year++)
-                                                                    <option value="{{ $year }}">{{ $year }}</option>
+                                                                    <option value="{{ $year }}">{{ $year }}
+                                                                    </option>
                                                                 @endfor
                                                             </select>
                                                             <div class="form-control-icon">
@@ -167,7 +172,8 @@
                                                 <div class="col-12">
                                                     <div class="form-group">
                                                         <label for="total">Total Iuran</label>
-                                                        <input type="text" class="form-control" id="total" readonly>
+                                                        <input type="text" class="form-control" id="total"
+                                                            readonly>
                                                     </div>
                                                 </div>
                                                 <div class="col-12">
@@ -176,12 +182,14 @@
                                                 <div class="col-12">
                                                     <div class="form-group">
                                                         <label for="file">Upload Bukti Pembayaran</label>
-                                                        <input type="file" class="form-control-file" id="file" name="file" required>
+                                                        <input type="file" class="form-control-file" id="file"
+                                                            name="file" required>
                                                     </div>
                                                 </div>
                                                 <div class="col-12 d-flex justify-content-end">
                                                     <button type="submit" class="btn btn-sm btn-submit">Submit</button>
-                                                    <button type="reset" class="btn btn-light-secondary me-1 mb-1">Reset</button>
+                                                    <button type="reset"
+                                                        class="btn btn-light-secondary me-1 mb-1">Reset</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -193,44 +201,45 @@
                 </div>
             </div>
 
-           <!-- Table -->
-           <div class="row">
-            {{-- <div class="col-12"> --}}
-            <div class="card-body">
-                <div class="accordion" id="accordionExample">
-                    <div class="accordion-item">
-                        <h2 class="accordion-header" id="headingOne">
-                            <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                                data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne"
-                                collapsed>
-                                History Pembayaran Iuran
-                            </button>
-                        </h2>
-                        <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
-                            data-bs-parent="#accordionExample">
-                            <div class="accordion-body">
-                                <table class="table table-bordered table-striped table-hover table-sm" id="table_iuran">
-                                    <thead>
-                                        <tr>
-                                            <th>No</th>
-                                            <th>Periode Pembayaran</th>
-                                            <th>Iuran Bulanan</th>
-                                            <th>Iuran Sampah</th>
-                                            <th>Iuran Keamanan</th>
-                                            <th>Status</th>
-                                        </tr>
-                                    </thead>
-                                </table>
+            <!-- Table -->
+            <div class="row">
+                {{-- <div class="col-12"> --}}
+                <div class="card-body">
+                    <div class="accordion" id="accordionExample">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="headingOne">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                    data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne"
+                                    collapsed>
+                                    History Pembayaran Iuran
+                                </button>
+                            </h2>
+                            <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
+                                data-bs-parent="#accordionExample">
+                                <div class="accordion-body">
+                                    <table class="table table-bordered table-striped table-hover table-sm"
+                                        id="table_iuran">
+                                        <thead>
+                                            <tr>
+                                                <th>No</th>
+                                                <th>Periode Pembayaran</th>
+                                                <th>Iuran Bulanan</th>
+                                                <th>Iuran Sampah</th>
+                                                <th>Iuran Keamanan</th>
+                                                <th>Status</th>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>
+                    {{-- </div> --}}
                 </div>
-                {{-- </div> --}}
             </div>
-        </div>
 
+        </div>
     </div>
-</div>
 @endsection
 
 @push('css')
@@ -250,7 +259,8 @@
             padding-right: 1rem;
         }
 
-        .btn-primary, .btn-success {
+        .btn-primary,
+        .btn-success {
             background-color: #BB955C;
             border-color: #BB955C;
             color: #ffffff;
