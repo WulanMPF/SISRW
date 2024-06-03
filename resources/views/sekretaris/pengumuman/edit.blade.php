@@ -25,7 +25,7 @@
                 <div class="card">
                     <div class="card-body">
                         <h2>Edit Pengumuman</h2>
-                        <form action="{{ route('sekretaris.pengumuman.update', $pengumuman->id) }}" method="POST">
+                        <form action="{{ route('sekretaris.pengumuman.update', $pengumuman->pengumuman_id) }}" method="POST">
                             @csrf
                             @method('PUT')
                             <div class="form-group">
@@ -34,13 +34,20 @@
                             </div>
                             <div class="form-group">
                                 <label for="isi_pengumuman">Isi Pengumuman</label>
-                                <textarea class="form-control" id="isi_pengumuman" name="isi_pengumuman" rows="3" required>{{ $pengumuman->isi_pengumuman }}</textarea>
+                                <textarea class="form-control" id="isi_pengumuman" name="isi_pengumuman" rows="10" required>{{ $pengumuman->isi_pengumuman }}</textarea>
                             </div>
                             <div class="form-group">
                                 <label for="gambar">Gambar</label>
-                                <input type="text" class="form-control" id="gambar" name="gambar" value="{{ $pengumuman->gambar }}" required>
+                                <input type="file" class="form-control-file" id="gambar" name="gambar" accept="image/*">
+                                
+                                <!-- Menampilkan gambar sebelumnya -->
+                                @if($pengumuman->gambar)
+                                    <div class="mt-2">
+                                        <img src="{{ asset('gambar_pengumuman/' . $pengumuman->gambar) }}" alt="Gambar Sebelumnya" style="max-width: 200px;">
+                                    </div>
+                                @endif
                             </div>
-                            <button type="submit" class="btn btn-primary">Simpan</button>
+                            <button type="submit" class="btn btn-sm btn-submit">Simpan</button>
                         </form>
                     </div>
                 </div>
