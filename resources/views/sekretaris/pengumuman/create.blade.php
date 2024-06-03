@@ -1,18 +1,7 @@
 @extends('layout.sekretaris.template')
 
 @section('content')
-@if ($errors->any())
-<div class="pt-3">
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $item)
-                <li>{{$item}}</li>
-            @endforeach
-        </ul>
-    
-@endif
-<form action='{{url('pengumuman_warga')}}' method='post'>
-    @csrf
+
     <div class="container">
         <div class="row">
             <div class="col-md-8">
@@ -24,6 +13,7 @@
                 @endif
                 <div class="card">
                     <div class="card-body">
+                        <form action="{{ route('sekretaris.pengumuman.store') }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="form-group">
                                 <label for="judul">Judul Pengumuman</label>
@@ -37,7 +27,7 @@
                                 <label for="gambar">Gambar</label>
                                 <input type="file" class="form-control-file" id="gambar" name="gambar" accept="image/*" required>
                             </div>
-                            <button type="submit" class="btn btn-primary">Simpan</button>
+                            <button type="submit" class="btn btn-sm btn-submit">Simpan</button>
                         </form>
                     </div>
                 </div>
