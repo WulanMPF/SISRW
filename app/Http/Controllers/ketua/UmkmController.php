@@ -47,8 +47,9 @@ class UmkmController extends Controller
         return DataTables::of($umkms)
             ->addIndexColumn()
             ->addColumn('aksi', function ($umkm) {
+                $status_usaha = strtolower($umkm->status_usaha);
                 $btn = '';
-                if ($umkm->status_usaha == 'Aktif') {
+                if ($status_usaha == 'aktif') {
                     $btn .= '<div class="btn-group mr-2">';
                     $btn .= '<a href="' . url('/ketua/umkm/' . $umkm->umkm_id . '/edit') . '" class="btn btn-xs btn-warning mr-2" style="border-radius: 6px;"><i class="fas fa-edit fa-lg"></i></a>';
                     $btn .= '<button type="button" class="btn btn-xs btn-danger" style="border-radius: 6px;" data-toggle="modal" data-target="#deactiveUMKM" data-umkm-id="' . $umkm->umkm_id . '"><i class="fas fa-trash fa-lg"></i></button>';
@@ -60,7 +61,7 @@ class UmkmController extends Controller
                     // $btn .= '</form>';
 
                     $btn .= '</div>';
-                } elseif ($umkm->status_usaha == 'diproses') {
+                } elseif ($status_usaha == 'diproses') {
                     $btn .= '<div class="btn-group mr-2">';
                     $btn .= '<a href="' . url('/ketua/umkm/' . $umkm->umkm_id . '/accept') . '" class="btn btn-xs btn-success mr-2" style="border-radius: 6px;"><i class="fas fa-check fa-lg"></i></a>';
                     $btn .= '<a href="' . url('/ketua/umkm/' . $umkm->umkm_id . '/reject') . '" class="btn btn-xs btn-danger" style="border-radius: 6px;"><i class="fas fa-times fa-lg"></i></a>';
