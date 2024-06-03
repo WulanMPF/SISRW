@@ -1,5 +1,5 @@
 <!-- Navbar -->
-<nav class="main-header navbar navbar-expand navbar-white navbar-light" style="font-family: Poppins; color: #463720;">
+<nav class="main-header navbar navbar-expand navbar-white navbar-light" style="font-family: Poppins; color: #463720; ">
     <!-- Left navbar links -->
     <ul class="navbar-nav">
         <li class="nav-item">
@@ -31,3 +31,14 @@
     </ul>
 </nav>
 <!-- /.navbar -->
+
+<style>
+.elemen {
+    font-family: Poppins;
+    color: #463720;
+    position: fixed;
+
+    }
+
+</style>
+
