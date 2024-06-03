@@ -6,13 +6,12 @@
     <div class="alert alert-danger">
         <ul>
             @foreach ($errors->all() as $item)
-                <li>{{ $item }}</li>
+                <li>{{$item}}</li>
             @endforeach
         </ul>
-    </div>
-</div>
+    
 @endif
-<form action="{{ route('sekretaris.pengumuman.store') }}" method="post" enctype="multipart/form-data">
+<form action='{{url('pengumuman_warga')}}' method='post'>
     @csrf
     <div class="container">
         <div class="row">
@@ -25,19 +24,21 @@
                 @endif
                 <div class="card">
                     <div class="card-body">
-                        <div class="form-group">
-                            <label for="judul">Judul Pengumuman</label>
-                            <input type="text" class="form-control" id="judul" name="judul" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="isi_pengumuman">Isi Pengumuman</label>
-                            <textarea class="form-control" id="isi_pengumuman" name="isi_pengumuman" rows="3" required></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label for="gambar">Gambar</label>
-                            <input type="file" class="form-control-file" id="gambar" name="gambar" accept="image/*" required>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Simpan</button>
+                            @csrf
+                            <div class="form-group">
+                                <label for="judul">Judul Pengumuman</label>
+                                <input type="text" class="form-control" id="judul" name="judul" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="isi_pengumuman">Isi Pengumuman</label>
+                                <textarea class="form-control" id="isi_pengumuman" name="isi_pengumuman" rows="3" required></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="gambar">Gambar</label>
+                                <input type="file" class="form-control-file" id="gambar" name="gambar" accept="image/*" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Simpan</button>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -46,72 +47,71 @@
             <div class="col-md-12">
                 <div class="input-group mb-3">
                     <div class="input-group-append">
-                        <!-- Tambahan button atau elemen lainnya dapat diletakkan di sini -->
+
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</form>
 @endsection
 
 @push('css')
-<style>
-    body,
-    option {
-        font-family: 'Poppins', sans-serif;
-        font-size: 15px;
-    }
+    <style>
+        body,
+        option {
+            font-family: 'Poppins', sans-serif;
+            font-size: 15px;
+        }
 
-    .form-group {
-        color: #463720;
-        font-family: Poppins;
-        font-size: 15px;
-        font-style: normal;
-        font-weight: 100;
-        line-height: normal;
-    }
+        .form-group {
+            color: #463720;
+            font-family: Poppins;
+            font-size: 15px;
+            font-style: normal;
+            font-weight: 100;
+            line-height: normal;
+        }
 
-    .form-control {
-        font-size: 15px;
-    }
+        .form-control {
+            font-size: 15px;
+        }
 
-    .btn-submit {
-        background-color: #BB955C;
-        border-color: #BB955C;
-        color: #ffffff;
-        font-family: Poppins;
-        font-size: 15px;
-        font-style: normal;
-        font-weight: 400;
-        line-height: normal;
-        margin-left: 30%;
-        border-radius: 10px;
-        padding-left: 1rem;
-        padding-right: 1rem;
-    }
+        .btn-submit {
+            background-color: #BB955C;
+            border-color: #BB955C;
+            color: #ffffff;
+            font-family: Poppins;
+            font-size: 15px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: normal;
+            margin-left: 30%;
+            border-radius: 10px;
+            padding-left: 1rem;
+            padding-right: 1rem;
+        }
 
-    .form-horizontal .form-group {
-        display: flex;
-        align-items: center;
-    }
+        .form-horizontal .form-group {
+            display: flex;
+            align-items: center;
+        }
 
-    .form-horizontal .col-form-label {
-        text-align: left;
-        color: #BB955C;
-    }
+        .form-horizontal .col-form-label {
+            text-align: left;
+            color: #BB955C;
+        }
 
-    #lampiran {
-        font-size: 15px;
-    }
+        #lampiran {
+            font-size: 15px;
+        }
 
-    #data {
-        font-size: 16px;
-        margin-left: -2rem;
-    }
+        #data {
+            font-size: 16px;
+            margin-left: -2rem;
+        }
 
-    .card {
-        box-shadow: none;
-    }
-</style>
+        .card {
+            box-shadow: none;
+        }
+    </style>
 @endpush

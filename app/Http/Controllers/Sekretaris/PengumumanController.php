@@ -23,12 +23,7 @@ class PengumumanController extends Controller
         $pengumuman = PengumumanModel::all();
         $user = UserModel::all();
 
-        return view('sekretaris.pengumuman.index', [
-            'breadcrumb' => $breadcrumb,
-            'pengumuman' => $pengumuman,
-            'user' => $user,
-            'activeMenu' => $activeMenu
-        ]);
+        return view('sekretaris.pengumuman.index', ['breadcrumb' => $breadcrumb, 'pengumuman' => $pengumuman, 'user' => $user, 'activeMenu' => $activeMenu]);
     }
 
     public function create()
@@ -39,56 +34,56 @@ class PengumumanController extends Controller
             'list'  => ['Home', 'Pengumuman', 'Tambah']
         ];
 
+        $pengumuman = PengumumanModel::all();
+
         $activeMenu = 'pengumuman';
 
-        return view('sekretaris.pengumuman.create', [
-            'breadcrumb' => $breadcrumb,
-            'activeMenu' => $activeMenu
-        ]);
+        return view('sekretaris.pengumuman.create', ['breadcrumb' => $breadcrumb, //'pengumuman' => $pengumuman, 
+        'activeMenu' => $activeMenu]);
     }
 
     public function store(Request $request)
-{
-    $request->validate([
-        'user_id' => 'required|integer',
-        'judul' => 'required|string|max:100',
-        'isi_pengumuman' => 'required|string|max:200',
-        'gambar' => 'required|string|max:200',
-    ]);
+    {
+        $request->validate([
+            'user_id'                 => 'required|integer',
+            'judul'                   => 'required|string|max:100',
+            'isi_pengumuman'          => 'required|string|max:200',
+            'gambar'                  => 'required|string|max:200',
+        ]);
 
-    PengumumanModel::create([
-        'user_id' => $request->user_id,
-        'judul' => $request->judul,
-        'isi_pengumuman' => $request->isi_pengumuman,
-        'gambar' => $request->gambar,
-    ]);
+        PengumumanModel::create([
+            'user_id'                 => $request->user_id,
+            'judul'                   => $request->judul,
+            'isi_pengumuman'          => $request->isi_pengumuman,
+            'gambar'                  => $request->gambar,
+        ]);
 
-    return redirect()->route('sekretaris.pengumuman.index')->with('success', 'Data pengumuman berhasil disimpan');
-}
-
+        return redirect('sekretaris.pengumuman.index')->with('success', 'Data pengumuman berhasil disimpan');
+    }
 
     public function edit($id)
-    {
-        $pengumuman = PengumumanModel::find($id);
+{
+    $pengumuman = PengumumanModel::find($id);
 
-        if (!$pengumuman) {
-            return redirect()->route('sekretaris.pengumuman.index')->with('error', 'Pengumuman tidak ditemukan');
-        }
-
-        $breadcrumb = (object) [
-            'title' => 'Pengumuman RW 05',
-            'date' => date('l, d F Y'),
-            'list'  => ['Home', 'Pengumuman', 'Edit']
-        ];
-
-        $activeMenu = 'pengumuman';
-
-        return view('sekretaris.pengumuman.edit', [
-            'breadcrumb' => $breadcrumb,
-            'pengumuman' => $pengumuman,
-            'activeMenu' => $activeMenu
-        ]);
+    if (!$pengumuman) {
+        return redirect()->route('sekretaris.pengumuman.index')->with('error', 'Pengumuman tidak ditemukan');
     }
+
+    $breadcrumb = (object) [
+        'title' => 'Pengumuman RW 05',
+        'date' => date('l, d F Y'),
+        'list'  => ['Home', 'Pengumuman', 'Edit']
+    ];
+
+    $activeMenu = 'pengumuman';
+
+    return view('sekretaris.pengumuman.edit', [
+        'breadcrumb' => $breadcrumb,
+        'pengumuman' => $pengumuman,
+        'activeMenu' => $activeMenu
+    ]);
+}
+
 
     public function update(Request $request, $id)
     {
@@ -99,11 +94,6 @@ class PengumumanController extends Controller
         ]);
 
         $pengumuman = PengumumanModel::find($id);
-
-        if (!$pengumuman) {
-            return redirect()->route('sekretaris.pengumuman.index')->with('error', 'Pengumuman tidak ditemukan');
-        }
-
         $pengumuman->update([
             'judul' => $request->judul,
             'isi_pengumuman' => $request->isi_pengumuman,
@@ -113,23 +103,18 @@ class PengumumanController extends Controller
         return redirect()->route('sekretaris.pengumuman.index')->with('success', 'Data pengumuman berhasil diubah');
     }
 
-    public function destroy($id)
+    public function destroy(string $id)
     {
-        $pengumuman = PengumumanModel::find($id);
-
-        if (!$pengumuman) {
-            return redirect()->route('sekretaris.pengumuman.index')->with('error', 'Data pengumuman tidak ditemukan');
+        $check = PengumumanModel::find($id);
+        if (!$check) {
+            return redirect('sekretaris.pengumuman.index')->with('error', 'Data pengumuman tidak ditemukan');
         }
-
-        $pengumuman->delete();
-
-        return redirect()->route('sekretaris.pengumuman.index')->with('success', 'Data pengumuman berhasil dihapus');
     }
-
     public function show($id)
     {
-        $pengumuman = PengumumanModel::findOrFail($id);
+    $pengumuman = PengumumanModel::findOrFail($id);
 
-        return view('sekretaris.pengumuman.show', compact('pengumuman'));
+    return view('sekretaris.pengumuman.show', compact('pengumuman'));
     }
+
 }
