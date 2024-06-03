@@ -17,6 +17,8 @@ return new class extends Migration
             $table->string('nama_usaha', 50);
             $table->string('alamat_usaha', 50);
             $table->string('jenis_usaha', 50);
+            $table->time('jam_buka');
+            $table->time('jam_tutup');
             $table->enum('status_usaha', ['Aktif', 'Nonaktif']);
             $table->string('deskripsi', 200);
             $table->string('lampiran', 200);
