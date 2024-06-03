@@ -7,11 +7,12 @@ use App\Models\KegiatanModel;
 use App\Models\UmkmModel;
 use App\Models\KkModel;
 use App\Models\WargaModel;
+use App\Charts\WargaChart;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
 {
-    public function index()
+    public function index(WargaChart $WargaChart)
     {
         $breadcrumb = (object) [
             'title' => 'Selamat Datang, Warga',
@@ -22,9 +23,9 @@ class DashboardController extends Controller
         // Initialize the necessary data from models
         $kegiatan = KegiatanModel::orderBy('tanggal', 'desc')->take(5)->get();
         $umkm = UmkmModel::orderBy('created_at', 'desc')->take(5)->get();
-        $jumlah_kk = KkModel::count(); // This assumes you have a KkModel and you want to count all records
-        $jumlah_umkm = UmkmModel::count(); // This assumes you have a KkModel and you want to count all records
-        $jumlah_warga =WargaModel::count(); // This assumes you have a KkModel and you want to count all records
+        $jumlah_kk = KkModel::count();
+        $jumlah_umkm = UmkmModel::count();
+        $jumlah_warga =WargaModel::count();
 
         // It seems there was an incorrect opening parenthesis here
         $activeMenu = 'dashboard';
@@ -37,7 +38,8 @@ class DashboardController extends Controller
             'umkm' => $umkm,
             'jumlah_kk' => $jumlah_kk,
             'jumlah_umkm' => $jumlah_umkm,
-            'jumlah_warga' => $jumlah_warga
+            'jumlah_warga' => $jumlah_warga,
+            'WargaChart' => $WargaChart->build()
         ]);
     }
 

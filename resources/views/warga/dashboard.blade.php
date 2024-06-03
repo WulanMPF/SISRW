@@ -5,25 +5,39 @@
     <li class="card">
         <i class="fas fa-solid fa-user"></i>
         <span class="text">
-            <h3>{{$jumlah_warga}}</h3>
-            <p>Jumlah Warga</p>
+            <h3 id="jumlahWargaCounter">0</h3> <!-- Initialize with 0 -->
+            <h3>Jumlah Warga</h3>
         </span>
     </li>
+
     <li class="card">
         <i class="fas fa-solid fa-user"></i>
         <span class="text">
-            <h3>{{$jumlah_kk}}</h3>
-            <p>Jumlah Keluarga</p>
+            <h3 id="jumlahKKCounter">0</h3> <!-- Initialize with 0 -->
+            <h3>Jumlah Keluarga</h3>
         </span>
     </li>
+
     <li class="card">
         <i class="fas fa-solid fa-user"></i>
         <span class="text">
-            <h3>{{$jumlah_umkm}}</h3>
-            <p>Jumlah UMKM</p>
+            <h3 id="jumlahUMKMCounter">0</h3> <!-- Initialize with 0 -->
+            <h3>Jumlah UMKM</h3>
         </span>
     </li>
 </ul>
+<div class="row">
+    <div class="col-md-4 ml-4">
+        <div class="card">
+            <div class="p-6 m-20 bg-white rounded shadow">
+                {!! $WargaChart->container() !!}
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
 <div class="container-fluid my-4">
     <div class="row">
         <!-- Main content for Community Activities -->
@@ -137,35 +151,60 @@
     }
 
     .box-info {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            grid-gap: 24px;
-            margin-top: 36px;
-            margin-left: 1rem;
-        }
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-gap: 24px;
+    margin-top: 36px;
+}
 
-        .box-info li {
-            padding: 20px;
-            background: var(--light);
-            border-radius: 20px;
-            display: flex;
-            align-items: center;
-            grid-gap: 24px;
-        }
+.box-info .card {
+    padding: 20px;
+    background: var(--light, #fff); /* Added a fallback value for --light */
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Centers content horizontally */
+    flex-direction: column; /* Stack items vertically */
+    text-align: center; /* Align text to the center for single-line items */
+}
 
-        .box-info li .bx {
-            width: 80px;
-            height: 80x;
-            border-radius: 10px;
-            font-size: 36px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
+.box-info .card i {
+    font-size: 36px; /* Adjust size as necessary */
+    margin-bottom: 10px; /* Space between icon and text */
+}
 
-        .box-info li:nth-child(1) .bx {
-            background: lightblue;
-            color: blue;
-        }
+.box-info .text h3, .box-info .text p {
+    margin: 5px 0; /* Reduces space around text for more compact card */
+}
+
+.box-info .card:hover {
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+}
+
 </style>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+    function animateValue(id, start, end, duration) {
+        let obj = document.getElementById(id);
+        let startTimestamp = null;
+        const step = (timestamp) => {
+            if (!startTimestamp) startTimestamp = timestamp;
+            const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+            obj.innerHTML = Math.floor(progress * (end - start) + start);
+            if (progress < 1) {
+                window.requestAnimationFrame(step);
+            }
+        };
+        window.requestAnimationFrame(step);
+    }
+
+    // Trigger animations
+    animateValue("jumlahWargaCounter", 0, {{$jumlah_warga}}, 2000); // Jumlah Warga
+    animateValue("jumlahKKCounter", 0, {{$jumlah_kk}}, 2000); // Jumlah Keluarga
+    animateValue("jumlahUMKMCounter", 0, {{$jumlah_umkm}}, 2000); // Jumlah UMKM
+});
+</script>
+<script src="{{ $WargaChart->cdn() }}"></script>
+    {{ $WargaChart->script() }}
 @endpush
