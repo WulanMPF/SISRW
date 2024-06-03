@@ -16,8 +16,7 @@ class CreatePengaduanTable extends Migration
         Schema::create('pengaduan', function (Blueprint $table) {
             $table->id('pengaduan_id');
             $table->unsignedBigInteger('warga_id')->index();
-            $table->string('nama_pelapor');
-            $table->string('jenis_pengaduan'); // Define 'jenis_pengaduan' column
+            $table->string('jenis_pengaduan');
             $table->date('tgl_pengaduan');
             $table->enum('prioritas', ['Tinggi', 'Sedang', 'Rendah']);
             $table->enum('status_pengaduan', ['Ditunda', 'Diproses', 'Selesai']);
