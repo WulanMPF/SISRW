@@ -36,6 +36,9 @@
                         <div class="col-sm-9">
                             <input type="text" id="nama_usaha" name="nama_usaha" class="form-control" rows="5"
                                 required>
+                            @error('nama_usaha')
+                                <small class="form-text text-danger">{{ $message }}</small>
+                            @enderror
                         </div>
                     </div>
                     <div class="form-group row">
@@ -43,6 +46,9 @@
                         <div class="col-sm-9">
                             <input type="text" id="alamat_usaha" name="alamat_usaha" class="form-control" rows="5"
                                 required>
+                            @error('alamat_usaha')
+                                <small class="form-text text-danger">{{ $message }}</small>
+                            @enderror
                         </div>
                     </div>
                     <div class="form-group row">
@@ -75,11 +81,49 @@
                                 value="Aktif" required readonly>
                         </div>
                     </div>
-
+                    <div class="form-group row">
+                        <label for="jam_buka" class="col-sm-2 col-form-label">Jam Buka:</label>
+                        <div class="col-sm-4">
+                            <select class="form-control" id="jam_buka" name="jam_buka" required>
+                                @foreach ($times as $time)
+                                    <option value="{{ $time }}" {{ old('jam_buka') == $time ? 'selected' : '' }}>
+                                        {{ $time }}</option>
+                                @endforeach
+                            </select>
+                            @error('jam_buka')
+                                <small class="form-text text-danger">{{ $message }}</small>
+                            @enderror
+                        </div>
+                        <label for="jam_tutup" class="col-sm-1 col-form-label">sampai</label>
+                        <div class="col-sm-4">
+                            <select class="form-control" id="jam_tutup" name="jam_tutup" required>
+                                @foreach ($times as $time)
+                                    <option value="{{ $time }}" {{ old('jam_tutup') == $time ? 'selected' : '' }}>
+                                        {{ $time }}</option>
+                                @endforeach
+                            </select>
+                            @error('jam_tutup')
+                                <small class="form-text text-danger">{{ $message }}</small>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="no_telepon" class="col-sm-2 col-form-label">No Telepon:</label>
+                        <div class="col-sm-9">
+                            <input type="tel" id="no_telepon" name="no_telepon" class="form-control" rows="5"
+                                pattern="[0-9]*" required>
+                            @error('no_telepon')
+                                <small class="form-text text-danger">{{ $message }}</small>
+                            @enderror
+                        </div>
+                    </div>
                     <div class="form-group row">
                         <label for="deskripsi" class="col-sm-2 col-form-label">Deskripsi Usaha:</label>
                         <div class="col-sm-9">
                             <textarea id="deskripsi" name="deskripsi" class="form-control" rows="5" required></textarea>
+                            @error('deskripsi')
+                                <small class="form-text text-danger">{{ $message }}</small>
+                            @enderror
                         </div>
                     </div>
 
@@ -87,6 +131,9 @@
                         <label for="lampiran" class="col-sm-2 col-form-label">Lampiran:</label>
                         <div class="col-sm-9">
                             <input type="file" id="lampiran" name="lampiran" class="form-control-file" required>
+                            @error('lampiran')
+                                <small class="form-text text-danger">{{ $message }}</small>
+                            @enderror
                         </div>
                     </div>
 
