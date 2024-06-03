@@ -11,7 +11,7 @@
     </li>
 
     <li class="card">
-        <i class="fas fa-solid fa-user"></i>
+        <i class="fas fa-solid fa-building"></i>
         <span class="text">
             <h3 id="jumlahKKCounter">0</h3> <!-- Initialize with 0 -->
             <h3>Jumlah Keluarga</h3>
@@ -19,7 +19,7 @@
     </li>
 
     <li class="card">
-        <i class="fas fa-solid fa-user"></i>
+        <i class="fas fa-solid fa-store"></i>
         <span class="text">
             <h3 id="jumlahUMKMCounter">0</h3> <!-- Initialize with 0 -->
             <h3>Jumlah UMKM</h3>
