@@ -14,6 +14,9 @@ class PengaduanController extends Controller
      */
     public function index()
     {
+        // Get data from database
+        $pengaduan = PengaduanModel::where('status_pengaduan', 'Selesai')->get();
+
         // Breadcrumbs setup
         $breadcrumb = (object) [
             'title' => 'Formulir Aspirasi dan Pengaduan Warga',
@@ -25,7 +28,7 @@ class PengaduanController extends Controller
         $activeMenu = 'pengaduan';
 
         // Passing data to the view
-        return view('warga.pengaduan.index', compact('breadcrumb', 'activeMenu'));
+        return view('warga.pengaduan.index', ['breadcrumb' => $breadcrumb, 'pengaduan' => $pengaduan, 'activeMenu' => $activeMenu]);
     }
 
     /**
