@@ -10,6 +10,7 @@ use App\Http\Controllers\Ketua\BansosController;
 use App\Http\Controllers\Ketua\LapkeuController;
 use App\Http\Controllers\Sekretaris\DashboardController as SekretarisDashboardController;
 use App\Http\Controllers\Sekretaris\PengumumanController;
+use App\Http\Controllers\Sekretaris\KegiatanController;
 use App\Http\Controllers\sekretaris\SyaratBansosController as SekretarisSyaratBansosController;
 use App\Http\Controllers\Sekretaris\UmkmController as SekretarisUmkmController;
 use App\Http\Controllers\Sekretaris\BansosController as SekretarisBansosController;
@@ -207,6 +208,15 @@ Route::group(['prefix' => 'sekretaris/pengumuman'], function () {
     Route::get('/edit/{id}', [PengumumanController::class, 'edit'])->name('sekretaris.pengumuman.edit');
     Route::put('/{id}', [PengumumanController::class, 'update'])->name('sekretaris.pengumuman.update');
     Route::delete('/destroy/{pengumuman_id}', [PengumumanController::class, 'destroy'])->name('sekretaris.pengumuman.destroy');
+});
+Route::group(['prefix' => 'sekretaris/kegiatan'], function () {
+    Route::get('/', [KegiatanController::class, 'index'])->name('sekretaris.kegiatan.index');
+    Route::get('/create', [KegiatanController::class, 'create'])->name('sekretaris.kegiatan.create');
+    Route::post('/', [KegiatanController::class, 'store'])->name('sekretaris.kegiatan.store');
+    Route::get('/{id}', [KegiatanController::class, 'show'])->name('sekretaris.kegiatan.show');
+    Route::get('/edit/{id}', [KegiatanController::class, 'edit'])->name('sekretaris.kegiatan.edit');
+    Route::put('/{id}', [KegiatanController::class, 'update'])->name('sekretaris.kegiatan.update');
+    Route::delete('/destroy/{kegiatan_id}', [KegiatanController::class, 'destroy'])->name('sekretaris.kegiatan.destroy');
 });
 
 Route::group(['prefix' => 'sekretaris/skBansos'], function () {

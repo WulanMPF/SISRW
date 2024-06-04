@@ -4,24 +4,27 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class KegiatanModel extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
 
     protected $table = 'kegiatan'; // Nama tabel di database
     protected $primaryKey = 'kegiatan_id'; // Nama primary key
 
     protected $fillable = [
-        'warga_id',
         'nama_kegiatan',
         'deskripsi',
         'tanggal',
+        'gambar',
     ];
 
-    // Relasi ke tabel Warga
-    public function warga()
+    protected $dates = ['deleted_at'];
+
+    public function user(): BelongsTo
     {
-        return $this->belongsTo(WargaModel::class, 'warga_id', 'warga_id');
+        return $this->belongsTo(UserModel::class, 'user_id', 'user_id');
     }
 }
