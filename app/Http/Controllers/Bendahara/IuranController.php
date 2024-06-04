@@ -92,7 +92,6 @@ class IuranController extends Controller
             'periode_id' => 'required|integer',
             'kk_id' => 'required|integer',
             'tgl_pembayaran' => 'required|date',
-            'jumlah_bayar' => 'required|numeric',
             'status_pembayaran' => 'required|string|max:20',
         ]);
 
@@ -100,13 +99,13 @@ class IuranController extends Controller
         IuranModel::create([
             'periode_id' => $request->periode_id,
             'kk_id' => $request->kk_id,
+            'laporan_id' => null,
             'tgl_pembayaran' => $request->tgl_pembayaran,
-            'jumlah_bayar' => $request->jumlah_bayar,
             'status_pembayaran' => $request->status_pembayaran,
         ]);
 
         // Redirect ke halaman index dengan pesan sukses
-        return redirect()->route('iuran.index')->with('success', 'Pembayaran iuran berhasil dilakukan.');
+        return redirect()->route('bendahara.iuran.index')->with('success', 'Pembayaran iuran berhasil dilakukan.');
     }
 
     public function show($id)

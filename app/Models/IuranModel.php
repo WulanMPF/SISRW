@@ -11,11 +11,10 @@ class IuranModel extends Model
     protected $table = 'iuran';
     protected $primaryKey = 'iuran_id';
     protected $fillable = [
+        'periode_id',
         'kk_id',
         'laporan_id',
         'tgl_pembayaran',
-        'jenis_iuran',
-        'jumlah_bayar',
         'status_pembayaran',
     ];
 

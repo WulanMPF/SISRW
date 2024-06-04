@@ -17,8 +17,6 @@ return new class extends Migration
             $table->unsignedBigInteger('kk_id')->index();
             $table->unsignedBigInteger('laporan_id')->index();
             $table->date('tgl_pembayaran');
-            $table->string('jenis_iuran', 20);
-            $table->unsignedBigInteger('jumlah_bayar');
             $table->enum('status_pembayaran', ['Lunas', 'Diproses', 'Belum Lunas']);
             $table->timestamps();
 
