@@ -1,32 +1,32 @@
 @extends('layout.sekretaris.template')
 
 @section('content')
-<div class="modal fade" id="deactivePengumuman" tabindex="-1" role="dialog" aria-labelledby="deactivePengumumanLabel"
-aria-hidden="true">
-<div class="modal-dialog" role="document">
-    <div class="modal-content">
-        <div class="modal-header">
-            <h5 class="modal-title" id="deactivePengumumanLabel">Konfirmasi Penghapusan Pengumuman</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            </button>
-        </div>
-        <div class="modal-body">
-            <form id="deleteForm" method="POST" action="">
-                @csrf
-                {!! method_field('DELETE') !!}
-                <div class="form-group">
-                    <p>Apakah yakin pengumuman akan dihapus?
-                    </p>
+    <div class="modal fade" id="deactivePengumuman" tabindex="-1" role="dialog" aria-labelledby="deactivePengumumanLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deactivePengumumanLabel">Konfirmasi Penghapusan Pengumuman</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    </button>
                 </div>
-                <div class="text-left mt-3">
-                    <button type="submit" class="btn btn-danger">Ya, Hapus</button>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                <div class="modal-body">
+                    <form id="deleteForm" method="POST" action="">
+                        @csrf
+                        {!! method_field('DELETE') !!}
+                        <div class="form-group">
+                            <p>Apakah yakin pengumuman akan dihapus?
+                            </p>
+                        </div>
+                        <div class="text-left mt-3">
+                            <button type="submit" class="btn btn-danger">Ya, Hapus</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                        </div>
+                    </form>
                 </div>
-            </form>
+            </div>
         </div>
     </div>
-</div>
-</div>
 
     <div class="container">
         <div class="row">
@@ -51,19 +51,29 @@ aria-hidden="true">
                     </div>
                 </div>
                 <div class="row" id="searchResults">
-                    @foreach($pengumuman as $item)
+                    @foreach ($pengumuman as $item)
                         <div class="col-md-4">
                             <div class="card">
+                                <div class="card-header">
+                                    <h5 class="card-title"><strong>{{ $item->judul }}</strong></h5>
+                                </div>
                                 <div class="card-body">
-                                    <h5 class="card-title">{{ $item->judul }}</h5>
                                     <p class="card-text">{{ $item->isi_pengumuman }}</p>
-                                    <img src="{{ asset('gambar_pengumuman/' . $item->gambar) }}" class="card-img-top center">
-                                    <a href="{{ url('sekretaris/pengumuman/edit/'. $item->pengumuman_id) }}" class="btn btn-xs btn-warning mr-2" style="border-radius: 6px;"><i class="fas fa-edit fa-lg"></i></a>
+                                    <img src="{{ asset('gambar_pengumuman/' . $item->gambar) }}"
+                                        class="card-img-top center">
+                                </div>
+                                <div class="card-footer">
+                                    <a href="{{ url('sekretaris/pengumuman/edit/' . $item->pengumuman_id) }}"
+                                        class="btn btn-xs btn-warning mr-2" style="border-radius: 6px;"><i
+                                            class="fas fa-edit fa-lg"></i></a>
                                     {{-- <a href="{{ url('sekretaris/pengumuman/edit/'. $item->pengumuman_id) }}" class="btn btn-sm btn-warning">+ Edit Pengumuman</a> --}}
-                                        @csrf
-                                        @method('DELETE')
-                                        {{-- <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')">Delete</button> --}}
-                                        <button type="button" class="btn btn-xs btn-danger" style="border-radius: 6px;" data-toggle="modal" data-target="#deactivePengumuman" data-pengumuman-id="{{ $item->pengumuman_id }}"><i class="fas fa-trash fa-lg"></i></button>
+                                    @csrf
+                                    @method('DELETE')
+                                    {{-- <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Apakah anda yakin ingin menghapus data ini?')">Delete</button> --}}
+                                    <button type="button" class="btn btn-xs btn-danger" style="border-radius: 6px;"
+                                        data-toggle="modal" data-target="#deactivePengumuman"
+                                        data-pengumuman-id="{{ $item->pengumuman_id }}"><i
+                                            class="fas fa-trash fa-lg"></i></button>
                                     </form>
                                 </div>
                             </div>
@@ -77,10 +87,25 @@ aria-hidden="true">
 
 @push('css')
     <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+
         .btn-tambah {
             background-color: #BB955C;
             border-color: #BB955C;
             color: #ffffff;
+        }
+
+        .card-title {
+            display: inline-block;
+            height: 45px;
+            color: #BB955C;
+            line-height: 1.7rem;
+        }
+
+        .card-footer {
+            left: 0;
         }
     </style>
 @endpush
@@ -102,13 +127,17 @@ aria-hidden="true">
                             html += '<div class="card">';
                             html += '<div class="card-body">';
                             html += '<h5 class="card-title">' + item.judul + '</h5>';
-                            html += '<p class="card-text">' + item.isi_pengumuman + '</p>';
+                            html += '<p class="card-text">' + item.isi_pengumuman +
+                                '</p>';
                             html += '<p class="picture">' + item.gambar + '</p>';
-                            html += '<a href="/sekretaris/pengumuman/' + item.id + '/edit" class="btn btn-sm btn-warning">Edit</a>';
-                            html += '<form action="/sekretaris/pengumuman/' + item.id + '" method="POST" style="display:inline;">';
+                            html += '<a href="/sekretaris/pengumuman/' + item.id +
+                                '/edit" class="btn btn-sm btn-warning">Edit</a>';
+                            html += '<form action="/sekretaris/pengumuman/' + item.id +
+                                '" method="POST" style="display:inline;">';
                             html += '@csrf';
-                            html += '@method("DELETE")';
-                            html += '<button type="submit" class="btn btn-sm btn-danger" onclick="return confirm(\'Are you sure?\')">Delete</button>';
+                            html += '@method('DELETE')';
+                            html +=
+                                '<button type="submit" class="btn btn-sm btn-danger" onclick="return confirm(\'Are you sure?\')">Delete</button>';
                             html += '</form>';
                             html += '</div>';
                             html += '</div>';
@@ -123,8 +152,11 @@ aria-hidden="true">
                 var button = $(event.relatedTarget); // Button yang memicu modal
                 var Id = button.data('pengumuman-id'); // Ambil nilai data-umkm-id
                 var form = $('#deleteForm');
-                form.attr('action', '{{ url('sekretaris/pengumuman/destroy') }}/' + Id); // Set action form dengan ID UMKM
+                form.attr('action', '{{ url('sekretaris/pengumuman/destroy') }}/' +
+                    Id); // Set action form dengan ID UMKM
             });
         });
     </script>
+@endpush
+@push('css')
 @endpush
