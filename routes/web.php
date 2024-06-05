@@ -17,17 +17,20 @@ use App\Http\Controllers\Sekretaris\BansosController as SekretarisBansosControll
 use App\Http\Controllers\Sekretaris\WargaController as SekretarisWargaController;
 use App\Http\Controllers\Bendahara\IuranController as BendaharaIuranController;
 use App\Http\Controllers\Bendahara\LapkeuController as BendaharaLapkeuController;
+use App\Http\Controllers\Bendahara\NotifikasiController as BendaharaNotifikasiController;
 use App\Http\Controllers\Bendahara\ProfileController as BendaharaProfileController;
 use App\Http\Controllers\Ketua\ArsipSuratController;
 use App\Http\Controllers\Ketua\NotifikasiController;
 use App\Http\Controllers\Ketua\ProfileController;
 use App\Http\Controllers\Login\LoginController;
+use App\Http\Controllers\Sekretaris\NotifikasiController as SekretarisNotifikasiController;
 use App\Http\Controllers\Sekretaris\ProfileController as SekretarisProfileController;
 use App\Http\Controllers\Sekretaris\SuratController as SekretarisSuratController;
 use App\Http\Controllers\Warga\IuranController as WargaIuranController;
 use App\Http\Controllers\Warga\PengaduanController as WargaPengaduanController;
 use App\Http\Controllers\Warga\AjukanPersuratanController as AjukanPersuratanController;
 use App\Http\Controllers\Warga\DashboardController as WargaDashboardController;
+use App\Http\Controllers\Warga\NotifikasiController as WargaNotifikasiController;
 use App\Http\Controllers\Warga\SyaratBansosController as WargaSyaratBansosController;
 use App\Http\Controllers\Warga\UmkmController as WargaUmkmController;
 use App\Http\Controllers\Warga\ProfileController as WargaProfileController;
@@ -250,6 +253,10 @@ Route::group(['prefix' => 'sekretaris/profile'], function () {
     Route::get('/', [SekretarisProfileController::class, 'index']);
 });
 
+Route::group(['prefix' => 'sekretaris/notification'], function () {
+    Route::get('/', [SekretarisNotifikasiController::class, 'index']);
+});
+
 // Route Halaman Bendahara RW
 Route::group(['prefix' => 'bendahara/dashboard'], function () {
     Route::get('/', [BendaharaDashboardController::class, 'index'])->name('bendahara.dashboard');;
@@ -274,6 +281,10 @@ Route::group(['prefix' => 'bendahara/laporan'], function () {
 });
 Route::group(['prefix' => 'bendahara/profile'], function () {
     Route::get('/', [BendaharaProfileController::class, 'index']);
+});
+
+Route::group(['prefix' => 'bendahara/notification'], function () {
+    Route::get('/', [BendaharaNotifikasiController::class, 'index']);
 });
 
 // Route Halaman Warga
@@ -306,6 +317,8 @@ Route::group(['prefix' => 'warga/umkm'], function () {
     Route::get('/{id}', [WargaUmkmController::class, 'show']);
 });
 
+Route::get('warga/umkm-saya', [WargaUmkmController::class, 'mine'])->name('umkm.saya');
+
 Route::group(['prefix' => 'warga/bansos'], function () {
     Route::get('/', [WargaSyaratBansosController::class, 'index']);
     Route::get('/{id}', [WargaSyaratBansosController::class, 'show']);
@@ -313,4 +326,8 @@ Route::group(['prefix' => 'warga/bansos'], function () {
 
 Route::group(['prefix' => 'warga/profile'], function () {
     Route::get('/', [WargaProfileController::class, 'index']);
+});
+
+Route::group(['prefix' => 'warga/notification'], function () {
+    Route::get('/', [WargaNotifikasiController::class, 'index']);
 });
