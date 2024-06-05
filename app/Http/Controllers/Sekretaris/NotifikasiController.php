@@ -28,7 +28,7 @@ class NotifikasiController extends Controller
 
         $umkm = UmkmModel::all();
 
-        return view('ketua.notifikasi.index', [
+        return view('sekretaris.notifikasi.index', [
             'user' => $user,
             'warga' => $warga, 'breadcrumb' => $breadcrumb, 'umkm' => $umkm, 'activeMenu' => $activeMenu
         ]);
