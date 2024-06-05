@@ -10,8 +10,8 @@
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
         <!-- Notifications Dropdown Menu -->
-        <li class="nav-item dropdown">
-            <a class="nav-link" data-toggle="dropdown" href="#">
+        <li class="nav-item ">
+            <a class="nav-link" href="{{ url('/ketua/notification') }}">
                 <i class="far fa-bell"></i>
             </a>
         </li>
