@@ -7,6 +7,15 @@
             Jenis Bantuan Sosial
         </h3>
         {{-- Code disesuaikan dengan pemgambilan data dari database - masih perlu perbaikan PADA SOURCE IMG --}}
+        <div class="list-group-item d-flex justify-content-between align-items-center mb-3">
+            <div>
+                <h4 class="mb-0">Daftar Bansos</h4>
+                <small class="text-muted">Cari dan tambah data bansos</small>
+            </div>
+            <div class="d-flex align-items-center">
+                <a href="skBansos/create" class="btn" id="tambah">Tambah Data</a>
+            </div>
+        </div>
         @foreach ($skBansos as $item)
             <div class="list-group-item d-flex justify-content-between">
                 <p class="card-text ml-2">{{ \Carbon\Carbon::parse($item->tgl_syarat_ketentuan)->format('d/m/Y') }} </p>
@@ -25,14 +34,13 @@
         }
 
         #tambah {
-            background-color: #cbbeab;
-            margin-left: 0;
+            background-color: #BB955C;
+            margin-right: 1.25rem;
             padding-left: 2rem;
-            color: black;
-            border-radius: 1rem;
-            font-size: 13px;
+            color: white;
+            border-radius: 20px;
             padding-right: 2rem;
-            margin-right: 3.2rem;
+            border: none;
         }
 
         #button {
