@@ -19,6 +19,7 @@ use App\Http\Controllers\Bendahara\IuranController as BendaharaIuranController;
 use App\Http\Controllers\Bendahara\LapkeuController as BendaharaLapkeuController;
 use App\Http\Controllers\Bendahara\ProfileController as BendaharaProfileController;
 use App\Http\Controllers\Ketua\ArsipSuratController;
+use App\Http\Controllers\Ketua\NotifikasiController;
 use App\Http\Controllers\Ketua\ProfileController;
 use App\Http\Controllers\Login\LoginController;
 use App\Http\Controllers\Sekretaris\ProfileController as SekretarisProfileController;
@@ -165,6 +166,10 @@ Route::group(['prefix' => 'ketua/iuran'], function () {
 Route::group(['prefix' => 'ketua/profile'], function () {
     Route::get('/', [ProfileController::class, 'index']);
     // Route::post('/list', [ProfileController::class, 'list']);
+});
+
+Route::group(['prefix' => 'ketua/notification'], function () {
+    Route::get('/', [NotifikasiController::class, 'index']);
 });
 
 // Route Halaman Sekretaris RW
