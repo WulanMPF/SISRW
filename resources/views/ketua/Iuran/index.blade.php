@@ -29,10 +29,9 @@
                     <tr>
                         <th>No</th>
                         <th>Periode Pembayaran</th>
-                        <th>No. KK </th>
-                        <th>Iuran Sampah</th>
-                        <th>Iuran Keamanan</th>
-                        <th>Iuran Bulanan</th>
+                        <th>Nama Kepala</th>
+                        <th>RT/RW</th>
+                        <th>Status Pembayaran</th>
                     </tr>
                 </thead>
             </table>
@@ -69,15 +68,36 @@
                         d._status_pembayaran = $('#status_pembayaran').val();
                     }
                 },
-                columns: [
-                    { data: "DT_RowIndex", className: "text-center", orderable: false, searchable: false },
-                    { data: "tgl_pembayaran", className: "", orderable: true, searchable: true },
-                    { data: "kk_no_kk", className: "", orderable: true, searchable: true },
-                    { data: "iuran_sampah", className: "", orderable: true, searchable: false },
-                    { data: "iuran_keamanan", className: "", orderable: true, searchable: false },
-                    { data: "iuran_bulanan", className: "", orderable: true, searchable: false }
-                    
-                   
+                columns: [{
+                        data: "DT_RowIndex",
+                        className: "text-center",
+                        orderable: false,
+                        searchable: false
+                    },
+                    {
+                        data: "periode.bulan",
+                        className: "",
+                        orderable: true,
+                        searchable: true
+                    },
+                    {
+                        data: "kk.nama_kepala_keluarga",
+                        className: "",
+                        orderable: true,
+                        searchable: true
+                    },
+                    {
+                        data: "kk.rt_rw",
+                        className: "",
+                        orderable: true,
+                        searchable: false
+                    },
+                    {
+                        data: "status_pembayaran",
+                        className: "",
+                        orderable: true,
+                        searchable: false
+                    },
                 ]
             });
 
