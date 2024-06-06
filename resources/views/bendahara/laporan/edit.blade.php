@@ -19,6 +19,38 @@
                         @csrf
                         {!! method_field('PUT') !!}
                         <div class="form-group row">
+                            <label class="col-sm-2 col-form-label"> Periode: </label>
+                            <div class="col-sm-8">
+                                <select class="form-control" id="periode" name="periode" required>
+                                    <option value="">- Pilih Periode -</option>
+                                    <option value="Januari" @selected(old('periode', $laporan->periode) == 'Januari')>Januari</option>
+                                    <option value="Februari" @selected(old('periode', $laporan->periode) == 'Februari')>Februari</option>
+                                    <option value="Maret" @selected(old('periode', $laporan->periode) == 'Maret')>Maret</option>
+                                    <option value="April" @selected(old('periode', $laporan->periode) == 'April')>April</option>
+                                    <option value="Mei" @selected(old('periode', $laporan->periode) == 'Mei')>Mei</option>
+                                    <option value="Juni" @selected(old('periode', $laporan->periode) == 'Juni')>Juni</option>
+                                    <option value="Juli" @selected(old('periode', $laporan->periode) == 'Juli')>Juli</option>
+                                    <option value="Agustus" @selected(old('periode', $laporan->periode) == 'Agustus')>Agustus</option>
+                                    <option value="September" @selected(old('periode', $laporan->periode) == 'September')>September</option>
+                                    <option value="Oktober" @selected(old('periode', $laporan->periode) == 'Oktober')>Oktober</option>
+                                    <option value="November" @selected(old('periode', $laporan->periode) == 'November')>November</option>
+                                    <option value="Desember" @selected(old('periode', $laporan->periode) == 'Desember')>Desember</option>
+                                </select>
+                                @error('periode')
+                                    <small class="form-text text-danger">{{ $message }}</small>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label"> Tahun: </label>
+                            <div class="col-sm-8">
+                                <input type="number" class="form-control" id="tahun" name="tahun" value="{{ old('tahun', $laporan->tahun) }}" required>
+                                @error('tahun')
+                                    <small class="form-text text-danger">{{ $message }}</small>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="form-group row">
                             <label for="tgl_laporan" class="col-sm-2 col-form-label"> Tanggal :</label>
                             <div class="col-sm-8">
                                 <input type="date" id="tgl_laporan" name="tgl_laporan" class="form-control" rows="5"

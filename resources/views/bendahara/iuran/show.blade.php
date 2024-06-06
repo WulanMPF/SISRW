@@ -10,21 +10,21 @@
                     <h5 class="card-title">Detail Iuran</h5>
                     <table class="table">
                         <tbody>
-                            <tr>
+                            {{-- <tr>
                                 <th scope="row">ID</th>
-                                <td>{{ $iuran->id }}</td>
+                                <td>{{ $iuran->iuran_id }}</td>
+                            </tr> --}}
+                            <tr>
+                                <th scope="row">Nomor KK</th>
+                                <td>{{ $iuran->kk->no_kk }}</td>
                             </tr>
                             <tr>
-                                <th scope="row">KK ID</th>
-                                <td>{{ $iuran->kk_id }}</td>
+                                <th scope="row">Nama Kepala Keluarga</th>
+                                <td>{{ $iuran->kk->nama_kepala_keluarga }}</td>
                             </tr>
                             <tr>
                                 <th scope="row">Tanggal Pembayaran</th>
                                 <td>{{ $iuran->tgl_pembayaran }}</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">Jenis Iuran</th>
-                                <td>{{ $iuran->jenis_iuran }}</td>
                             </tr>
                             <tr>
                                 <th scope="row">Jumlah Bayar</th>

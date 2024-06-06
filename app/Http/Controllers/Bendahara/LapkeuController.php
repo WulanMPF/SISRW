@@ -28,10 +28,18 @@ class LapkeuController extends Controller
     // Ambil data user dalam bentuk json untuk datatables
     public function list(Request $request)
     {
-        $laporans = LapkeuModel::select('laporan_id', 'nominal', 'keterangan', 'jenis_laporan', 'tgl_laporan');
+        $laporans = LapkeuModel::select('laporan_id', 'nominal', 'keterangan', 'jenis_laporan', 'periode', 'tahun', 'tgl_laporan');
 
         if ($request->has('jenis_laporan') && $request->jenis_laporan != '') {
             $laporans->where('jenis_laporan', $request->jenis_laporan);
+        }
+
+        if ($request->has('periode') && $request->periode != '') {
+            $laporans->whereMonth('tgl_laporan', $request->periode);
+        }
+
+        if ($request->has('tahun') && $request->tahun != '') {
+            $laporans->whereYear('tgl_laporan', $request->tahun);
         }
 
         return DataTables::of($laporans)
@@ -45,7 +53,7 @@ class LapkeuController extends Controller
             ->addColumn('aksi', function ($laporan) {
                 $btn = '<a href="' . url('/bendahara/laporan/' . $laporan->laporan_id) . '" class="btn btn-sm"><i class="fas fa-eye" style="color: #BB955C; font-size: 17px;"></i></a>';
                 $btn .= '<a href="' . url('/bendahara/laporan/' . $laporan->laporan_id . '/edit') . '" class="btn btn-sm"><i class="fas fa-edit" style="color: #007bff;" font-size: 17px;></i></a>';
-                $btn .= '<button type="button" class="btn btn-sm" onclick="showConfirmationModal(' . $laporan->laporan_id . ')"><i class="fas fa-trash-alt" style="color: #dc3545; font-size: 17px;"></i></button>';
+                $btn .= '<button class="btn btn-sm delete-btn" data-toggle="modal" data-target="#confirmationDelete" data-laporan-id="' . $laporan->laporan_id . '"><i class="fas fa-trash-alt" style="color: #dc3545; font-size: 17px;"></i></button>';
                 // delete default -- localhost
                 /*$btn .= '<form class="d-inline-block" method="POST" action="' . url('/bendahara/laporan/' . $laporan->laporan_id) . '">'
                     . csrf_field() . method_field('DELETE') .
@@ -77,6 +85,8 @@ class LapkeuController extends Controller
             'nominal'    => 'required|integer',
             'keterangan'  => 'required|string|max:200',
             'jenis_laporan' => 'required|string|max:50',
+            'periode'  => 'required|string|max:200',
+            'tahun'    => 'required|integer',
             'tgl_laporan' => 'required|date',
         ]);
 
@@ -84,6 +94,8 @@ class LapkeuController extends Controller
             'nominal'    => $request->nominal,
             'keterangan'  => $request->keterangan,
             'jenis_laporan' => $request->jenis_laporan,
+            'periode' => $request->periode,
+            'tahun' => $request->tahun,
             'tgl_laporan' => $request->tgl_laporan,
         ]);
 
@@ -128,6 +140,8 @@ class LapkeuController extends Controller
             'nominal'    => 'required|integer',
             'keterangan'  => 'required|string|max:200',
             'jenis_laporan' => 'required|string|max:50',
+            'periode'  => 'required|string|max:200',
+            'tahun'    => 'required|integer',
             'tgl_laporan' => 'required|date',
         ]);
 
@@ -135,6 +149,8 @@ class LapkeuController extends Controller
             'nominal'    => $request->nominal,
             'keterangan'  => $request->keterangan,
             'jenis_laporan' => $request->jenis_laporan,
+            'periode' => $request->periode,
+            'tahun' => $request->tahun,
             'tgl_laporan' => $request->tgl_laporan,
         ]);
         return redirect('/bendahara/laporan')->with('success', 'Data laporan berhasil diubah');
@@ -143,7 +159,7 @@ class LapkeuController extends Controller
     {
         $check = LapkeuModel::find($id);
         if (!$check) {
-            return redirect('/bendahara/laporan')->with('error', 'Data UMKM Warga 05 tidak ditemukan');
+            return redirect('/bendahara/laporan')->with('error', 'Data Laporan Keuangan tidak ditemukan');
         }
         try {
             LapkeuModel::destroy($id);

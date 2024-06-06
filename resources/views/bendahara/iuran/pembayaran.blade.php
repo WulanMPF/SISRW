@@ -14,7 +14,7 @@
                     <div class="form-group row">
                         <label class="col-1 control-label col-form-label">Filter:</label>
                         <div class="col-3">
-                            <select class="form-control" id="status_pembayaran" name="status_pembayaran" required>
+                            <select class="form-control status_pembayaran" name="status_pembayaran" required>
                                 <option value="">Tampilkan Semua</option>
                                 <option value="Lunas">Lunas</option>
                                 <option value="Diproses">Diproses</option>
@@ -24,39 +24,46 @@
                     </div>
                 </div>
             </div>
-            <table class="table table-bordered table-striped table-hover table-sm" id="table_iuran">
+            <table class="table table-bordered table-hover table-sm" id="table_iuran">
                 <thead>
                     <tr>
                         <th style="padding-left: 1rem; padding-right: 1rem; text-align:center">No</th>
-                        {{-- <th>Periode Pembayaran</th> --}}
                         <th>Nama Kepala Keluarga</th>
                         <th>RT_RW</th>
                         <th>Tanggal Bayar</th>
-                        {{-- <th>Jumlah Bayar</th> --}}
                         <th>Status Pembayaran</th>
                         <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach ($kk as $key => $kks)
+                        @php
+                            $iuran = $kks->iuran->first();
+                            $statusPembayaran = $iuran ? $iuran->status_pembayaran : 'Belum Lunas';
+                        @endphp
                         <tr>
-                            <form action="{{ route('iuran.store') }}" method="POST">
-                                @csrf
-                                <input type="hidden" id="periode_id" name="periode_id" value="{{ $periode->periode_id }}">
-                                <input type="hidden" id="kk_id" name="kk_id" value="{{ $kks->kk_id }}">
-                                <td>{{ $key + 1 }}</td>
-                                <td>{{ $kks->nama_kepala_keluarga }}</td>
-                                <td>{{ $kks->rt_rw }}</td>
-                                <td><input type="date" id="tgl_pembayaran" name="tgl_pembayaran" class="input-table">
-                                </td>
-                                <td>
-                                    <select id="status_pembayaran" name="status_pembayaran" class="input-table">
-                                        <option value="Belum Lunas">Belum Lunas</option>
-                                        <option value="Lunas">Lunas</option>
-                                    </select>
-                                </td>
-                                <td><button type="submit" class="btn btn-simpan">Simpan</button></td>
-                            </form>
+                            <td>{{ $key + 1 }}</td>
+                            <td>{{ $kks->nama_kepala_keluarga }}</td>
+                            <td>{{ $kks->rt_rw }}</td>
+                            @if ($statusPembayaran == 'Lunas')
+                                <td>{{ $iuran->tgl_pembayaran ?? '' }}</td>
+                                <td>Lunas</td>
+                                <td><a href="{{ route('bendahara.iuran.show', $iuran->iuran_id) }}" class="btn btn-simpan">Lihat Detail</a></td>
+                            @else
+                                <form action="{{ route('iuran.store') }}" method="POST">
+                                    @csrf
+                                    <input type="hidden" id="periode_id" name="periode_id" value="{{ $periode->periode_id }}">
+                                    <input type="hidden" id="kk_id" name="kk_id" value="{{ $kks->kk_id }}">
+                                    <td><input type="date" id="tgl_pembayaran" name="tgl_pembayaran" class="input-table"></td>
+                                    <td>
+                                        <select id="status_pembayaran" name="status_pembayaran" class="input-table">
+                                            <option value="Belum Lunas" {{ $statusPembayaran == 'Belum Lunas' ? 'selected' : '' }}>Belum Lunas</option>
+                                            <option value="Lunas" {{ $statusPembayaran == 'Lunas' ? 'selected' : '' }}>Lunas</option>
+                                        </select>
+                                    </td>
+                                    <td><button type="submit" class="btn btn-simpan">Simpan</button></td>
+                                </form>
+                            @endif
                         </tr>
                     @endforeach
                 </tbody>
@@ -80,9 +87,7 @@
 
         #table_iuran thead {
             background-color: #d9d2c7;
-            /* Warna latar belakang coklat */
             color: #7F643C;
-            /* Warna teks putih */
         }
 
         .btn-simpan {
@@ -105,16 +110,30 @@
 @push('js')
     <script>
         $(document).ready(function() {
-            $('#table_iuran').DataTable();
-        });
+            // Inisialisasi DataTable
+            var table = $('#table_iuran').DataTable();
 
-        window.onload = function() {
-            var jumlahBayarElements = document.querySelectorAll('#jumlah_bayar');
-            jumlahBayarElements.forEach(function(element) {
-                var jumlahBayar = parseInt(element.innerText);
-                var statusElement = element.closest('tr').querySelector('#status');
-                statusElement.value = jumlahBayar === 85000 ? 'Lunas' : 'Belum Lunas';
+            // Event handler untuk perubahan nilai dropdown
+            $('.status_pembayaran').change(function() {
+                var status = $(this).val(); // Ambil nilai filter
+                
+                // Perbarui tabel sesuai dengan status pembayaran yang dipilih
+                table.column(4).search(status).draw();
             });
-        }
+
+            // Event handler untuk pengiriman formulir
+            $('form').submit(function(event) {
+                var tgl_pembayaran = $(this).find('#tgl_pembayaran').val();
+                var status_pembayaran = $(this).find('#status_pembayaran').val();
+
+                // Validasi jika tanggal pembayaran atau status pembayaran kosong
+                if (!tgl_pembayaran || !status_pembayaran) {
+                    event.preventDefault(); // Mencegah pengiriman formulir
+
+                    // Tampilkan pesan untuk mengisi inputan terlebih dahulu
+                    alert('Silakan isi tanggal bayar dan status pembayaran terlebih dahulu.');
+                }
+            });
+        });
     </script>
 @endpush

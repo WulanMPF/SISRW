@@ -12,7 +12,6 @@
             <div class="row mb-3">
                 <div class="col-md-12">
                     <div class="row mb-3">
-                        {{-- <div class="mol-md-5" id="datatable-buttons"></div> --}}
                         <div class="col-md-8 text-left">
                             <a class="btn btn-sm mt-1 btn-tambah" href="{{ url('bendahara/laporan/create') }}">+
                                 Tambah Data
@@ -20,13 +19,27 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        {{-- <label class="col-1 control-label col-form-label">Dari Tanggal:</label> --}}
-                        <div class="col-2">
+                        {{-- <div class="col-2">
                             <input type="date" class="form-control" id="dari_tanggal" name="dari_tanggal" required>
                         </div>
-                        {{-- <label class="control-label col-form-label">Sampai Tanggal:</label> --}}
                         <div class="col-2">
                             <input type="date" class="form-control" id="sampai_tanggal" name="sampai_tanggal" required>
+                        </div> --}}
+                        <div class="col-2">
+                            <select class="form-control" id="periode" name="periode">
+                                <option value="">Pilih Bulan</option>
+                                @foreach (range(1, 12) as $month)
+                                    <option value="{{ $month }}">{{ date('F', mktime(0, 0, 0, $month, 10)) }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="col-2">
+                            <select class="form-control" id="tahun" name="tahun">
+                                <option value="">Pilih Tahun</option>
+                                @foreach (range(date('Y'), date('Y') - 10) as $year)
+                                    <option value="{{ $year }}">{{ $year }}</option>
+                                @endforeach
+                            </select>
                         </div>
                         <div class="col-3">
                             <select class="form-control" id="jenis_laporan" name="jenis_laporan" required>
@@ -38,7 +51,7 @@
                     </div>
                 </div>
             </div>
-            <table class="table table-bordered table-striped table-hover table-sm" id="table_laporan_keuangan"
+            <table class="table table-bordered table-hover table-sm" id="table_laporan_keuangan"
                 style="width: 100%;">
                 <thead>
                     <tr>
@@ -65,40 +78,42 @@
     </div>
 
     {{-- Modal delete  --}}
-    <div class="modal fade" id="confirmationModal" tabindex="-1" role="dialog" aria-labelledby="confirmationModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="confirmationModalLabel">Konfirmasi Penghapusan</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+    <div class="modal fade" id="confirmationDelete" tabindex="-1" role="dialog" aria-labelledby="confirmationDeleteLabel"
+aria-hidden="true">
+<div class="modal-dialog" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="confirmationDeleteLabel">Konfirmasi Penghapusan Laporan</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            </button>
+        </div>
+        <div class="modal-body">
+            <form id="deleteForm" method="POST" action="">
+                @csrf
+                {!! method_field('DELETE') !!}
+                <div class="form-group">
+                    <p>Apakah yakin data laporan akan dihapus?
+                    </p>
                 </div>
-                <div class="modal-body">
-                    <p>Apakah Anda yakin menghapus data ini?</p>
+                <div class="text-left mt-3">
+                    <button type="submit" class="btn btn-danger">Ya, Hapus</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal"
-                        style="border-radius: 15px;">Batal</button>
-                    <button type="button" class="btn btn-danger" id="confirmDeleteButton" style="border-radius: 15px;">Ya,
-                        Hapus</button>
-                </div>
-            </div>
+            </form>
         </div>
     </div>
+</div>
+</div>
 @endsection
 
 @push('css')
     <style>
         .modal-content {
             font-family: 'Poppins', sans-serif;
-
         }
 
         body {
             font-family: 'Poppins', sans-serif;
-            /* font-family: "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"; */
         }
 
         #table_laporan_keuangan {
@@ -108,7 +123,6 @@
 
         #table_laporan_keuangan thead {
             background-color: #d9d2c7;
-            /* Warna latar belakang coklat */
             color: #7F643C;
         }
 
@@ -159,7 +173,6 @@
             margin: 0 5px;
         }
 
-        /* css modal tambah  */
         .form-group {
             color: #463720;
             font-family: Poppins;
@@ -202,9 +215,12 @@
         }
 
         $('#confirmDeleteButton').click(function() {
-            // Lakukan aksi penghapusan di sini
             $('#confirmationModal').modal('hide');
         });
+
+        function formatRupiah(number) {
+            return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(number);
+        }
 
         $(document).ready(function() {
             var dataIuran = $('#table_laporan_keuangan').DataTable({
@@ -215,6 +231,8 @@
                     "type": "POST",
                     "data": function(d) {
                         d.jenis_laporan = $('#jenis_laporan').val();
+                        d.periode = $('#periode').val(); // Tambahkan parameter periode
+                        d.tahun = $('#tahun').val(); // Tambahkan parameter tahun
                         d.start_date = $('#dari_tanggal').val();
                         d.end_date = $('#sampai_tanggal').val();
                     },
@@ -261,7 +279,6 @@
 
                             var table = $(win.document.body).find('table');
 
-                            // Hide the Action column
                             $(table).find('th:last-child, td:last-child').remove();
 
                             table.append('<tfoot><tr>' +
@@ -271,84 +288,97 @@
                                 '<td style="text-align:right;">' + totalSaldo + '</td>' +
                                 '</tr></tfoot>');
 
-                            // Set print margins similar to Word document margins
                             $(win.document.body).css('margin', '25.4mm');
-
-                            // Set font to Calibri
                             $(win.document.body).css('font-family', 'Calibri');
                             $(win.document.body).css('font-size', '10pt');
                         }
                     }
                 ],
-                columns: [{
-                        data: "DT_RowIndex",
-                        className: "text-center",
-                        orderable: false,
-                        searchable: false
-                    },
-                    {
-                        data: "tgl_laporan",
-                        className: "",
-                        orderable: true,
-                        searchable: true
-                    },
-                    {
-                        data: "keterangan",
-                        className: "",
-                        orderable: true,
-                        searchable: true
-                    },
+                columns: [
+                    { data: "DT_RowIndex", className: "text-center", orderable: false, searchable: false },
+                    { data: "tgl_laporan", className: "", orderable: true, searchable: true },
+                    { data: "keterangan", className: "", orderable: true, searchable: true },
                     {
                         data: "pemasukan",
                         className: "text-right",
                         orderable: true,
-                        searchable: false
+                        searchable: false,
+                        render: function(data, type, row) {
+                            return formatRupiah(data);
+                        }
                     },
                     {
                         data: "pengeluaran",
                         className: "text-right",
                         orderable: true,
-                        searchable: false
+                        searchable: false,
+                        render: function(data, type, row) {
+                            return formatRupiah(data);
+                        }
                     },
                     {
-                        data: function(row) {
-                            return row.pemasukan - row.pengeluaran;
-                        },
+                        data: null,
                         className: "text-right",
                         orderable: true,
-                        searchable: false
+                        searchable: false,
+                        render: function(data, type, row, meta) {
+                            return formatRupiah(data.saldo);
+                        }
                     },
-                    {
-                        data: "aksi",
-                        className: "text-center",
-                        orderable: false,
-                        searchable: false
-                    }
+                    { data: "aksi", className: "text-center", orderable: false, searchable: false }
                 ],
                 drawCallback: function(settings) {
                     var totalPemasukan = 0;
                     var totalPengeluaran = 0;
+                    var saldoSebelumnya = 0;
                     var api = this.api();
 
-                    api.rows({
-                        page: 'current'
-                    }).data().each(function(row) {
+                    api.rows({ page: 'current' }).data().each(function(row, index) {
                         totalPemasukan += parseFloat(row.pemasukan);
                         totalPengeluaran += parseFloat(row.pengeluaran);
+                        
+                        if (index === 0) {
+                            row.saldo = totalPemasukan + totalPengeluaran;
+                        } else {
+                            if (parseFloat(row.pengeluaran) === 0) {
+                                row.saldo = saldoSebelumnya + parseFloat(row.pemasukan);
+                            } else if (parseFloat(row.pemasukan) === 0) {
+                                row.saldo = saldoSebelumnya - parseFloat(row.pengeluaran);
+                            } else {
+                                row.saldo = saldoSebelumnya - (parseFloat(row.pemasukan) + parseFloat(row.pengeluaran));
+                            }
+                        }
+                        
+                        saldoSebelumnya = row.saldo;
+
+                        $(api.row(index).node()).find('td:eq(5)').html(formatRupiah(row.saldo));
                     });
 
-                    var totalSaldo = totalPemasukan - totalPengeluaran;
+                    var totalSaldo = saldoSebelumnya;
 
-                    $('#total_pemasukan').html(totalPemasukan.toFixed(2));
-                    $('#total_pengeluaran').html(totalPengeluaran.toFixed(2));
-                    $('#total_saldo').html(totalSaldo.toFixed(2));
+                    $('#total_pemasukan').html(formatRupiah(totalPemasukan));
+                    $('#total_pengeluaran').html(formatRupiah(totalPengeluaran));
+                    $('#total_saldo').html(formatRupiah(totalSaldo));
                 },
+
+
             });
 
-            dataLaporan.buttons().container().appendTo('#datatable-buttons');
+            dataIuran.buttons().container().appendTo('#datatable-buttons');
 
-            $('#jenis_laporan').on('change', function() {
-                dataLaporan.ajax.reload();
+            $('#jenis_laporan, #periode, #tahun').on('change', function() {
+                dataIuran.ajax.reload();
+            });
+
+            $('#dari_tanggal, #sampai_tanggal').on('change', function() {
+                dataIuran.ajax.reload();
+            });
+
+            $('#confirmationDelete').on('show.bs.modal', function(event) {
+                var button = $(event.relatedTarget); // Button yang memicu modal
+                var Id = button.data('laporan-id'); // Ambil nilai data-umkm-id
+                var form = $('#deleteForm');
+                form.attr('action', '{{ url('bendahara/laporan/destroy') }}/' + Id); // Set action form dengan ID UMKM
             });
         });
     </script>

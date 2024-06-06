@@ -18,6 +18,38 @@
                     class="form-horizontal">
                     @csrf
                     <div class="form-group row">
+                        <label class="col-sm-2 col-form-label"> Periode : </label>
+                        <div class="col-sm-8">
+                            <select class="form-control" id="periode" name="periode" required>
+                                <option value="">- Pilih Periode -</option>
+                                <option value="Januari">Januari</option>
+                                <option value="Februari">Februari</option>
+                                <option value="Maret">Maret</option>
+                                <option value="April">April</option>
+                                <option value="Mei">Mei</option>
+                                <option value="Juni">Juni</option>
+                                <option value="Juli">Juli</option>
+                                <option value="Agustus">Agustus</option>
+                                <option value="September">September</option>
+                                <option value="Oktober">Oktober</option>
+                                <option value="November">November</option>
+                                <option value="Desember">Desember</option>
+                            </select>
+                            @error('periode')
+                                <small class="form-text text-danger">{{ $message }}</small>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label"> Tahun: </label>
+                        <div class="col-sm-8">
+                            <input type="number" class="form-control" id="tahun" name="tahun" required>
+                            @error('tahun')
+                                <small class="form-text text-danger">{{ $message }}</small>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="form-group row">
                         <label for="tgl_laporan" class="col-sm-2 col-form-label"> Tanggal :</label>
                         <div class="col-sm-8">
                             <input type="date" id="9" name="tgl_laporan" class="form-control" rows="5"
@@ -124,4 +156,25 @@
             box-shadow: none;
         }
     </style>
+@endpush
+
+@push('js')
+    <script>
+        $(document).ready(function() {
+            var now = new Date();
+            var monthNames = ["Januari", "Februari", "Maret", "April", "Mei", "Juni",
+                "Juli", "Agustus", "September", "Oktober", "November", "Desember"
+            ];
+
+            // Set default values for periode and tahun
+            $('#periode').val(monthNames[now.getMonth()]);
+            $('#tahun').val(now.getFullYear());
+
+            // Set default value for tgl_laporan
+            var day = ("0" + now.getDate()).slice(-2);
+            var month = ("0" + (now.getMonth() + 1)).slice(-2);
+            var today = now.getFullYear() + "-" + month + "-" + day;
+            $('#tgl_laporan').val(today);
+        });
+    </script>
 @endpush

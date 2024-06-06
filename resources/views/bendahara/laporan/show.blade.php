@@ -11,6 +11,18 @@
                     </div>
                 @else
                     <div class="form-group row">
+                        <label for="periode" class="col-sm-2 col-form-label">Periode :</label>
+                        <div class="col-sm-8">
+                            <p class="form-control-plaintext">{{ $laporan->periode }}</p>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="tahun" class="col-sm-2 col-form-label">Tahun :</label>
+                        <div class="col-sm-8">
+                            <p class="form-control-plaintext">{{ $laporan->tahun }}</p>
+                        </div>
+                    </div>
+                    <div class="form-group row">
                         <label for="tgl_laporan" class="col-sm-2 col-form-label"> Tanggal :</label>
                         <div class="col-sm-8">
                             <p class="form-control-plaintext">{{ $laporan->tgl_laporan }}</p>

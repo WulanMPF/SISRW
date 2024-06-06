@@ -34,6 +34,14 @@ class LapkeuController extends Controller
             $laporans->where('jenis_laporan', $request->jenis_laporan);
         }
 
+        if ($request->has('periode') && $request->periode != '') {
+            $laporans->whereMonth('tgl_laporan', $request->periode);
+        }
+
+        if ($request->has('tahun') && $request->tahun != '') {
+            $laporans->whereYear('tgl_laporan', $request->tahun);
+        }
+
         return DataTables::of($laporans)
             ->addIndexColumn() // Menambahkan kolom index / no urut (default nama kolom: DT_RowIndex)
             ->addColumn('pemasukan', function ($laporan) {
@@ -43,7 +51,7 @@ class LapkeuController extends Controller
                 return $laporan->jenis_laporan == 'pengeluaran' ? $laporan->nominal : 0;
             })
             ->addColumn('aksi', function ($laporan) {
-                $btn = '<a href="' . url('/laporan/' . $laporan->laporan_id) . '" class="btn btn-sm" style="background-color: #BB955C; color: white; border-radius: 9px;">Lihat Detail</a>';
+                $btn = '<a href="' . url('ketua/laporan/' . $laporan->laporan_id) . '" class="btn btn-sm" style="background-color: #BB955C; color: white; border-radius: 9px;">Lihat Detail</a>';
                 return $btn;
             })
             ->rawColumns(['aksi'])

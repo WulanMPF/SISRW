@@ -36,4 +36,9 @@ class KkModel extends Model
     {
         return $this->HasMany(WargaModel::class, 'kk_id', 'kk_id');
     }
+
+    public function iuran(): HasMany
+    {
+        return $this->HasMany(IuranModel::class, 'kk_id', 'kk_id');
+    }
 }

@@ -55,70 +55,71 @@
 @push('js')
     <script>
         $(document).ready(function() {
-            var currentYear = new Date().getFullYear();
+                var currentYear = new Date().getFullYear();
 
-            for (var year = currentYear - 5; year <= currentYear + 5; year++) {
-                $('#tahun').append($('<option >', {
-                    value: year,
-                    text: year
-                }));
-            }
+                for (var year = currentYear - 5; year <= currentYear + 5; year++) {
+                    $('#tahun').append($('<option>', {
+                        value: year,
+                        text: year
+                    }));
+                }
 
-            // Set tahun default yang dipilih ke tahun saat ini
-            $('#tahun').val(currentYear);
+                // Set tahun default yang dipilih ke tahun saat ini
+                $('#tahun').val(currentYear);
 
-            var dataPeriode = $('#table_periode').DataTable({
-                serverSide: true,
-                ajax: {
-                    "url": "{{ url('bendahara/iuran/list') }}",
-                    "dataType": "json",
-                    "type": "POST",
-                    "data": function(d) {
-                        d.year = $('#tahun').val();
-                    }
-                },
-                columns: [{
-                        data: "DT_RowIndex",
-                        className: "text-center",
-                        orderable: false,
-                        searchable: false
-                    },
-                    {
-                        data: "bulan",
-                        className: "",
-                        orderable: true,
-                        searchable: true,
-                        render: function(data, type, row) {
-                            var monthNames = ["Januari", "Februari", "Maret", "April", "Mei",
-                                "Juni",
-                                "Juli", "Agustus", "September", "Oktober", "November",
-                                "Desember"
-                            ];
-                            return monthNames[parseInt(data) - 1];
+                var dataPeriode = $('#table_periode').DataTable({
+                    serverSide: true,
+                    ajax: {
+                        "url": "{{ url('bendahara/iuran/list') }}",
+                        "dataType": "json",
+                        "type": "POST",
+                        "data": function(d) {
+                            d.tahun = $('#tahun').val(); // Perubahan di sini, mengubah 'year' menjadi 'tahun'
                         }
                     },
-                    {
-                        data: "tahun",
-                        className: "",
-                        orderable: true,
-                        searchable: true
-                    },
-                    {
-                        data: "aksi",
-                        className: "",
-                        orderable: false,
-                        searchable: false
-                    },
-                ],
-                pageLength: 12,
-                lengthMenu: [
-                    12, 24, 48
-                ]
+                    columns: [{
+                            data: "DT_RowIndex",
+                            className: "text-center",
+                            orderable: false,
+                            searchable: false
+                        },
+                        {
+                            data: "bulan",
+                            className: "",
+                            orderable: true,
+                            searchable: true,
+                            render: function(data, type, row) {
+                                var monthNames = ["Januari", "Februari", "Maret", "April", "Mei",
+                                    "Juni",
+                                    "Juli", "Agustus", "September", "Oktober", "November",
+                                    "Desember"
+                                ];
+                                return monthNames[parseInt(data) - 1];
+                            }
+                        },
+                        {
+                            data: "tahun",
+                            className: "",
+                            orderable: true,
+                            searchable: true
+                        },
+                        {
+                            data: "aksi",
+                            className: "",
+                            orderable: false,
+                            searchable: false
+                        },
+                    ],
+                    pageLength: 12,
+                    lengthMenu: [
+                        12, 24, 48
+                    ]
+                });
+
+                $('#tahun').on('change', function() {
+                    dataPeriode.ajax.reload();
+                });
             });
 
-            $('#tahun').on('change', function() {
-                dataPeriode.ajax.reload();
-            });
-        });
     </script>
 @endpush

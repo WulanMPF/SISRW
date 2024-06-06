@@ -266,9 +266,13 @@ Route::group(['prefix' => 'bendahara/iuran'], function () {
     Route::post('/list', [BendaharaIuranController::class, 'list'])->name('bendahara.iuran.list');
     Route::get('/{id_periode}', [BendaharaIuranController::class, 'bayar'])->name('bendahara.iuran.bayar');
     Route::post('/', [BendaharaIuranController::class, 'store'])->name('iuran.store');
-    // Route::get('/{id}', [BendaharaIuranController::class, 'show'])->name('bendahara.iuran.show');
+    Route::get('/detail/{iuran_id}', [BendaharaIuranController::class, 'show'])->name('bendahara.iuran.show');
+    Route::get('/validasi', [BendaharaIuranController::class, 'validasi'])->name('iuran.validasi');
+    Route::post('/validasiData', [BendaharaIuranController::class, 'validasiData'])->name('iuran.validasiData');
+
     // Route::get('/create', [BendaharaIuranController::class, 'create'])->name('iuran.create');
 });
+
 Route::group(['prefix' => 'bendahara/laporan'], function () {
     Route::get('/', [BendaharaLapkeuController::class, 'index']);
     Route::post('/list', [BendaharaLapkeuController::class, 'list']);
@@ -277,8 +281,9 @@ Route::group(['prefix' => 'bendahara/laporan'], function () {
     Route::get('/{id}', [BendaharaLapkeuController::class, 'show']);
     Route::get('/{id}/edit', [BendaharaLapkeuController::class, 'edit']);
     Route::put('/{id}', [BendaharaLapkeuController::class, 'update'])->name('laporan.update');
-    Route::delete('/{id}', [BendaharaLapkeuController::class, 'destroy']);
+    Route::delete('/destroy/{id}', [BendaharaLapkeuController::class, 'destroy']);
 });
+
 Route::group(['prefix' => 'bendahara/profile'], function () {
     Route::get('/', [BendaharaProfileController::class, 'index']);
 });
@@ -292,9 +297,10 @@ Route::group(['prefix' => 'warga/dashboard'], function () {
     Route::get('/', [WargaDashboardController::class, 'index'])->name('warga.dashboard');
 });
 Route::group(['prefix' => 'warga/iuran'], function () {
-    Route::get('/', [WargaIuranController::class, 'index']);
+    Route::get('/', [WargaIuranController::class, 'index'])->name('warga.iuran.index');
     Route::post('/list', [WargaIuranController::class, 'list']);
     Route::get('/{id}', [WargaIuranController::class, 'show']);
+    Route::post('/store', [WargaIuranController::class, 'store'])->name('warga.iuran.store');
 });
 
 Route::group(['prefix' => 'warga/pengaduan'], function () {

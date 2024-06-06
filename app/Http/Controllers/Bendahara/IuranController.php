@@ -51,10 +51,10 @@ class IuranController extends Controller
             ->rawColumns(['aksi'])
             ->make(true);
     }
-    public function bayar($id)
+    public function bayar(Request $request, $id)
     {
         $breadcrumb = (object) [
-            'title' => 'Data Pembayaran Iuran RW 05 Bulan',
+            'title' => 'Data Pembayaran Iuran RW 05',
             'date' => date('l, d F Y'),
             'list'  => ['Home', 'Data Pembayaran Iuran']
         ];
@@ -62,10 +62,19 @@ class IuranController extends Controller
         $activeMenu = 'iuran';
 
         $periode = PeriodeIuranModel::findOrFail($id);
-        $iurans = IuranModel::all();
-        $kk = KkModel::all();
-        return view('bendahara.iuran.pembayaran', compact('breadcrumb', 'iurans', 'periode', 'kk', 'activeMenu'));
+        $kk = KkModel::with(['iuran' => function ($query) use ($periode) {
+            $query->where('periode_id', $periode->periode_id);
+        }])->get();
+
+        $iuran = IuranModel::select()->get();
+        if ($request->has('status_pembayaran') && $request->status_pembayaran != '') {
+            $iuran->where('status_pembayaran', $request->status_pembayaran);
+        }
+
+
+        return view('bendahara.iuran.pembayaran', compact('breadcrumb', 'periode', 'kk', 'iuran', 'activeMenu'));
     }
+
 
     public function create()
     {
@@ -101,19 +110,27 @@ class IuranController extends Controller
             'kk_id' => $request->kk_id,
             'laporan_id' => null,
             'tgl_pembayaran' => $request->tgl_pembayaran,
+            'jumlah_bayar' => 55000,
             'status_pembayaran' => $request->status_pembayaran,
+            'lampiran' => null,
         ]);
 
         // Redirect ke halaman index dengan pesan sukses
-        return redirect()->route('bendahara.iuran.index')->with('success', 'Pembayaran iuran berhasil dilakukan.');
+        return redirect()->route('bendahara.iuran.pembayaran')->with('success', 'Pembayaran iuran berhasil dilakukan.');
     }
 
-    public function show($id)
+    public function show(string $id)
     {
-        // Mengambil data iuran berdasarkan ID
-        $iuran = IuranModel::findOrFail($id);
+        $iuran = IuranModel::with('kk')->findOrFail($id); // Load the kk relationship
 
-        // Mengembalikan view yang menampilkan detail iuran
-        return view('bendahara.iuran.show', compact('iuran'));
+        $breadcrumb = (object) [
+            'title' => 'Data Iuran Warga',
+            'date' => date('l, d F Y'),
+            'list'  => ['Home', 'Data Iuran Warga', 'Detail']
+        ];
+
+        $activeMenu = 'iuran';
+
+        return view('bendahara.iuran.show', ['breadcrumb' => $breadcrumb, 'iuran' => $iuran, 'activeMenu' => $activeMenu]);
     }
 }

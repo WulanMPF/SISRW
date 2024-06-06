@@ -14,8 +14,10 @@ class IuranModel extends Model
         'periode_id',
         'kk_id',
         'laporan_id',
+        'jumlah_bayar',
         'tgl_pembayaran',
         'status_pembayaran',
+        'lampiran',
     ];
 
     public function kk()
