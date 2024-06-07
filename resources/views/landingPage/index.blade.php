@@ -5,12 +5,11 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>SISRW</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+
     <link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css'>
     <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.3/owl.carousel.min.css'>
     <link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-KyZXEAg3QhqLMpG8r+Knujsl5/8j1/2Cp4/8jZw5g0P5j1z6KNi1Jh7K+Bo6U8+8" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
@@ -195,25 +194,46 @@
                                         <li class="border-bottom pb-3 mt-3">
                                             <span class="meta text-uppercase">{{ \Carbon\Carbon::parse($announcement->created_at)->format('F d, Y') }}</span>
                                             <h3 class="font-weight-bold mt-0">
-                                                <a href="#">
+                                                <a href="#" data-bs-toggle="modal" data-bs-target="#announcementModal{{ $announcement->id }}">
                                                     {{ $announcement->judul }}
                                                 </a>
                                             </h3>
                                             <p class="m-0 post_intro">
                                                 {{ \Illuminate\Support\Str::words($announcement->isi_pengumuman, 20, '...') }}
-                                                <a href="#">Read more</a>
+                                                <a href="#" class="read-more" data-bs-toggle="modal" data-bs-target="#announcementModal{{ $announcement->id }}">Read more</a>
                                             </p>
                                         </li>
+
+                                        <!-- Modal -->
+                                        <div class="modal fade" id="announcementModal{{ $announcement->id }}" tabindex="-1" aria-labelledby="modalLabel{{ $announcement->id }}" aria-hidden="true">
+                                            <div class="modal-dialog modal-lg">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="modalLabel{{ $announcement->id }}">{{ $announcement->judul }}</h5>
+                                                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <p>{{ $announcement->isi_pengumuman }}</p>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     @endforeach
                                 </ul>
-                                <a class="all pos-stat text-uppercase ml-lg-5" href="#">Semua Pengumuman
+                                {{-- <a class="all pos-stat text-uppercase ml-lg-5" href="#">Semua Pengumuman
                                     <i class="fa fa-caret-right" aria-hidden="true"></i>
-                                </a>
+                                </a> --}}
                                 <div class="left-right-arrows pr-lg-3">
                                     <a href="#" class="previous round">&#8249;</a>
                                     <a href="#" class="next round">&#8250;</a>
                                 </div>
                             </div>
+
                         </div>
                     </section>
                 </div>
@@ -224,29 +244,49 @@
                             <div class="events-block">
                                 <ul class="nolist list-unstyled position-relative mb-0 px-lg-3">
                                     @foreach ($kegiatan as $event)
-                                        <li class="border-bottom d-flex align-items-center">
-                                            <div class="events-date text-uppercase text-center">
-                                                <a class="text-white" href="#">{{ \Carbon\Carbon::parse($event->tanggal)->format('F') }}
-                                                    <span>{{ \Carbon\Carbon::parse($event->tanggal)->format('d') }}</span>
-                                                </a>
-                                            </div>
-                                            <div class="d-inline-block pl-3 event-li">
-                                                <h3 class="font-weight-bold mt-0">
-                                                    <a href="#">
-                                                        {{ $event->nama_kegiatan }}
-                                                    </a>
-                                                </h3>
-                                                <p class="m-0 post_intro">
-                                                    {{ \Illuminate\Support\Str::words($event->deskripsi, 20, '...') }}
-                                                    <a href="#">Read more</a>
-                                                </p>
-                                            </div>
-                                        </li>
-                                    @endforeach
-                                </ul>
-                                <a class="all pos-stat text-uppercase ml-lg-4" href="/calendar/">Semua acara
-                                    <i class="fa fa-caret-right" aria-hidden="true"></i>
+                    <li class="border-bottom d-flex align-items-center">
+                        <div class="events-date text-uppercase text-center">
+                            <a class="text-white" href="#" data-bs-toggle="modal" data-bs-target="#eventModal{{ $event->kegiatan_id }}">
+                                {{ \Carbon\Carbon::parse($event->tanggal)->format('F') }}
+                                <span>{{ \Carbon\Carbon::parse($event->tanggal)->format('d') }}</span>
+                            </a>
+                        </div>
+                        <div class="d-inline-block pl-3 event-li">
+                            <h3 class="font-weight-bold mt-0">
+                                <a href="#" data-bs-toggle="modal" data-bs-target="#eventModal{{ $event->kegiatan_id }}">
+                                    {{ $event->nama_kegiatan }}
                                 </a>
+                            </h3>
+                            <p class="m-0 post_intro">
+                                {{ \Illuminate\Support\Str::words($event->deskripsi, 20, '...') }}
+                                <a href="#" data-bs-toggle="modal" data-bs-target="#eventModal{{ $event->kegiatan_id }}">Read more</a>
+                            </p>
+                        </div>
+                    </li>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="eventModal{{ $event->kegiatan_id }}" tabindex="-1" aria-labelledby="eventModalLabel{{ $event->kegiatan_id }}" aria-hidden="true">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="eventModalLabel{{ $event->kegiatan_id }}">{{ $event->nama_kegiatan }}</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <img src="{{ asset('lampiran_kegiatan/' . $event->lampiran_kegiatan) }}" alt="">
+                                    {{ $event->deskripsi }}
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+                                </ul>
+                                {{-- <a class="all pos-stat text-uppercase ml-lg-4" href="/calendar/">Semua acara
+                                    <i class="fa fa-caret-right" aria-hidden="true"></i>
+                                </a> --}}
                                 <div class="left-right-arrows second">
                                     <a href="#" class="previous round">&#8249;</a>
                                     <a href="#" class="next round">&#8250;</a>
@@ -255,6 +295,14 @@
                             </div>
                         </div>
                     </section>
+                    <div id="announcementModal{{ $announcement->id }}" class="modal">
+                        <div class="modal-content">
+                            <span class="close">&times;</span>
+                            <h2>{{ $announcement->judul }}</h2>
+                            <p>{{ $announcement->isi_pengumuman }}</p>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
@@ -303,7 +351,7 @@
 
     </section>
 
-    <section class="">
+    <section class="footer">
         <div class="container text-center text-md-start mt-5">
             <div class="row mt-3">
                 <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
@@ -316,23 +364,6 @@
                     </p>
                 </div>
 
-                <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
-                    <h6 class="text-uppercase fw-bold mb-4">
-                        Products
-                    </h6>
-                    <p>
-                        <a href="#!" class="text-reset">Angular</a>
-                    </p>
-                    <p>
-                        <a href="#!" class="text-reset">React</a>
-                    </p>
-                    <p>
-                        <a href="#!" class="text-reset">Vue</a>
-                    </p>
-                    <p>
-                        <a href="#!" class="text-reset">Laravel</a>
-                    </p>
-                </div>
 
                 <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
                     <h6 class="text-uppercase fw-bold mb-4">
@@ -367,13 +398,14 @@
             </div>
         </div>
     </section>
-
+<section>
+<footer>
     <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
-        2020 Copyright
+        2024 Copyright
         <a class="text-reset fw-bold">© Jurusan Teknologi Informasi Politeknik Negeri Malang</a>
     </div>
     </footer>
-
+</section>
     <!-- End of .container -->
 
     <script src='https://code.jquery.com/jquery-1.12.0.min.js'></script>
@@ -434,6 +466,23 @@
             });
         });
 
+</script>
+<script>
+$(document).ready(function() {
+    // Event listener untuk setiap tombol "Read more"
+    $('.read-more').click(function() {
+        // Ambil ID modal dari atribut data
+        var modalId = $(this).data('target');
+        // Tampilkan modal yang sesuai
+        $(modalId).show();
+    });
+
+    // Event listener untuk tombol close pada modal
+    $('.close').click(function() {
+        // Sembunyikan modal saat tombol close diklik
+        $(this).closest('.modal').hide();
+    });
+});
 </script>
 
 </body>

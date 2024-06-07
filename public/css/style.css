@@ -381,7 +381,7 @@ input.form-control {
     background: var(--softgray);
 }
 .two-column-list .announcements, .two-column-section .events {
-    padding: 30px;
+
     border-right: 1px solid #ddd;
 
 }
@@ -454,6 +454,8 @@ input.form-control {
 
 
 
+
+
 .aboutus {
     padding: 70px 0 70px 0;
     background: var(--white);
@@ -468,28 +470,11 @@ input.form-control {
 }
 
 
-.house-details .header .rating {
-    float: right;
+.footer{
+    background: var(--softgray);
+    padding-top: 10px;
 }
 
-.house-details .header h3 {
-    margin-top: 5px;
-    float: right;
-    margin-left: 10px;
-}
-
-.house-details .house-informations .features .icon {
-    float: left;
-    margin-right: 12px;
-}
-
-.house-details .house-informations .booking {
-    padding: 30px;
-    border: 1px solid var(--softgray2);
-    border-radius: 16px;
-}
-
-.house-details .house-informations .booking .item .title {}
 
 
 
