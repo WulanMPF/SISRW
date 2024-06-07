@@ -182,6 +182,83 @@
         </div>
     </section>
 
+    <section class="two-column-list mb-sm-5 pr-lg-3 container-fluid" id="two-column-list">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 pr-0">
+                    <section aria-label="Announcements" class="announcements">
+                        <h2 class="font-weight-bold border-bottom pb-3 mt-3 mb-0 pr-5">Announcements</h2>
+                        <div class="announcement-slider border-r-xs-0 border-r position-relative">
+                            <div>
+                                <ul class="nolist list-unstyled position-relative mb-0 px-lg-5 pt-lg-5">
+                                    @foreach ($pengumuman as $announcement)
+                                        <li class="border-bottom pb-3 mt-3">
+                                            <span class="meta text-uppercase">{{ \Carbon\Carbon::parse($announcement->created_at)->format('F d, Y') }}</span>
+                                            <h3 class="font-weight-bold mt-0">
+                                                <a href="#">
+                                                    {{ $announcement->judul }}
+                                                </a>
+                                            </h3>
+                                            <p class="m-0 post_intro">
+                                                {{ \Illuminate\Support\Str::words($announcement->isi_pengumuman, 20, '...') }}
+                                                <a href="#">Read more</a>
+                                            </p>
+                                        </li>
+                                    @endforeach
+                                </ul>
+                                <a class="all pos-stat text-uppercase ml-lg-5" href="#">All announcements
+                                    <i class="fa fa-caret-right" aria-hidden="true"></i>
+                                </a>
+                                <div class="left-right-arrows pr-lg-5">
+                                    <button class="prev-arrow-announcement" type="button"><i class="fa fa-chevron-left"></i></button>
+                                    <button class="next-arrow-announcement" type="button"><i class="fa fa-chevron-right"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+                <div class="col-lg-6 pl-0">
+                    <section class="events-section pl-lg-3" aria-label="Events">
+                        <h2 class="font-weight-bold border-bottom pb-3 mt-3 pl-lg-5 mb-0">Events</h2>
+                        <div class="events p-lg-5">
+                            <div class="events-block">
+                                <ul class="nolist list-unstyled position-relative mb-0 px-lg-3">
+                                    @foreach ($kegiatan as $event)
+                                        <li class="border-bottom d-flex align-items-center">
+                                            <div class="events-date text-uppercase text-center">
+                                                <a class="text-white" href="#">{{ \Carbon\Carbon::parse($event->tanggal)->format('F') }}
+                                                    <span>{{ \Carbon\Carbon::parse($event->tanggal)->format('d') }}</span>
+                                                </a>
+                                            </div>
+                                            <div class="d-inline-block pl-3 event-li">
+                                                <h3 class="font-weight-bold mt-0">
+                                                    <a href="#">
+                                                        {{ $event->nama_kegiatan }}
+                                                    </a>
+                                                </h3>
+                                                <p>
+                                                    {{ \Carbon\Carbon::parse($event->tanggal)->format('H:i A') }}
+                                                </p>
+                                            </div>
+                                        </li>
+                                    @endforeach
+                                </ul>
+                                <a class="all pos-stat text-uppercase ml-lg-5" href="/calendar/">All events
+                                    <i class="fa fa-caret-right" aria-hidden="true"></i>
+                                </a>
+                                <div class="left-right-arrows second">
+                                    <button class="prev-arrow-events" type="button"><i class="fa fa-chevron-left"></i></button>
+                                    <button class="next-arrow-events" type="button"><i class="fa fa-chevron-right"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
 
 
     <section id="aboutus" class="aboutus">
@@ -303,32 +380,42 @@
         integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous">
     </script>
     <script>
-        $(document).ready(function() {
+        $(document).ready(function(){
             $("#news-slider").owlCarousel({
-                items: 3,
-                loop: true,
-                nav: true, // Enables navigation buttons
-                navText: [
-                    "<i class='fa fa-chevron-left'></i>",
-                    "<i class='fa fa-chevron-right'></i>"
-                ], // Custom navigation buttons (make sure Font Awesome is loaded)
-                autoplay: true,
-                autoplayTimeout: 3000, // Autoplay interval (in milliseconds)
-                responsive: {
-                    0: {
-                        items: 1
-                    },
-                    600: {
-                        items: 2
-                    },
-                    1000: {
-                        items: 3
-                    }
-                }
-            });
-        });
+                        loop: true,
+                        margin: 3,
+                        items: 3,
+                        nav: true,
+                        autoplay: true,
+                        autoplayTimeout: 300,
+                        autoplayHoverPause: true,
+                        responsive: {
+                        0: {
+                            items: 1
+                        },
+                        600: {
+                            items: 2
+                        },
+                        1000: {
+                            items: 3
+                        },
+                        1200: {
+                            items: 7
+                        }
+                        }
+                    });
+                });
     </script>
+    <script>
+    $(document).ready(function(){
+    $('.announcements ul, .events ul').slick({
+        infinite: true,
+        slidesToShow: 3,
+        slidesToScroll: 1
+    });
+});
 
+</script>
 
 </body>
 

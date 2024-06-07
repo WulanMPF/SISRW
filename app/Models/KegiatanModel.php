@@ -21,7 +21,7 @@ class KegiatanModel extends Model
         'gambar',
     ];
 
-    protected $dates = ['deleted_at'];
+    protected $dates = ['deleted_at', 'tanggal'];
 
     public function user(): BelongsTo
     {
