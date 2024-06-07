@@ -11,7 +11,7 @@
         }
 
         .container {
-            width: 80%;
+            width: 90%;
             margin: 0 auto;
         }
 
@@ -30,19 +30,18 @@
         }
 
         .letterhead {
-            border-bottom: 2px solid #000;
+            /* border-bottom: 2px solid rgb(22, 142, 255); */
             padding-bottom: 10px;
-            margin-bottom: 20px;
+            /* margin-bottom: 20px; */
             overflow: hidden;
         }
 
         .letterhead img {
             float: left;
             display: block;
-            /* Agar margin-right bekerja */
             margin: 0 auto 20px;
-            /* Menengahkan gambar dan memberi ruang bawah */
-            width: 135px;
+            margin-top: 1rem;
+            width: 110px;
         }
 
         .letterhead h1 {
@@ -57,6 +56,14 @@
         .letterhead p {
             margin: 5px 0;
             text-align: center;
+        }
+
+        .letterhead .rw {
+            float: right;
+            display: block;
+            margin: 0 auto 20px;
+            margin-top: 1rem;
+            width: 110px;
         }
     </style>
 </head>
@@ -76,8 +83,9 @@
                 <p>Nomor Surat: {{ $undangan->undangan_no_surat }}</p>
                 {{-- <p>Telp: 123456789 | Email: info@perusahaanabc.com</p> --}}
             </div>
+            <h1 class="rw">RW. V</h1>
         </div>
-
+        <hr>
         <!-- Isi surat -->
         <div class="content">
             <p>{{ $undangan->undangan_tempat }}, {{ date('d F Y', strtotime($undangan->undangan_tanggal)) }} </p>
