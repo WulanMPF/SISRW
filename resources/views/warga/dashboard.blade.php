@@ -17,6 +17,7 @@
             <h5>Jumlah Keluarga</h5>
         </span>
     </li>
+    
 
     <li class="card">
         <i class="fas fa-solid fa-store"></i>
@@ -30,7 +31,7 @@
     <div class="col-md-4 ml-4">
         <div class="card">
             <div class="p-6 m-20 bg-white rounded shadow">
-                {!! $WargaChart->container() !!}
+                {!! $wargaChart->container() !!}
             </div>
         </div>
     </div>
@@ -206,6 +207,6 @@
     animateValue("jumlahUMKMCounter", 0, {{$jumlah_umkm}}, 2000); // Jumlah UMKM
 });
 </script>
-<script src="{{ $WargaChart->cdn() }}"></script>
-    {{ $WargaChart->script() }}
+<script src="{{ $wargaChart->cdn() }}"></script>
+    {{ $wargaChart->script() }}
 @endpush

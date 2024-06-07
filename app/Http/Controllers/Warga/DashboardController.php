@@ -12,7 +12,7 @@ use Illuminate\Http\Request;
 
 class DashboardController extends Controller
 {
-    public function index(WargaChart $WargaChart)
+    public function index(WargaChart $wargaChart)
     {
         $breadcrumb = (object) [
             'title' => 'Selamat Datang, Warga',
@@ -21,11 +21,11 @@ class DashboardController extends Controller
         ];
 
         // Initialize the necessary data from models
-        $kegiatan = KegiatanModel::orderBy('tanggal', 'desc')->take(5)->get();
-        $umkm = UmkmModel::orderBy('created_at', 'desc')->take(5)->get();
+        $kegiatan = KegiatanModel::orderBy('tanggal', 'asc')->take(5)->get();
+        $umkm = UmkmModel::orderBy('created_at', 'asc')->take(5)->get();
         $jumlah_kk = KkModel::count();
         $jumlah_umkm = UmkmModel::count();
-        $jumlah_warga =WargaModel::count();
+        $jumlah_warga = WargaModel::count();
 
         // It seems there was an incorrect opening parenthesis here
         $activeMenu = 'dashboard';
@@ -39,7 +39,7 @@ class DashboardController extends Controller
             'jumlah_kk' => $jumlah_kk,
             'jumlah_umkm' => $jumlah_umkm,
             'jumlah_warga' => $jumlah_warga,
-            'WargaChart' => $WargaChart->build()
+            'wargaChart' => $wargaChart->build()
         ]);
     }
 

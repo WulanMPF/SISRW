@@ -142,49 +142,24 @@
                                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                                 <span class="visually-hidden">Previous</span>
                               </button>
+
+                              @foreach ($umkm as $umkm)
                             <div class="post-slide">
                                 <div class="post-img">
-                                    <img src="https://images.unsplash.com/photo-1596265371388-43edbaadab94?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=301&ixid=eyJhcHBfaWQiOjF9&ixlib=rb-1.2.1&q=80&w=501" alt="">
+                                    <img src="{{ asset('lampiran_umkm/' . $umkm->lampiran) }}" alt="">
                                     <a href="#" class="over-layer"><i class="fa fa-link"></i></a>
                                 </div>
                                 <div class="post-content">
                                     <h3 class="post-title">
-                                        <a href="#umkm ">Lorem ipsum dolor sit amet.</a>
+                                        <a href="#umkm">{{ $umkm->nama_usaha }}</a>
                                     </h3>
-                                    <p class="post-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam consectetur cumque dolorum, ex incidunt ipsa laudantium necessitatibus neque quae tempora......</p>
-                                    <a href="#" class="read-more">read more</a>
-                                </div>
-                            </div>
-
-                            <div class="post-slide">
-                                <div class="post-img">
-                                    <img src="https://images.unsplash.com/photo-1533227268428-f9ed0900fb3b?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=303&ixid=eyJhcHBfaWQiOjF9&ixlib=rb-1.2.1&q=80&w=503" alt="">
-                                    <a href="#" class="over-layer"><i class="fa fa-link"></i></a>
-                                </div>
-                                <div class="post-content">
-                                    <h3 class="post-title">
-                                        <a href="#umkm">Lorem ipsum dolor sit amet.</a>
-                                    </h3>
-                                    <p class="post-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam consectetur cumque dolorum, ex incidunt ipsa laudantium necessitatibus neque quae tempora......</p>
+                                    <p class="post-description">{{ $umkm->deskripsi }}</p>
 
                                     <a href="#" class="read-more">read more</a>
                                 </div>
                             </div>
+                            @endforeach
 
-                            <div class="post-slide">
-                                <div class="post-img">
-                                    <img src="https://images.unsplash.com/photo-1564979268369-42032c5ca998?crop=entropy&cs=tinysrgb&fit=crop&fm=jpg&h=300&ixid=eyJhcHBfaWQiOjF9&ixlib=rb-1.2.1&q=80&w=500" alt="">
-                                    <a href="#" class="over-layer"><i class="fa fa-link"></i></a>
-                                </div>
-                                <div class="post-content">
-                                    <h3 class="post-title">
-                                        <a href="#umkm">Lorem ipsum dolor sit amet.</a>
-                                    </h3>
-                                    <p class="post-description">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam consectetur cumque dolorum, ex incidunt ipsa laudantium necessitatibus neque quae tempora......</p>
-
-                                    <a href="#" class="read-more">read more</a>
-                                </div>
-                            </div>
 
                               <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
                                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
