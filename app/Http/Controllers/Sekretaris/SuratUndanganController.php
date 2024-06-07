@@ -21,7 +21,7 @@ class SuratUndanganController extends Controller
             'list'  => ['Home', 'Persuratan']
         ];
 
-        $activeMenu = 'undangan';
+        $activeMenu = 'surat';
 
         $undangan = SuratUndanganModel::all();
 
@@ -48,17 +48,14 @@ class SuratUndanganController extends Controller
     public function create()
     {
         $breadcrumb = (object) [
-            'title' => 'Formulir Surat Undangan UMKM RW 05',
+            'title' => 'Formulir Surat Undangan',
             'date' => date('l, d F Y'),
             'list'  => ['Home', 'Data UMKM', 'Pengajuan']
         ];
-        $page = (object)[
-            'title' => 'Ajukan UMKM RW 05'
-        ];
 
         $user = UserModel::all();
-        $activeMenu = 'undangan';
-        return view('sekretaris.undangan.create', ['breadcrumb' => $breadcrumb, 'page' => $page, 'user' => $user, 'activeMenu' => $activeMenu]);
+        $activeMenu = 'surat';
+        return view('sekretaris.undangan.create', ['breadcrumb' => $breadcrumb, 'user' => $user, 'activeMenu' => $activeMenu]);
     }
 
     public function store(Request $request)
@@ -127,7 +124,7 @@ class SuratUndanganController extends Controller
         ];
 
         $undangan = SuratUndanganModel::find($id);
-        $activeMenu = 'undangan';
+        $activeMenu = 'surat';
         return view('sekretaris.undangan.edit', ['breadcrumb' => $breadcrumb, 'page' => $page, 'undangan' => $undangan, 'activeMenu' => $activeMenu]);
     }
 

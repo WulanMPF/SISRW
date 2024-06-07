@@ -9,8 +9,19 @@
             @if (session('error'))
                 <div class="alert alert-danger">{{ session('error') }}</div>
             @endif
-            <div class="col-md text-right">
+            {{-- <div class="col-md text-right">
                 <a class="btn btn-sm mt-1 btn-tambah" href="{{ url('/sekretaris/surat/create') }}">+ Buat Surat</a>
+            </div> --}}
+            <div class="col-md text-right">
+                <a class="btn btn-sm mt-1 btn-tambah" data-toggle="dropdown">Halaman Surat</a>
+                <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                    <a href="{{ url('/sekretaris/undangan') }}" class="dropdown-item">
+                        Surat Undangan
+                    </a>
+                    <a href="{{ url('/sekretaris/pengantar') }}" class="dropdown-item">
+                        Surat Pengantar
+                    </a>
+                </div>
             </div>
             <br>
             <div class="row">

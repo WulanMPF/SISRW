@@ -10,10 +10,6 @@
                 @if (session('error'))
                     <div class="alert alert-danger">{{ session('error') }}</div>
                 @endif
-                <h3 class="form-header">Formulir Surat Undangan RW 05</h3>
-                <div class="form-group row">
-                    <label for="data_usaha" class="col-sm-4 col-form-label" id="data">Surat Undangan RW 05</label>
-                </div>
                 <form method="POST" action="{{ route('undangan.store') }}" enctype="multipart/form-data"
                     class="form-horizontal">
                     @csrf
@@ -66,10 +62,7 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="data_usaha" class="col-sm-4 col-form-label" id="data">Pelaksanaan Undangan</label>
-                    </div>
-                    <div class="form-group row">
-                        <label for="undangan_isi_hari" class="col-sm-2 col-form-label">Hari</label>
+                        <label for="undangan_isi_hari" class="col-sm-2 col-form-label">Hari Agenda</label>
                         <div class="col-sm-9">
                             <input type="text" id="undangan_isi_hari" name="undangan_isi_hari" class="form-control"
                                 required>
@@ -79,7 +72,7 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="undangan_isi_tgl" class="col-sm-2 col-form-label">Tanggal</label>
+                        <label for="undangan_isi_tgl" class="col-sm-2 col-form-label">Tanggal Agenda</label>
                         <div class="col-sm-9">
                             <input type="date" id="undangan_isi_tgl" name="undangan_isi_tgl" class="form-control"
                                 required>
@@ -99,7 +92,7 @@
                         </div>
                     </div> --}}
                     <div class="form-group row">
-                        <label for="undangan_isi_waktu" class="col-sm-2 col-form-label">Waktu</label>
+                        <label for="undangan_isi_waktu" class="col-sm-2 col-form-label">Waktu Agenda</label>
                         <div class="col-sm-9">
                             <input type="time" min="00:00" max="23:59" id="undangan_isi_waktu"
                                 name="undangan_isi_waktu" class="form-control" required>
@@ -110,7 +103,7 @@
                     </div>
 
                     <div class="form-group row">
-                        <label for="undangan_isi_tempat" class="col-sm-2 col-form-label">Tempat</label>
+                        <label for="undangan_isi_tempat" class="col-sm-2 col-form-label">Tempat Agenda</label>
                         <div class="col-sm-9">
                             <input type="text" id="undangan_isi_tempat" name="undangan_isi_tempat" class="form-control"
                                 required>
@@ -120,7 +113,7 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="undangan_isi_acara" class="col-sm-2 col-form-label">Acara</label>
+                        <label for="undangan_isi_acara" class="col-sm-2 col-form-label">Agenda Acara</label>
                         <div class="col-sm-9">
                             <input type="text" id="undangan_isi_acara" name="undangan_isi_acara" class="form-control"
                                 required>
@@ -145,6 +138,10 @@
         body,
         option {
             font-family: 'Poppins', sans-serif;
+        }
+
+        .card-body {
+            padding-top: 0;
         }
 
         .form-group {
