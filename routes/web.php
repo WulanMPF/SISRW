@@ -49,14 +49,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('landingpage.index');
-});
+
 
 // Route::get('/', [WelcomeController::class, 'index']);
 
 // Route Landing Page
-Route::get('/', [WelcomeController::class, 'index']);
+use App\Http\Controllers\landingPage\LandingController;
+
+Route::get('/', [LandingController::class, 'index'])->name('landing');
 
 //Route Login Page
 Route::get('/login', [LoginController::class, 'index'])->name('login');
