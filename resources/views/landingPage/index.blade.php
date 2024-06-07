@@ -187,7 +187,7 @@
             <div class="row">
                 <div class="col-lg-6 pr-0">
                     <section aria-label="Announcements" class="announcements">
-                        <h2 class="font-weight-bold border-bottom pb-3 mt-3 mb-0 pr-5">Announcements</h2>
+                        <h2 class="font-weight-bold border-bottom pb-3 mt-3 mb-0 pr-5">Pengumuman</h2>
                         <div class="announcement-slider border-r-xs-0 border-r position-relative">
                             <div>
                                 <ul class="nolist list-unstyled position-relative mb-0 px-lg-5 pt-lg-5">
@@ -206,12 +206,12 @@
                                         </li>
                                     @endforeach
                                 </ul>
-                                <a class="all pos-stat text-uppercase ml-lg-5" href="#">All announcements
+                                <a class="all pos-stat text-uppercase ml-lg-5" href="#">Semua Pengumuman
                                     <i class="fa fa-caret-right" aria-hidden="true"></i>
                                 </a>
-                                <div class="left-right-arrows pr-lg-5">
-                                    <button class="prev-arrow-announcement" type="button"><i class="fa fa-chevron-left"></i></button>
-                                    <button class="next-arrow-announcement" type="button"><i class="fa fa-chevron-right"></i></button>
+                                <div class="left-right-arrows pr-lg-3">
+                                    <a href="#" class="previous round">&#8249;</a>
+                                    <a href="#" class="next round">&#8250;</a>
                                 </div>
                             </div>
                         </div>
@@ -219,7 +219,7 @@
                 </div>
                 <div class="col-lg-6 pl-0">
                     <section class="events-section pl-lg-3" aria-label="Events">
-                        <h2 class="font-weight-bold border-bottom pb-3 mt-3 pl-lg-5 mb-0">Events</h2>
+                        <h2 class="font-weight-bold border-bottom pb-3 mt-3 pl-lg-5 mb-0">Acara</h2>
                         <div class="events p-lg-5">
                             <div class="events-block">
                                 <ul class="nolist list-unstyled position-relative mb-0 px-lg-3">
@@ -236,19 +236,21 @@
                                                         {{ $event->nama_kegiatan }}
                                                     </a>
                                                 </h3>
-                                                <p>
-                                                    {{ \Carbon\Carbon::parse($event->tanggal)->format('H:i A') }}
+                                                <p class="m-0 post_intro">
+                                                    {{ \Illuminate\Support\Str::words($event->deskripsi, 20, '...') }}
+                                                    <a href="#">Read more</a>
                                                 </p>
                                             </div>
                                         </li>
                                     @endforeach
                                 </ul>
-                                <a class="all pos-stat text-uppercase ml-lg-5" href="/calendar/">All events
+                                <a class="all pos-stat text-uppercase ml-lg-4" href="/calendar/">Semua acara
                                     <i class="fa fa-caret-right" aria-hidden="true"></i>
                                 </a>
                                 <div class="left-right-arrows second">
-                                    <button class="prev-arrow-events" type="button"><i class="fa fa-chevron-left"></i></button>
-                                    <button class="next-arrow-events" type="button"><i class="fa fa-chevron-right"></i></button>
+                                    <a href="#" class="previous round">&#8249;</a>
+                                    <a href="#" class="next round">&#8250;</a>
+
                                 </div>
                             </div>
                         </div>
@@ -407,13 +409,30 @@
                 });
     </script>
     <script>
-    $(document).ready(function(){
-    $('.announcements ul, .events ul').slick({
-        infinite: true,
-        slidesToShow: 3,
-        slidesToScroll: 1
-    });
-});
+     document.addEventListener("DOMContentLoaded", function() {
+
+            $('.announcement-slider').slick({
+                dots: false,
+                arrows: true,
+                infinite: true,
+                slidesToShow: 1,
+                slidesToScroll: 1,
+                fade: true,
+                prevArrow: $('.prev-arrow-announcement'),
+                nextArrow: $('.next-arrow-announcement')
+            });
+
+            $('.events').slick({
+                dots: false,
+                arrows: true,
+                infinite: true,
+                slidesToShow: 1,
+                slidesToScroll: 1,
+                fade: true,
+                prevArrow: $('.prev-arrow-events'),
+                nextArrow: $('.next-arrow-events')
+            });
+        });
 
 </script>
 
