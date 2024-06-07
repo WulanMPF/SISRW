@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Sekretaris;
 use App\Http\Controllers\Controller;
 use App\Models\SuratUndanganModel;
 use App\Models\UserModel;
+use App\Models\WargaModel;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf as PDF;
 use Carbon\CarbonPeriod;
@@ -163,11 +164,18 @@ class SuratUndanganController extends Controller
     }
     public function cetak(Request $request, $undangan_id)
     {
-        $data = SuratUndanganModel::where('undangan_id', $undangan_id)->get();
-        $pdf = PDF::loadview('sekretaris.undangan.cetak_surat', ['data' => $data]);
-        // dd($data);
+        $user = UserModel::where('level_id', 2)->first();
+        $ketua_id = $user->warga_id;
+        $ketua = WargaModel::find($ketua_id);
+        $undangan = SuratUndanganModel::find($undangan_id);
+        if (!$undangan) {
+            // Handle jika data undangan tidak ditemukan
+        }
+
+        $pdf = PDF::loadview('sekretaris.undangan.cetak_surat', ['undangan' => $undangan, 'user' => $user, 'ketua_id' => $ketua_id, 'ketua' => $ketua]);
         return $pdf->stream('cetak_surat_pdf');
     }
+
     public function destroy(string $id)
     {
         $check = SuratUndanganModel::find($id);
