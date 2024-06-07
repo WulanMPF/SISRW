@@ -21,6 +21,13 @@
                 </a>
             </li>
             <li class="nav-item">
+                <a href="{{ url('/sekretaris/undangan') }}"
+                    class="nav-link {{ $activeMenu == 'undangan' ? 'active' : '' }}">
+                    <i class="nav-icon fas fa-file-alt"></i>
+                    <p>Undangan</p>
+                </a>
+            </li>
+            <li class="nav-item">
                 <a href="{{ url('/sekretaris/pengumuman') }}"
                     class="nav-link {{ $activeMenu == 'pengumuman' ? 'active' : '' }} ">
                     <i class="nav-icon fas fa-bullhorn"></i>
@@ -35,7 +42,6 @@
                     <p>Kegiatan</p>
                 </a>
             </li>
-
             <li class="nav-item">
                 <a href="{{ url('/sekretaris/umkm') }}" class="nav-link {{ $activeMenu == 'umkm' ? 'active' : '' }} ">
                     <i class="nav-icon fas fa-store"></i>
