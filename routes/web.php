@@ -26,6 +26,7 @@ use App\Http\Controllers\Login\LoginController;
 use App\Http\Controllers\Sekretaris\NotifikasiController as SekretarisNotifikasiController;
 use App\Http\Controllers\Sekretaris\ProfileController as SekretarisProfileController;
 use App\Http\Controllers\Sekretaris\SuratController as SekretarisSuratController;
+use App\Http\Controllers\Sekretaris\SuratUndanganController;
 use App\Http\Controllers\Warga\IuranController as WargaIuranController;
 use App\Http\Controllers\Warga\PengaduanController as WargaPengaduanController;
 use App\Http\Controllers\Warga\AjukanPersuratanController as AjukanPersuratanController;
@@ -207,6 +208,17 @@ Route::group(['prefix' => 'sekretaris/surat'], function () {
     Route::post('/', [SekretarisSuratController::class, 'store']);
     Route::get('/{id}', [SekretarisSuratController::class, 'show']);
     Route::delete('/{id}', [SekretarisSuratController::class, 'destroy']);
+});
+Route::group(['prefix' => 'sekretaris/undangan'], function () {
+    Route::get('/', [SuratUndanganController::class, 'index']);
+    Route::get('/cetak_surat_pdf/{id}', [SuratUndanganController::class, 'cetak']);
+    Route::post('/list', [SuratUndanganController::class, 'list']);
+    Route::get('/create', [SuratUndanganController::class, 'create']);
+    Route::post('/', [SuratUndanganController::class, 'store'])->name('undangan.store');
+    Route::get('/{id}', [SuratUndanganController::class, 'show']);
+    Route::get('/{id}/edit', [SuratUndanganController::class, 'edit'])->name('undangan.edit');
+    Route::put('/{id}', [SuratUndanganController::class, 'update'])->name('undangan.update');
+    Route::delete('/destroy/{id}', [SuratUndanganController::class, 'destroy']);
 });
 Route::group(['prefix' => 'sekretaris/pengumuman'], function () {
     Route::get('/', [PengumumanController::class, 'index'])->name('sekretaris.pengumuman.index');
