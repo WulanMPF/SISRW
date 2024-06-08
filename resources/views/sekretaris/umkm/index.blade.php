@@ -2,9 +2,16 @@
 
 @section('content')
     <div class="card card-outline card-light">
-        <div class="card-header">
-            <div class="card-tools">
-                <a class="btn btn-sm mt-1" id="tambah" href="{{ url('sekretaris/umkm/create') }}">Tambah UMKM</a>
+        <div class="card-header d-flex justify-content-end align-items-center">
+            <div class="form-group mb-0 mr-2">
+                <select name="status_usaha" id="status_usaha" class="form-control rounded-select" required>
+                    <option value="Aktif">- Aktif -</option>
+                    <option value="Nonaktif">- Nonaktif -</option>
+                    <option value="Diproses">- Diproses -</option>
+                </select>
+            </div>
+            <div>
+                <a class="btn btn-sm" id="tambah" href="{{ url('sekretaris/umkm/create') }}">Tambah UMKM</a>
             </div>
         </div>
         <div class="card-body">
@@ -14,33 +21,18 @@
             @if (session('error'))
                 <div class="alert alert-danger">{{ session('error') }}</div>
             @endif
-            <div class="row">
-                <div class="col-md-12">
-                    <h3>UMKM Warga RW 05</h3>
-                    <div class="col-sm-12 col-md-5">
-                        <div class="form-group row">
-                            <div class="col-4">
-                                <select name="status_usaha" id="status_usaha" class="form-control rounded-select" required>
-                                    <option value="">- Semua -</option>
-                                    <option value="Aktif">- Aktif -</option>
-                                    <option value="Nonaktif">- Nonaktif -</option>
-                                    <option value="Diproses">- Diproses -</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <table class="table table-bordered table-hover table-sm" id="table_umkm" style="text-align: center;">
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Nama Usaha</th>
-                                <th>Jenis Usaha</th>
-                                <th>Status Usaha</th>
-                                <th>Aksi</th>
-                            </tr>
-                        </thead>
-                    </table>
-                </div>
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover table-sm" id="table_umkm" style="text-align: center;">
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Nama Usaha</th>
+                            <th>Jenis Usaha</th>
+                            <th>Status Usaha</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </thead>
+                </table>
             </div>
         </div>
     </div>
@@ -48,21 +40,42 @@
 
 @push('css')
     <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+
         .rounded-select {
-            border-radius: 20px;
+            border-radius: 5px;
         }
 
-        select.rounded-select:hover {
-            background-color: #f0f0f0;
+        .form-group.mb-0 {
+            margin-bottom: 0 !important;
         }
 
-        select.rounded-select:focus {
+        #status_usaha {
+            padding: 10px;
+            font-size: 14px;
+            color: #333;
+            border: 1px solid #ccc;
+        }
+
+        #status_usaha:focus {
+            border-color: #66afe9;
             outline: none;
-            border-color: #cacaca;
-            box-shadow: none;
+            box-shadow: 0 0 8px rgba(102, 175, 233, 0.6);
         }
 
-        #table_ajukan_umkm,
+        #tambah {
+            background-color: #BB955C;
+            padding: 0.5rem;
+            margin-left: 0;
+            padding-left: 1rem;
+            color: white;
+            border-radius: 9px;
+            padding-right: 1rem;
+            margin-right: 1.2rem;
+        }
+
         #table_umkm {
             border-radius: 10px;
             overflow: hidden;
@@ -72,26 +85,23 @@
             color: #463720;
             font-family: Poppins;
             font-size: 15.005px;
-            font-style: normal;
             font-weight: 800;
             line-height: normal;
         }
 
-        #table_ajukan_umkm thead,
         #table_umkm thead {
             background-color: #d9d2c7;
             color: #7F643C;
         }
 
-        #tambah {
-            background-color: #BB955C;
-            margin-left: 0;
-            padding-left: 2rem;
-            color: white;
-            border-radius: 9px;
-            font-size: 13px;
-            padding-right: 2rem;
-            margin-right: 1.2rem;
+        .table-responsive {
+            overflow-x: auto;
+        }
+
+        @media (max-width: 767px) {
+            .table-responsive {
+                overflow-x: scroll;
+            }
         }
     </style>
 @endpush
