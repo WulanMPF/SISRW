@@ -28,7 +28,7 @@ class WargaChart
 
         return $this->chart->donutChart()
             ->setTitle('Distribusi Gender')
-            ->setSubtitle('Jumlah Warga Berdasarkan Gender')
+            ->setSubtitle('Jumlah Warga RW 05 Berdasarkan Gender')
             ->addData($data)
             ->setLabels($label);
     }
