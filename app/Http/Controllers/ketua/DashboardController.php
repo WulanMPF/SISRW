@@ -3,6 +3,12 @@
 namespace App\Http\Controllers\Ketua;
 
 use App\Http\Controllers\Controller;
+use App\Models\KegiatanModel;
+use App\Models\KkModel;
+use App\Models\PenerimaBansosModel;
+use App\Models\PengaduanModel;
+use App\Models\UmkmModel;
+use App\Models\WargaModel;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
@@ -18,9 +24,23 @@ class DashboardController extends Controller
             'list' => ['Home', 'Dashboard']
         ];
 
+        $jumlah_penerima_bansos = PenerimaBansosModel::count();
+        $jumlah_pengaduan = PengaduanModel::count();
+        $jumlah_kk = KkModel::count();
+        $jumlah_umkm = UmkmModel::count();
+        $jumlah_warga = WargaModel::count();
+
         $activeMenu = 'dashboard';
 
-        return view('ketua.dashboard', ['breadcrumb' => $breadcrumb, 'activeMenu' => $activeMenu]);
+        return view('ketua.dashboard', [
+            'breadcrumb' => $breadcrumb,
+            'activeMenu' => $activeMenu,
+            'jumlah_penerima_bansos' => $jumlah_penerima_bansos,
+            'jumlah_pengaduan' => $jumlah_pengaduan,
+            'jumlah_kk' => $jumlah_kk,
+            'jumlah_umkm' => $jumlah_umkm,
+            'jumlah_warga' => $jumlah_warga
+        ]);
     }
 
     /**
