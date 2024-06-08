@@ -40,7 +40,7 @@
                     <li class="nav-item"><a class="nav-link" href="#aboutus">About Us</a></li>
                 </ul>
                 <ul class="navbar-nav mb-2 mb-lg-0">
-                    <li class="nav-item"><a class="btn btn-secondary" href="/login"> Log In</a>
+                    <li class="nav-item"><a class="btn btn-secondary" href="login"> Log In</a>
                 </ul>
             </div>
         </div>
@@ -87,13 +87,15 @@
                     <div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel">
                         <ol class="carousel-indicators">
                             @foreach ($kegiatan as $index => $activity)
-                                <li data-bs-target="#carouselExampleFade" data-bs-slide-to="{{ $index }}" class="{{ $index == 0 ? 'active' : '' }}"></li>
+                                <li data-bs-target="#carouselExampleFade" data-bs-slide-to="{{ $index }}"
+                                    class="{{ $index == 0 ? 'active' : '' }}"></li>
                             @endforeach
                         </ol>
                         <div class="carousel-inner">
                             @foreach ($kegiatan as $index => $activity)
                                 <div class="carousel-item {{ $index == 0 ? 'active' : '' }}">
-                                    <img src="{{ asset('gambar_kegiatan/' . $activity->gambar) }}" class="d-block w-100" alt="{{ $activity->nama_kegiatan }}">
+                                    <img src="{{ asset('gambar_kegiatan/' . $activity->gambar) }}" class="d-block w-100"
+                                        alt="{{ $activity->nama_kegiatan }}">
                                     <div class="carousel-caption d-none d-md-block">
                                         <h5>{{ $activity->nama_kegiatan }}</h5>
                                         <p>{{ \Illuminate\Support\Str::words($activity->deskripsi, 20, '...') }}</p>
@@ -101,11 +103,13 @@
                                 </div>
                             @endforeach
                         </div>
-                        <a class="carousel-control-prev" href="#carouselExampleFade" role="button" data-bs-slide="prev">
+                        <a class="carousel-control-prev" href="#carouselExampleFade" role="button"
+                            data-bs-slide="prev">
                             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                             \
                         </a>
-                        <a class="carousel-control-next" href="#carouselExampleFade" role="button" data-bs-slide="next">
+                        <a class="carousel-control-next" href="#carouselExampleFade" role="button"
+                            data-bs-slide="next">
                             <span class="carousel-control-next-icon" aria-hidden="true"></span>
 
                         </a>
@@ -135,7 +139,8 @@
                             @foreach ($umkm as $umkm)
                                 <div class="post-slide">
                                     <div class="post-img">
-                                        <img src="{{ asset('lampiran_umkm/' . $umkm->lampiran) }}" alt="" width="300" height="200">
+                                        <img src="{{ asset('lampiran_umkm/' . $umkm->lampiran) }}" alt=""
+                                            width="300" height="200">
                                         <a href="#" class="over-layer"><i class="fa fa-link"></i></a>
                                     </div>
                                     <div class="post-content">
@@ -166,34 +171,45 @@
                                 <ul class="nolist list-unstyled position-relative mb-0 px-lg-5 pt-lg-5">
                                     @foreach ($pengumuman as $announcement)
                                         <li class="border-bottom pb-3 mt-3">
-                                            <span class="meta text-uppercase">{{ \Carbon\Carbon::parse($announcement->created_at)->format('F d, Y') }}</span>
+                                            <span
+                                                class="meta text-uppercase">{{ \Carbon\Carbon::parse($announcement->created_at)->format('F d, Y') }}</span>
                                             <h3 class="font-weight-bold mt-0">
-                                                <a href="#" data-bs-toggle="modal" data-bs-target="#announcementModal{{ $announcement->id }}">
+                                                <a href="#" data-bs-toggle="modal"
+                                                    data-bs-target="#announcementModal{{ $announcement->id }}">
                                                     {{ $announcement->judul }}
                                                 </a>
                                             </h3>
                                             <p class="m-0 post_intro">
                                                 {{ \Illuminate\Support\Str::words($announcement->isi_pengumuman, 20, '...') }}
-                                                <a href="#" class="read-more" data-bs-toggle="modal" data-bs-target="#announcementModal{{ $announcement->id }}">Read more</a>
+                                                <a href="#" class="read-more" data-bs-toggle="modal"
+                                                    data-bs-target="#announcementModal{{ $announcement->id }}">Read
+                                                    more</a>
                                             </p>
                                         </li>
 
                                         <!-- Modal -->
-                                        <div class="modal fade" id="announcementModal{{ $announcement->id }}" tabindex="-1" aria-labelledby="modalLabel{{ $announcement->id }}" aria-hidden="true">
+                                        <div class="modal fade" id="announcementModal{{ $announcement->id }}"
+                                            tabindex="-1" aria-labelledby="modalLabel{{ $announcement->id }}"
+                                            aria-hidden="true">
                                             <div class="modal-dialog modal-lg">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
-                                                        <h5 class="modal-title" id="modalLabel{{ $announcement->id }}">{{ $announcement->judul }}</h5>
-                                                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                                        <h5 class="modal-title"
+                                                            id="modalLabel{{ $announcement->id }}">
+                                                            {{ $announcement->judul }}</h5>
+                                                        <button type="button" class="close" data-bs-dismiss="modal"
+                                                            aria-label="Close">
                                                             <span aria-hidden="true">&times;</span>
                                                         </button>
                                                     </div>
                                                     <div class="modal-body">
-                                                        <img src="{{ asset('gambar_pengumuman/' . $announcement->gambar) }}" style="max-width: 100%; height: auto;" alt="">
+                                                        <img src="{{ asset('gambar_pengumuman/' . $announcement->gambar) }}"
+                                                            style="max-width: 100%; height: auto;" alt="">
                                                         <p>{{ $announcement->isi_pengumuman }}</p>
                                                     </div>
                                                     <div class="modal-footer">
-                                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                        <button type="button" class="btn btn-secondary"
+                                                            data-bs-dismiss="modal">Close</button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -219,45 +235,56 @@
                             <div class="events-block">
                                 <ul class="nolist list-unstyled position-relative mb-0 px-lg-3">
                                     @foreach ($kegiatan as $event)
-                                    <li class="border-bottom d-flex align-items-center">
-                                        <div class="events-date text-uppercase text-center">
-                                            <a class="text-white" href="#" data-bs-toggle="modal" data-bs-target="#eventModal{{ $event->kegiatan_id }}">
-                                                {{ \Carbon\Carbon::parse($event->tanggal)->format('F') }}
-                                                <span>{{ \Carbon\Carbon::parse($event->tanggal)->format('d') }}</span>
-                                            </a>
-                                        </div>
-                                        <div class="d-inline-block pl-3 event-li">
-                                            <h3 class="font-weight-bold mt-0">
-                                                <a href="#" data-bs-toggle="modal" data-bs-target="#eventModal{{ $event->kegiatan_id }}">
-                                                    {{ $event->nama_kegiatan }}
+                                        <li class="border-bottom d-flex align-items-center">
+                                            <div class="events-date text-uppercase text-center">
+                                                <a class="text-white" href="#" data-bs-toggle="modal"
+                                                    data-bs-target="#eventModal{{ $event->kegiatan_id }}">
+                                                    {{ \Carbon\Carbon::parse($event->tanggal)->format('F') }}
+                                                    <span>{{ \Carbon\Carbon::parse($event->tanggal)->format('d') }}</span>
                                                 </a>
-                                            </h3>
-                                            <p class="m-0 post_intro">
-                                                {{ \Illuminate\Support\Str::words($event->deskripsi, 20, '...') }}
-                                                <a href="#" data-bs-toggle="modal" data-bs-target="#eventModal{{ $event->kegiatan_id }}">Read more</a>
-                                            </p>
-                                        </div>
-                                    </li>
+                                            </div>
+                                            <div class="d-inline-block pl-3 event-li">
+                                                <h3 class="font-weight-bold mt-0">
+                                                    <a href="#" data-bs-toggle="modal"
+                                                        data-bs-target="#eventModal{{ $event->kegiatan_id }}">
+                                                        {{ $event->nama_kegiatan }}
+                                                    </a>
+                                                </h3>
+                                                <p class="m-0 post_intro">
+                                                    {{ \Illuminate\Support\Str::words($event->deskripsi, 20, '...') }}
+                                                    <a href="#" data-bs-toggle="modal"
+                                                        data-bs-target="#eventModal{{ $event->kegiatan_id }}">Read
+                                                        more</a>
+                                                </p>
+                                            </div>
+                                        </li>
 
-                                    <!-- Modal -->
-                                    <div class="modal fade" id="eventModal{{ $event->kegiatan_id }}" tabindex="-1" aria-labelledby="eventModalLabel{{ $event->kegiatan_id }}" aria-hidden="true">
-                                        <div class="modal-dialog modal-lg">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="eventModalLabel{{ $event->kegiatan_id }}">{{ $event->nama_kegiatan }}</h5>
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <img src="{{ asset('gambar_kegiatan/' . $activity->gambar) }}" style="max-width: 100%; height: auto;" alt="">
-                                                    {{ $event->deskripsi }}
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                        <!-- Modal -->
+                                        <div class="modal fade" id="eventModal{{ $event->kegiatan_id }}"
+                                            tabindex="-1" aria-labelledby="eventModalLabel{{ $event->kegiatan_id }}"
+                                            aria-hidden="true">
+                                            <div class="modal-dialog modal-lg">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title"
+                                                            id="eventModalLabel{{ $event->kegiatan_id }}">
+                                                            {{ $event->nama_kegiatan }}</h5>
+                                                        <button type="button" class="btn-close"
+                                                            data-bs-dismiss="modal" aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <img src="{{ asset('gambar_kegiatan/' . $activity->gambar) }}"
+                                                            style="max-width: 100%; height: auto;" alt="">
+                                                        {{ $event->deskripsi }}
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary"
+                                                            data-bs-dismiss="modal">Close</button>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                     @endforeach
+                                    @endforeach
                                 </ul>
                                 {{-- <a class="all pos-stat text-uppercase ml-lg-4" href="/calendar/">Semua acara
                                     <i class="fa fa-caret-right" aria-hidden="true"></i>
@@ -291,8 +318,7 @@
             <div class="container">
                 <div class="row align-items-center gx-4">
                     <div class="col-md-3">
-                        <div class="ms-md-2 ms-lg-5"><img class="img-fluid round-5"
-                                src="images/ketuarw.png"></div>
+                        <div class="ms-md-2 ms-lg-5"><img class="img-fluid round-5" src="images/ketuarw.png"></div>
                     </div>
                     <div class="col-md-6 offset-md-1">
                         <div class="ms-md-2 ms-lg-5">
@@ -373,14 +399,14 @@
             </div>
         </div>
     </section>
-<section>
-<footer>
-    <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
-        2024 Copyright
-        <a class="text-reset fw-bold">© Jurusan Teknologi Informasi Politeknik Negeri Malang</a>
-    </div>
-    </footer>
-</section>
+    <section>
+        <footer>
+            <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
+                2024 Copyright
+                <a class="text-reset fw-bold">© Jurusan Teknologi Informasi Politeknik Negeri Malang</a>
+            </div>
+        </footer>
+    </section>
     <!-- End of .container -->
 
     <script src='https://code.jquery.com/jquery-1.12.0.min.js'></script>
@@ -389,34 +415,34 @@
         integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous">
     </script>
     <script>
-        $(document).ready(function(){
+        $(document).ready(function() {
             $("#news-slider").owlCarousel({
-                        loop: true,
-                        margin: 3,
-                        items: 3,
-                        nav: true,
-                        autoplay: true,
-                        autoplayTimeout: 300,
-                        autoplayHoverPause: true,
-                        responsive: {
-                        0: {
-                            items: 1
-                        },
-                        600: {
-                            items: 2
-                        },
-                        1000: {
-                            items: 3
-                        },
-                        1200: {
-                            items: 7
-                        }
-                        }
-                    });
-                });
+                loop: true,
+                margin: 3,
+                items: 3,
+                nav: true,
+                autoplay: true,
+                autoplayTimeout: 300,
+                autoplayHoverPause: true,
+                responsive: {
+                    0: {
+                        items: 1
+                    },
+                    600: {
+                        items: 2
+                    },
+                    1000: {
+                        items: 3
+                    },
+                    1200: {
+                        items: 7
+                    }
+                }
+            });
+        });
     </script>
     <script>
-     document.addEventListener("DOMContentLoaded", function() {
+        document.addEventListener("DOMContentLoaded", function() {
 
             $('.announcement-slider').slick({
                 dots: false,
@@ -440,25 +466,24 @@
                 nextArrow: $('.next-arrow-events')
             });
         });
+    </script>
+    <script>
+        $(document).ready(function() {
+            // Event listener untuk setiap tombol "Read more"
+            $('.read-more').click(function() {
+                // Ambil ID modal dari atribut data
+                var modalId = $(this).data('target');
+                // Tampilkan modal yang sesuai
+                $(modalId).show();
+            });
 
-</script>
-<script>
-$(document).ready(function() {
-    // Event listener untuk setiap tombol "Read more"
-    $('.read-more').click(function() {
-        // Ambil ID modal dari atribut data
-        var modalId = $(this).data('target');
-        // Tampilkan modal yang sesuai
-        $(modalId).show();
-    });
-
-    // Event listener untuk tombol close pada modal
-    $('.close').click(function() {
-        // Sembunyikan modal saat tombol close diklik
-        $(this).closest('.modal').hide();
-    });
-});
-</script>
+            // Event listener untuk tombol close pada modal
+            $('.close').click(function() {
+                // Sembunyikan modal saat tombol close diklik
+                $(this).closest('.modal').hide();
+            });
+        });
+    </script>
 
 </body>
 
