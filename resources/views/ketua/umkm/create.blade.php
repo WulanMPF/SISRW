@@ -19,10 +19,6 @@
                     <div class="form-group row">
                         <label for="data_usaha" class="col-sm-4 col-form-label" id="data">Data Usaha</label>
                     </div>
-                    {{-- Mengambil ID pengguna dari sesi atau database setelah login (KEPERLUAN UNTUK INSERT DATA) --}}
-                    {{-- <input type="hidden" id="warga_id" name="warga_id" value="???"> --}}
-
-                    {{-- INI CUMA BUAT TESTING AJUKAN AJA -- aslinya ambil id pengguna dari session (line 46) --}}
                     <div class="form-group row">
                         <label for="nama_usaha" class="col-sm-2 col-form-label">Warga ID:</label>
                         <div class="col-sm-9">
@@ -153,7 +149,6 @@
         body,
         option {
             font-family: 'Poppins', sans-serif;
-            font-size: 15px;
         }
 
         .form-group {
