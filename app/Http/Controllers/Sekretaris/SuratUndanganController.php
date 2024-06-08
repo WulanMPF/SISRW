@@ -165,12 +165,17 @@ class SuratUndanganController extends Controller
         $ketua_id = $user->warga_id;
         $ketua = WargaModel::find($ketua_id);
         $undangan = SuratUndanganModel::find($undangan_id);
+
+        \Carbon\Carbon::setLocale('id');
+
         if (!$undangan) {
             // Handle jika data undangan tidak ditemukan
         }
 
-        $pdf = PDF::loadview('sekretaris.undangan.cetak_surat', ['undangan' => $undangan, 'user' => $user, 'ketua_id' => $ketua_id, 'ketua' => $ketua]);
-        return $pdf->stream('cetak_surat_pdf');
+        $html = view('sekretaris.undangan.cetak_surat',  ['undangan' => $undangan, 'user' => $user, 'ketua_id' => $ketua_id, 'ketua' => $ketua])->render();
+
+        $pdf = PDF::loadHTML($html);
+        return $pdf->stream($undangan->undangan_nama . '.pdf');
     }
 
     public function destroy(string $id)
