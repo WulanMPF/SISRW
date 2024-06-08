@@ -7,8 +7,10 @@ use App\Http\Controllers\Controller;
 use App\Models\ArsipSuratModel;
 use App\Models\SuratUndanganModel;
 use App\Models\UserModel;
+use App\Models\WargaModel;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
+use Barryvdh\DomPDF\Facade\Pdf as PDF;
 
 class ArsipSuratController extends Controller
 {
@@ -67,7 +69,7 @@ class ArsipSuratController extends Controller
         return view('ketua.surat.create-undangan', ['breadcrumb' => $breadcrumb, 'user' => $user, 'activeMenu' => $activeMenu]);
     }
 
-    public function storeUndangan(Request $request)
+    /*public function storeUndangan(Request $request)
     {
         $request->validate([
             'undangan_nama' => 'required|string|max:20',
@@ -97,6 +99,51 @@ class ArsipSuratController extends Controller
         ]);
 
         return redirect('/ketua/surat.index')->with('success', 'Data surat berhasil disimpan');
+    }*/
+    public function storeUndangan(Request $request)
+    {
+        $request->validate([
+            'undangan_nama' => 'required|string|max:20',
+            'undangan_tempat' => 'required|string|max:20',
+            'undangan_tanggal' => 'required|date',
+            'undangan_no_surat' => 'required|string|max:20',
+            'undangan_perihal' => 'required|string|max:20',
+            'undangan_isi_hari' => 'required|string|max:20',
+            'undangan_isi_tgl' => 'required|date',
+            'undangan_isi_waktu' => 'required|date_format:H:i',
+            'undangan_isi_tempat' => 'required|string|max:20',
+            'undangan_isi_acara' => 'required|string|max:100',
+        ]);
+
+        $undangan = SuratUndanganModel::create([
+            'user_id' => auth()->user()->id,
+            'undangan_nama' => $request->undangan_nama,
+            'undangan_tempat' => $request->undangan_tempat,
+            'undangan_tanggal' => $request->undangan_tanggal,
+            'undangan_no_surat' => $request->undangan_no_surat,
+            'undangan_perihal' => $request->undangan_perihal,
+            'undangan_isi_hari' => $request->undangan_isi_hari,
+            'undangan_isi_tgl' => $request->undangan_isi_tgl,
+            'undangan_isi_waktu' => $request->undangan_isi_waktu,
+            'undangan_isi_tempat' => $request->undangan_isi_tempat,
+            'undangan_isi_acara' => $request->undangan_isi_acara,
+        ]);
+
+        // Retrieve the necessary data for the PDF
+        $user = UserModel::where('level_id', 2)->first();
+        $ketua_id = $user->warga_id;
+        $ketua = WargaModel::find($ketua_id);
+
+        \Carbon\Carbon::setLocale('id');
+
+        if (!$undangan) {
+            return redirect('ketua/surat')->with('error', 'Data surat tidak ditemukan');
+        }
+
+        $html = view('sekretaris.undangan.cetak_surat', ['undangan' => $undangan, 'user' => $user, 'ketua_id' => $ketua_id, 'ketua' => $ketua])->render();
+
+        $pdf = PDF::loadHTML($html);
+        return $pdf->stream($undangan->undangan_nama . '.pdf');
     }
 
     public function show(string $id)
