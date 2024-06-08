@@ -17,14 +17,10 @@
                         <option value="jasa">Pelayanan dan Layanan Jasa</option>
                     </select>
                 </div>
-                {{-- <div class="col-md-5">
-                    <a class="btn" id="tambah" href="{{ url('warga/umkm/create') }}">Ajukan UMKM</a>
-                </div> --}}
             </div>
         </div>
     </div>
     <div class="card-body" style="padding-left: 1rem;">
-        {{-- Alert success dan error  --}}
         @if (session('success'))
             <div class="alert alert-success alert-dismissible show fade">{{ session('success') }}
                 <button type="button" class="btn-close btn-sm" data-bs-dismiss="alert" aria-label="Close"></button>
@@ -37,7 +33,6 @@
             </div>
         @endif
 
-        {{-- Filter UMKM --}}
         @if ($umkm->isEmpty())
             <div class="container">
                 <div class="header">
@@ -76,18 +71,19 @@
             </div>
             <div class="d-flex flex-wrap overflow-auto flex-container" style="margin-top:1rem;">
                 @foreach ($umkm as $item)
-                    <div class="card">
+                    <div class="card umkm-card">
                         {{-- di folder storage --}}
-                        {{-- <img src="{{ asset('storage/umkm/' . $item->lampiran) }}" class="card-img-top"> --}}
+                        {{-- <img src="{{ asset('storage/umkm/' . $item->lampiran) }}" class="card-img-top" alt="{{ $item->nama_usaha }}"> --}}
 
                         {{-- di folder public --}}
-                        <img src="{{ asset('lampiran_umkm/' . $item->lampiran) }}" class="card-img-top center">
+                        <img src="{{ asset('lampiran_umkm/' . $item->lampiran) }}" class="card-img-top center"
+                            alt="{{ $item->nama_usaha }}">
                         <div class="card-body">
                             <h5 class="card-title"><strong>{{ $item->nama_usaha }}</strong></h5>
                             <p class="card-text">{{ $item->deskripsi }}</p>
                         </div>
                         <div class="card-footer d-flex justify-content-between">
-                            <a href="umkm/{{ $item->umkm_id }}" class="btn" id="button">Baca selengkapnya</a>
+                            <a href="umkm/{{ $item->umkm_id }}" class="btn btn-detail">Baca selengkapnya</a>
                         </div>
                     </div>
                 @endforeach
@@ -98,7 +94,10 @@
 
 @push('css')
     <style>
-        /* Style jual produk Anda */
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+
         .container {
             max-width: 100%;
             padding-top: 1rem;
@@ -147,146 +146,116 @@
             margin-left: 5px;
         }
 
-        /* Untuk perangkat seluler */
         @media (max-width: 768px) {
+            .header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
             .header img {
                 max-width: 80px;
             }
 
             .header a {
                 font-size: 12px;
+                margin-top: 10px;
+            }
+
+            .flex-container {
+                flex-direction: column;
+            }
+
+            .card {
+                width: 100%;
+                margin-right: 0;
+                margin-bottom: 1rem;
+            }
+
+            .header div {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .header span {
+                margin-top: 10px;
+            }
+
+            #jenis_usaha {
+                width: 100%;
+            }
+
+            .alert {
+                font-size: 14px;
+                padding: 0.75rem;
+            }
+
+            .alert h5 {
+                font-size: 16px;
             }
         }
 
-        /* End of styling jual produk Anda */
-
-        .card-box {
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        .umkm-card {
+            width: 18rem;
+            margin: 1rem;
             border: 1px solid #ddd;
-            border-radius: 5px;
-            padding: 20px;
-            position: relative;
+            border-radius: 10px;
+            overflow: hidden;
+            transition: transform 0.2s, box-shadow 0.2s;
         }
 
-        .img-card {
-            width: 150px;
-            height: auto;
-            border-radius: 5px;
+        .umkm-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
-        .text-card {
-            display: flex;
-            align-items: center;
+        .umkm-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
         }
 
-        .content {
-            flex: 1;
+        .umkm-card .card-body {
+            padding: 1rem;
+            background-color: #fff;
         }
 
-        .text-card h5 {
-            margin-bottom: 5px;
-            font-size: 18px;
-            color: #333;
+        .umkm-card .card-footer {
+            background-color: #f8f8f8;
+            border-top: 1px solid #ddd;
         }
 
-        .text-card p {
-            margin-bottom: 10px;
-            color: #666;
-        }
-
-        .center-button {
+        .btn-detail {
+            background-color: #E2D4BF;
+            color: black;
+            border-radius: 10px;
+            padding: 0.5rem 1rem;
             text-align: center;
         }
 
-        .center-button a {
-            color: #FF4500;
-            text-decoration: none;
-        }
-
-        .center-button a:hover {
-            color: #FF8C00;
-        }
-
-        .card-box {
-            background: #E2D4BF;
-        }
-
-        .text-card img {
-            width: 5rem;
-            height: 5rem;
-            float: left;
-        }
-
-        body {
-            font-family: 'Poppins', sans-serif;
-        }
-
-        h5 {
-            font-weight: bold;
-            padding-bottom: 1rem;
-        }
-
-        img {
-            width: 288px;
-            height: 192px;
-            object-fit: cover;
+        .btn-detail:hover {
+            background-color: #d1c2a9;
+            color: black;
         }
 
         .flex-container {
             display: flex;
             flex-wrap: wrap;
-            justify-content: left;
+            justify-content: center;
             background: #f8f8f8;
         }
 
-        .card {
-            width: 18rem;
-            margin-right: 2.75rem;
-            margin-bottom: 2.5rem;
-        }
-
-        a {
-            float: right;
-        }
-
-        /* STyling close button for alert */
         .alert-dismissible .btn-close {
             padding: 1rem 1rem;
         }
-
-        /* Styling button */
-        #tambah {
-            background-color: #E2D4BF;
-            margin-left: 0;
-            padding-left: 2rem;
-            color: black;
-            border-radius: 10px;
-            padding-right: 2rem;
-        }
-
-        #button {
-            background-color: #E2D4BF;
-            margin-left: auto;
-            padding-left: 1rem;
-            color: black;
-            border-radius: 10px;
-            font-size: 14px;
-            padding-right: 1rem;
-        }
-
-        /* End of styling button */
     </style>
 @endpush
+
 @push('js')
     <script>
         $(document).ready(function() {
-            // Mendapatkan nilai parameter kategori dari URL
             var urlParams = new URLSearchParams(window.location.search);
             var kategori = urlParams.get('kategori');
 
-            // Menetapkan nilai dropdown sesuai dengan nilai parameter kategori
             if (kategori !== null) {
                 $('#jenis_usaha').val(kategori);
             }

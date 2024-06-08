@@ -1,18 +1,18 @@
 @extends('layout.warga.template')
 
 @section('content')
-    <div class="card card-outline card-light" style="margin-left:1rem; margin-right:1rem;">
+    <div class="card card-outline card-light mx-3">
 
         <div class="card-header">
             <!-- Button to Open the Modal -->
             {{-- <button type="button" class="btn btn-submit" data-toggle="modal" data-target="#pengaduanModal">
                 Ajukan Pengaduan dan Aspirasi Anda disini </button> --}}
-            <div class="container col-md-12">
-                <div class="row px-5 py-4 bg-white">
-                    <div class="col-md-3 mb-3">
+            <div class="container">
+                <div class="row px-3 py-4 bg-white">
+                    <div class="col-md-3 col-sm-12 mb-3">
                         <img src="https://sippn.menpan.go.id/asset/images/ayo_lapor.png" class="img-fluid" alt="LAPOR!">
                     </div>
-                    <div class="col-md-8" style="margin-left:1rem;">
+                    <div class="col-md-8 col-sm-12">
                         <h6>Anda juga dapat menyampaikan pengaduan, aspirasi, maupun permintaan informasi melalui aplikasi
                             LAPOR!</h6>
                         <p class="small">Melalui LAPOR!, Anda dapat menyampaikan permasalahan pelayanan publik yang Anda
@@ -25,10 +25,12 @@
                                 <polyline points="15 3 21 3 21 9"></polyline>
                                 <line x1="10" y1="14" x2="21" y2="3"></line>
                             </svg>&nbsp;Open the FORM!
+                        </button>
                     </div>
                 </div>
             </div>
         </div>
+
         <div class="card-body">
             @if (session('success'))
                 <div class="alert alert-success">{{ session('success') }}</div>
@@ -36,14 +38,14 @@
             @if (session('error'))
                 <div class="alert alert-danger">{{ session('error') }}</div>
             @endif
-            <div class="d-flex flex-wrap overflow-auto flex-container" style="margin-top:1rem;">
+            <div class="d-flex flex-wrap overflow-auto flex-container mt-3">
                 @foreach ($pengaduan as $item)
-                    <div class="card">
+                    <div class="card pengaduan-card col-md-5 col-lg-3 col-sm-12 mx-2 my-2">
                         <img src="{{ asset('lampiran/' . $item->lampiran) }}" class="card-img-top center">
-                        <div class="card-body">
+                        <div class="card-body p-2">
                             <h5 class="card-title"><strong>{{ $item->jenis_pengaduan }}</strong></h5>
-                            <p class="card-text">{{ $item->tgl_pengaduan }}</p>
-                            <p class="card-text">{{ $item->deskripsi }}</p>
+                            <p class="card-text mb-1">{{ $item->tgl_pengaduan }}</p>
+                            <p class="card-text">{{ Str::limit($item->deskripsi, 100) }}</p>
                         </div>
                         <div class="card-footer d-flex justify-content-between">
                             <a href="ketua/pengaduan/{{ $item->pengaduan_id }}" class="btn" id="button">Baca
@@ -158,9 +160,9 @@
             font-style: normal;
             font-weight: 400;
             line-height: normal;
-            margin-left: 50%;
             border-radius: 10px;
-
+            display: block;
+            margin: 0 auto;
         }
 
         .form-horizontal .form-group {
@@ -178,37 +180,67 @@
             flex-wrap: wrap;
             overflow: auto;
             margin-top: 1rem;
-            gap: 1.5rem;
-            /* Adjust the gap between cards */
+            gap: 1rem;
         }
 
         .card {
-            flex: 1 1 calc(25% - 1.5rem);
+            flex: 1 1 calc(100% - 1rem);
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             border: none;
             border-radius: 10px;
             overflow: hidden;
-            transition: transform 0.2s;
+            max-width: 100%;
         }
 
-        .card:hover {
-            transform: translateY(-10px);
+        @media (min-width: 576px) {
+            .card {
+                flex: 1 1 calc(48% - 1rem);
+            }
+        }
+
+        @media (min-width: 768px) {
+            .card {
+                flex: 1 1 calc(31.333% - 1rem);
+            }
+        }
+
+        @media (min-width: 992px) {
+            .card {
+                flex: 1 1 calc(23.5% - 1rem);
+            }
+        }
+
+        /* .card:hover .card-body,
+                        .card:hover .card-img-top {
+                            transform: translateY(-10px);
+                        } */
+        .pengaduan-card {
+            width: 18rem;
+            margin: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            overflow: hidden;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .pengaduan-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
         .card-img-top {
             width: 100%;
-            height: 200px;
-            /* Adjust as needed */
+            height: 150px;
             object-fit: cover;
             border-bottom: 1px solid #ddd;
         }
 
         .card-body {
-            padding: 1rem;
+            padding: 0.5rem;
         }
 
         .card-title {
-            font-size: 1.25rem;
+            font-size: 1rem;
             margin-bottom: 0.5rem;
         }
 
@@ -230,7 +262,6 @@
             text-align: center;
             text-decoration: none;
             border-radius: 5px;
-            transition: background-color 0.3s;
         }
 
         .btn:hover {
@@ -238,7 +269,6 @@
         }
 
         /* Styling ajukan */
-        /* Style ajukan */
         .btn-red {
             background-color: #ff0000;
             color: white;
