@@ -2,48 +2,18 @@
 
 @section('content')
     <div class="card-body" style="padding-left: 1rem;">
-        <h3
+        {{-- <h3
             style="text-decoration: underline; text-align: center; font-style: normal; margin-bottom: 2rem; font-weight: 600;">
             Jenis Bantuan Sosial
-        </h3>
-
-        {{-- HANYA UNTUK KEPERLUAN TESTING VIEW SAJA --}}
-        {{-- <div class="list-group-item d-flex justify-content-between">
-            <p class="card-text ml-2">13/03/2024
-            </p>
-            <p class="card-text">Bantuan Sosial Beras 10 kg
-            </p>
-            <a href="bansos/1" class="btn" id="button">Baca Persyaratan</a>
-        </div>
-        <div class="list-group-item d-flex justify-content-between">
-            <p class="card-text ml-2">09/07/2023
-            </p>
-            <p class="card-text">Bantuan Sosial DTKS
-            </p>
-            <a href="bansos/1" class="btn" id="button">Baca Persyaratan</a>
-        </div>
-        <div class="list-group-item d-flex justify-content-between">
-            <p class="card-text ml-2">28/12/2021
-            </p>
-            <p class="card-text">Bantuan Sosial Tunai akibat Covid-19
-            </p>
-            <a href="bansos/1" class="btn" id="button">Baca Persyaratan</a>
-        </div>
-        <div class="list-group-item d-flex justify-content-between">
-            <p class="card-text ml-2">17/02/2024
-            </p>
-            <p class="card-text">Bantuan Sosial PKH
-            </p>
-            <a href="bansos/1" class="btn" id="button">Baca Persyaratan</a>
-        </div> --}}
-        {{-- END OF TESTING VIEW --}}
-
-        {{-- Code disesuaikan dengan pemgambilan data dari database - masih perlu perbaikan PADA SOURCE IMG --}}
+        </h3> --}}
         @foreach ($bansos as $item)
-            <div class="list-group-item d-flex justify-content-between">
-                <p class="card-text ml-2">{{ \Carbon\Carbon::parse($item->tgl_syarat_ketentuan)->format('d/m/Y') }} </p>
-                <p class="card-text">{{ $item->jenis_bansos }} </p>
-                <a href="bansos/{{ $item->syarat_bansos_id }}" class="btn" id="button">Baca Persyaratan</a>
+            <div class="list-group-item d-flex justify-content-between" style="background-color: #E5E2DE;">
+                <p class="card-text m-3" style="flex: 1;">
+                    {{ \Carbon\Carbon::parse($item->tgl_syarat_ketentuan)->format('d/m/Y') }}</p>
+                <p class="card-text m-3" style="flex: 2;">{{ $item->jenis_bansos }}</p>
+                <a href="bansos/{{ $item->syarat_bansos_id }}" class="btn" id="button">
+                    <i class="fas fa-solid fa-book" style="font-size: 1rem;"></i>&nbsp;&nbsp;Baca
+                </a>
             </div>
         @endforeach
     </div>
@@ -53,28 +23,17 @@
     <style>
         body {
             font-family: 'Poppins', sans-serif;
-            /* font-size: 15px; */
+            margin: 0;
+            padding: 0;
         }
 
-        #tambah {
-            background-color: #cbbeab;
-            margin-left: 0;
-            padding-left: 2rem;
-            color: black;
-            border-radius: 1rem;
-            font-size: 13px;
-            padding-right: 2rem;
-            margin-right: 3.2rem;
-        }
-
+        #tambah,
         #button {
-            /* background-color: #E2D4BF; */
             background-color: #BB955C;
-            margin-right: 1.25rem;
-            padding-left: 1rem;
             color: white;
             border-radius: 20px;
-            padding-right: 1rem;
+            border: none;
+            padding: 0.5rem 1rem;
         }
 
         .list-group-item {
@@ -83,11 +42,35 @@
             background-color: #E5E2DE;
             align-items: center;
             margin-bottom: 1rem;
+            padding: 0.5rem;
         }
 
         .list-group-item:last-child {
             border-bottom-left-radius: 0.75rem;
             border-bottom-right-radius: 0.75rem;
+        }
+
+        .list-group-item:first-child {
+            border-top-left-radius: 0.75rem;
+            border-top-right-radius: 0.75rem;
+        }
+
+        @media (max-width: 768px) {
+
+            #tambah,
+            #button {
+                padding: 0.3rem 0.7rem;
+            }
+
+            .list-group-item {
+                padding: 0.7rem;
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .list-group-item>* {
+                margin: 0.5rem 0;
+            }
         }
     </style>
 @endpush
