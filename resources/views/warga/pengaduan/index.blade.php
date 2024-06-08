@@ -8,14 +8,15 @@
             {{-- <button type="button" class="btn btn-submit" data-toggle="modal" data-target="#pengaduanModal">
                 Ajukan Pengaduan dan Aspirasi Anda disini </button> --}}
             <div class="container">
-                <div class="row px-3 py-4 bg-white">
+                <div class="row bg-white">
                     <div class="col-md-3 col-sm-12 mb-3">
                         <img src="https://sippn.menpan.go.id/asset/images/ayo_lapor.png" class="img-fluid" alt="LAPOR!">
                     </div>
                     <div class="col-md-8 col-sm-12">
-                        <h6>Anda juga dapat menyampaikan pengaduan, aspirasi, maupun permintaan informasi melalui aplikasi
-                            LAPOR!</h6>
-                        <p class="small">Melalui LAPOR!, Anda dapat menyampaikan permasalahan pelayanan publik yang Anda
+                        <h5><b>Anda juga dapat menyampaikan pengaduan dan aspirasi melalui
+                                formulir di bawah ini</b></h5>
+                        <p class="small" style="font-size: 0.9rem;">Melalui LAPOR!, Anda dapat menyampaikan permasalahan
+                            pelayanan publik yang Anda
                             temui dalam satu kanal sehingga laporanmu dapat kami sampaikan ke instansi terkait.</p>
                         <button class="btn btn-sm btn-red mb-2" data-toggle="modal" data-target="#pengaduanModal">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -48,7 +49,7 @@
                             <p class="card-text">{{ Str::limit($item->deskripsi, 100) }}</p>
                         </div>
                         <div class="card-footer d-flex justify-content-between">
-                            <a href="ketua/pengaduan/{{ $item->pengaduan_id }}" class="btn" id="button">Baca
+                            <a href="pengaduan/{{ $item->pengaduan_id }}" class="btn" id="button">Baca
                                 selengkapnya</a>
                         </div>
                     </div>
@@ -142,6 +143,16 @@
             font-family: 'Poppins', sans-serif;
         }
 
+        .container {
+            margin: 0;
+            margin-top: 1rem;
+        }
+
+        .row {
+            justify-content: space-around;
+            width: 100%
+        }
+
         .form-group {
             color: #463720;
             font-family: Poppins;
@@ -192,6 +203,10 @@
             max-width: 100%;
         }
 
+        .img-fluid {
+            max-width: 90%;
+        }
+
         @media (min-width: 576px) {
             .card {
                 flex: 1 1 calc(48% - 1rem);
@@ -210,10 +225,6 @@
             }
         }
 
-        /* .card:hover .card-body,
-                        .card:hover .card-img-top {
-                            transform: translateY(-10px);
-                        } */
         .pengaduan-card {
             width: 18rem;
             margin: 1rem;
@@ -229,8 +240,10 @@
         }
 
         .card-img-top {
+            margin-top: 0.5rem;
+            border: 0.75rem;
             width: 100%;
-            height: 150px;
+            height: 200px;
             object-fit: cover;
             border-bottom: 1px solid #ddd;
         }
