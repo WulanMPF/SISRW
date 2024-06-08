@@ -1,69 +1,87 @@
+<?php
+use Carbon\Carbon;
+Carbon::setLocale('id');
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>{{ $undangan->undangan_nama }}</title>
     <style>
         body {
             font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
         }
 
         .container {
-            width: 90%;
-            margin: 0 auto;
-        }
-
-        .header {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
-        .content {
-            margin-bottom: 20px;
-        }
-
-        .footer {
-            text-align: right;
-            margin-top: 20px;
+            width: 80%;
+            margin: 20px auto;
         }
 
         .letterhead {
-            /* border-bottom: 2px solid rgb(22, 142, 255); */
             padding-bottom: 10px;
-            /* margin-bottom: 20px; */
             overflow: hidden;
+            text-align: center;
         }
 
         .letterhead img {
             float: left;
-            display: block;
-            margin: 0 auto 20px;
-            margin-top: 1rem;
-            width: 110px;
+            width: 100px;
+            margin-right: 10px;
         }
 
         .letterhead h1 {
             font-size: 24px;
             margin: 0;
-            padding: 0;
-            text-align: center;
-            margin-top: 10px;
-            margin-bottom: 5px;
+        }
+
+        .letterhead h2 {
+            font-size: 22px;
+            margin: 0;
+            font-weight: bold;
+            font-style: italic;
         }
 
         .letterhead p {
-            margin: 5px 0;
-            text-align: center;
+            margin: 2px 0;
+            font-size: 16px;
         }
 
-        .letterhead .rw {
-            float: right;
-            display: block;
-            margin: 0 auto 20px;
-            margin-top: 1rem;
-            width: 110px;
+        .double-line {
+            border-top: 2px solid rgb(22, 142, 255);
+            border-bottom: 2px solid black;
+            padding: 2px 0;
+            margin-bottom: 10px;
+        }
+
+        .content {
+            margin-bottom: 10px;
+            font-size: 16px;
+            line-height: 1.5;
+        }
+
+        .content table {
+            width: 100%;
+            margin-bottom: 10px;
+        }
+
+        .content p {
+            margin: 5px 0;
+            font-size: 16px;
+        }
+
+        .footer {
+            text-align: right;
+            margin-top: 10px;
+        }
+
+        .signature img {
+            width: 10rem;
         }
     </style>
 </head>
@@ -73,49 +91,93 @@
         <!-- Kepala surat -->
         <div class="letterhead">
             <!-- Logo Malang Kecakwara -->
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/Seal_of_Malang_City_%28Logo_Kota_Malang%29.svg/867px-Seal_of_Malang_City_%28Logo_Kota_Malang%29.svg.png"
-                alt="Logo Malang Kecakwara">
+            <img src="{{ asset('images/logo kota malang.png') }}">
             <div>
-                <h1>RUKUN WARGA (RW) V</h1>
+                <h1>PEMERINTAH KELURAHAN CIAMIS</h1>
+                {{-- <h2>RUKUN WARGA (RW) V</h2> --}}
                 <p>Kelurahan Purwodadi Kecamatan Blimbing</p>
                 <p>Kota Malang</p>
                 <p>Jl. Ikan Nila - Malang</p>
-                <p>Nomor Surat: {{ $undangan->undangan_no_surat }}</p>
-                {{-- <p>Telp: 123456789 | Email: info@perusahaanabc.com</p> --}}
             </div>
-            <h1 class="rw">RW. V</h1>
         </div>
-        <hr>
+
+        <div class="double-line"></div>
+
         <!-- Isi surat -->
         <div class="content">
-            <p>{{ $undangan->undangan_tempat }}, {{ date('d F Y', strtotime($undangan->undangan_tanggal)) }} </p>
+            <p style="text-align: right;">{{ $undangan->undangan_tempat }},
+                {{ \Carbon\Carbon::parse($undangan->undangan_tanggal)->translatedFormat('d F Y') }}</p>
+
+            <table style="border: none;margin-left:-1;">
+                <tr>
+                    <td style="width: 15%;">Nomor</td>
+                    <td style="width: 5%;">:</td>
+                    <td>{{ $undangan->undangan_no_surat }}</td>
+                </tr>
+                <tr>
+                    <td>Lampiran</td>
+                    <td>:</td>
+                    <td>-</td>
+                </tr>
+                <tr>
+                    <td>Perihal</td>
+                    <td>:</td>
+                    <td>{{ $undangan->undangan_perihal }}</td>
+                </tr>
+            </table>
+
             <p>Kepada Yth.,</p>
-            <p style="margin-left: 2.5rem;">[Nama Penerima]</p>
-            <p style="margin-left: 2.5rem;">[Perusahaan / Instansi]</p>
-            <p style="margin-left: 2.5rem;">di Tempat</p>
-            <p>
-                Perihal : {{ $undangan->undangan_perihal }}
-            </p>
-            <p>
-                Dengan Hormat,
-            </p>
-            <p style="margin-top:1rem; margin-bottom:1rem;">
-                [Isi Surat]
-            </p>
-            <p>Hari : {{ $undangan->undangan_isi_hari }}</p>
-            <p>Tanggal : {{ date('d F Y', strtotime($undangan->undangan_isi_tgl)) }}</p>
-            <p>Jam : {{ $undangan->undangan_isi_waktu }}</p>
-            <p>Tempat : {{ $undangan->undangan_isi_tempat }}</p>
-            <p>Acara : {{ $undangan->undangan_isi_acara }}</p>
-            <p>
-                Demikian undangan ini kami sampaikan, atas perhatian serta kehadirannya, kami ucapkan terima kasih.
-            </p>
+            <p>Bapak/Ibu/Saudara/i</p>
+            <p style="margin-bottom: 1.25rem;">di Tempat</p>
+
+            <p>Disampaikan dengan hormat, sehubungan dengan adanya kegiatan rutin yang diselenggarakan pada RW V,
+                Kelurahan Purwodadi, Kecamatan Blimbing, Kota Malang, dengan ini kami
+                mengundang Bapak/Ibu/Saudara/i untuk berkenan menghadiri pertemuan yang akan dilaksanakan pada:</p>
+
+            <table style="border: none; margin-left:-1;">
+                <tr>
+                    <td style="width: 15%;">Hari</td>
+                    <td style="width: 5%;">:</td>
+                    <td>{{ $undangan->undangan_isi_hari }}</td>
+                </tr>
+                <tr>
+                    <td>Tanggal</td>
+                    <td>:</td>
+                    <td>{{ \Carbon\Carbon::parse($undangan->undangan_isi_tgl)->translatedFormat('d F Y') }}</td>
+
+                </tr>
+                <tr>
+                    <td>Jam</td>
+                    <td>:</td>
+                    <td>{{ $undangan->undangan_isi_waktu }}</td>
+                </tr>
+                <tr>
+                    <td>Tempat</td>
+                    <td>:</td>
+                    <td>{{ $undangan->undangan_isi_tempat }}</td>
+                </tr>
+                <tr>
+                    <td>Acara</td>
+                    <td>:</td>
+                    <td>{{ $undangan->undangan_isi_acara }}</td>
+                </tr>
+            </table>
+
+            <p style="margin-top: 1.25rem;">Demikian undangan ini kami sampaikan, atas perhatian serta kehadirannya,
+                kami ucapkan terima kasih.</p>
+            <p>Wassalamu'alaikum Wr. Wb.</p>
         </div>
+
         <!-- Tanda tangan dan kaki surat -->
         <div class="footer">
-            <p>{{ $undangan->undangan_tempat }}, {{ date('d F Y', strtotime($undangan->undangan_tanggal)) }}</p>
+            <p>{{ $undangan->undangan_tempat }},
+                {{ \Carbon\Carbon::parse($undangan->undangan_tanggal)->translatedFormat('d F Y') }}</p>
             <p> Hormat Kami,</p>
-            <p style="margin-top: 5rem;">{{ $ketua->nama_warga }}</p>
+            <div class="signature">
+                <img src="{{ asset('images/signature.png') }}">
+                <p>____________________</p>
+                <p>{{ $ketua->nama_warga }}</p>
+            </div>
         </div>
     </div>
 </body>
