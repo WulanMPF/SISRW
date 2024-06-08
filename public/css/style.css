@@ -16,7 +16,7 @@
 
 body {
     font-family: 'Poppins', sans-serif;
-    padding-top: 120px;
+    padding-top: 30px;
 }
 
 a {
@@ -129,8 +129,14 @@ input.form-control {
 }
 
 .navbar {
-    padding: 8px 0 8px 0;
-    background-color: #ffffff
+    background-color: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    width: 90%;
+    margin-left: 60px;
+    z-index: 1000;
+
 }
 
 .navbar-nav .nav-item {
@@ -170,6 +176,7 @@ input.form-control {
 
 .header {
     margin-bottom: 30px;
+    margin-top: 90px;
 
   }
 
@@ -218,7 +225,7 @@ input.form-control {
 
 /* umkm */
 .umkm {
-    padding: 70px 0 70px 0;
+    padding: 40px 0 5px 0;
     background: var(--white);
 
 }
@@ -361,6 +368,11 @@ input.form-control {
 
 .owl-carousel .owl-nav .owl-next {
     right: -25px;
+}
+.umkm-image {
+    width: 300px; /* Adjust width as needed */
+    height: 200px; /* Adjust height as needed */
+    object-fit: cover; /* This property ensures the image covers the set area without distorting its aspect ratio */
 }
 
 

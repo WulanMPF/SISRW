@@ -21,7 +21,7 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light ">
         <div class="container">
             <a class="navbar-brand" href="#">
                 <img src="{{ asset('adminlte/dist/img/sisrw/logo3.png') }}"height="55" alt="SISRW Logo">
@@ -36,6 +36,7 @@
                     <li class="nav-item "><a class="nav-link" href="#">Home</a></li>
                     <li class="nav-item "><a class="nav-link" href="#kegiatan">Kegiatan</a></li>
                     <li class="nav-item "><a class="nav-link" href="#umkm">UMKM</a></li>
+                    <li class="nav-item "><a class="nav-link" href="#two-column-list">Pengumuman</a></li>
                     <li class="nav-item"><a class="nav-link" href="#aboutus">About Us</a></li>
                 </ul>
                 <ul class="navbar-nav mb-2 mb-lg-0">
@@ -83,53 +84,37 @@
             <div class="row justify-content-center text-center mb-30">
                 <div class="col-lg-8">
                     <h3 class="kegiatan-header">Kegiatan Warga RW 05</h3>
-                    <div id="carouselExampleCaptions" class="carousel slide">
-                        <div class="carousel-indicators">
-                            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0"
-                                class="active" aria-current="true" aria-label="Slide 1"></button>
-                            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1"
-                                aria-label="Slide 2"></button>
-                            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2"
-                                aria-label="Slide 3"></button>
-                        </div>
+                    <div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel">
+                        <ol class="carousel-indicators">
+                            @foreach ($kegiatan as $index => $activity)
+                                <li data-bs-target="#carouselExampleFade" data-bs-slide-to="{{ $index }}" class="{{ $index == 0 ? 'active' : '' }}"></li>
+                            @endforeach
+                        </ol>
                         <div class="carousel-inner">
-                            <div class="carousel-item active">
-                                <img src="images/kegiatan2.png" class="d-block w-100" alt="...">
-                                <div class="carousel-caption d-none d-md-block">
-                                    <h5>KEGIATAN KARNAVAL OLEH WARGA RW 05</h5>
-                                    <p>Some representative placeholder content for the first slide.</p>
+                            @foreach ($kegiatan as $index => $activity)
+                                <div class="carousel-item {{ $index == 0 ? 'active' : '' }}">
+                                    <img src="{{ asset('gambar_kegiatan/' . $activity->gambar) }}" class="d-block w-100" alt="{{ $activity->nama_kegiatan }}">
+                                    <div class="carousel-caption d-none d-md-block">
+                                        <h5>{{ $activity->nama_kegiatan }}</h5>
+                                        <p>{{ \Illuminate\Support\Str::words($activity->deskripsi, 20, '...') }}</p>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="carousel-item">
-                                <img src=trf class="d-block w-100" alt="...">
-                                <div class="carousel-caption d-none d-md-block">
-                                    <h5>PERINGATAN 78 TAHUN KEMERDEKAAN INDONESIA</h5>
-                                    <p>Some representative placeholder content for the second slide.</p>
-                                </div>
-                            </div>
-                            <div class="carousel-item">
-                                <img src="images/kegiatan1.png" class="d-block w-100" alt="...">
-                                <div class="carousel-caption d-none d-md-block">
-                                    <h5>PERSIAPAN PERINGATAN 78 TAHUN KEMERDEKAAN INDONESIA </h5>
-                                    <p>Some representative placeholder content for the third slide.</p>
-                                </div>
-                            </div>
+                            @endforeach
                         </div>
-                        <button class="carousel-control-prev" type="button"
-                            data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+                        <a class="carousel-control-prev" href="#carouselExampleFade" role="button" data-bs-slide="prev">
                             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Previous</span>
-                        </button>
-                        <button class="carousel-control-next" type="button"
-                            data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+                            \
+                        </a>
+                        <a class="carousel-control-next" href="#carouselExampleFade" role="button" data-bs-slide="next">
                             <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Next</span>
-                        </button>
+
+                        </a>
                     </div>
                 </div>
             </div>
         </div>
     </section>
+
 
 
 
@@ -145,16 +130,12 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div id="news-slider" class="owl-carousel">
-                            <button class="carousel-control-prev" type="button"
-                                data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
-                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                <span class="visually-hidden">Previous</span>
-                            </button>
+
 
                             @foreach ($umkm as $umkm)
                                 <div class="post-slide">
                                     <div class="post-img">
-                                        <img src="{{ asset('lampiran_umkm/' . $umkm->lampiran) }}" alt="">
+                                        <img src="{{ asset('lampiran_umkm/' . $umkm->lampiran) }}" alt="" width="300" height="200">
                                         <a href="#" class="over-layer"><i class="fa fa-link"></i></a>
                                     </div>
                                     <div class="post-content">
@@ -167,13 +148,6 @@
                                     </div>
                                 </div>
                             @endforeach
-
-
-                            <button class="carousel-control-next" type="button"
-                                data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
-                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                <span class="visually-hidden">Next</span>
-                            </button>
                         </div>
                     </div>
                 </div>
@@ -215,6 +189,7 @@
                                                         </button>
                                                     </div>
                                                     <div class="modal-body">
+                                                        <img src="{{ asset('gambar_pengumuman/' . $announcement->gambar) }}" style="max-width: 100%; height: auto;" alt="">
                                                         <p>{{ $announcement->isi_pengumuman }}</p>
                                                     </div>
                                                     <div class="modal-footer">
@@ -244,45 +219,45 @@
                             <div class="events-block">
                                 <ul class="nolist list-unstyled position-relative mb-0 px-lg-3">
                                     @foreach ($kegiatan as $event)
-                    <li class="border-bottom d-flex align-items-center">
-                        <div class="events-date text-uppercase text-center">
-                            <a class="text-white" href="#" data-bs-toggle="modal" data-bs-target="#eventModal{{ $event->kegiatan_id }}">
-                                {{ \Carbon\Carbon::parse($event->tanggal)->format('F') }}
-                                <span>{{ \Carbon\Carbon::parse($event->tanggal)->format('d') }}</span>
-                            </a>
-                        </div>
-                        <div class="d-inline-block pl-3 event-li">
-                            <h3 class="font-weight-bold mt-0">
-                                <a href="#" data-bs-toggle="modal" data-bs-target="#eventModal{{ $event->kegiatan_id }}">
-                                    {{ $event->nama_kegiatan }}
-                                </a>
-                            </h3>
-                            <p class="m-0 post_intro">
-                                {{ \Illuminate\Support\Str::words($event->deskripsi, 20, '...') }}
-                                <a href="#" data-bs-toggle="modal" data-bs-target="#eventModal{{ $event->kegiatan_id }}">Read more</a>
-                            </p>
-                        </div>
-                    </li>
+                                    <li class="border-bottom d-flex align-items-center">
+                                        <div class="events-date text-uppercase text-center">
+                                            <a class="text-white" href="#" data-bs-toggle="modal" data-bs-target="#eventModal{{ $event->kegiatan_id }}">
+                                                {{ \Carbon\Carbon::parse($event->tanggal)->format('F') }}
+                                                <span>{{ \Carbon\Carbon::parse($event->tanggal)->format('d') }}</span>
+                                            </a>
+                                        </div>
+                                        <div class="d-inline-block pl-3 event-li">
+                                            <h3 class="font-weight-bold mt-0">
+                                                <a href="#" data-bs-toggle="modal" data-bs-target="#eventModal{{ $event->kegiatan_id }}">
+                                                    {{ $event->nama_kegiatan }}
+                                                </a>
+                                            </h3>
+                                            <p class="m-0 post_intro">
+                                                {{ \Illuminate\Support\Str::words($event->deskripsi, 20, '...') }}
+                                                <a href="#" data-bs-toggle="modal" data-bs-target="#eventModal{{ $event->kegiatan_id }}">Read more</a>
+                                            </p>
+                                        </div>
+                                    </li>
 
-                    <!-- Modal -->
-                    <div class="modal fade" id="eventModal{{ $event->kegiatan_id }}" tabindex="-1" aria-labelledby="eventModalLabel{{ $event->kegiatan_id }}" aria-hidden="true">
-                        <div class="modal-dialog modal-lg">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="eventModalLabel{{ $event->kegiatan_id }}">{{ $event->nama_kegiatan }}</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body">
-                                    <img src="{{ asset('lampiran_kegiatan/' . $event->lampiran_kegiatan) }}" alt="">
-                                    {{ $event->deskripsi }}
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                @endforeach
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="eventModal{{ $event->kegiatan_id }}" tabindex="-1" aria-labelledby="eventModalLabel{{ $event->kegiatan_id }}" aria-hidden="true">
+                                        <div class="modal-dialog modal-lg">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="eventModalLabel{{ $event->kegiatan_id }}">{{ $event->nama_kegiatan }}</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <img src="{{ asset('gambar_kegiatan/' . $activity->gambar) }}" style="max-width: 100%; height: auto;" alt="">
+                                                    {{ $event->deskripsi }}
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                     @endforeach
                                 </ul>
                                 {{-- <a class="all pos-stat text-uppercase ml-lg-4" href="/calendar/">Semua acara
                                     <i class="fa fa-caret-right" aria-hidden="true"></i>
@@ -317,7 +292,7 @@
                 <div class="row align-items-center gx-4">
                     <div class="col-md-3">
                         <div class="ms-md-2 ms-lg-5"><img class="img-fluid round-5"
-                                src="https://freefrontend.dev/assets/square.png"></div>
+                                src="images/ketuarw.png"></div>
                     </div>
                     <div class="col-md-6 offset-md-1">
                         <div class="ms-md-2 ms-lg-5">
