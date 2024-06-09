@@ -13,6 +13,22 @@
                     <i class="nav-icon fas fa-money-bill-wave"></i>
                     <p>Data Iuran</p>
                 </a>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="{{ url('/bendahara/iuran') }}" class="nav-link">
+                            <i class="nav-icon fas fa-angle-right"></i>
+                            <p>Data Pembayaran</p>
+                        </a>
+                    </li>
+                </ul>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="{{ url('/bendahara/iuran/validasi') }}" class="nav-link">
+                            <i class="nav-icon fas fa-angle-right"></i>
+                            <p>Pembayaran Masuk</p>
+                        </a>
+                    </li>
+                </ul>
             </li>
             <li class="nav-item">
                 <a href="{{ url('/bendahara/laporan') }}"

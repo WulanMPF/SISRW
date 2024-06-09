@@ -133,4 +133,46 @@ class IuranController extends Controller
 
         return view('bendahara.iuran.show', ['breadcrumb' => $breadcrumb, 'iuran' => $iuran, 'activeMenu' => $activeMenu]);
     }
+
+    public function validasi()
+    {
+        $breadcrumb = (object) [
+            'title' => 'Validasi Pembayaran Iuran RW 05',
+            'date' => date('l, d F Y'),
+            'list'  => ['Home', 'Validasi Pembayaran Iuran']
+        ];
+
+        $activeMenu = 'iuran';
+
+        $iurans = IuranModel::all();
+        $kk = KkModel::all();
+        $periode = PeriodeIuranModel::all();
+
+        return view('bendahara.iuran.validasi', compact('breadcrumb', 'iurans', 'kk', 'periode', 'activeMenu'));
+    }
+
+    public function listValidasi(Request $request)
+    {
+        if ($request->ajax()) {
+            $data = IuranModel::join('kk', 'iuran.kk_id', '=', 'kk.id')
+                ->join('periode_iuran', 'iuran.periode_id', '=', 'periode_iuran.id')
+                ->select([
+                    'iuran.id',
+                    'periode_iuran.bulan as periode_bulan_awal',
+                    'periode_iuran.bulan as periode_bulan_akhir',
+                    'kk.nama_kepala_keluarga',
+                    'kk.rt_rw',
+                    'iuran.tgl_pembayaran'
+                ]);
+
+            return DataTables::of($data)
+                ->addIndexColumn()
+                ->addColumn('aksi', function ($row) {
+                    $btn = '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#validasiIuran" data-iuran-id="' . $row->id . '">Validasi</button>';
+                    return $btn;
+                })
+                ->rawColumns(['aksi'])
+                ->make(true);
+        }
+    }
 }

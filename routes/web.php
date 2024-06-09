@@ -144,27 +144,25 @@ Route::group(['prefix' => 'ketua/umkm'], function () {
     Route::get('/{umkm_id}/reject', [UmkmController::class, 'rejectUmkm']);
 });
 Route::group(['prefix' => 'ketua/bansos'], function () {
-    Route::group(['prefix' => 'ketua/bansos'], function () {
-        Route::get('/', [BansosController::class, 'index']);
-        Route::post('/list', [BansosController::class, 'list']);
-        Route::get('/create', [BansosController::class, 'create']);
-        Route::post('/store', [BansosController::class, 'store']);
-        Route::get('/edit/{id}', [BansosController::class, 'edit']);
-        Route::put('/update/{id}', [BansosController::class, 'update'])->name('bansos.update');
-        Route::get('/kriteria', [BansosController::class, 'kriteria']);
-        Route::post('/listKriteria', [BansosController::class, 'listKriteria']);
-        Route::get('/editKriteria/{id}', [BansosController::class, 'editKriteria']);
-        Route::put('/updateKriteria/{id}', [BansosController::class, 'updateKriteria'])->name('kriteria_bansos.update');
-        Route::get('/penerima', [BansosController::class, 'penerima']); // Rute tambahan
-        Route::get('/perangkingan', [BansosController::class, 'perangkingan']); // Rute tambahan
-        Route::post('/listRangking', [BansosController::class, 'listRangking']);
-        Route::get('/moora', [BansosController::class, 'moora']);
-        Route::get('/saw', [BansosController::class, 'saw']);
-        Route::delete('/destroy/{id}', [BansosController::class, 'destroy']);
-        Route::get('/laporanBansos', [BansosController::class, 'laporanBansos']); // Rute tambahan
-        Route::get('/{id}', [BansosController::class, 'show']); // Rute dinamis harus di paling akhir
-        // Rute dinamis harus di paling akhir
-    });
+    Route::get('/', [BansosController::class, 'index']);
+    Route::post('/list', [BansosController::class, 'list']);
+    Route::get('/create', [BansosController::class, 'create']);
+    Route::post('/store', [BansosController::class, 'store']);
+    Route::get('/edit/{id}', [BansosController::class, 'edit']);
+    Route::put('/update/{id}', [BansosController::class, 'update'])->name('bansos.update');
+    Route::get('/kriteria', [BansosController::class, 'kriteria']);
+    Route::post('/listKriteria', [BansosController::class, 'listKriteria']);
+    Route::get('/editKriteria/{id}', [BansosController::class, 'editKriteria']);
+    Route::put('/updateKriteria/{id}', [BansosController::class, 'updateKriteria'])->name('kriteria_bansos.update');
+    Route::get('/penerima', [BansosController::class, 'penerima']); // Rute tambahan
+    Route::get('/perangkingan', [BansosController::class, 'perangkingan']); // Rute tambahan
+    Route::post('/listRangking', [BansosController::class, 'listRangking']);
+    Route::get('/moora', [BansosController::class, 'moora']);
+    Route::get('/saw', [BansosController::class, 'saw']);
+    Route::delete('/destroy/{id}', [BansosController::class, 'destroy']);
+    Route::get('/laporanBansos', [BansosController::class, 'laporanBansos']); // Rute tambahan
+    Route::get('/{id}', [BansosController::class, 'show']); // Rute dinamis harus di paling akhir
+    // Rute dinamis harus di paling akhir
 });
 Route::group(['prefix' => 'ketua/laporan'], function () {
     Route::get('/', [LapkeuController::class, 'index']);
@@ -294,10 +292,9 @@ Route::group(['prefix' => 'bendahara/iuran'], function () {
     Route::post('/list', [BendaharaIuranController::class, 'list'])->name('bendahara.iuran.list');
     Route::get('/{id_periode}', [BendaharaIuranController::class, 'bayar'])->name('bendahara.iuran.bayar');
     Route::post('/', [BendaharaIuranController::class, 'store'])->name('iuran.store');
+    Route::get('/validasi', [BendaharaIuranController::class, 'validasi'])->name('bendahara.iuran.validasi');
+    Route::post('/listValidasi', [BendaharaIuranController::class, 'listValidasi']);
     Route::get('/detail/{iuran_id}', [BendaharaIuranController::class, 'show'])->name('bendahara.iuran.show');
-    Route::get('/validasi', [BendaharaIuranController::class, 'validasi'])->name('iuran.validasi');
-    Route::post('/validasiData', [BendaharaIuranController::class, 'validasiData'])->name('iuran.validasiData');
-
     // Route::get('/create', [BendaharaIuranController::class, 'create'])->name('iuran.create');
 });
 

@@ -191,7 +191,7 @@
                 serverSide: true,
                 processing: true,
                 ajax: {
-                    url: "{{ url('bendahara/iuran/validasiData') }}",
+                    url: "{{ url('bendahara/iuran/listValidasi') }}",
                     type: "POST",
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
