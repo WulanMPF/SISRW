@@ -13,29 +13,13 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    {{-- <div class="form-group">
-                        <div class="row">
-                            <h3>Periode Awal</h3>
-                            <p>Mei 2024</p>
-                        </div>
-                        <div class="row">
-                            <h3>Periode Akhir</h3>
-                            <p>Mei 2025</p>
-                        </div>
-                        <div class="row">
-                            <h3>Jumlah</h3>
-                            <p>Rp90000</p>
-                        </div>
-                        <h3>Bukti pembayaran : </h3>
-                        <img src="{{ asset('lampiran_umkm/lampiran1.jpg') }}" class="card-img-top img-umkm center">
-                    </div> --}}
                     <div class="form-group">
                         <div class="row mb-2">
                             <div class="col-4">
                                 <h3>Periode Awal</h3>
                             </div>
                             <div class="col-8">
-                                <p>Mei 2024</p>
+                                <p id="periodeAwal"></p> <!-- Ubah id menjadi periodeAwal -->
                             </div>
                         </div>
                         <div class="row mb-2">
@@ -43,7 +27,7 @@
                                 <h3>Periode Akhir</h3>
                             </div>
                             <div class="col-8">
-                                <p>Mei 2025</p>
+                                <p id="periodeAkhir"></p> <!-- Ubah id menjadi periodeAkhir -->
                             </div>
                         </div>
                         <div class="row mb-2">
@@ -51,14 +35,14 @@
                                 <h3>Jumlah</h3>
                             </div>
                             <div class="col-8">
-                                <p>Rp90000</p>
+                                <p id="jumlahIuran"></p> <!-- Tambahkan id untuk menampilkan jumlah iuran -->
                             </div>
                         </div>
                         <div class="row mt-3">
                             <div class="col-12">
                                 <h3>Bukti pembayaran:</h3>
-                                <img src="{{ asset('lampiran_umkm/lampiran1.jpg') }}"
-                                    class="card-img-top img-umkm center mt-2">
+                                <img id="buktiPembayaran" class="card-img-top img-umkm center mt-2">
+                                <!-- Ubah src menjadi id untuk menampilkan bukti pembayaran -->
                             </div>
                         </div>
                     </div>
@@ -207,12 +191,12 @@
                         searchable: false
                     },
                     {
-                        data: "periode_bulan",
+                        data: "periode_awal",
                         orderable: true,
                         searchable: true
                     },
                     {
-                        data: "periode_bulan",
+                        data: "periode_akhir",
                         orderable: true,
                         searchable: true
                     },
@@ -245,9 +229,27 @@
             $('#validasiIuran').on('show.bs.modal', function(event) {
                 var button = $(event.relatedTarget);
                 var iuranId = button.data('iuran-id');
-                var form = $('#validasiForm');
-                form.attr('action', '{{ url('ketua/umkm/deactive') }}/' + iuranId);
+                
+                // Mengambil data iuran menggunakan AJAX
+                $.ajax({
+                    url: '/bendahara/iuran/validasiDetail/' + iuranId, // Ganti dengan URL yang sesuai
+                    method: 'POST',
+                    success: function(response) {
+                        $('#periodeAwal').text(response.periode_awal);
+                        $('#periodeAkhir').text(response.periode_akhir);
+                        $('#jumlahIuran').text(response.jumlah_bayar);
+                        $('#buktiPembayaran').attr('src', response.lampiran);
+                        
+                        // Mengatur aksi form validasi
+                        var form = $('#validasiForm');
+                        form.attr('action', '{{ url('ketua/umkm/deactive') }}/' + iuranId);
+                    },
+                    error: function(xhr, status, error) {
+                        console.error(error);
+                    }
+                });
             });
+
         });
     </script>
 @endpush

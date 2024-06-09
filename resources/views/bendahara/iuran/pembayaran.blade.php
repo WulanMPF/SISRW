@@ -122,18 +122,18 @@
             });
 
             // Event handler untuk pengiriman formulir
-            $('form').submit(function(event) {
-                var tgl_pembayaran = $(this).find('#tgl_pembayaran').val();
-                var status_pembayaran = $(this).find('#status_pembayaran').val();
+            // $('form').submit(function(event) {
+            //     var tgl_pembayaran = $(this).find('#tgl_pembayaran').val();
+            //     var status_pembayaran = $(this).find('#status_pembayaran').val();
 
-                // Validasi jika tanggal pembayaran atau status pembayaran kosong
-                if (!tgl_pembayaran || !status_pembayaran) {
-                    event.preventDefault(); // Mencegah pengiriman formulir
+            //     // Validasi jika tanggal pembayaran atau status pembayaran kosong
+            //     if (!tgl_pembayaran || !status_pembayaran) {
+            //         event.preventDefault(); // Mencegah pengiriman formulir
 
-                    // Tampilkan pesan untuk mengisi inputan terlebih dahulu
-                    alert('Silakan isi tanggal bayar dan status pembayaran terlebih dahulu.');
-                }
-            });
+            //         // Tampilkan pesan untuk mengisi inputan terlebih dahulu
+            //         alert('Silakan isi tanggal bayar dan status pembayaran terlebih dahulu.');
+            //     }
+            // });
         });
     </script>
 @endpush

@@ -155,25 +155,85 @@ class IuranController extends Controller
     public function listValidasi(Request $request)
     {
         if ($request->ajax()) {
-            $data = IuranModel::join('kk', 'iuran.kk_id', '=', 'kk.id')
-                ->join('periode_iuran', 'iuran.periode_id', '=', 'periode_iuran.id')
+            $data = IuranModel::join('kk', 'iuran.kk_id', '=', 'kk.kk_id')
+                ->join('periode_iuran', 'iuran.periode_id', '=', 'periode_iuran.periode_id')
                 ->select([
-                    'iuran.id',
-                    'periode_iuran.bulan as periode_bulan_awal',
-                    'periode_iuran.bulan as periode_bulan_akhir',
+                    'iuran.iuran_id',
                     'kk.nama_kepala_keluarga',
                     'kk.rt_rw',
-                    'iuran.tgl_pembayaran'
-                ]);
+                    'iuran.tgl_pembayaran',
+                    'periode_iuran.bulan as periode_bulan',
+                    'periode_iuran.tahun as periode_tahun'
+                ])
+                ->where('iuran.status_pembayaran', 'Diproses');
 
             return DataTables::of($data)
                 ->addIndexColumn()
+                ->addColumn('periode_awal', function ($row) {
+                    return $row->periode_bulan . '/' . $row->periode_tahun;
+                })
+                ->addColumn('periode_akhir', function ($row) {
+                    return $row->periode_bulan . '/' . $row->periode_tahun;
+                })
                 ->addColumn('aksi', function ($row) {
-                    $btn = '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#validasiIuran" data-iuran-id="' . $row->id . '">Validasi</button>';
+                    // $btn = '<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#validasiIuran" data-iuran-id="' . $row->iuran_id . '">Validasi</button>';
+                    $btn = '<a href="' . url('/bendahara/iuran/validasiDetail/' . $row->iuran_id) . '" class="btn btn-sm" style="background-color: #BB955C; color: white; border-radius: 9px;">Lihat Detail</a>  &nbsp;';
                     return $btn;
                 })
                 ->rawColumns(['aksi'])
                 ->make(true);
         }
+    }
+
+    public function validasiDetail($id)
+    {
+        $iuran = IuranModel::join('kk', 'iuran.kk_id', '=', 'kk.kk_id')
+            ->join('periode_iuran', 'iuran.periode_id', '=', 'periode_iuran.periode_id')
+            ->select([
+                'iuran.iuran_id',
+                'kk.nama_kepala_keluarga',
+                'kk.rt_rw',
+                'iuran.tgl_pembayaran',
+                'iuran.jumlah_bayar',  // Pastikan jumlah_bayar termasuk dalam pemilihan kolom
+                'iuran.lampiran',      // Pastikan lampiran termasuk dalam pemilihan kolom
+                'periode_iuran.bulan as periode_bulan',
+                'periode_iuran.tahun as periode_tahun'
+            ])
+            ->where('iuran.iuran_id', $id)
+            ->first();
+
+        if (!$iuran) {
+            return response()->json(['error' => 'Data tidak ditemukan'], 404);
+        }
+
+        $periode_awal = $iuran->periode_bulan . '/' . $iuran->periode_tahun;
+        $periode_akhir = $iuran->periode_bulan . '/' . $iuran->periode_tahun;
+
+        $breadcrumb = (object) [
+            'title' => 'Data Iuran Warga',
+            'date' => date('l, d F Y'),
+            'list'  => ['Home', 'Data Iuran Warga', 'Detail']
+        ];
+
+        $activeMenu = 'iuran';
+
+        return view('bendahara.iuran.validasi-detail', [
+            'breadcrumb' => $breadcrumb,
+            'iuran' => $iuran,
+            'activeMenu' => $activeMenu
+        ]);
+    }
+
+    public function validasiProses(Request $request, $id)
+    {
+        $iuran = IuranModel::find($id);
+        if (!$iuran) {
+            return redirect()->back()->with('error', 'Data tidak ditemukan');
+        }
+
+        $iuran->status_pembayaran = 'Lunas';
+        $iuran->save();
+
+        return redirect()->route('bendahara.iuran.validasi', $id)->with('success', 'Iuran berhasil divalidasi');
     }
 }

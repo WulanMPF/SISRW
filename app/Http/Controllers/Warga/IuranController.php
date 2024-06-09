@@ -74,6 +74,8 @@ class IuranController extends Controller
         // Dapatkan kk_id yang sesuai dengan warga yang sedang login
         $kk_id = WargaModel::where('warga_id', $warga_id)->value('kk_id');
 
+        $namaFile = $request->file('file')->hashName();
+
         // Hitung total bulan
         $start = Carbon::create($request->start_year, $request->start_month, 1);
         $end = Carbon::create($request->end_year, $request->end_month, 1);
@@ -84,9 +86,6 @@ class IuranController extends Controller
 
         $totalMonths = $end->diffInMonths($start) + 1;
         $jumlah_bayar = $totalMonths * 55000;
-
-        // Simpan file
-        $filePath = $request->file('file')->store('public/uploads');
 
         // Ambil periode_id untuk setiap bulan dalam rentang waktu yang dipilih
         $periodeIds = [];
@@ -127,9 +126,12 @@ class IuranController extends Controller
                 'tgl_pembayaran' => Carbon::now(), // Tanggal pembayaran otomatis diisi dengan tanggal saat ini
                 'jumlah_bayar' => 55000, // Jumlah bayar per bulan
                 'status_pembayaran' => 'Diproses',
-                'lampiran' => $filePath,
+                'lampiran' => $namaFile,
             ]);
         }
+
+        $path = $request->file('file')->move('lampiran_pembayaran', $namaFile);
+        $path = str_replace("\\", "//", $path);
 
         // Redirect ke halaman index dengan pesan sukses
         return redirect()->route('warga.iuran.index')->with('success', 'Pembayaran iuran berhasil dilakukan.');
