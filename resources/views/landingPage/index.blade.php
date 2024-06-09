@@ -318,7 +318,7 @@
             <div class="container">
                 <div class="row align-items-center gx-4">
                     <div class="col-md-3">
-                        <div class="ms-md-2 ms-lg-5"><img class="img-fluid round-5" src="images/ketuarw.png"></div>
+                        <div class="ms-md-2 ms-lg-3"><img class="img-fluid round-3" src="images/ketuarw.png"></div>
                     </div>
                     <div class="col-md-6 offset-md-1">
                         <div class="ms-md-2 ms-lg-5">
