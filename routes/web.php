@@ -288,12 +288,12 @@ Route::group(['prefix' => 'bendahara/dashboard'], function () {
     Route::get('/', [BendaharaDashboardController::class, 'index'])->name('bendahara.dashboard');;
 });
 Route::group(['prefix' => 'bendahara/iuran'], function () {
+    Route::get('/validasi', [BendaharaIuranController::class, 'validasi'])->name('bendahara.iuran.validasi');
+    Route::post('/listValidasi', [BendaharaIuranController::class, 'listValidasi']);
     Route::get('/', [BendaharaIuranController::class, 'index'])->name('bendahara.iuran.index');
     Route::post('/list', [BendaharaIuranController::class, 'list'])->name('bendahara.iuran.list');
     Route::get('/{id_periode}', [BendaharaIuranController::class, 'bayar'])->name('bendahara.iuran.bayar');
     Route::post('/', [BendaharaIuranController::class, 'store'])->name('iuran.store');
-    Route::get('/validasi', [BendaharaIuranController::class, 'validasi'])->name('bendahara.iuran.validasi');
-    Route::post('/listValidasi', [BendaharaIuranController::class, 'listValidasi']);
     Route::get('/detail/{iuran_id}', [BendaharaIuranController::class, 'show'])->name('bendahara.iuran.show');
     // Route::get('/create', [BendaharaIuranController::class, 'create'])->name('iuran.create');
 });
