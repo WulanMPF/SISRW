@@ -116,7 +116,8 @@ class IuranController extends Controller
         ]);
 
         // Redirect ke halaman index dengan pesan sukses
-        return redirect()->route('bendahara.iuran.pembayaran')->with('success', 'Pembayaran iuran berhasil dilakukan.');
+        $id_periode = $request->periode_id; // or however you obtain the id_periode
+        return redirect()->route('bendahara.iuran.bayar', ['id_periode' => $id_periode])->with('success', 'Pembayaran iuran berhasil dilakukan.');
     }
 
     public function show(string $id)
