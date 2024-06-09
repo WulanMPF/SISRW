@@ -126,11 +126,16 @@ Route::group(['prefix' => 'ketua/warga'], function () {
 Route::group(['prefix' => 'ketua/surat'], function () {
     Route::get('/', [ArsipSuratController::class, 'index']);
     Route::post('/list', [ArsipSuratController::class, 'list']);
+    Route::get('/create', [ArsipSuratController::class, 'createArsipSurat'])->name('surat.create');
+    Route::post('/', [ArsipSuratController::class, 'storeArsipSurat'])->name('surat.store');
     Route::get('/create-undangan', [ArsipSuratController::class, 'createUndangan']);
     Route::post('/undangan', [ArsipSuratController::class, 'storeUndangan']);
     Route::get('/{id}', [ArsipSuratController::class, 'show']);
-    Route::delete('/{id}', [ArsipSuratController::class, 'destroy']);
+    Route::get('/{id}/edit', [ArsipSuratController::class, 'editArsipSurat'])->name('surat.edit');
+    Route::put('/{id}', [ArsipSuratController::class, 'updateArsipSurat'])->name('surat.update');
+    Route::delete('/destroy/{id}', [ArsipSuratController::class, 'destroy']);
 });
+
 Route::group(['prefix' => 'ketua/umkm'], function () {
     Route::get('/', [UmkmController::class, 'index'])->name('umkm.index');
     Route::post('/list', [UmkmController::class, 'list']);

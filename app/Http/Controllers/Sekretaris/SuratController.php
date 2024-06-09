@@ -30,25 +30,23 @@ class SuratController extends Controller
 
     public function list(Request $request)
     {
-        $arsip_surat = ArsipSuratModel::select('arsip_surat_id', 'nama_surat', 'jenis_surat');
+        $arsip_surat = ArsipSuratModel::all();
 
-        // Check if jenis_surat is provided in the request and not empty
-        if ($request->has('jenis_surat') && $request->jenis_surat != '') {
-            // Filter data based on jenis_surat
-            $arsip_surat->where('jenis_surat', $request->jenis_surat);
+        if ($request->has('pengirim') && $request->pengirim != '') {
+            $arsip_surat->where('pengirim', $request->pengirim);
         }
 
         return DataTables::of($arsip_surat)
             ->addIndexColumn()
             ->addColumn('Action', function ($arsip_surat) {
-                // Define your action button here
-                $btn = '<a href="' . url('/sekretaris/surat/' . $arsip_surat->arsip_surat_id) . '" class="btn btn-sm" style="background-color: #BB955C; color: white;">Lihat Surat</a> ';
+                $btn = '<a href="' . url('/sekretaris/surat/' . $arsip_surat->arsip_surat_id) . '" class="btn btn-sm"><i class="fas fa-eye" style="color: #BB955C; font-size: 17px;"></i></a>';
+                $btn .= '<a href="' . url('/sekretaris/surat/' . $arsip_surat->arsip_surat_id . '/edit') . '" class="btn btn-sm"><i class="fas fa-edit" style="color: #007bff;" font-size: 17px;></i></a>';
+                $btn .= '<button class="btn btn-sm delete-btn" data-toggle="modal" data-target="#delete" data-surat-id="' . $arsip_surat->arsip_surat_id . '"><i class="fas fa-trash-alt" style="color: #dc3545; font-size: 17px;"></i></button>';
                 return $btn;
             })
             ->rawColumns(['Action'])
             ->make(true);
     }
-
 
     public function create()
     {
@@ -66,18 +64,83 @@ class SuratController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nama_surat'              => 'required|string|max:50',
-            'jenis_surat'             => 'required|in:Masuk,Keluar',
+            'nomor_surat'       => 'required|string|max:50',
+            'tanggal_surat'     => 'required|date',
+            'pengirim'          => 'required|string|max:25',
+            'penerima'          => 'required|string|max:25',
+            'perihal'           => 'required|string|max:50',
+            'lampiran'          => 'nullable|file',
+            'keterangan'        => 'required|string'
         ]);
+
+        if ($request->file) {
+            $namaFile = $request->file('lampiran')->hashName();
+            $path = $request->file('lampiran')->move('arsip_surat', $namaFile);
+            $path = str_replace("\\", "//", $path);
+        } else {
+            $namaFile = null;
+        }
 
         ArsipSuratModel::create([
-            'nama_surat'              => $request->nama_surat,
-            'jenis_surat'             => $request->jenis_surat
+            'nomor_surat'       => $request->nomor_surat,
+            'tanggal_surat'     => $request->tanggal_surat,
+            'pengirim'          => $request->pengirim,
+            'penerima'          => $request->penerima,
+            'perihal'           => $request->perihal,
+            'lampiran'          => $namaFile,
+            'keterangan'        => $request->keterangan,
         ]);
 
-        return redirect('/sekretaris/surat.index')->with('success', 'Data surat berhasil disimpan');
+        return redirect('/sekretaris/surat')->with('success', 'Data surat berhasil disimpan');
     }
+    public function edit(string $id)
+    {
+        $arsip_surat = ArsipSuratModel::find($id);
 
+        $breadcrumb = (object)[
+            'title' => 'Edit Data UMKM RW 05',
+            'date' => date('l, d F Y'),
+            'list' => ['Home', 'UMKM RW 05', 'Edit']
+        ];
+
+        $page = (object)[
+            'title' => 'Edit UMKM RW 05'
+        ];
+
+        $activeMenu = 'arsip_surat';
+
+        return view('sekretaris.surat.edit', ['breadcrumb' => $breadcrumb, 'page' => $page, 'arsip_surat' => $arsip_surat, 'activeMenu' => $activeMenu]);
+    }
+    public function update(Request $request, string $id)
+    {
+        $request->validate([
+            'nomor_surat'       => 'required|string|max:50',
+            'tanggal_surat'     => 'required|date',
+            'pengirim'          => 'required|string|max:25',
+            'penerima'          => 'required|string|max:25',
+            'perihal'           => 'required|string|max:50',
+            'lampiran'          => 'nullable|file',
+            'keterangan'        => 'required|string'
+        ]);
+
+        if ($request->file) {
+            $namaFile = $request->file('lampiran')->hashName();
+            $path = $request->file('lampiran')->move('arsip_surat', $namaFile);
+            $path = str_replace("\\", "//", $path);
+        }
+
+        ArsipSuratModel::find($id)->update([
+            'nomor_surat'       => $request->nomor_surat,
+            'tanggal_surat'     => $request->tanggal_surat,
+            'pengirim'          => $request->pengirim,
+            'penerima'          => $request->penerima,
+            'perihal'           => $request->perihal,
+            'lampiran'          => $request->file('lampiran') ? $namaFile : basename(ArsipSuratModel::find($id)->lampiran),
+            'keterangan'        => $request->keterangan,
+        ]);
+
+        return redirect('/sekretaris/surat')->with('success', 'Data surat berhasil diperbarui');
+    }
     public function show(string $id)
     {
         $arsip_surat = ArsipSuratModel::find($id);
@@ -97,15 +160,15 @@ class SuratController extends Controller
     {
         $check = ArsipSuratModel::find($id);
         if (!$check) {
-            return redirect('/sekretaris/surat.index')->with('error', 'Data surat tidak ditemukan');
+            return redirect('/sekretaris/surat')->with('error', 'Data surat tidak ditemukan');
         }
 
         try {
             ArsipSuratModel::destroy($id);
 
-            return redirect('/sekretaris/surat.index')->with('success', 'Data surat berhasil dihapus');
+            return redirect('/sekretaris/surat')->with('success', 'Data surat berhasil dihapus');
         } catch (\Illuminate\Database\QueryException $e) {
-            return redirect('/sekretaris/surat.index')->with('error', 'Data surat gagal dihapus karena masih terdapat tabel lain yang terkait dengan data ini');
+            return redirect('/sekretaris/surat')->with('error', 'Data surat gagal dihapus karena masih terdapat tabel lain yang terkait dengan data ini');
         }
     }
 }
