@@ -12,17 +12,17 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('arsip_surat', function (Blueprint $table) {
-            $table->id('arsip_id');
-            $table->unsignedBigInteger('undangan_id')->index();
-            $table->unsignedBigInteger('pengantar_id')->index();
-            $table->enum('jenis_surat', ['Masuk', 'Keluar']);
+            $table->id('arsip_surat_id');
+            $table->string('nomor_surat', 50);
+            $table->date('tanggal_surat');
+            $table->string('pengirim', 25);
+            $table->string('penerima', 25);
+            $table->string('perihal', 50);
+            $table->string('lampiran', 255)->nullable();
+            $table->text('keterangan')->nullable();
             $table->timestamps();
-
-            $table->foreign('undangan_id')->references('undangan_id')->on('surat_undangan');
-            $table->foreign('pengantar_id')->references('pengantar_id')->on('surat_pengantar');
         });
     }
-
     public function down(): void
     {
         Schema::dropIfExists('arsip_surat');

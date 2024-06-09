@@ -216,12 +216,14 @@ Route::group(['prefix' => 'sekretaris/warga'], function () {
     Route::delete('/destroy-wargaSementara/{warga_id}', [SekretarisWargaController::class, 'destroyWargaSementara']);
 });
 Route::group(['prefix' => 'sekretaris/surat'], function () {
-    Route::get('/', [SekretarisSuratController::class, 'index']);
+    Route::get('/', [SekretarisSuratController::class, 'index'])->name('sekretaris.surat.index');
     Route::post('/list', [SekretarisSuratController::class, 'list']);
-    Route::get('/create', [SekretarisSuratController::class, 'create']);
-    Route::post('/', [SekretarisSuratController::class, 'store']);
+    Route::get('/create', [SekretarisSuratController::class, 'create'])->name('sekretaris.surat.create');
+    Route::post('/', [SekretarisSuratController::class, 'store'])->name('sekretaris.surat.store');
     Route::get('/{id}', [SekretarisSuratController::class, 'show']);
-    Route::delete('/{id}', [SekretarisSuratController::class, 'destroy']);
+    Route::get('/{id}/edit', [SekretarisSuratController::class, 'edit'])->name('sekretaris.surat.edit');
+    Route::put('/{id}', [SekretarisSuratController::class, 'update'])->name('sekretaris.surat.update');
+    Route::delete('/destroy/{id}', [SekretarisSuratController::class, 'destroy']);
 });
 Route::group(['prefix' => 'sekretaris/undangan'], function () {
     Route::get('/', [SuratUndanganController::class, 'index']);
