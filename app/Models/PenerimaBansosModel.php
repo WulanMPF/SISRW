@@ -18,10 +18,20 @@ class PenerimaBansosModel extends Model
     protected $fillable = [
         'bansos_id',
         'kk_id',
-        'jenis_bansos'
+        'jenis_bansos',
+        'penghasilan',
+        'jumlah_tanggungan',
+        'dinding_rumah',
+        'atap_rumah',
+        'lantai_rumah'
     ];
     public function kk(): BelongsTo
     {
         return $this->belongsTo(KkModel::class, 'kk_id', 'kk_id');
+    }
+
+    public function nilai(): HasMany
+    {
+        return $this->HasMany(NilaiModel::class, 'nilai_id', 'nilai_id');
     }
 }

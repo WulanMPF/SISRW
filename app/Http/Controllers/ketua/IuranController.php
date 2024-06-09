@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\IuranModel;
 use App\Models\KkModel;
 use App\Models\LaporanKeuanganModel;
+use App\Models\PeriodeIuranModel;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -33,34 +34,44 @@ class IuranController extends Controller
 
     public function list(Request $request)
     {
-        $iurans = IuranModel::select('kk_id', 'tgl_pembayaran', 'jenis_iuran', 'status_pembayaran')
-            ->with('kk')
-            ->get()
-            ->groupBy('kk_id');
+        $periodes = PeriodeIuranModel::select('periode_id', 'bulan', 'tahun');
 
-        $data = [];
-        foreach ($iurans as $kk_id => $iuranGroup) {
-            $iuranSampah = $iuranGroup->where('jenis_iuran', 'sampah')->first();
-            $iuranKeamanan = $iuranGroup->where('jenis_iuran', 'keamanan')->first();
-            $iuranBulanan = $iuranGroup->where('jenis_iuran', 'bulanan')->first();
 
-            $data[] = [
-                'DT_RowIndex' => $kk_id,
-                'tgl_pembayaran' => optional($iuranGroup->first())->tgl_pembayaran,
-                'kk_no_kk' => optional($iuranGroup->first()->kk)->no_kk,
-                'iuran_sampah' => optional($iuranSampah)->status_pembayaran ?? 'Belum Lunas',
-                'iuran_keamanan' => optional($iuranKeamanan)->status_pembayaran ?? 'Belum Lunas',
-                'iuran_bulanan' => optional($iuranBulanan)->status_pembayaran ?? 'Belum Lunas',
-            ];
+        if ($request->tahun) {
+            $periodes->where('tahun', $request->tahun);
         }
 
-        return DataTables::of(collect($data))
+        return DataTables::of($periodes)
             ->addIndexColumn()
-            ->addColumn('aksi', function ($row) {
-                $btn = '<a href="' . url('/iuran/' . $row['DT_RowIndex']) . '" class="btn btn-sm" style="background-color: #BB955C; color: white; border-radius: 9px;">Lihat Detail</a>';
+            ->addColumn('aksi', function ($periode) {
+                $btn = '<a href="' . url('/ketua/iuran/show/' . $periode->periode_id) . '" class="btn btn-sm" style="background-color: #BB955C; color: white; border-radius: 9px;">Lihat Detail</a>  &nbsp;';
                 return $btn;
             })
             ->rawColumns(['aksi'])
             ->make(true);
+    }
+
+    public function show(Request $request, $id)
+    {
+        $breadcrumb = (object) [
+            'title' => 'Data Pembayaran Iuran RW 05',
+            'date' => date('l, d F Y'),
+            'list'  => ['Home', 'Data Pembayaran Iuran']
+        ];
+
+        $activeMenu = 'iuran';
+
+        $periode = PeriodeIuranModel::findOrFail($id);
+        $kk = KkModel::with(['iuran' => function ($query) use ($periode) {
+            $query->where('periode_id', $periode->periode_id);
+        }])->get();
+
+        $iuran = IuranModel::select()->get();
+        if ($request->has('status_pembayaran') && $request->status_pembayaran != '') {
+            $iuran->where('status_pembayaran', $request->status_pembayaran);
+        }
+
+
+        return view('ketua.iuran.show', compact('breadcrumb', 'periode', 'kk', 'iuran', 'activeMenu'));
     }
 }

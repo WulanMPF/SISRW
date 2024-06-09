@@ -144,11 +144,27 @@ Route::group(['prefix' => 'ketua/umkm'], function () {
     Route::get('/{umkm_id}/reject', [UmkmController::class, 'rejectUmkm']);
 });
 Route::group(['prefix' => 'ketua/bansos'], function () {
-    Route::get('/', [BansosController::class, 'index']);
-    Route::post('/list', [BansosController::class, 'list']);
-    Route::get('/create', [BansosController::class, 'create']);
-    Route::post('/', [BansosController::class, 'store']);
-    Route::get('/{id}', [BansosController::class, 'show']);
+    Route::group(['prefix' => 'ketua/bansos'], function () {
+        Route::get('/', [BansosController::class, 'index']);
+        Route::post('/list', [BansosController::class, 'list']);
+        Route::get('/create', [BansosController::class, 'create']);
+        Route::post('/store', [BansosController::class, 'store']);
+        Route::get('/edit/{id}', [BansosController::class, 'edit']);
+        Route::put('/update/{id}', [BansosController::class, 'update'])->name('bansos.update');
+        Route::get('/kriteria', [BansosController::class, 'kriteria']);
+        Route::post('/listKriteria', [BansosController::class, 'listKriteria']);
+        Route::get('/editKriteria/{id}', [BansosController::class, 'editKriteria']);
+        Route::put('/updateKriteria/{id}', [BansosController::class, 'updateKriteria'])->name('kriteria_bansos.update');
+        Route::get('/penerima', [BansosController::class, 'penerima']); // Rute tambahan
+        Route::get('/perangkingan', [BansosController::class, 'perangkingan']); // Rute tambahan
+        Route::post('/listRangking', [BansosController::class, 'listRangking']);
+        Route::get('/moora', [BansosController::class, 'moora']);
+        Route::get('/saw', [BansosController::class, 'saw']);
+        Route::delete('/destroy/{id}', [BansosController::class, 'destroy']);
+        Route::get('/laporanBansos', [BansosController::class, 'laporanBansos']); // Rute tambahan
+        Route::get('/{id}', [BansosController::class, 'show']); // Rute dinamis harus di paling akhir
+        // Rute dinamis harus di paling akhir
+    });
 });
 Route::group(['prefix' => 'ketua/laporan'], function () {
     Route::get('/', [LapkeuController::class, 'index']);

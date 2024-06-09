@@ -3,37 +3,26 @@
 @section('content')
     <div class="card card-outline card-light">
         <div class="card-body">
-            @if (session('success'))
-                <div class="alert alert-success">{{ session('success') }}</div>
-            @endif
-            @if (session('error'))
-                <div class="alert alert-danger">{{ session('error') }}</div>
-            @endif
             <div class="row mb-3">
                 <div class="col-md-12">
                     <div class="form-group row">
-                        <label class="col-1 control-label col-form-label">Filter:</label>
-                        <div class="col-3">
-                            <select class="form-control" id="status_pembayaran" name="status_pembayaran" required>
-                                <option value="">Tampilkan Semua</option>
-                                <option value="Lunas">Lunas</option>
-                                <option value="Belum Lunas">Belum Lunas</option>
-                            </select>
-                            <small class="form-text text-muted">Status Pembayaran</small>
+                        <div class="col-2">
+                            <label for="yearFilter">Select Year:</label>
+                            <select id="tahun" name="tahun" class="form-control"></select>
                         </div>
                     </div>
                 </div>
             </div>
-            <table class="table table-bordered table-striped table-hover table-sm" id="table_iuran">
+            <table class="table table-bordered table-striped table-hover table-sm" id="table_periode">
                 <thead>
                     <tr>
                         <th>No</th>
-                        <th>Periode Pembayaran</th>
-                        <th>Nama Kepala</th>
-                        <th>RT/RW</th>
-                        <th>Status Pembayaran</th>
+                        <th>Bulan</th>
+                        <th>Tahun</th>
+                        <th>Action</th>
                     </tr>
                 </thead>
+                <tbody></tbody>
             </table>
         </div>
     </div>
@@ -41,16 +30,24 @@
 
 @push('css')
     <style>
-        #table_iuran {
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+
+        #table_periode {
             border-radius: 10px;
             overflow: hidden;
         }
 
-        #table_iuran thead {
+        #table_periode thead {
             background-color: #d9d2c7;
-            /* Warna latar belakang coklat */
             color: #7F643C;
-            /* Warna teks putih */
+        }
+
+        .btn-tambah {
+            background-color: #BB955C;
+            border-color: #BB955C;
+            color: #ffffff;
         }
     </style>
 @endpush
@@ -58,53 +55,71 @@
 @push('js')
     <script>
         $(document).ready(function() {
-            var dataIuran = $('#table_iuran').DataTable({
-                serverSide: true,
-                ajax: {
-                    "url": "{{ url('ketua/iuran/list') }}",
-                    "dataType": "json",
-                    "type": "POST",
-                    "data": function(d) {
-                        d._status_pembayaran = $('#status_pembayaran').val();
-                    }
-                },
-                columns: [{
-                        data: "DT_RowIndex",
-                        className: "text-center",
-                        orderable: false,
-                        searchable: false
+                var currentYear = new Date().getFullYear();
+
+                for (var year = currentYear - 5; year <= currentYear + 5; year++) {
+                    $('#tahun').append($('<option>', {
+                        value: year,
+                        text: year
+                    }));
+                }
+
+                // Set tahun default yang dipilih ke tahun saat ini
+                $('#tahun').val(currentYear);
+
+                var dataPeriode = $('#table_periode').DataTable({
+                    serverSide: true,
+                    ajax: {
+                        "url": "{{ url('ketua/iuran/list') }}",
+                        "dataType": "json",
+                        "type": "POST",
+                        "data": function(d) {
+                            d.tahun = $('#tahun').val(); // Perubahan di sini, mengubah 'year' menjadi 'tahun'
+                        }
                     },
-                    {
-                        data: "periode.bulan",
-                        className: "",
-                        orderable: true,
-                        searchable: true
-                    },
-                    {
-                        data: "kk.nama_kepala_keluarga",
-                        className: "",
-                        orderable: true,
-                        searchable: true
-                    },
-                    {
-                        data: "kk.rt_rw",
-                        className: "",
-                        orderable: true,
-                        searchable: false
-                    },
-                    {
-                        data: "status_pembayaran",
-                        className: "",
-                        orderable: true,
-                        searchable: false
-                    },
-                ]
+                    columns: [{
+                            data: "DT_RowIndex",
+                            className: "text-center",
+                            orderable: false,
+                            searchable: false
+                        },
+                        {
+                            data: "bulan",
+                            className: "",
+                            orderable: true,
+                            searchable: true,
+                            render: function(data, type, row) {
+                                var monthNames = ["Januari", "Februari", "Maret", "April", "Mei",
+                                    "Juni",
+                                    "Juli", "Agustus", "September", "Oktober", "November",
+                                    "Desember"
+                                ];
+                                return monthNames[parseInt(data) - 1];
+                            }
+                        },
+                        {
+                            data: "tahun",
+                            className: "",
+                            orderable: true,
+                            searchable: true
+                        },
+                        {
+                            data: "aksi",
+                            className: "",
+                            orderable: false,
+                            searchable: false
+                        },
+                    ],
+                    pageLength: 12,
+                    lengthMenu: [
+                        12, 24, 48
+                    ]
+                });
+
+                $('#tahun').on('change', function() {
+                    dataPeriode.ajax.reload();
+                });
             });
 
-            $('#status_pembayaran').on('change', function() {
-                dataIuran.ajax.reload();
-            });
-
-        });
     </script>
 @endpush

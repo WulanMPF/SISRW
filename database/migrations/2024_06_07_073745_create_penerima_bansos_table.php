@@ -13,11 +13,17 @@ return new class extends Migration
     {
         Schema::create('penerima_bansos', function (Blueprint $table) {
             $table->id('bansos_id');
-            $table->unsignedBigInteger('kk_id')->index();
-            $table->string('jenis_bansos', 50);
+            $table->unsignedBigInteger('kk_id');
+            $table->string('jenis_bansos');
+            $table->decimal('penghasilan', 15, 2);
+            $table->integer('jumlah_tanggungan');
+            $table->string('dinding_rumah');
+            $table->string('atap_rumah');
+            $table->string('lantai_rumah');
             $table->timestamps();
 
-            $table->foreign('kk_id')->references('kk_id')->on('kk');
+            // Foreign keys
+            $table->foreign('kk_id')->references('kk_id')->on('kk')->onDelete('cascade');
         });
     }
 

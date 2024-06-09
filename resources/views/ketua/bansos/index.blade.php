@@ -1,6 +1,35 @@
 @extends('layout.ketua.template')
 
 @section('content')
+<!-- The Modal -->
+<div class="modal fade" id="confirmDeleteModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">Konfirmasi Penghapusan</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <!-- Modal Body -->
+            <div class="modal-body">
+                <form id="deleteForm" method="POST" action="">
+                    @csrf
+                    {!! method_field('DELETE') !!}
+                    {{-- @if($anggotaKeluarga->isNotEmpty()) --}}
+                    <div class="form-group">
+                        <p>Apakah Anda Yakin Ingin Menghapus Data Ini?</p>
+                    </div>
+                    <div class="text-left mt-3">
+                        <button type="submit" class="btn btn-danger">Ya, hapus data ini</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                    </div>
+                    {{-- @endif --}}
+                </form>
+                
+            </div>
+        </div>
+    </div>
+</div>
     <div class="card card-outline card-light">
         {{-- <div class="card-header">
             <h3 class="card-title">{{ $page->title }}</h3>
@@ -15,32 +44,41 @@
             @if (session('error'))
                 <div class="alert alert-danger">{{ session('error') }}</div>
             @endif
+
             <div class="row">
                 <div class="col-md-12">
                     <div class="form-group row">
-                        <label class="col-1 control-label col-form-label">Filter:</label>
-                        <div class="col-3">
-                            <select class="form-control" id="jenis_bansos" name="jenis_bansos" required>
-                                <option value="">- Tampilkan Semua -</option>
-                                <option value="Bansos Beras 10kg">Bansos Beras 10kg</option>
-                                <option value="Bansos DTKS">Bansos DTKS</option>
-                                <option value="Bansos PKH">Bansos PKH</option>
-                                <option value="Bansos Tunai Akibat Covid 19">Bansos Tunai Akibat Covid 19</option>
-                            </select>
-                            <small class="form-text text-muted">Jenis Bansos</small>
+                        <div class="col-2">
+                            <a class="btn btn-sm mt-1" id="tambah" href="{{ url('ketua/bansos/create') }}">+Tambah Data</a>
+                        </div>
+                        <div class="col-md-12 text-right">
+                            <a class="btn btn-sm mt-1 btn-tambah" data-toggle="dropdown">Lakukan Perangkingan</a>
+                            <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                                <a href="{{ url('ketua/bansos/moora') }}" class="dropdown-item">
+                                    Metode MOORA
+                                </a>
+                                <a href="{{ url('ketua/bansos/saw') }}" class="dropdown-item">
+                                    Metode SAW
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <table class="table table-bordered table-striped table-hover table-sm" id="table_bansos"
+
+            <table class="table table-bordered table-hover table-sm" id="table_bansos"
                 style="text-align: center;">
                 <thead>
                     <tr>
                         <th>No</th>
                         <th>Nomor Kartu Keluarga</th>
                         <th>Nama Kepala Keluarga</th>
-                        <th>Alamat</th>
                         <th>Jenis Bantuan</th>
+                        <th>Penghasilan</th>
+                        <th>Jumlah Tanggungan</th>
+                        <th>Kondisi Dinding Rumah</th>
+                        <th>Kondisi Atap Rumah</th>
+                        <th>Kondisi Lantai Rumah</th>
                         <th>Aksi</th>
                     </tr>
                 </thead>
@@ -63,12 +101,23 @@
             /* Warna teks putih */
         }
 
-        #tambah {
+        #table_kriteria thead {
             background-color: #d9d2c7;
-            margin: 15%;
-            margin-left: 0;
-            color: black;
-            border-radius: 15%;
+            /* Warna latar belakang coklat */
+            color: #7F643C;
+            /* Warna teks putih */
+        }
+
+        #tambah {
+            background-color: #BB955C;
+            border-color: #BB955C;
+            color: #ffffff;
+        }
+
+        .btn-tambah {
+            background-color: #BB955C;
+            border-color: #BB955C;
+            color: #ffffff;
         }
     </style>
 @endpush
@@ -102,12 +151,32 @@
                     orderable: true,
                     searchable: true
                 }, {
-                    data: "kk.alamat",
+                    data: "jenis_bansos",
                     className: "",
                     orderable: true,
                     searchable: true
                 }, {
-                    data: "jenis_bansos",
+                    data: "penghasilan",
+                    className: "",
+                    orderable: true,
+                    searchable: true
+                }, {
+                    data: "jumlah_tanggungan",
+                    className: "",
+                    orderable: true,
+                    searchable: true
+                }, {
+                    data: "dinding_rumah",
+                    className: "",
+                    orderable: true,
+                    searchable: true
+                }, {
+                    data: "atap_rumah",
+                    className: "",
+                    orderable: true,
+                    searchable: true
+                }, {
+                    data: "lantai_rumah",
                     className: "",
                     orderable: true,
                     searchable: true
@@ -119,8 +188,12 @@
                 }]
             });
 
-            S('#jenis_bansos').on('change', function() {
-                dataBansos.ajax.reload();
+            // Mengatur action form ketika tombol modal diklik
+            $('#confirmDeleteModal').on('show.bs.modal', function(event) {
+                var button = $(event.relatedTarget); // Button yang memicu modal
+                var bansosId = button.data('id'); // Ambil nilai data-umkm-id
+                var form = $('#deleteForm');
+                form.attr('action', '{{ url('ketua/bansos/destroy') }}/' + bansosId); // Set action form dengan ID UMKM
             });
 
         });
