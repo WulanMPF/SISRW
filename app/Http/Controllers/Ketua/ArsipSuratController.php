@@ -36,14 +36,20 @@ class ArsipSuratController extends Controller
     {
         $arsip_surat = ArsipSuratModel::all();
 
-        /*// Check if jenis_surat is provided in the request and not empty
-        if ($request->has('jenis_surat') && $request->jenis_surat != '') {
-            // Filter data based on jenis_surat
-            $arsip_surat->where('jenis_surat', $request->jenis_surat);
+        /*if ($request->has('pengirim') && $request->pengirim != '') {
+            $arsip_surat->where('pengirim', $request->pengirim);
+        }
+
+        if ($request->has('penerima') && $request->penerima != '') {
+            $arsip_surat->where('penerima', $request->penerima);
         }*/
 
-        if ($request->has('pengirim') && $request->pengirim != '') {
-            $arsip_surat->where('pengirim', $request->pengirim);
+        if ($request->has('pengirim') && !empty($request->pengirim)) {
+            $arsip_surat->where('pengirim', 'like', '%' . $request->pengirim . '%');
+        }
+
+        if ($request->has('penerima') && !empty($request->penerima)) {
+            $arsip_surat->where('penerima', 'like', '%' . $request->penerima . '%');
         }
 
         return DataTables::of($arsip_surat)
@@ -82,8 +88,8 @@ class ArsipSuratController extends Controller
             'keterangan'        => 'required|string'
         ]);
 
-        if ($request->file) {
-            $namaFile = $request->file('lampiran')->hashName();
+        if ($request->hasFile('lampiran')) {
+            $namaFile = $request->file('lampiran')->getClientOriginalName();
             $path = $request->file('lampiran')->move('arsip_surat', $namaFile);
             $path = str_replace("\\", "//", $path);
         } else {
@@ -192,8 +198,8 @@ class ArsipSuratController extends Controller
             'keterangan'        => 'required|string'
         ]);
 
-        if ($request->file) {
-            $namaFile = $request->file('lampiran')->hashName();
+        if ($request->hasFile('lampiran')) {
+            $namaFile = $request->file('lampiran')->getClientOriginalName();
             $path = $request->file('lampiran')->move('arsip_surat', $namaFile);
             $path = str_replace("\\", "//", $path);
         }
@@ -210,7 +216,7 @@ class ArsipSuratController extends Controller
 
         return redirect('/ketua/surat')->with('success', 'Data surat berhasil diperbarui');
     }
-    public function show(string $id)
+    public function showArsipSurat(string $id)
     {
         $arsip_surat = ArsipSuratModel::find($id);
 

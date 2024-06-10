@@ -32,8 +32,12 @@ class SuratController extends Controller
     {
         $arsip_surat = ArsipSuratModel::all();
 
-        if ($request->has('pengirim') && $request->pengirim != '') {
-            $arsip_surat->where('pengirim', $request->pengirim);
+        if ($request->has('pengirim') && !empty($request->pengirim)) {
+            $arsip_surat->where('pengirim', 'like', '%' . $request->pengirim . '%');
+        }
+
+        if ($request->has('penerima') && !empty($request->penerima)) {
+            $arsip_surat->where('penerima', 'like', '%' . $request->penerima . '%');
         }
 
         return DataTables::of($arsip_surat)
@@ -73,8 +77,8 @@ class SuratController extends Controller
             'keterangan'        => 'required|string'
         ]);
 
-        if ($request->file) {
-            $namaFile = $request->file('lampiran')->hashName();
+        if ($request->hasFile('lampiran')) {
+            $namaFile = $request->file('lampiran')->getClientOriginalName();
             $path = $request->file('lampiran')->move('arsip_surat', $namaFile);
             $path = str_replace("\\", "//", $path);
         } else {
@@ -123,8 +127,8 @@ class SuratController extends Controller
             'keterangan'        => 'required|string'
         ]);
 
-        if ($request->file) {
-            $namaFile = $request->file('lampiran')->hashName();
+        if ($request->hasFile('lampiran')) {
+            $namaFile = $request->file('lampiran')->getClientOriginalName();
             $path = $request->file('lampiran')->move('arsip_surat', $namaFile);
             $path = str_replace("\\", "//", $path);
         }
