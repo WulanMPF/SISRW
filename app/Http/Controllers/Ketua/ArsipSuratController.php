@@ -165,7 +165,7 @@ class ArsipSuratController extends Controller
             return redirect('ketua/surat')->with('error', 'Data surat tidak ditemukan');
         }
 
-        $html = view('sekretaris.undangan.cetak_surat', ['undangan' => $undangan, 'user' => $user, 'ketua_id' => $ketua_id, 'ketua' => $ketua])->render();
+        $html = view('surat.cetak_surat', ['undangan' => $undangan, 'user' => $user, 'ketua_id' => $ketua_id, 'ketua' => $ketua])->render();
 
         $pdf = PDF::loadHTML($html);
         return $pdf->stream($undangan->undangan_nama . '.pdf');

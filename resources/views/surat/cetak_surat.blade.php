@@ -174,8 +174,8 @@ Carbon::setLocale('id');
                 {{ \Carbon\Carbon::parse($undangan->undangan_tanggal)->translatedFormat('d F Y') }}</p>
             <p> Hormat Kami,</p>
             <div class="signature">
-                <img src="{{ asset('images/signature.png') }}">
-                <p>____________________</p>
+                {{-- <img src="{{ asset('images/signature.png') }}"> --}}
+                <p style="margin-top: 4rem;">____________________</p>
                 <p>{{ $ketua->nama_warga }}</p>
             </div>
         </div>

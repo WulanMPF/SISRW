@@ -173,7 +173,7 @@ class SuratUndanganController extends Controller
             // Handle jika data undangan tidak ditemukan
         }
 
-        $html = view('sekretaris.undangan.cetak_surat',  ['undangan' => $undangan, 'user' => $user, 'ketua_id' => $ketua_id, 'ketua' => $ketua])->render();
+        $html = view('surat.cetak_surat',  ['undangan' => $undangan, 'user' => $user, 'ketua_id' => $ketua_id, 'ketua' => $ketua])->render();
 
         $pdf = PDF::loadHTML($html);
         return $pdf->stream($undangan->undangan_nama . '.pdf');
