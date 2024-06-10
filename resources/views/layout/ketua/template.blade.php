@@ -42,6 +42,10 @@
             color: #463720;
             font-family: Poppins;
         }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
     </style>
 </head>
 
