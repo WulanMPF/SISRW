@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers\warga;
 
-use App\Models\PersuratanModel; // Update the model namespace
+use App\Models\SuratPengantarModel;
+use App\Models\ArsipSuratModel;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Yajra\DataTables\DataTables;
+use Barryvdh\DomPDF\Facade\Pdf as PDF;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Storage;
 
@@ -23,16 +26,16 @@ class AjukanPersuratanController extends Controller
         // Active menu identifier
         $activeMenu = 'surat';
 
-        // Mocked documents data
-        $documents = [
-            (object) ['id' => 1, 'name' => 'Surat Keterangan Belum Menikah', 'size' => 345],
-            (object) ['id' => 2, 'name' => 'Surat Kehilangan', 'size' => 1234],
-            (object) ['id' => 3, 'name' => 'Surat Pindah Domisili', 'size' => 645],
-            (object) ['id' => 4, 'name' => 'Surat Keterangan Warga Tidak Mampu', 'size' => 987],
+        // // Mocked documents data
+        // $documents = [
+        //     (object) ['id' => 1, 'name' => 'Surat Keterangan Belum Menikah', 'size' => 345],
+        //     (object) ['id' => 2, 'name' => 'Surat Kehilangan', 'size' => 1234],
+        //     (object) ['id' => 3, 'name' => 'Surat Pindah Domisili', 'size' => 645],
+        //     (object) ['id' => 4, 'name' => 'Surat Keterangan Warga Tidak Mampu', 'size' => 987],
 
-        ];
+        // ];
 
-        return view('warga.ajukanpersuratan.index', compact('breadcrumb', 'activeMenu', 'documents'));
+        return view('warga.ajukanpersuratan.index', compact('breadcrumb', 'activeMenu'));
     }
 
     public function create()
@@ -45,28 +48,75 @@ class AjukanPersuratanController extends Controller
 
         // $surats = persuratanmodel::all();
         $activeMenu = 'surat'; //set menu yang sedang aktif
-        return view('warga.ajukanpersuratan.create', ['breadcrumb' => $breadcrumb,  'activeMenu' => $activeMenu]);
-    }  
-    
+        return view('warga.ajukanpersuratan.create-pengantar', ['breadcrumb' => $breadcrumb,  'activeMenu' => $activeMenu]);
+    }
 
-    // store the new document data
-    // public function store(Request $request)
-    // {
-    //     // Validate and store the document
-    //     $request->validate([
-    //         'name' => 'required|string|max:255',
-    //         'file' => 'required|file'
-    //     ]);
+    public function store(Request $request)
+    {
+        $request->validate([
+            'pengantar_nama' => 'required|string|max:20',
+            'pengantar_no_surat' => 'required|string|max:20',
+            'pengantar_isi_nik' => 'required|string|max:20',
+            'pengantar_isi_nama' => 'required|string|max:100',
+            'pengantar_isi_ttl' => 'required|string|max:100',
+            'pengantar_isi_jk' => 'required|in:L,P',
+            'pengantar_isi_agama' => 'required|string|max:20',
+            'pengantar_isi_pekerjaan' => 'required|string|max:50',
+            'pengantar_isi_alamat' => 'required|string|max:100',
+            'pengantar_isi_keperluan' => 'required|string|max:100',
+        ]);
 
-    //     // Assume you have a Document model set up correctly
-    //     $document = new Document([
-    //         'name' => $request->name,
-    //         'file_path' => $request->file('file')->store('documents', 'public')
-    //     ]);
-    //     $document->save();
+        if (!auth()->check()) {
+            return redirect('login')->with('error', 'Anda harus login terlebih dahulu');
+        }
+        $user_id = auth()->user()->user_id;
 
-    //     return redirect()->route('ajukanpersuratan.index')->with('success', 'Document uploaded successfully.');
-    // }
+
+        $pengantar = SuratPengantarModel::create([
+            'user_id' => $user_id,
+            'pengantar_nama' => $request->pengantar_nama,
+            'pengantar_no_surat' => $request->pengantar_no_surat,
+            'pengantar_isi_nik' => $request->pengantar_isi_nik,
+            'pengantar_isi_nama' => $request->pengantar_isi_nama,
+            'pengantar_isi_ttl' => $request->pengantar_isi_ttl,
+            'pengantar_isi_jk' => $request->pengantar_isi_jk,
+            'pengantar_isi_agama' => $request->pengantar_isi_agama,
+            'pengantar_isi_pekerjaan' => $request->pengantar_isi_pekerjaan,
+            'pengantar_isi_alamat' => $request->pengantar_isi_alamat,
+            'pengantar_isi_keperluan' => $request->pengantar_isi_keperluan,
+        ]);
+
+        $pdf = PDF::loadView('surat.cetak_pengantar', ['pengantar' => $pengantar]);
+        $filename = 'Surat_Pengantar_' . $pengantar->id . '.pdf';
+        $directory = storage_path('app/public/surat_pengantar');
+
+        // Check if directory exists, if not create it
+        if (!file_exists($directory)) {
+            mkdir($directory, 0777, true);
+        }
+
+        $path = $directory . '/' . $filename;
+
+        // Save the PDF to the specified path
+        $pdf->save($path);
+
+        // Save the path to the model if necessary
+        $pengantar->update(['file_path' => $path]);
+
+        // Create entry in Arsip Surat as Surat Masuk for Ketua
+        ArsipSuratModel::create([
+            'nomor_surat' => $pengantar->pengantar_no_surat,
+            'tanggal_surat' => now(),
+            'pengirim' => 'Warga',
+            'penerima' => 'Ketua RW',
+            'perihal' => 'Permohonan Surat Pengantar',
+            'file_path' => $path,
+            'keterangan' => 'Surat Pengantar submitted by Warga'
+        ]);
+
+        return redirect()->back()->with('success', 'Surat Pengantar berhasil dibuat dan diarsipkan.');
+    }
+
 
     public function download($id)
     {

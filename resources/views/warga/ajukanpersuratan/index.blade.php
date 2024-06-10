@@ -18,9 +18,17 @@
 
             <div class="row">
                 <div class="col-md-12">
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ajukanSuratModal">
+                    {{-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ajukanSuratModal">
                         Ajukan Surat
-                    </button>
+                    </button> --}}
+                    <div class="col-md text-right">
+                        <a class="btn btn-primary" data-toggle="dropdown">+ Buat Surat</a>
+                        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+                            <a href="{{ url('/warga/surat/create-pengantar') }}" class="dropdown-item">
+                                Surat Undangan
+                            </a>
+                        </div>
+                    </div>
                     <div class="mt-3">
                         <p>Surat ini digunakan untuk menjadi tanda bahwa pembawa surat telah diketahui dan disetujui oleh
                             Ketua RT dan RW setempat. Surat pengantar kami lampirkan dan dapat di unduh untuk dapat
@@ -28,20 +36,20 @@
                             pengantar ini kemudian anda cetak, selanjutnya anda isi sesuai kebutuhan dan kemudian mintakan
                             tanda tangan dan stempel pada ketua RT dan RW sesuai domisili anda.</p>
                     </div>
-                    @foreach ($documents as $document)
+                    {{-- @foreach ($documents as $document)
                         <div class="list-group-item">
                             {{ $document->name }}
                             <span>{{ $document->size }} kb</span>
                             <a class="btn btn-success">Download</a>
                         </div>
-                    @endforeach
+                    @endforeach --}}
                 </div>
             </div>
         </div>
     </div>
 
     <!-- The Modal -->
-    <div class="modal fade" id="ajukanSuratModal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+    {{-- <div class="modal fade" id="ajukanSuratModal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -91,7 +99,7 @@
                     </form>
                 </div>
             </div>
-        </div>
+        </div> --}}
     </div>
 @endsection
 

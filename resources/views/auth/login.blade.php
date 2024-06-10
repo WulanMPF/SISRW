@@ -116,13 +116,20 @@
                     <img src="{{ asset('adminlte/dist/img/sisrw/logo3.png') }}" height="100" alt="SISRW Logo"> <!-- Ensure this path is correct -->
                     <h4>SISTEM INFORMASI RW 05</h4>
                     <h2>Login</h2>
+
                     <form action="{{ route('login-proses') }}" method="POST">
                         @csrf
                         <div class="form-group mb-3">
                             <input id="inputNIK" name="nik" type="text" placeholder="Masukkan NIK" required class="form-control shadow-sm px-4">
+                            @if ($errors->has('nik'))
+                                <span class="text-danger">{{ $errors->first('nik') }}</span>
+                            @endif
                         </div>
                         <div class="form-group mb-3">
                             <input id="inputPassword" name="password" type="password" placeholder="Masukkan Password" required class="form-control shadow-sm px-4">
+                            @if ($errors->has('password'))
+                            <span class="text-danger">{{ $errors->first('password') }}</span>
+                            @endif
                         </div>
                         <div class="form-links">
                             <a href="{{ route('forgot-password') }}" class="link-secondary text-decoration-none">Forgot password</a>

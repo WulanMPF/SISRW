@@ -358,8 +358,11 @@ Route::group(['prefix' => 'warga/pengaduan'], function () {
 
 Route::group(['prefix' => 'warga/surat'], function () {
     Route::get('/', [AjukanPersuratanController::class, 'index']);
-    Route::get('/create', [AjukanPersuratanController::class, 'create'])->name('ajukanpersuratan.create');
-    Route::post('/list', [AjukanPersuratanController::class, 'list']);
+     // Route::get('/', [AjukanPersuratanController::class, 'create'])->name('ajukanpersuratan.create');
+    Route::get('/create-pengantar', [AjukanPersuratanController::class, 'create'])->name('ajukanpersuratan.create-pengantar');
+    // Route::post('surat-pengantar', [AjukanPersuratanController::class, 'store'])->name('ajukanpersuratan.store');
+    Route::post('/warga/ajukanpersuratan/pengantar', [AjukanPersuratanController::class, 'store'])->name('warga.ajukanpersuratan.store');
+
 });
 
 Route::group(['prefix' => 'warga/umkm'], function () {
