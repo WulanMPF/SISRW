@@ -29,7 +29,8 @@
                             <select class="form-control" id="periode" name="periode">
                                 <option value="">Pilih Bulan</option>
                                 @foreach (range(1, 12) as $month)
-                                    <option value="{{ $month }}">{{ date('F', mktime(0, 0, 0, $month, 10)) }}</option>
+                                    <option value="{{ $month }}">{{ date('F', mktime(0, 0, 0, $month, 10)) }}
+                                    </option>
                                 @endforeach
                             </select>
                         </div>
@@ -51,65 +52,67 @@
                     </div>
                 </div>
             </div>
-            <table class="table table-bordered table-hover table-sm" id="table_laporan_keuangan"
-                style="width: 100%;">
-                <thead>
-                    <tr>
-                        <th>No</th>
-                        <th>Tanggal</th>
-                        <th>Keterangan</th>
-                        <th>Pemasukan</th>
-                        <th>Pengeluaran</th>
-                        <th>Saldo</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tfoot>
-                    <tr>
-                        <td colspan="3" style="text-align:right;"><strong>Total:</strong></td>
-                        <td id="total_pemasukan">0</td>
-                        <td id="total_pengeluaran">0</td>
-                        <td id="total_saldo">0</td>
-                        <td></td>
-                    </tr>
-                </tfoot>
-            </table>
+            <div class="table-container">
+                <table class="table table-bordered table-hover table-sm" id="table_laporan_keuangan" style="width: 100%;">
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Tanggal</th>
+                            <th>Keterangan</th>
+                            <th>Pemasukan</th>
+                            <th>Pengeluaran</th>
+                            <th>Saldo</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <td colspan="3" style="text-align:right;"><strong>Total:</strong></td>
+                            <td id="total_pemasukan">0</td>
+                            <td id="total_pengeluaran">0</td>
+                            <td id="total_saldo">0</td>
+                            <td></td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
         </div>
     </div>
 
     {{-- Modal delete  --}}
     <div class="modal fade" id="confirmationDelete" tabindex="-1" role="dialog" aria-labelledby="confirmationDeleteLabel"
-aria-hidden="true">
-<div class="modal-dialog" role="document">
-    <div class="modal-content">
-        <div class="modal-header">
-            <h5 class="modal-title" id="confirmationDeleteLabel">Konfirmasi Penghapusan Laporan</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            </button>
-        </div>
-        <div class="modal-body">
-            <form id="deleteForm" method="POST" action="">
-                @csrf
-                {!! method_field('DELETE') !!}
-                <div class="form-group">
-                    <p>Apakah yakin data laporan akan dihapus?
-                    </p>
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="confirmationDeleteLabel">Konfirmasi Penghapusan Laporan</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    </button>
                 </div>
-                <div class="text-left mt-3">
-                    <button type="submit" class="btn btn-danger">Ya, Hapus</button>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                <div class="modal-body">
+                    <form id="deleteForm" method="POST" action="">
+                        @csrf
+                        {!! method_field('DELETE') !!}
+                        <div class="form-group">
+                            <p>Apakah yakin data laporan akan dihapus?
+                            </p>
+                        </div>
+                        <div class="text-right mt-3 mr-4">
+                            <button type="submit" class="btn btn-danger">Ya, Hapus</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                        </div>
+                    </form>
                 </div>
-            </form>
+            </div>
         </div>
     </div>
-</div>
-</div>
 @endsection
 
 @push('css')
     <style>
         .modal-content {
             font-family: 'Poppins', sans-serif;
+            width: 27rem;
         }
 
         body {
@@ -178,7 +181,6 @@ aria-hidden="true">
             font-family: Poppins;
             font-size: 15px;
             font-style: normal;
-            font-weight: 100;
             line-height: normal;
         }
 
@@ -205,6 +207,33 @@ aria-hidden="true">
             display: flex;
             align-items: center;
         }
+
+        .table-container {
+            overflow-x: auto;
+            max-width: 100%;
+        }
+
+        .table-responsive {
+            overflow-x: scroll;
+        }
+
+        @media (max-width: 768px) {
+            .table-responsive {
+                overflow-x: scroll;
+            }
+
+            .col-1 {
+                -ms-flex: 0 0 25%;
+                flex: 0 0 25%;
+                max-width: 25%;
+            }
+
+            .col-3 {
+                -ms-flex: 0 0 65%;
+                flex: 0 0 65%;
+                max-width: 65%;
+            }
+        }
     </style>
 @endpush
 
@@ -219,7 +248,10 @@ aria-hidden="true">
         });
 
         function formatRupiah(number) {
-            return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR' }).format(number);
+            return new Intl.NumberFormat('id-ID', {
+                style: 'currency',
+                currency: 'IDR'
+            }).format(number);
         }
 
         $(document).ready(function() {
@@ -294,10 +326,24 @@ aria-hidden="true">
                         }
                     }
                 ],
-                columns: [
-                    { data: "DT_RowIndex", className: "text-center", orderable: false, searchable: false },
-                    { data: "tgl_laporan", className: "", orderable: true, searchable: true },
-                    { data: "keterangan", className: "", orderable: true, searchable: true },
+                columns: [{
+                        data: "DT_RowIndex",
+                        className: "text-center",
+                        orderable: false,
+                        searchable: false
+                    },
+                    {
+                        data: "tgl_laporan",
+                        className: "",
+                        orderable: true,
+                        searchable: true
+                    },
+                    {
+                        data: "keterangan",
+                        className: "",
+                        orderable: true,
+                        searchable: true
+                    },
                     {
                         data: "pemasukan",
                         className: "text-right",
@@ -325,7 +371,12 @@ aria-hidden="true">
                             return formatRupiah(data.saldo);
                         }
                     },
-                    { data: "aksi", className: "text-center", orderable: false, searchable: false }
+                    {
+                        data: "aksi",
+                        className: "text-center",
+                        orderable: false,
+                        searchable: false
+                    }
                 ],
                 drawCallback: function(settings) {
                     var totalPemasukan = 0;
@@ -333,10 +384,12 @@ aria-hidden="true">
                     var saldoSebelumnya = 0;
                     var api = this.api();
 
-                    api.rows({ page: 'current' }).data().each(function(row, index) {
+                    api.rows({
+                        page: 'current'
+                    }).data().each(function(row, index) {
                         totalPemasukan += parseFloat(row.pemasukan);
                         totalPengeluaran += parseFloat(row.pengeluaran);
-                        
+
                         if (index === 0) {
                             row.saldo = totalPemasukan + totalPengeluaran;
                         } else {
@@ -345,10 +398,11 @@ aria-hidden="true">
                             } else if (parseFloat(row.pemasukan) === 0) {
                                 row.saldo = saldoSebelumnya - parseFloat(row.pengeluaran);
                             } else {
-                                row.saldo = saldoSebelumnya - (parseFloat(row.pemasukan) + parseFloat(row.pengeluaran));
+                                row.saldo = saldoSebelumnya - (parseFloat(row.pemasukan) +
+                                    parseFloat(row.pengeluaran));
                             }
                         }
-                        
+
                         saldoSebelumnya = row.saldo;
 
                         $(api.row(index).node()).find('td:eq(5)').html(formatRupiah(row.saldo));
@@ -378,7 +432,8 @@ aria-hidden="true">
                 var button = $(event.relatedTarget); // Button yang memicu modal
                 var Id = button.data('laporan-id'); // Ambil nilai data-umkm-id
                 var form = $('#deleteForm');
-                form.attr('action', '{{ url('bendahara/laporan/destroy') }}/' + Id); // Set action form dengan ID UMKM
+                form.attr('action', '{{ url('bendahara/laporan/destroy') }}/' +
+                    Id); // Set action form dengan ID UMKM
             });
         });
     </script>
