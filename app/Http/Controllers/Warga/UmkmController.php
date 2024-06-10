@@ -8,6 +8,7 @@ use App\Models\UmkmModel;
 use App\Models\WargaModel;
 use Carbon\CarbonPeriod;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\Facades\DataTables;
 
 class UmkmController extends Controller
@@ -37,26 +38,37 @@ class UmkmController extends Controller
         return view('warga.umkm.index', ['breadcrumb' => $breadcrumb, 'umkm' => $umkm, 'warga' => $warga, 'jenis_usaha' => $jenis_usaha, 'activeMenu' => $activeMenu]);
     }
 
-    /*public function list(Request $request)
+    public function list(Request $request)
     {
-        $umkm = UmkmModel::select('nama_usaha', 'alamat_usaha', 'jenis_usaha', 'status_usaha', 'deskripsi', 'lampiran')
-            ->with('warga_id');
+        $warga_id = auth()->user()->warga_id;
 
+        $umkm = UmkmModel::select('*')->where('warga_id', $warga_id);
 
         if ($request->jenis_usaha) {
             $umkm->where('jenis_usaha', $request->jenis_usaha);
+        } elseif ($request->status_usaha) {
+            $umkm->where('status_usaha', $request->status_usaha);
         }
 
+        $umkm = $umkm->with('warga')->get();
+
         return DataTables::of($umkm)
-            ->addIndexColumn() // Menambahkan kolom index / no urut (default nmaa kolom: DT_RowINdex)
+            ->addIndexColumn()
             ->addColumn('aksi', function ($umkm) {
-                $btn = '<a href="' . url('/umkm/' . $umkm->umkm_id) . '" class="btn btn-info btn-sm">Lihat Detail</a>  &nbsp;';
+                $status_usaha = strtolower($umkm->status_usaha);
+                $btn = '';
+                if ($status_usaha == 'aktif') {
+                    $btn .= '<div class="btn-group mr-2">';
+                    $btn .= '<a href="' . url('/warga/umkm/' . $umkm->umkm_id . '/edit') . '" class="btn btn-xs btn-warning mr-2" style="border-radius: 6px;"><i class="fas fa-edit fa-lg"></i></a>';
+                    $btn .= '<button type="button" class="btn btn-xs btn-danger" style="border-radius: 6px;" data-toggle="modal" data-target="#deactiveUMKM" data-umkm-id="' . $umkm->umkm_id . '"><i class="fas fa-trash fa-lg"></i></button>';
+                    $btn .= '</div>';
+                }
+                $btn .= '<a href="' . url('/warga/umkm/' . $umkm->umkm_id) . '" class="btn btn-xs btn-primary" style="border-radius: 6px;"><i class="fas fa-info-circle fa-lg"></i></a>';
                 return $btn;
             })
-
             ->rawColumns(['aksi'])
             ->make(true);
-    }*/
+    }
     public function create()
     {
         $times = [];
@@ -94,6 +106,7 @@ class UmkmController extends Controller
         ]);
         // Ambil warga_id dari sesi login
         $warga_id = auth()->user()->warga_id;
+
         // Mendapatkan nama file yang diacak menggunakan hashName()
         $namaFile = $request->file('lampiran')->hashName();
 
@@ -141,5 +154,38 @@ class UmkmController extends Controller
         $activeMenu = 'umkm';
 
         return view('warga.umkm.show', ['breadcrumb' => $breadcrumb, 'page' => $page, 'umkm' => $umkm, 'warga' => $warga, 'activeMenu' => $activeMenu]);
+    }
+    public function umkmSaya()
+    {
+        // Ambil warga_id dari pengguna yang saat ini diotentikasi
+        $warga_id = auth()->user()->warga_id;
+
+        // Cek apakah warga_id tidak kosong dan benar-benar ditemukan
+        if (!$warga_id) {
+            abort(404, 'Warga not found');
+        }
+
+        // Mengambil UMKM berdasarkan warga_id
+        $umkm = UmkmModel::with('warga')->where('warga_id', $warga_id)->get();
+
+        // Jika tidak ada UMKM ditemukan untuk warga yang diberikan, mungkin perlu ditangani dengan lebih lanjut
+        if ($umkm->isEmpty()) {
+            abort(404, 'UMKM not found for this warga');
+        }
+
+        // Data untuk breadcrumb
+        $breadcrumb = (object)[
+            'title' => 'Detail UMKM RW 05',
+            'date' => date('l, d F Y'),
+            'list' => ['Home', 'UMKM', 'Detail']
+        ];
+
+        $page = (object)[
+            'title' => 'Detail UMKM Saya'
+        ];
+
+        $activeMenu = 'umkm';
+
+        return view('warga.umkm.umkm_saya', compact('breadcrumb', 'page', 'umkm', 'warga_id', 'activeMenu'));
     }
 }

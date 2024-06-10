@@ -29,7 +29,7 @@
                 </ul>
                 <ul class="nav nav-treeview">
                     <li class="nav-item">
-                        <a href="{{ url('/warga/umkm/') }}" class="nav-link">
+                        <a href="{{ url('/warga/umkm-saya') }}" class="nav-link">
                             <i class="nav-icon fas fa-angle-right"></i>
                             <p>UMKM Saya</p>
                         </a>
@@ -82,9 +82,7 @@
         min-height: 100%;
         position: fixed;
         top: 0;
-        }
-
-    
+    }
 </style>
 
 <script>

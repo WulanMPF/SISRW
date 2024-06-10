@@ -357,7 +357,7 @@ Route::group(['prefix' => 'warga/umkm'], function () {
     Route::get('/{id}', [WargaUmkmController::class, 'show']);
 });
 
-Route::get('warga/umkm-saya', [WargaUmkmController::class, 'mine'])->name('umkm.saya');
+Route::get('warga/umkm-saya', [WargaUmkmController::class, 'umkmSaya'])->name('umkm.saya');
 
 Route::group(['prefix' => 'warga/bansos'], function () {
     Route::get('/', [WargaSyaratBansosController::class, 'index']);
