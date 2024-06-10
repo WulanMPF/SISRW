@@ -17,10 +17,10 @@
                         </a>
                         <a class="btn btn-sm btn-tambah" data-toggle="dropdown">Halaman Surat</a>
                         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                            <a href="{{ url('/ketua/undangan') }}" class="dropdown-item">
+                            <a href="{{ url('/ketua/surat/create-undangan') }}" class="dropdown-item">
                                 Surat Undangan
                             </a>
-                            <a href="{{ url('/ketua/pengantar') }}" class="dropdown-item">
+                            <a href="{{ url('/ketua/surat/create-pengantar') }}" class="dropdown-item">
                                 Surat Pengantar
                             </a>
                         </div>
