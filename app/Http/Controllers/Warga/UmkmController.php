@@ -57,13 +57,15 @@ class UmkmController extends Controller
             ->addColumn('aksi', function ($umkm) {
                 $status_usaha = strtolower($umkm->status_usaha);
                 $btn = '';
+                $btn .= '<div class="btn-group mr-2">';
+                $btn = '<a href="' . url('/warga/umkm/' . $umkm->umkm_id) . '" class="btn btn-sm"><i class="fas fa-eye" style="color: #BB955C; font-size: 17px;"></i></a>';
                 if ($status_usaha == 'aktif') {
-                    $btn .= '<div class="btn-group mr-2">';
-                    $btn .= '<a href="' . url('/warga/umkm-saya/' . $umkm->umkm_id . '/edit') . '" class="btn btn-xs btn-warning mr-2" style="border-radius: 6px;"><i class="fas fa-edit fa-lg"></i></a>';
-                    $btn .= '<button type="button" class="btn btn-xs btn-danger" style="border-radius: 6px;" data-toggle="modal" data-target="#deactiveUMKM" data-umkm-id="' . $umkm->umkm_id . '"><i class="fas fa-trash fa-lg"></i></button>';
-                    $btn .= '</div>';
+                    $btn .= '<a href="' . url('/warga/umkm-saya/' . $umkm->umkm_id . '/edit') . '" class="btn btn-sm"><i class="fas fa-edit" style="color: #007bff;" font-size: 17px;></i></a>';
+                    $btn .= '<button class="btn btn-sm delete-btn" data-toggle="modal" data-target="#deactiveUMKM" data-umkm-id="' . $umkm->umkm_id . '"><i class="fas fa-trash-alt" style="color: #dc3545; font-size: 17px;"></i></button>';
+                    // $btn .= '<a href="' . url('/warga/umkm-saya/' . $umkm->umkm_id . '/edit') . '" class="btn btn-xs btn-warning mr-2" style="border-radius: 6px;"><i class="fas fa-edit fa-lg"></i></a>';
+                    // $btn .= '<button class="btn btn-sm delete-btn" data-toggle="modal" data-target="#deactiveUMKM" data-umkm-id="' . $umkm->umkm_id . '"><i class="fas fa-trash fa-lg"></i></button>';
                 }
-                $btn .= '<a href="' . url('/warga/umkm/' . $umkm->umkm_id) . '" class="btn btn-xs btn-primary" style="border-radius: 6px;"><i class="fas fa-info-circle fa-lg"></i></a>';
+                $btn .= '</div>';
                 return $btn;
             })
             ->rawColumns(['aksi'])

@@ -37,9 +37,6 @@
                     <option value="Diproses">- Diproses -</option>
                 </select>
             </div>
-            <div>
-                <a class="btn btn-sm" id="tambah" href="{{ url('ketua/umkm/create') }}">Tambah UMKM</a>
-            </div>
         </div>
         <div class="card-body">
             @if (session('success'))
