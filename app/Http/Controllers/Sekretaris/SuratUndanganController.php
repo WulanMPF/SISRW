@@ -73,8 +73,10 @@ class SuratUndanganController extends Controller
             'undangan_isi_acara'    => 'required|string|max:255'
         ]);
 
+        $user_id = auth()->user()->user_id;
+
         SuratUndanganModel::create([
-            'user_id'               => auth()->user()->id,
+            'user_id'               => $user_id,
             'undangan_nama'         => $request->undangan_nama,
             'undangan_tempat'       => $request->undangan_tempat,
             'undangan_tanggal'      => $request->undangan_tanggal,
@@ -144,7 +146,6 @@ class SuratUndanganController extends Controller
         ]);
 
         SuratUndanganModel::find($id)->update([
-            'user_id'               => auth()->user()->id,
             'undangan_nama'         => $request->undangan_nama,
             'undangan_tempat'       => $request->undangan_tempat,
             'undangan_tanggal'      => $request->undangan_tanggal,

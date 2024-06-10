@@ -138,8 +138,10 @@ class ArsipSuratController extends Controller
             'undangan_isi_acara' => 'required|string|max:100',
         ]);
 
+        $user_id = auth()->user()->user_id;
+
         $undangan = SuratUndanganModel::create([
-            'user_id' => auth()->user()->id,
+            'user_id' => $user_id,
             'undangan_nama' => $request->undangan_nama,
             'undangan_tempat' => $request->undangan_tempat,
             'undangan_tanggal' => $request->undangan_tanggal,
