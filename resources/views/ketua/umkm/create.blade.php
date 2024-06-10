@@ -52,18 +52,15 @@
                         <div class="col-sm-9">
                             <select class="form-control" id="jenis_usaha" name="jenis_usaha" required>
                                 <option value="">- Pilih Jenis Usaha -</option>
-                                <option value="Makanan-Minuman">Produk Makanan dan Minuman</option>
-                                <option value="Fashion-Aksesoris">Fashion dan Aksesoris</option>
-                                <option value="Kesehatan-Kecantikan">Produk Kesehatan dan Kecantikan</option>
-                                <option value="Rumah Tangga">Produk Rumah Tangga</option>
-                                <option value="Teknologi-Elektronik">Produk Teknologi dan Elektronik</option>
-                                <option value="Jasa">Jasa</option>
-                                <option value="Kreatif-Seni">Produk Kreatif dan Seni</option>
-                                <option value="Pendidikan-Pelatihan">Pendidikan dan Pelatihan</option>
-                                <option value="Olahraga-Rekreasi">Produk Olahraga dan Rekreasi</option>
-                                <option value="Pertanian-Perkebunan">Pertanian dan Perkebunan</option>
-                                <option value="Pariwisata-Wisata Kuliner">Pariwisata dan Wisata Kuliner</option>
-                                <option value="Manufaktur-Kerajinan Tangan">Manufaktur dan Kerajinan Tangan</option>
+                                <option value="Agribisnis">Agribisnis dan Pertanian</option>
+                                <option value="Hobi-Olahraga">Hobi dan Kegiatan Olahraga</option>
+                                <option value="Fashion">Tren Fashion dan Gaya</option>
+                                <option value="Kecantikan">Perawatan Kecantikan dan Kosmetik</option>
+                                <option value="Kerajinan">Seni dan Kerajinan Tangan</option>
+                                <option value="Kuliner">Kuliner dan Masakan Lokal</option>
+                                <option value="Teknologi">Inovasi dan Teknologi Terkini</option>
+                                <option value="Jasa">Pelayanan dan Layanan Jasa</option>
+                                <option value="Lainnya">Lainnya</option>
                             </select>
                             @error('jenis_usaha')
                                 <small class="form-text text-danger">{{ $message }}</small>

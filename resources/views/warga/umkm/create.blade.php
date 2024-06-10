@@ -93,6 +93,7 @@
                                 <option value="Kuliner">Kuliner dan Masakan Lokal</option>
                                 <option value="Teknologi">Inovasi dan Teknologi Terkini</option>
                                 <option value="Jasa">Pelayanan dan Layanan Jasa</option>
+                                <option value="Lainnya">Lainnya</option>
                             </select>
                             @error('jenis_usaha')
                                 <small class="form-text text-danger">{{ $message }}</small>

@@ -17,10 +17,11 @@ return new class extends Migration
             $table->string('nama_usaha', 50);
             $table->string('alamat_usaha', 50);
             $table->string('jenis_usaha', 50);
+            $table->enum('jenis_usaha', ['Agribisnis', 'Hobi-Olahraga', 'Fashion', 'Kecantikan', 'Kerajinan', 'Kuliner', 'Teknologi', 'Jasa', 'Lainnya']);
             $table->time('jam_buka');
             $table->time('jam_tutup');
             $table->string('no_telepon', 20);
-            $table->enum('status_usaha', ['Aktif', 'Nonaktif']);
+            $table->enum('status_usaha', ['Aktif', 'Nonaktif', 'Diproses']);
             $table->string('deskripsi', 200);
             $table->string('lampiran', 200);
             $table->timestamps();
