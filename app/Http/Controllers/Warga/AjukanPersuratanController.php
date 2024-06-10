@@ -43,12 +43,12 @@ class AjukanPersuratanController extends Controller
         $breadcrumb = (object) [
             'title' => 'Formulir Pengajuan Surat',
             'date' => date('l, d F Y'),
-            'list'  => ['Home', 'Daftar Template Surat', 'Pengajuan']
+            'list' => ['Home', 'Daftar Template Surat', 'Pengajuan']
         ];
 
         // $surats = persuratanmodel::all();
         $activeMenu = 'surat'; //set menu yang sedang aktif
-        return view('warga.ajukanpersuratan.create-pengantar', ['breadcrumb' => $breadcrumb,  'activeMenu' => $activeMenu]);
+        return view('warga.ajukanpersuratan.create-pengantar', ['breadcrumb' => $breadcrumb, 'activeMenu' => $activeMenu]);
     }
 
     public function store(Request $request)
@@ -86,13 +86,28 @@ class AjukanPersuratanController extends Controller
             'pengantar_isi_keperluan' => $request->pengantar_isi_keperluan,
         ]);
 
-        $pdf = PDF::loadView('surat.cetak_pengantar', ['pengantar' => $pengantar]);
-        $filename = 'Surat_Pengantar_' . $pengantar->id . '.pdf';
-        $directory = storage_path('app/public/surat_pengantar');
+        // // Log data sebelum proses penyimpanan PDF
+        // \Log::info('Data Pengantar Lengkap:', [
+        //     'Nama Pengantar' => $pengantar->pengantar_nama,
+        //     'Nomor Surat' => $pengantar->pengantar_no_surat,
+        //     'NIK' => $pengantar->pengantar_isi_nik,
+        //     'Nama Lengkap' => $pengantar->pengantar_isi_nama,
+        //     'Tempat/Tanggal Lahir' => $pengantar->pengantar_isi_ttl,
+        //     'Jenis Kelamin' => $pengantar->pengantar_isi_jk,
+        //     'Agama' => $pengantar->pengantar_isi_agama,
+        //     'Pekerjaan' => $pengantar->pengantar_isi_pekerjaan,
+        //     'Alamat' => $pengantar->pengantar_isi_alamat,
+        //     'Keperluan' => $pengantar->pengantar_isi_keperluan
+        // ]);
 
-        // Check if directory exists, if not create it
+
+        $pdf = PDF::loadView('surat.cetak_pengantar', ['pengantar' => $pengantar]);
+        $filename = 'Surat_Pengantar_' . $pengantar->user_id . '.pdf';
+        $directory = public_path('surat_pengantar');
+
+        // Buat direktori jika tidak ada
         if (!file_exists($directory)) {
-            mkdir($directory, 0777, true);
+            mkdir($directory, 0755, true);
         }
 
         $path = $directory . '/' . $filename;
@@ -114,13 +129,12 @@ class AjukanPersuratanController extends Controller
             'keterangan' => 'Surat Pengantar submitted by Warga'
         ]);
 
-        return redirect()->back()->with('success', 'Surat Pengantar berhasil dibuat dan diarsipkan.');
+        return redirect()->back()->with('success', 'Surat Pengantar berhasil dibuat dan dikirim ke Ketua RW.');
     }
-
 
     public function download($id)
     {
-        $document = PersuratanModel::findOrFail($id); // Use the new model
+        $document = SuratPengantarModel::findOrFail($id); // Use the new model
         $pathToFile = storage_path('app/public/' . $document->file_path);
 
         if (!file_exists($pathToFile)) {
