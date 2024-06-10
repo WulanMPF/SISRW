@@ -89,4 +89,69 @@ class SyaratBansosController extends Controller
             'activeMenu' => $activeMenu
         ]);
     }
+
+    public function edit(string $id)
+    {
+        $skBansos = SyaratBansosModel::findOrFail($id); // Menggunakan findOrFail agar error 404 jika tidak ditemukan
+
+        $breadcrumb = (object) [
+            'title' => 'Form Edit S&K S&K Bansos RW 05',
+            'date' => date('l, d F y'),
+            'list' => ['Home', 'S&K Bansos', 'Edit']
+        ];
+
+        $page = (object) [
+            'title' => 'Edit S&K Bansos RW 05'
+        ];
+
+        $activeMenu = 'skBansos';
+
+        return view('sekretaris.skBansos.edit', [
+            'breadcrumb' => $breadcrumb,
+            'page' => $page,
+            'skBansos' => $skBansos,
+            'activeMenu' => $activeMenu
+        ]);
+    }
+
+
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'tgl_syarat_ketentuan'  => 'required|date',
+            'jenis_bansos' => 'required|string|max:50',
+            'deskripsi' => 'required|string|max:200',
+            'gambar' => 'nullable|image|mimes:jpeg,png,jpg,svg|max:2048'
+        ]);
+
+        if ($request->image) {
+            $namaFile = $request->file('gambar')->hashName();
+            $path = $request->file('gambar')->move('syarat_bansos', $namaFile);
+            $path = str_replace("\\", "//", $path);
+        }
+
+        $kegiatan = SyaratBansosModel::find($id);
+        $kegiatan->update([
+            'tgl_syarat_ketentuan' => $request->tgl_syarat_ketentuan,
+            'jenis_bansos' => $request->jenis_bansos,
+            'deskripsi' => $request->deskripsi,
+            'gambar' => $request->file('gambar') ? $namaFile : basename(SyaratBansosModel::find($id)->gambar)
+        ]);
+
+        return redirect()->route('sekretaris.skBansos.index')->with('success', 'Data syarat dan ketentuan bansos berhasil diubah');
+    }
+
+    public function destroy(string $id)
+    {
+        $skBansos = SyaratBansosModel::find($id);
+
+        if (!$skBansos) {
+            return redirect()->route('sekretaris.skBansos.index')->with('error', 'Data syarat dan ketentuan bansos tidak ditemukan');
+        }
+
+        // Menggunakan soft delete
+        $skBansos->delete();
+
+        return redirect()->route('sekretaris.skBansos.index')->with('success', 'Data syarat dan ketentuan bansos berhasil dihapus');
+    }
 }

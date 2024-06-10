@@ -261,11 +261,14 @@ Route::group(['prefix' => 'sekretaris/kegiatan'], function () {
 });
 
 Route::group(['prefix' => 'sekretaris/skBansos'], function () {
-    Route::get('/', [SekretarisSyaratBansosController::class, 'index']);
+    Route::get('/', [SekretarisSyaratBansosController::class, 'index'])->name('sekretaris.skBansos.index');
     Route::post('/list', [SekretarisSyaratBansosController::class, 'list']);
     Route::get('/create', [SekretarisSyaratBansosController::class, 'create']);
     Route::post('/', [SekretarisSyaratBansosController::class, 'store'])->name('sk_bansos.store');
-    Route::get('/{id}', [SekretarisSyaratBansosController::class, 'show']);
+    Route::get('/edit/{id}', [SekretarisSyaratBansosController::class, 'edit'])->name('sk_bansos.edit');
+    Route::put('/update/{id}', [SekretarisSyaratBansosController::class, 'update'])->name('sk_bansos.update');
+    Route::delete('/destroy/{id}', [SekretarisSyaratBansosController::class, 'destroy'])->name('sk_bansos.destroy');
+    Route::get('/{id}', [SekretarisSyaratBansosController::class, 'show'])->name('sk_bansos.show');
 });
 
 Route::group(['prefix' => 'sekretaris/umkm'], function () {

@@ -12,7 +12,7 @@
             @endif
 
             <!-- Filter Section -->
-            <div class="row mb-3">
+            {{-- <div class="row mb-3">
                 <div class="col-md-12">
                     <div class="form-group row">
                         <label class="col-sm-1 control-label col-form-label">Filter:</label>
@@ -25,7 +25,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> --}}
 
             <!-- Information Boxes -->
             <div class="d-flex justify-content-start">
