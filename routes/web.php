@@ -194,6 +194,7 @@ Route::group(['prefix' => 'ketua/pengaduan'], function () {
 Route::group(['prefix' => 'ketua/iuran'], function () {
     Route::get('/', [IuranController::class, 'index']);
     Route::post('/list', [IuranController::class, 'list']);
+    Route::get('/show/{iuran_id}', [IuranController::class, 'show']);
 });
 Route::group(['prefix' => 'ketua/profile'], function () {
     Route::get('/', [ProfileController::class, 'index']);

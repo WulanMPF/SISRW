@@ -11,9 +11,9 @@
             @endif
             <div class="row mb-3">
                 <div class="col-md-12">
+                    <label class="control-label col-form-label">Filter:</label>
                     <div class="form-group row">
-                        <label class="col-1 control-label col-form-label">Filter:</label>
-                        <div class="col-3">
+                        <div class="col-2">
                             <select class="form-control status_pembayaran" name="status_pembayaran" required>
                                 <option value="">Tampilkan Semua</option>
                                 <option value="Lunas">Lunas</option>
@@ -83,7 +83,7 @@
             // Event handler untuk perubahan nilai dropdown
             $('.status_pembayaran').change(function() {
                 var status = $(this).val(); // Ambil nilai filter
-                
+
                 // Perbarui tabel sesuai dengan status pembayaran yang dipilih
                 table.column(4).search(status).draw();
             });
