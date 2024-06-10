@@ -9,73 +9,83 @@
             @if (session('error'))
                 <div class="alert alert-danger">{{ session('error') }}</div>
             @endif
-            <form class="form" method="POST" action="{{ url('ketua/surat/undangan') }}">
+            <form class="form" method="POST" action="{{ url('ketua/undangan') }}">
                 @csrf
                 <div class="row mb-3">
-                    <label class="undangan_nama col-sm-2 col-form-label mt-1" for="undangan_nama" style="margin-right: 80px;">Nama Surat</label>
+                    <label class="undangan_nama col-sm-2 col-form-label mt-1" for="undangan_nama"
+                        style="margin-right: 80px;">Nama Surat</label>
                     <div class="col-sm-3">
                         <input type="text" class="form-control" id="undangan_nama" name="undangan_nama"
                             placeholder="Nama Surat" required>
                     </div>
                 </div>
                 <div class="row mb-3">
-                    <label class="undangan_tempat col-sm-2 col-form-label mt-1" for="undangan_tempat" style="margin-right: 80px;">Tempat Surat Dibuat</label>
+                    <label class="undangan_tempat col-sm-2 col-form-label mt-1" for="undangan_tempat"
+                        style="margin-right: 80px;">Tempat Surat Dibuat</label>
                     <div class="col-sm-3">
                         <input type="text" class="form-control" id="undangan_tempat" name="undangan_tempat"
                             placeholder="Tempat Surat Dibuat" required>
                     </div>
                 </div>
                 <div class="row mb-3">
-                    <label class="undangan_tanggal col-sm-2 col-form-label mt-1" for="undangan_tanggal" style="margin-right: 80px;">Tanggal Surat Dibuat</label>
+                    <label class="undangan_tanggal col-sm-2 col-form-label mt-1" for="undangan_tanggal"
+                        style="margin-right: 80px;">Tanggal Surat Dibuat</label>
                     <div class="col-sm-3">
                         <input type="date" class="form-control" id="undangan_tanggal" name="undangan_tanggal"
                             placeholder="Tanggal Surat Dibuat" required>
                     </div>
                 </div>
                 <div class="row mb-3">
-                    <label class="undangan_no_surat col-sm-2 col-form-label mt-1" for="undangan_no_surat" style="margin-right: 80px;">Nomor Surat</label>
+                    <label class="undangan_no_surat col-sm-2 col-form-label mt-1" for="undangan_no_surat"
+                        style="margin-right: 80px;">Nomor Surat</label>
                     <div class="col-sm-3">
                         <input type="text" class="form-control" id="undangan_no_surat" name="undangan_no_surat"
                             placeholder="Nomor Surat" required>
                     </div>
                 </div>
                 <div class="row mb-3">
-                    <label class="undangan_perihal col-sm-2 col-form-label mt-1" for="undangan_perihal" style="margin-right: 80px;">Perihal</label>
+                    <label class="undangan_perihal col-sm-2 col-form-label mt-1" for="undangan_perihal"
+                        style="margin-right: 80px;">Perihal</label>
                     <div class="col-sm-3">
                         <input type="text" class="form-control" id="undangan_perihal" name="undangan_perihal"
                             placeholder="Perihal" required>
                     </div>
                 </div>
                 <div class="row mb-3">
-                    <label class="undangan_isi_hari col-sm-2 col-form-label mt-1" for="undangan_isi_hari" style="margin-right: 50px; margin-left: 30px;">Hari Agenda</label>
+                    <label class="undangan_isi_hari col-sm-2 col-form-label mt-1" for="undangan_isi_hari"
+                        style="margin-right: 50px; margin-left: 30px;">Hari Agenda</label>
                     <div class="col-sm-3">
                         <input type="text" class="form-control" id="undangan_isi_hari" name="undangan_isi_hari"
                             placeholder="Hari Agenda" required>
                     </div>
                 </div>
                 <div class="row mb-3">
-                    <label class="undangan_isi_tgl col-sm-2 col-form-label mt-1" for="undangan_isi_tgl" style="margin-right: 50px; margin-left: 30px;">Tanggal Agenda</label>
+                    <label class="undangan_isi_tgl col-sm-2 col-form-label mt-1" for="undangan_isi_tgl"
+                        style="margin-right: 50px; margin-left: 30px;">Tanggal Agenda</label>
                     <div class="col-sm-3">
                         <input type="date" class="form-control" id="undangan_isi_tgl" name="undangan_isi_tgl"
                             placeholder="Tanggal Agenda" required>
                     </div>
                 </div>
                 <div class="row mb-3">
-                    <label class="undangan_isi_waktu col-sm-2 col-form-label mt-1" for="undangan_isi_waktu" style="margin-right: 50px; margin-left: 30px;">Waktu Agenda</label>
+                    <label class="undangan_isi_waktu col-sm-2 col-form-label mt-1" for="undangan_isi_waktu"
+                        style="margin-right: 50px; margin-left: 30px;">Waktu Agenda</label>
                     <div class="col-sm-3">
                         <input type="time" class="form-control" id="undangan_isi_waktu" name="undangan_isi_waktu"
                             placeholder="Waktu Agenda" required>
                     </div>
                 </div>
                 <div class="row mb-3">
-                    <label class="undangan_isi_tempat col-sm-2 col-form-label mt-1" for="undangan_isi_tempat" style="margin-right: 50px; margin-left: 30px;">Tempat Agenda</label>
+                    <label class="undangan_isi_tempat col-sm-2 col-form-label mt-1" for="undangan_isi_tempat"
+                        style="margin-right: 50px; margin-left: 30px;">Tempat Agenda</label>
                     <div class="col-sm-3">
                         <input type="text" class="form-control" id="undangan_isi_tempat" name="undangan_isi_tempat"
                             placeholder="Tempat Agenda" required>
                     </div>
                 </div>
                 <div class="row mb-3">
-                    <label class="undangan_isi_acara col-sm-2 col-form-label mt-1" for="undangan_isi_acara" style="margin-right: 50px; margin-left: 30px;">Agenda</label>
+                    <label class="undangan_isi_acara col-sm-2 col-form-label mt-1" for="undangan_isi_acara"
+                        style="margin-right: 50px; margin-left: 30px;">Agenda</label>
                     <div class="col-sm-3">
                         <input type="text" class="form-control" id="undangan_isi_acara" name="undangan_isi_acara"
                             placeholder="Agenda" required>
@@ -114,4 +124,34 @@
 @endpush
 
 @push('js')
+    <script>
+        function submitForm(event) {
+            event.preventDefault(); // Mencegah pengiriman form default
+
+            var form = document.createElement("form");
+            form.method = "POST";
+            form.action = "{{ url('ketua/surat/undangan') }}";
+            form.target = "_blank"; // Membuka di tab baru
+
+            // Tambahkan CSRF token
+            var csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+            var csrfInput = document.createElement("input");
+            csrfInput.type = "hidden";
+            csrfInput.name = "_token";
+            csrfInput.value = csrfToken;
+            form.appendChild(csrfInput);
+
+            // Menyalin semua input dari form asli ke form baru
+            var originalForm = document.querySelector('.form');
+            var inputs = originalForm.querySelectorAll('input, textarea, select');
+            inputs.forEach(function(input) {
+                var clonedInput = input.cloneNode(true);
+                form.appendChild(clonedInput);
+            });
+
+            document.body.appendChild(form);
+            form.submit();
+            document.body.removeChild(form); // Menghapus form setelah dikirim
+        }
+    </script>
 @endpush

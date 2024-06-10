@@ -119,7 +119,7 @@ class SuratUndanganController extends Controller
         $breadcrumb = (object) [
             'title' => 'Formulir Surat Undangan UMKM RW 05',
             'date' => date('l, d F Y'),
-            'list'  => ['Home', ' Surat Undangan ', 'Create']
+            'list'  => ['Home', ' Surat Undangan ', 'Edit']
         ];
         $page = (object)[
             'title' => 'Surat Undangan RW 05'

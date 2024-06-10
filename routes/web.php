@@ -22,6 +22,7 @@ use App\Http\Controllers\Bendahara\ProfileController as BendaharaProfileControll
 use App\Http\Controllers\Ketua\ArsipSuratController;
 use App\Http\Controllers\Ketua\NotifikasiController;
 use App\Http\Controllers\Ketua\ProfileController;
+use App\Http\Controllers\Ketua\SuratUndanganController as KetuaSuratUndanganController;
 use App\Http\Controllers\Login\LoginController;
 use App\Http\Controllers\Sekretaris\NotifikasiController as SekretarisNotifikasiController;
 use App\Http\Controllers\Sekretaris\ProfileController as SekretarisProfileController;
@@ -128,14 +129,22 @@ Route::group(['prefix' => 'ketua/surat'], function () {
     Route::post('/list', [ArsipSuratController::class, 'list']);
     Route::get('/create', [ArsipSuratController::class, 'createArsipSurat'])->name('surat.create');
     Route::post('/', [ArsipSuratController::class, 'storeArsipSurat'])->name('surat.store');
-    Route::get('/create-undangan', [ArsipSuratController::class, 'createUndangan']);
-    Route::post('/undangan', [ArsipSuratController::class, 'storeUndangan']);
     Route::get('/{id}', [ArsipSuratController::class, 'showArsipSurat']);
     Route::get('/{id}/edit', [ArsipSuratController::class, 'editArsipSurat'])->name('surat.edit');
     Route::put('/{id}', [ArsipSuratController::class, 'updateArsipSurat'])->name('surat.update');
     Route::delete('/destroy/{id}', [ArsipSuratController::class, 'destroy']);
 });
-
+Route::group(['prefix' => 'ketua/undangan'], function () {
+    Route::get('/', [KetuaSuratUndanganController::class, 'indexUndangan']);
+    Route::get('/cetak_surat_pdf/{id}', [KetuaSuratUndanganController::class, 'cetak']);
+    Route::post('/list', [KetuaSuratUndanganController::class, 'listUndangan']);
+    Route::get('/create', [KetuaSuratUndanganController::class, 'createUndangan'])->name('ketua.undangan.create');
+    Route::post('/', [KetuaSuratUndanganController::class, 'storeUndangan'])->name('ketua.undangan.store');
+    Route::get('/{id}', [KetuaSuratUndanganController::class, 'showUndangan']);
+    Route::get('/{id}/edit', [KetuaSuratUndanganController::class, 'editUndangan'])->name('ketua.undangan.edit');
+    Route::put('/{id}', [KetuaSuratUndanganController::class, 'updateUndangan'])->name('ketua.undangan.update');
+    Route::delete('/destroy/{id}', [KetuaSuratUndanganController::class, 'destroyUndangan']);
+});
 Route::group(['prefix' => 'ketua/umkm'], function () {
     Route::get('/', [UmkmController::class, 'index'])->name('umkm.index');
     Route::post('/list', [UmkmController::class, 'list']);
