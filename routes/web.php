@@ -130,7 +130,7 @@ Route::group(['prefix' => 'ketua/surat'], function () {
     Route::post('/', [ArsipSuratController::class, 'storeArsipSurat'])->name('surat.store');
     Route::get('/create-undangan', [ArsipSuratController::class, 'createUndangan']);
     Route::post('/undangan', [ArsipSuratController::class, 'storeUndangan']);
-    Route::get('/{id}', [ArsipSuratController::class, 'show']);
+    Route::get('/{id}', [ArsipSuratController::class, 'showArsipSurat']);
     Route::get('/{id}/edit', [ArsipSuratController::class, 'editArsipSurat'])->name('surat.edit');
     Route::put('/{id}', [ArsipSuratController::class, 'updateArsipSurat'])->name('surat.update');
     Route::delete('/destroy/{id}', [ArsipSuratController::class, 'destroy']);
