@@ -36,8 +36,8 @@
                                     <th>Lampiran</th>
                                     <td>
                                         @if ($arsip_surat->lampiran)
-                                            <a href="{{ url('arsip_surat/' . $arsip_surat->lampiran) }}" target="_blank">
-                                                {{ $arsip_surat->lampiran }}
+                                            <a href="{{ asset($arsip_surat->lampiran) }}" target="_blank">
+                                                Unduh Lampiran
                                             </a>
                                         @else
                                             Tidak ada lampiran
