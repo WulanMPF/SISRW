@@ -73,7 +73,6 @@
             color: white;
             border-radius: 9px;
             padding-right: 1rem;
-            margin-right: 1.2rem;
         }
 
         #table_umkm {
@@ -95,7 +94,7 @@
         }
 
         .table-responsive {
-            overflow-x: auto;
+            overflow-x: scroll;
         }
 
         @media (max-width: 767px) {

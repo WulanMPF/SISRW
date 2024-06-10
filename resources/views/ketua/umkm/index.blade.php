@@ -122,7 +122,7 @@
         }
 
         .table-responsive {
-            overflow-x: auto;
+            overflow-x: scroll;
         }
 
         @media (max-width: 767px) {
