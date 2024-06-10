@@ -357,7 +357,12 @@ Route::group(['prefix' => 'warga/umkm'], function () {
     Route::get('/{id}', [WargaUmkmController::class, 'show']);
 });
 
-Route::get('warga/umkm-saya', [WargaUmkmController::class, 'umkmSaya'])->name('umkm.saya');
+Route::group(['prefix' => 'warga/umkm-saya'], function () {
+    Route::get('/', [WargaUmkmController::class, 'umkmSaya'])->name('umkm.saya');
+    Route::get('/{id}/edit', [WargaUmkmController::class, 'edit']);
+    Route::put('/{id}', [WargaUmkmController::class, 'update']);
+    Route::delete('/deactive/{umkm_id}', [WargaUmkmController::class, 'deactive']);
+});
 
 Route::group(['prefix' => 'warga/bansos'], function () {
     Route::get('/', [WargaSyaratBansosController::class, 'index']);

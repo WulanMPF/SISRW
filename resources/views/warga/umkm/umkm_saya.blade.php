@@ -187,7 +187,7 @@
                 var button = $(event.relatedTarget);
                 var umkmId = button.data('umkm-id');
                 var form = $('#deleteForm');
-                form.attr('action', '{{ url('ketua/umkm/deactive') }}/' + umkmId);
+                form.attr('action', '{{ url('warga/umkm-saya/deactive') }}/' + umkmId);
             });
         });
     </script>

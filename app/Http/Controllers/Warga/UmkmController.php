@@ -59,7 +59,7 @@ class UmkmController extends Controller
                 $btn = '';
                 if ($status_usaha == 'aktif') {
                     $btn .= '<div class="btn-group mr-2">';
-                    $btn .= '<a href="' . url('/warga/umkm/' . $umkm->umkm_id . '/edit') . '" class="btn btn-xs btn-warning mr-2" style="border-radius: 6px;"><i class="fas fa-edit fa-lg"></i></a>';
+                    $btn .= '<a href="' . url('/warga/umkm-saya/' . $umkm->umkm_id . '/edit') . '" class="btn btn-xs btn-warning mr-2" style="border-radius: 6px;"><i class="fas fa-edit fa-lg"></i></a>';
                     $btn .= '<button type="button" class="btn btn-xs btn-danger" style="border-radius: 6px;" data-toggle="modal" data-target="#deactiveUMKM" data-umkm-id="' . $umkm->umkm_id . '"><i class="fas fa-trash fa-lg"></i></button>';
                     $btn .= '</div>';
                 }
@@ -155,6 +155,54 @@ class UmkmController extends Controller
 
         return view('warga.umkm.show', ['breadcrumb' => $breadcrumb, 'page' => $page, 'umkm' => $umkm, 'warga' => $warga, 'activeMenu' => $activeMenu]);
     }
+    public function edit(string $id)
+    {
+        $umkm = UmkmModel::find($id);
+        $warga = WargaModel::all();
+
+        $breadcrumb = (object)[
+            'title' => 'Edit UMKM Saya',
+            'date' => date('l, d F Y'),
+            'list' => ['Home', 'UMKM Saya', 'Edit']
+        ];
+
+        $page = (object)[
+            'title' => 'Edit UMKM Saya'
+        ];
+
+        $activeMenu = 'umkm';
+
+        return view('warga.umkm.edit_umkm_saya', ['breadcrumb' => $breadcrumb, 'page' => $page, 'umkm' => $umkm, 'warga' => $warga, 'activeMenu' => $activeMenu]);
+    }
+
+    public function update(Request $request, string $id)
+    {
+        $request->validate([
+            'nama_usaha'  => 'required|string|max:20',
+            'alamat_usaha' => 'required|string|max:50',
+            'jenis_usaha' => 'required|string|max:30',
+            'status_usaha' => 'required',
+            'deskripsi' => 'required|string|max:200',
+            'lampiran' => 'nullable|image|mimes:jpeg,png,jpg,svg|max:2048'
+        ]);
+
+        if ($request->image) {
+            $namaFile = $request->file('lampiran')->hashName();
+            $path = $request->file('lampiran')->move('lampiran_umkm', $namaFile);
+            $path = str_replace("\\", "//", $path);
+        }
+
+        UmkmModel::find($id)->update([
+            'nama_usaha'  => $request->nama_usaha,
+            'alamat_usaha' => $request->alamat_usaha,
+            'jenis_usaha' => $request->jenis_usaha,
+            'status_usaha' => $request->status_usaha,
+            'deskripsi' => $request->deskripsi,
+            'lampiran' => $request->file('lampiran') ? $namaFile : basename(UmkmModel::find($id)->lampiran)
+        ]);
+
+        return redirect('/warga/umkm-saya')->with('success', 'Data UMKM berhasil diupdate');
+    }
     public function umkmSaya()
     {
         // Ambil warga_id dari pengguna yang saat ini diotentikasi
@@ -187,5 +235,20 @@ class UmkmController extends Controller
         $activeMenu = 'umkm';
 
         return view('warga.umkm.umkm_saya', compact('breadcrumb', 'page', 'umkm', 'warga_id', 'activeMenu'));
+    }
+    public function deactive(string $umkm_id)
+    {
+        $umkm = UmkmModel::find($umkm_id);
+        if (!$umkm) {
+            return redirect('/warga/umkm-saya')->with('error', 'Data UMKM tidak ditemukan');
+        }
+        try {
+            // Ubah status UMKM menjadi 'nonaktif'
+            $umkm->update(['status_usaha' => 'Nonaktif']);
+
+            return redirect('/warga/umkm-saya')->with('success', 'Data UMKM berhasil dinonaktifkan');
+        } catch (\Illuminate\Database\QueryException $e) {
+            return redirect('/warga/umkm-saya')->with('error', 'Gagal menonaktifkan data UMKM');
+        }
     }
 }
