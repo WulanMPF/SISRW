@@ -28,10 +28,20 @@
         </li>
     </ul>
     <div class="row">
-        <div class="col-md-4 ml-4">
+        <!-- Gender Chart -->
+        <div class="col-md-5">
             <div class="card">
-                <div class="p-6 m-20 bg-white rounded shadow">
+                <div class="card-body">
                     {!! $wargaChart->container() !!}
+                </div>
+            </div>
+        </div>
+
+        <!-- Agama Chart -->
+        <div class="col-md-5">
+            <div class="card">
+                <div class="card-body">
+                    {!! $AgamaChart->container() !!}
                 </div>
             </div>
         </div>
@@ -220,4 +230,6 @@
     </script>
     <script src="{{ $wargaChart->cdn() }}"></script>
     {{ $wargaChart->script() }}
+    <script src="{{ $AgamaChart->cdn() }}"></script>
+    {{ $AgamaChart->script() }}
 @endpush

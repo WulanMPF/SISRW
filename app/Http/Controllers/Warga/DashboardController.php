@@ -8,12 +8,13 @@ use App\Models\UmkmModel;
 use App\Models\KkModel;
 use App\Models\WargaModel;
 use App\Charts\WargaChart;
+use App\Charts\AgamaChart;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
 {
-    public function index(WargaChart $wargaChart)
+    public function index(WargaChart $wargaChart, AgamaChart $AgamaChart,)
     {
         $user = Auth::user(); // Mendapatkan data user yang sedang login
         $namaWarga = $user->warga->nama_warga; // Mengambil nama warga dari relasi user
@@ -43,7 +44,8 @@ class DashboardController extends Controller
             'jumlah_kk' => $jumlah_kk,
             'jumlah_umkm' => $jumlah_umkm,
             'jumlah_warga' => $jumlah_warga,
-            'wargaChart' => $wargaChart->build()
+            'wargaChart' => $wargaChart->build(),
+            'AgamaChart' => $AgamaChart->build()
         ]);
     }
 
