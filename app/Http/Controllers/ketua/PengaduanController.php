@@ -56,7 +56,7 @@ class PengaduanController extends Controller
                 return '<span class="' . $color . '">' . $row->prioritas . '</span>';
             })
             ->addColumn('action', function ($row) {
-                $showUrl = route('pengaduan.show', $row->pengaduan_id);
+                $showUrl = route('ketua.pengaduan.show', $row->pengaduan_id);
                 $editUrl = url('/ketua/pengaduan/' . $row->pengaduan_id . '/edit');
 
                 $btn = '<a href="' . $showUrl . '" class="btn btn-xs btn-primary" style="border-radius: 6px;"><i class="fas fa-info-circle fa-lg"></i></a>';

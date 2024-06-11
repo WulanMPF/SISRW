@@ -168,8 +168,8 @@ Route::group(['middleware' => ['auth']], function () {
         Route::group(['prefix' => '/pengaduan'], function () {
             Route::get('/', [PengaduanController::class, 'index'])->name('pengaduan.index');
             Route::post('/list', [PengaduanController::class, 'list']);
-            Route::get('/{id}', [PengaduanController::class, 'show'])->name('pengaduan.show');
-            Route::get('/{id}/show', [PengaduanController::class, 'show'])->name('pengaduan.show');
+            Route::get('/{id}', [PengaduanController::class, 'show'])->name('ketua.pengaduan.show');
+            // Route::get('/{id}/show', [PengaduanController::class, 'show'])->name('pengaduan.show');
             Route::get('/{id}/edit', [PengaduanController::class, 'edit']);
             Route::put('/{id}', [PengaduanController::class, 'update'])->name('pengaduan.update');
         });
@@ -276,9 +276,24 @@ Route::group(['middleware' => ['auth']], function () {
             Route::put('/{id}', [SekretarisUmkmController::class, 'update']);
         });
         Route::group(['prefix' => '/bansos'], function () {
-            Route::get('/', [SekretarisBansosController::class, 'index'])->name('sekretaris.bansos.index');
-            Route::post('/list', [SekretarisBansosController::class, 'list'])->name('sekretaris.bansos.list');
-            Route::get('/{id}', [SekretarisBansosController::class, 'show'])->name('sekretaris.bansos.show');
+            Route::get('/', [SekretarisBansosController::class, 'index']);
+            Route::post('/list', [SekretarisBansosController::class, 'list']);
+            Route::get('/create', [SekretarisBansosController::class, 'create']);
+            Route::post('/store', [SekretarisBansosController::class, 'store']);
+            Route::get('/edit/{id}', [SekretarisBansosController::class, 'edit']);
+            Route::put('/update/{id}', [SekretarisBansosController::class, 'update'])->name('sekretaris.bansos.update');
+            Route::get('/kriteria', [SekretarisBansosController::class, 'kriteria']);
+            Route::post('/listKriteria', [SekretarisBansosController::class, 'listKriteria']);
+            Route::get('/editKriteria/{id}', [SekretarisBansosController::class, 'editKriteria']);
+            Route::put('/updateKriteria/{id}', [SekretarisBansosController::class, 'updateKriteria'])->name('kriteria_bansos.update');
+            Route::get('/penerima', [SekretarisBansosController::class, 'penerima']); // Rute tambahan
+            Route::get('/perangkingan', [SekretarisBansosController::class, 'perangkingan']); // Rute tambahan
+            Route::post('/listRangking', [SekretarisBansosController::class, 'listRangking']);
+            Route::get('/moora', [SekretarisBansosController::class, 'moora']);
+            Route::get('/saw', [SekretarisBansosController::class, 'saw']);
+            Route::delete('/destroy/{id}', [SekretarisBansosController::class, 'destroy']);
+            Route::get('/laporanBansos', [SekretarisBansosController::class, 'laporanBansos']); // Rute tambahan
+            Route::get('/{id}', [SekretarisBansosController::class, 'show']); // Rute dinamis harus di paling akhir
         });
         Route::group(['prefix' => '/profile'], function () {
             Route::get('/', [SekretarisProfileController::class, 'index']);

@@ -87,36 +87,33 @@ class PengaduanController extends Controller
             'prioritas' => 'required|string|max:255',
             'deskripsi' => 'required|string|max:255',
             'jenis_pengaduan' => 'required|string|max:255', // Ensure this field exists in your form and database
-            'lampiran' => 'required|file|max:2048',
+            'lampiran' => 'required|image|mimes:jpeg,png,jpg,svg|max:2048',
         ]);
 
         // Ambil warga_id dari sesi login
         $warga_id = auth()->user()->warga_id;
 
-        // Create a new Pengaduan entry using the model
-        $pengaduan = new PengaduanModel();
-        $pengaduan->warga_id = $warga_id; // Set warga_id from session
-        $pengaduan->tgl_pengaduan = $request->tgl_pengaduan;
-        $pengaduan->prioritas = $request->prioritas; // Ensure this field exists in your form and database
-        $pengaduan->deskripsi = $request->deskripsi;
-        $pengaduan->jenis_pengaduan = $request->jenis_pengaduan; // Set the jenis_pengaduan field
-        $pengaduan->status_pengaduan = 'Diproses'; // Set status_pengaduan to "Diproses"
-        $pengaduan->tindakan_diambil = 'belum ada tindakan'; // Set tindakan_diambil to "belum ada tindakan"
+        $namaFile = $request->file('lampiran')->hashName();
+
+        PengaduanModel::create([
+            'warga_id' => $warga_id,
+            'tgl_pengaduan' => $request->tgl_pengaduan,
+            'prioritas' => $request->prioritas,
+            'deskripsi' => $request->deskripsi,
+            'jenis_pengaduan' => $request->jenis_pengaduan,
+            'status_pengaduan' => 'Diproses',
+            'tindakan_diambil' => 'belum ada tindakan',
+            'lampiran' => $namaFile
+        ]);
 
         // Handle file upload with Laravel's Storage facade
-        if ($request->hasFile('lampiran')) {
-            $lampiran = $request->file('lampiran');
-            $namaFile = $lampiran->getClientOriginalName();
-            $path = $lampiran->move('lampiran', $namaFile);
-            $path = str_replace("\\", "//", $path);
-            $pengaduan->lampiran = $namaFile;
-        }
-
-        $pengaduan->save();
+        $path = $request->file('lampiran')->move('lampiran_pengaduan', $namaFile);
+        $path = str_replace("\\", "//", $path);
 
         // Redirect with success message
         return redirect()->route('pengaduan.index')->with('success', 'Pengaduan berhasil diajukan.');
     }
+
     public function pengaduanSaya()
     {
         // Ambil warga_id dari pengguna yang saat ini diotentikasi

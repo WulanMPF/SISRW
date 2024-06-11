@@ -127,14 +127,14 @@ class UmkmController extends Controller
         // Validate the input
         $request->validate([
             'nik'          => 'required|string|max:16',
-            'nama_usaha'   => 'required|string|max:20',
-            'alamat_usaha' => 'required|string|max:50',
-            'jenis_usaha'  => 'required|string|max:30',
+            'nama_usaha'   => 'required|string|max:200',
+            'alamat_usaha' => 'required|string|max:200',
+            'jenis_usaha'  => 'required|string|max:200',
             'jam_buka'     => 'required|date_format:H:i',
             'jam_tutup'    => 'required|date_format:H:i',
             'no_telepon'   => 'required|string|max:20',
             'status_usaha' => 'required',
-            'deskripsi'    => 'required|string|max:200',
+            'deskripsi'    => 'required|string|max:65535',
             'lampiran'     => 'required|image|mimes:jpeg,png,jpg,svg|max:2048'
         ]);
 
@@ -170,6 +170,7 @@ class UmkmController extends Controller
 
         return redirect('/ketua/umkm')->with('success', 'Data UMKM berhasil ditambahkan');
     }
+
 
     public function show(string $id)
     {
@@ -210,11 +211,11 @@ class UmkmController extends Controller
     {
         $request->validate([
             'warga_id'    => 'nullable|integer',
-            'nama_usaha'  => 'required|string|max:20',
-            'alamat_usaha' => 'required|string|max:50',
-            'jenis_usaha' => 'required|string|max:30',
+            'nama_usaha'  => 'required|string|max:200',
+            'alamat_usaha' => 'required|string|max:200',
+            'jenis_usaha' => 'required|string|max:200',
             'status_usaha' => 'required',
-            'deskripsi' => 'required|string|max:200',
+            'deskripsi' => 'required|string|max:65535',
             'lampiran' => 'nullable|image|mimes:jpeg,png,jpg,svg|max:2048'
         ]);
 
@@ -236,6 +237,7 @@ class UmkmController extends Controller
 
         return redirect('/ketua/umkm')->with('success', 'Data UMKM berhasil diupdate');
     }
+
 
     public function deactive(string $umkm_id)
     {

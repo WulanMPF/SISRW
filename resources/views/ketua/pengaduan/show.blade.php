@@ -35,7 +35,7 @@
                                 </tr>
                                 <tr>
                                     <th>Lampiran</th>
-                                    <td>{{ $pengaduan->lampiran }}</td>
+                                    <td><img src="{{ asset('lampiran_pengaduan/' . $pengaduan->lampiran) }}" class="card-img-top img-umkm center"></td>
                                 </tr>
                                 <tr>
                                     <th>Tindakan Diambil</th>
@@ -91,6 +91,15 @@
             background-color: #BB955C;
             border-color: #BB955C;
             color: #ffffff;
+        }
+
+        .img-umkm {
+            height: auto;
+            max-width: 25.5rem;
+            margin-top: 0.5rem;
+            float: left;
+            display: block;
+            border-radius: 1rem;
         }
     </style>
 @endpush

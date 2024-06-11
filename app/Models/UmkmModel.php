@@ -14,9 +14,9 @@ class UmkmModel extends Model
     protected $primaryKey = 'umkm_id';
     protected $fillable = ['warga_id', 'nama_usaha', 'alamat_usaha', 'jenis_usaha', 'jam_buka', 'jam_tutup', 'no_telepon', 'status_usaha', 'deskripsi', 'lampiran'];
 
-    public function warga(): HasMany
+    public function warga()
     {
-        return $this->hasMany(WargaModel::class, 'warga_id', 'warga_id');
+        return $this->belongsTo(WargaModel::class, 'warga_id');
     }
     protected function image(): Attribute
     {

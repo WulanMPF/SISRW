@@ -15,7 +15,7 @@
                         <div class="col-md-8 text-left">
                             <a class="btn btn-sm mt-1 btn-tambah" href="{{ url('bendahara/laporan/create') }}">+
                                 Tambah Data
-                                Iuran</a>
+                                Laporan</a>
                         </div>
                     </div>
                     <div class="form-group row">
@@ -410,9 +410,9 @@
 
                     var totalSaldo = saldoSebelumnya;
 
-                    $('#total_pemasukan').html(formatRupiah(totalPemasukan));
-                    $('#total_pengeluaran').html(formatRupiah(totalPengeluaran));
-                    $('#total_saldo').html(formatRupiah(totalSaldo));
+                    $('#total_pemasukan').html('<strong>' + formatRupiah(totalPemasukan) + '</strong>');
+                    $('#total_pengeluaran').html('<strong>' + formatRupiah(totalPengeluaran) + '</strong>');
+                    $('#total_saldo').html('<strong>' + formatRupiah(totalSaldo) + '</strong>');
                 },
 
 

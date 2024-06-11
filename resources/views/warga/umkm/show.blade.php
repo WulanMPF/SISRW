@@ -18,7 +18,7 @@
                 <div class="card-text col-md-7">
                     <div class="info-item">
                         <strong class="title">Pemilik Usaha:</strong>
-                        <p>{{ $warga->nama_warga }}</p>
+                        <p>{{ $umkm->warga->nama_warga }}</p>
                     </div>
                     <div class="info-item">
                         <strong class="title">Jenis Usaha:</strong>
