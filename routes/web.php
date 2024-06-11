@@ -77,7 +77,12 @@ Route::group(['middleware' => ['auth']], function () {
 
     // Route Halaman Ketua RW
     Route::group(['prefix' => 'ketua', 'middleware' => ['role:ketua']], function () {
-        Route::get('/dashboard', [DashboardController::class, 'index'])->name('ketua.dashboard');
+
+        Route::group(['prefix' => '/dashboard'], function () {
+            Route::get('/', [DashboardController::class, 'index'])->name('ketua.dashboard');
+            ;
+        });
+
 
         Route::group(['prefix' => 'warga'], function () {
             Route::get('/', [WargaController::class, 'index'])->name('warga.index');
@@ -290,7 +295,7 @@ Route::group(['middleware' => ['auth']], function () {
     // Route Halaman Bendahara RW
     Route::group(['prefix' => 'bendahara', 'middleware' => ['role:bendahara']], function () {
         Route::group(['prefix' => '/dashboard'], function () {
-            Route::get('/', [BendaharaDashboardController::class, 'index'])->name('sekretaris.dashboard');
+            Route::get('/', [BendaharaDashboardController::class, 'index'])->name('bendahara.dashboard');
             ;
         });
 
