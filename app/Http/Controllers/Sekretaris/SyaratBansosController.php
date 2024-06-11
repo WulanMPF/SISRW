@@ -95,7 +95,7 @@ class SyaratBansosController extends Controller
         $skBansos = SyaratBansosModel::findOrFail($id); // Menggunakan findOrFail agar error 404 jika tidak ditemukan
 
         $breadcrumb = (object) [
-            'title' => 'Form Edit S&K S&K Bansos RW 05',
+            'title' => 'Form Edit S&K Bansos RW 05',
             'date' => date('l, d F y'),
             'list' => ['Home', 'S&K Bansos', 'Edit']
         ];

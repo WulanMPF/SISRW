@@ -10,12 +10,8 @@
                 @if (session('error'))
                     <div class="alert alert-danger">{{ session('error') }}</div>
                 @endif
-                <h3
-                    style="text-decoration: underline; text-align: center; font-style: normal; margin-bottom: 1rem; font-weight: 700;">
-                    Formulir Edit Persyaratan Penerima Bansos RW 05
-                </h3>
-                <form method="POST" action="{{ route('sk_bansos.update', $skBansos->syarat_bansos_id) }}" enctype="multipart/form-data"
-                    class="form-horizontal">
+                <form method="POST" action="{{ route('sk_bansos.update', $skBansos->syarat_bansos_id) }}"
+                    enctype="multipart/form-data" class="form-horizontal">
                     @csrf
                     @method('PUT')
                     <div class="form-group row">
@@ -33,10 +29,18 @@
                         <div class="col-sm-9">
                             <select class="form-control" id="jenis_bansos" name="jenis_bansos" required>
                                 <option value="">- Pilih Jenis Bansos -</option>
-                                <option value="Bansos Beras 10kg" {{ old('jenis_bansos', $skBansos->jenis_bansos) == 'Bansos Beras 10kg' ? 'selected' : '' }}>Bansos Beras 10kg</option>
-                                <option value="Bansos DTKS" {{ old('jenis_bansos', $skBansos->jenis_bansos) == 'Bansos DTKS' ? 'selected' : '' }}>Bansos DTKS</option>
-                                <option value="Bansos PKH" {{ old('jenis_bansos', $skBansos->jenis_bansos) == 'Bansos PKH' ? 'selected' : '' }}>Bansos PKH</option>
-                                <option value="Bansos Tunai Akibat Covid 19" {{ old('jenis_bansos', $skBansos->jenis_bansos) == 'Bansos Tunai Akibat Covid 19' ? 'selected' : '' }}>Bansos Tunai Akibat Covid 19</option>
+                                <option value="Bansos Beras 10kg"
+                                    {{ old('jenis_bansos', $skBansos->jenis_bansos) == 'Bansos Beras 10kg' ? 'selected' : '' }}>
+                                    Bansos Beras 10kg</option>
+                                <option value="Bansos DTKS"
+                                    {{ old('jenis_bansos', $skBansos->jenis_bansos) == 'Bansos DTKS' ? 'selected' : '' }}>
+                                    Bansos DTKS</option>
+                                <option value="Bansos PKH"
+                                    {{ old('jenis_bansos', $skBansos->jenis_bansos) == 'Bansos PKH' ? 'selected' : '' }}>
+                                    Bansos PKH</option>
+                                <option value="Bansos Tunai Akibat Covid 19"
+                                    {{ old('jenis_bansos', $skBansos->jenis_bansos) == 'Bansos Tunai Akibat Covid 19' ? 'selected' : '' }}>
+                                    Bansos Tunai Akibat Covid 19</option>
                             </select>
                             @error('jenis_bansos')
                                 <small class="form-text text-danger">{{ $message }}</small>
@@ -57,10 +61,10 @@
                         <label for="gambar" class="col-sm-2 col-form-label">Lampiran</label>
                         <div class="col-sm-9">
                             <input type="file" id="gambar" name="gambar" class="form-control-file">
-                            @if($skBansos->gambar)
-                            <div class="mt-2">
-                                <img src="{{ asset('syarat_bansos/' . $skBansos->gambar) }}" style="max-width: 200px;">
-                            </div>
+                            @if ($skBansos->gambar)
+                                <div class="mt-2">
+                                    <img src="{{ asset('syarat_bansos/' . $skBansos->gambar) }}" style="max-width: 200px;">
+                                </div>
                             @endif
                             @error('gambar')
                                 <small class="form-text text-danger">{{ $message }}</small>
