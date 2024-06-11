@@ -363,7 +363,7 @@ Route::group(['middleware' => ['auth']], function () {
 
         });
 
-        Route::group(['prefix' => 'warga/umkm'], function () {
+        Route::group(['prefix' => '/umkm'], function () {
             Route::get('/', [WargaUmkmController::class, 'index']);
             Route::post('/list', [WargaUmkmController::class, 'list']);
             Route::get('/create', [WargaUmkmController::class, 'create']);
@@ -371,23 +371,23 @@ Route::group(['middleware' => ['auth']], function () {
             Route::get('/{id}', [WargaUmkmController::class, 'show']);
         });
 
-        Route::group(['prefix' => 'warga/umkm-saya'], function () {
+        Route::group(['prefix' => '/umkm-saya'], function () {
             Route::get('/', [WargaUmkmController::class, 'umkmSaya'])->name('umkm.saya');
             Route::get('/{id}/edit', [WargaUmkmController::class, 'edit']);
             Route::put('/{id}', [WargaUmkmController::class, 'update']);
             Route::delete('/deactive/{umkm_id}', [WargaUmkmController::class, 'deactive']);
         });
 
-        Route::group(['prefix' => 'warga/bansos'], function () {
+        Route::group(['prefix' => '/bansos'], function () {
             Route::get('/', [WargaSyaratBansosController::class, 'index']);
             Route::get('/{id}', [WargaSyaratBansosController::class, 'show']);
         });
 
-        Route::group(['prefix' => 'warga/profile'], function () {
+        Route::group(['prefix' => '/profile'], function () {
             Route::get('/', [WargaProfileController::class, 'index']);
         });
 
-        Route::group(['prefix' => 'warga/notification'], function () {
+        Route::group(['prefix' => '/notification'], function () {
             Route::get('/', [WargaNotifikasiController::class, 'index']);
         });
     });

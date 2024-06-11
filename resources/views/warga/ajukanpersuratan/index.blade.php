@@ -31,10 +31,8 @@
                     </div>
                     <div class="mt-3">
                         <p>Surat ini digunakan untuk menjadi tanda bahwa pembawa surat telah diketahui dan disetujui oleh
-                            Ketua RT dan RW setempat. Surat pengantar kami lampirkan dan dapat di unduh untuk dapat
-                            dipergunakan sebagaimana mestinya. Untuk penggunaannya bisa anda download / unduh template surat
-                            pengantar ini kemudian anda cetak, selanjutnya anda isi sesuai kebutuhan dan kemudian mintakan
-                            tanda tangan dan stempel pada ketua RT dan RW sesuai domisili anda.</p>
+                            Ketua RW setempat. Formulir kami lampirkan dan dapat diisi untuk dapat dipergunakan sebagaimana mestinya. Untuk penggunaannya bisa anda isi sesuai kebutuhan, submit dan tunggu
+                            tanda tangan dan stempel dari ketua RT dan RW sesuai domisili anda. Hubungi ketua RW 05 untuk konfirmasi surat.</p>
                     </div>
                     {{-- @foreach ($documents as $document)
                         <div class="list-group-item">
