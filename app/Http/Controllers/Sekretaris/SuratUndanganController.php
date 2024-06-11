@@ -36,7 +36,7 @@ class SuratUndanganController extends Controller
         return DataTables::of($undangan)
             ->addIndexColumn()
             ->addColumn('Action', function ($undangan) {
-                $btn = '<button class="btn btn-sm info-btn" data-toggle="modal" data-target="#lihatSuratUndangan" data-undangan-id="' . $undangan->undangan_id . '"><i class="fas fa-eye" style="color: #BB955C; font-size: 17px;"></i></button>';
+                $btn = '<a href="' . url('/sekretaris/undangan/' . $undangan->undangan_id) . '" class="btn btn-sm"><i class="fas fa-eye" style="color: #BB955C; font-size: 17px;"></i></a>';
                 $btn .= '<a href="' . url('/sekretaris/undangan/' . $undangan->undangan_id) . '/edit' . '" class="btn btn-sm"><i class="fas fa-edit" style="color: #007bff; font-size: 17px;"></i></a>';
                 $btn .= '<a href="' . url('/sekretaris/undangan/cetak_surat_pdf/' . $undangan->undangan_id) . '" target="_blank" class="btn btn-sm"><i class="fas fa-print" style="color: #28a745; font-size: 17px;"></i></a>';
                 // $btn .= '<a href="" onclick="this.href=\'/cetak_surat_pdf/\' + document.getElementById(' . $undangan->undangan_id . ').value" role="button" class="btn btn-sm"><i class="fas fa-print" style="color: #28a745; font-size: 17px;"></i></a>';
@@ -132,7 +132,7 @@ class SuratUndanganController extends Controller
 
         return redirect('/sekretaris/undangan')->with('success', 'Surat Undangan berhasil dibuat');
     }
-    /*public function show(string $id)
+    public function show(string $id)
     {
         $undangan = SuratUndanganModel::find($id);
 
@@ -149,12 +149,18 @@ class SuratUndanganController extends Controller
         $activeMenu = 'surat';
 
         return view('sekretaris.undangan.show', ['breadcrumb' => $breadcrumb, 'page' => $page, 'undangan' => $undangan, 'activeMenu' => $activeMenu]);
-    }*/
-    public function show($id)
-    {
-        $undangan = SuratUndanganModel::findOrFail($id); // Mengambil data undangan berdasarkan ID
-        return view('sekretaris.undangan.show', compact('undangan')); // Menampilkan view dengan data undangan
     }
+    /*public function show($id)
+    {
+        try {
+            $undangan = SuratUndanganModel::findOrFail($id); // Mengambil data undangan berdasarkan ID
+            return view('sekretaris.undangan.show', compact('undangan')); // Menampilkan view dengan data undangan
+        } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
+            // Tindakan untuk menangani kesalahan jika data tidak ditemukan
+            return redirect()->back()->with('error', 'Surat undangan tidak ditemukan.');
+        }
+    }*/
+
     public function edit(string $id)
     {
         $breadcrumb = (object) [

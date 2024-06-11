@@ -47,7 +47,7 @@
                                 <h3>Nama Undangan</h3>
                             </div>
                             <div class="col-8">
-                                <p id="undangan_nama">H</p>
+                                <p id="undangan_nama"></p>
                             </div>
                         </div>
                         <div class="row mb-2">
@@ -55,7 +55,7 @@
                                 <h3>Tempat</h3>
                             </div>
                             <div class="col-8">
-                                <p id="undangan_tempat">H</p>
+                                <p id="undangan_tempat"></p>
                             </div>
                         </div>
                         <div class="row mb-2">
@@ -63,7 +63,7 @@
                                 <h3>Tanggal</h3>
                             </div>
                             <div class="col-8">
-                                <p id="undangan_tanggal">H</p>
+                                <p id="undangan_tanggal"></p>
                             </div>
                         </div>
                         <div class="row mb-2">
@@ -71,7 +71,7 @@
                                 <h3>Nomor Surat</h3>
                             </div>
                             <div class="col-8">
-                                <p id="undangan_no_surat">H</p>
+                                <p id="undangan_no_surat"></p>
                             </div>
                         </div>
                         <div class="row mb-2">
@@ -79,7 +79,7 @@
                                 <h3>Perihal</h3>
                             </div>
                             <div class="col-8">
-                                <p id="undangan_perihal">H</p>
+                                <p id="undangan_perihal"></p>
                             </div>
                         </div>
                         <div class="row mb-2">
@@ -87,7 +87,7 @@
                                 <h3>Hari</h3>
                             </div>
                             <div class="col-8">
-                                <p id="undangan_isi_hari">H</p>
+                                <p id="undangan_isi_hari"></p>
                             </div>
                         </div>
 
@@ -96,7 +96,7 @@
                                 <h3>Tanggal</h3>
                             </div>
                             <div class="col-8">
-                                <p id="undangan_isi_tgl">H</p>
+                                <p id="undangan_isi_tgl"></p>
                             </div>
                         </div>
                         <div class="row mb-2">
@@ -104,7 +104,7 @@
                                 <h3>Waktu</h3>
                             </div>
                             <div class="col-8">
-                                <p id="undangan_isi_waktu">H</p>
+                                <p id="undangan_isi_waktu"></p>
                             </div>
                         </div>
                         <div class="row mb-2">
@@ -112,7 +112,7 @@
                                 <h3>Tempat</h3>
                             </div>
                             <div class="col-8">
-                                <p id="undangan_isi_tempat">H</p>
+                                <p id="undangan_isi_tempat"></p>
                             </div>
                         </div>
                         <div class="row mb-2">
@@ -120,7 +120,7 @@
                                 <h3>Acara</h3>
                             </div>
                             <div class="col-8">
-                                <p id="undangan_isi_acara">H</p>
+                                <p id="undangan_isi_acara"></p>
                             </div>
                         </div>
                     </div>
@@ -228,31 +228,6 @@
 
 @push('js')
     <script>
-        $('#lihatSuratUndangan').on('show.bs.modal', function(event) {
-            var button = $(event.relatedTarget); // Button yang memicu modal
-            var undanganId = button.data('undangan-id'); // Ambil nilai data-undangan-id
-
-            $.ajax({
-                url: '/sekretaris/undangan/' + undanganId, // Sesuaikan dengan URL endpoint Anda
-                type: 'GET',
-                success: function(response) {
-                    $('#undangan_nama').text(response.undangan_nama);
-                    $('#undangan_tempat').text(response.undangan_tempat);
-                    $('#undangan_tanggal').text(response.undangan_tanggal);
-                    $('#undangan_no_surat').text(response.undangan_no_surat);
-                    $('#undangan_perihal').text(response.undangan_perihal);
-                    $('#undangan_isi_hari').text(response.undangan_isi_hari);
-                    $('#undangan_isi_tgl').text(response.undangan_isi_tgl);
-                    $('#undangan_isi_waktu').text(response.undangan_isi_waktu);
-                    $('#undangan_isi_tempat').text(response.undangan_isi_tempat);
-                    $('#undangan_isi_acara').text(response.undangan_isi_acara);
-                },
-                error: function(xhr) {
-                    console.log(xhr.responseText);
-                }
-            });
-        });
-
         function showConfirmationModal() {
             $('#confirmationModal').modal('show');
         }

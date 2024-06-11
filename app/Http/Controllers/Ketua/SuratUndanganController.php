@@ -34,7 +34,7 @@ class SuratUndanganController extends Controller
         return DataTables::of($undangan)
             ->addIndexColumn()
             ->addColumn('Action', function ($undangan) {
-                $btn = '<button class="btn btn-sm info-btn" data-toggle="modal" data-target="#lihatSuratUndangan" data-undangan-id="' . $undangan->undangan_id . '"><i class="fas fa-eye" style="color: #BB955C; font-size: 17px;"></i></button>';
+                $btn = '<a href="' . url('/ketua/undangan/' . $undangan->undangan_id) . '" class="btn btn-sm"><i class="fas fa-eye" style="color: #BB955C; font-size: 17px;"></i></a>';
                 $btn .= '<a href="' . url('/ketua/undangan/' . $undangan->undangan_id) . '/edit' . '" class="btn btn-sm"><i class="fas fa-edit" style="color: #007bff; font-size: 17px;"></i></a>';
                 $btn .= '<a href="' . url('/ketua/undangan/cetak_surat_pdf/' . $undangan->undangan_id) . '" target="_blank" class="btn btn-sm"><i class="fas fa-print" style="color: #28a745; font-size: 17px;"></i></a>';
                 $btn .= '<button class="btn btn-sm delete-btn" data-toggle="modal" data-target="#confirmationDelete" data-undangan-id="' . $undangan->undangan_id . '"><i class="fas fa-trash-alt" style="color: #dc3545; font-size: 17px;"></i></button>';
@@ -185,10 +185,28 @@ class SuratUndanganController extends Controller
 
         return redirect('/ketua/undangan')->with('success', 'Surat Undangan berhasil dibuat');
     }
-    public function showUndangan($id)
+    /*public function showUndangan($id)
     {
         $undangan = SuratUndanganModel::findOrFail($id); // Mengambil data undangan berdasarkan ID
         return view('ketua.undangan.show', compact('undangan')); // Menampilkan view dengan data undangan
+    }*/
+    public function showUndangan(string $id)
+    {
+        $undangan = SuratUndanganModel::findOrFail($id);
+
+        $breadcrumb = (object) [
+            'title' => 'Formulir Surat Undangan UMKM RW 05',
+            'date' => date('l, d F Y'),
+            'list'  => ['Home', 'Surat Undangan', 'Detail']
+        ];
+
+        $page = (object)[
+            'title' => 'Surat Undangan RW 05'
+        ];
+
+        $activeMenu = 'surat';
+
+        return view('ketua.undangan.show', ['breadcrumb' => $breadcrumb, 'page' => $page, 'undangan' => $undangan, 'activeMenu' => $activeMenu]);
     }
     public function cetak(Request $request, $undangan_id)
     {
