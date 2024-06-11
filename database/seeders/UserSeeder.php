@@ -16,28 +16,24 @@ class UserSeeder extends Seeder
     {
         DB::table('user')->insert([
             [
-                'user_id' => 3,
-                'level_id' => 2,
+                'level_id' => 5,
                 'warga_id' => 1,
-                'nik' => '6950452900237864',
-                'password' => Hash::make('ketua'),
+                'email' => 'user1@example.com',
+                'password' => Hash::make('password1'),
             ],
             [
-                'user_id' => 4,
-                'level_id' => 3,
+                'level_id' => 5,
                 'warga_id' => 2,
-                'nik' => '7239141999266455',
-                'password' => Hash::make('sekretaris'),
+                'email' => 'user2@example.com',
+                'password' => Hash::make('password2'),
             ],
             [
-                'user_id' => 5,
-                'level_id' => 4,
+                'level_id' => 5,
                 'warga_id' => 3,
-                'nik' => '7772301997320154',
-                'password' => Hash::make('bendahara'),
+                'email' => 'user3@example.com',
+                'password' => Hash::make('password3'),
             ],
-
-
+            // Tambahkan data pengguna lain sesuai kebutuhan
         ]);
     }
 }

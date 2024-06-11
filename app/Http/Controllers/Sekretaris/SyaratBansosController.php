@@ -44,8 +44,8 @@ class SyaratBansosController extends Controller
     {
         $request->validate([
             'tgl_syarat_ketentuan'  => 'required|date',
-            'jenis_bansos' => 'required|string|max:50',
-            'deskripsi' => 'required|string|max:200',
+            'jenis_bansos' => 'required|string|max:200',
+            'deskripsi' => 'required|string|max:65535',
             'gambar' => 'required|image|mimes:jpeg,png,jpg,svg|max:2048'
         ]);
 
@@ -119,12 +119,12 @@ class SyaratBansosController extends Controller
     {
         $request->validate([
             'tgl_syarat_ketentuan'  => 'required|date',
-            'jenis_bansos' => 'required|string|max:50',
-            'deskripsi' => 'required|string|max:200',
+            'jenis_bansos' => 'required|string|max:200',
+            'deskripsi' => 'required|string|max:65535',
             'gambar' => 'nullable|image|mimes:jpeg,png,jpg,svg|max:2048'
         ]);
 
-        if ($request->image) {
+        if ($request->gambar) {
             $namaFile = $request->file('gambar')->hashName();
             $path = $request->file('gambar')->move('syarat_bansos', $namaFile);
             $path = str_replace("\\", "//", $path);
