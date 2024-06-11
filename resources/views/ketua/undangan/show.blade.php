@@ -12,8 +12,8 @@
                 <div class="col-md-10 offset-md-1">
                     <div class="card">
                         <div class="card-header" style="text-align: center;">
-                            <h4><strong>{{ $undangan->undangan_nama }}</strong></h4>
-                            <h4 style="font-size: 17px">{{ $undangan->undangan_no_surat }}</h4>
+                            <h4 style="font-weight: 550">{{ $undangan->undangan_nama }}</h4>
+                            <h4 style="font-size: 17px">No. surat : {{ $undangan->undangan_no_surat }}</h4>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
