@@ -48,29 +48,18 @@ class UmkmController extends Controller
             ->addIndexColumn()
             ->addColumn('aksi', function ($umkm) {
                 $status_usaha = strtolower($umkm->status_usaha);
-                $btn = '';
+                $btn = '<a href="' . url('/ketua/umkm/' . $umkm->umkm_id) . '" class="btn btn-sm"><i class="fas fa-eye" style="color: #BB955C; font-size: 17px;"></i></a>';
                 if ($status_usaha == 'aktif') {
                     $btn .= '<div class="btn-group mr-2">';
-                    $btn .= '<a href="' . url('/ketua/umkm/' . $umkm->umkm_id . '/edit') . '" class="btn btn-xs btn-warning mr-2" style="border-radius: 6px;"><i class="fas fa-edit fa-lg"></i></a>';
-                    $btn .= '<button type="button" class="btn btn-xs btn-danger" style="border-radius: 6px;" data-toggle="modal" data-target="#deactiveUMKM" data-umkm-id="' . $umkm->umkm_id . '"><i class="fas fa-trash fa-lg"></i></button>';
-
-                    // Tampilan localhost
-                    // $btn .= '<form class="d-inline-block" method="POST" action="' . url('/ketua/umkm/' . $umkm->umkm_id . '/deactive') . '">'
-                    // . csrf_field() . method_field('PUT') .
-                    // '<button type="submit" class="btn btn-xs btn-danger" style="border-radius: 6px;" onclick="return confirm(\'Apakah anda yakin ingin menonaktifkan UMKM?\')"><i class="fas fa-trash fa-lg"></i></button>';
-                    // $btn .= '</form>';
-
+                    $btn .= '<a href="' . url('/ketua/umkm/' . $umkm->umkm_id . '/edit') . '" class="btn btn-sm"><i class="fas fa-edit" style="color: #007bff;" font-size: 17px;></i></a>';
+                    $btn .= '<button type="button" class="btn btn-sm delete-btn" data-toggle="modal" data-target="#deactiveUMKM" data-umkm-id="' . $umkm->umkm_id . '"><i class="fas fa-trash-alt" style="color: #dc3545; font-size: 17px;"></i></button>';
                     $btn .= '</div>';
                 } elseif ($status_usaha == 'diproses') {
                     $btn .= '<div class="btn-group mr-2">';
-                    $btn .= '<a href="' . url('/ketua/umkm/' . $umkm->umkm_id . '/accept') . '" class="btn btn-xs btn-success mr-2" style="border-radius: 6px;"><i class="fas fa-check fa-lg"></i></a>';
-                    $btn .= '<a href="' . url('/ketua/umkm/' . $umkm->umkm_id . '/reject') . '" class="btn btn-xs btn-danger" style="border-radius: 6px;"><i class="fas fa-times fa-lg"></i></a>';
+                    $btn .= '<a href="' . url('/ketua/umkm/' . $umkm->umkm_id . '/accept') . '" class="btn btn-sm" style="border-radius: 6px;"><i class="fas fa-check fa-lg" style="color: #28a745; font-size: 17px;"></i></a>';
+                    $btn .= '<a href="' . url('/ketua/umkm/' . $umkm->umkm_id . '/reject') . '" class="btn btn-sm"><i class="fas fa-times fa-lg" style="color: #dc3545;" font-size: 17px;></i></a>';
                     $btn .= '</div>';
                 }
-
-                // Button "Lihat Detail" selalu ditampilkan di tengah
-                $btn .= '<a href="' . url('/ketua/umkm/' . $umkm->umkm_id) . '" class="btn btn-xs btn-primary" style="border-radius: 6px;"><i class="fas fa-info-circle fa-lg"></i></a>';
-
                 return $btn;
             })
 
