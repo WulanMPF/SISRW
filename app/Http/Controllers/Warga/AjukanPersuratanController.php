@@ -122,7 +122,7 @@ class AjukanPersuratanController extends Controller
         ArsipSuratModel::create([
             'nomor_surat' => $pengantar->pengantar_no_surat,
             'tanggal_surat' => now(),
-            'pengirim' => 'Warga',
+            'pengirim' => $pengantar->pengantar_isi_nama,
             'penerima' => 'Ketua RW',
             'perihal' => 'Permohonan Surat Pengantar',
             'lampiran' => $filename,
