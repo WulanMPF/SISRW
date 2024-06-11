@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('pengirim', 25);
             $table->string('penerima', 25);
             $table->string('perihal', 100);
-            $table->string('lampiran', 255)->nullable();
+            $table->string('lampiran', 150)->nullable();
             $table->text('keterangan')->nullable();
             $table->timestamps();
         });

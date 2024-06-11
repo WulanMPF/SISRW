@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('undangan_isi_hari', 6);
             $table->date('undangan_isi_tgl');
             $table->time('undangan_isi_waktu');
-            $table->string('undangan_isi_tempat', 150);
+            $table->string('undangan_isi_tempat', 255);
             $table->text('undangan_isi_acara');
             $table->timestamps();
 
