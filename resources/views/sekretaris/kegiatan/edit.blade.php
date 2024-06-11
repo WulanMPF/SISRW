@@ -30,24 +30,28 @@
                             @method('PUT')
                             <div class="form-group">
                                 <label for="nama_kegiatan">Judul Kegiatan</label>
-                                <input type="text" class="form-control" id="nama_kegiatan" name="nama_kegiatan" value="{{ $kegiatan->nama_kegiatan }}" required>
+                                <input type="text" class="form-control" id="nama_kegiatan" name="nama_kegiatan"
+                                    value="{{ $kegiatan->nama_kegiatan }}" required>
                             </div>
                             <div class="form-group">
                                 <label for="tanggal">Tanggal</label>
-                                <input type="date" class="form-control" id="tanggal" name="tanggal" value="{{ $kegiatan->tanggal }}" required>
+                                <input type="date" class="form-control" id="tanggal" name="tanggal"
+                                    value="{{ $kegiatan->tanggal }}" required>
                             </div>
                             <div class="form-group">
                                 <label for="deskripsi">Deskripsi</label>
-                                <textarea class="form-control" id="deskripsi" name="deskripsi" rows="10" required>{{ $pengumuman->deskripsi }}</textarea>
+                                <textarea class="form-control" id="deskripsi" name="deskripsi" rows="10" required>{{ $kegiatan->deskripsi }}</textarea>
                             </div>
                             <div class="form-group">
                                 <label for="gambar">Gambar</label>
-                                <input type="file" class="form-control-file" id="gambar" name="gambar" accept="image/*">
-                                
+                                <input type="file" class="form-control-file" id="gambar" name="gambar"
+                                    accept="image/*">
+
                                 <!-- Menampilkan gambar sebelumnya -->
-                                @if($kegiatan->gambar)
+                                @if ($kegiatan->gambar)
                                     <div class="mt-2">
-                                        <img src="{{ asset('gambar_kegiatan/' . $kegiatan->gambar) }}" alt="Gambar Sebelumnya" style="max-width: 200px;">
+                                        <img src="{{ asset('gambar_kegiatan/' . $kegiatan->gambar) }}"
+                                            alt="Gambar Sebelumnya" style="max-width: 200px;">
                                     </div>
                                 @endif
                             </div>
