@@ -36,7 +36,8 @@
                                     <th>Lampiran</th>
                                     <td>
                                         @if ($arsip_surat->lampiran)
-                                            <a href="{{ asset($arsip_surat->lampiran) }}" target="_blank">
+                                            <a href="{{ asset('surat_pengantar/' . $arsip_surat->lampiran) }}"
+                                                target="_blank">
                                                 Unduh Lampiran
                                             </a>
                                         @else

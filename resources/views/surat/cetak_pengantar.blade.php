@@ -84,7 +84,7 @@ Carbon::setLocale('id');
         <!-- Kepala surat -->
         <div class="letterhead">
             <!-- Logo Malang Kecakwara -->
-            <img src="{{ asset('images/logo_kota_malang.png') }}">
+            <img src="{{ asset('images/logo kota malang.png') }}">
             <div>
                 <h1>PEMERINTAH KELURAHAN CIAMIS</h1>
                 <p>Kelurahan Purwodadi Kecamatan Blimbing</p>
