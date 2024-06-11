@@ -1,4 +1,4 @@
-@extends('layout.ketua.template')
+@extends('layout.warga.template')
 
 @section('content')
     <!-- Modal -->
