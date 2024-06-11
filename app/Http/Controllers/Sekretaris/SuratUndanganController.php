@@ -3,11 +3,13 @@
 namespace App\Http\Controllers\Sekretaris;
 
 use App\Http\Controllers\Controller;
+use App\Models\ArsipSuratModel;
 use App\Models\SuratUndanganModel;
 use App\Models\UserModel;
 use App\Models\WargaModel;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf as PDF;
+use Carbon\Carbon;
 use Carbon\CarbonPeriod;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -73,9 +75,12 @@ class SuratUndanganController extends Controller
             'undangan_isi_acara'    => 'required|string|max:255'
         ]);
 
+        if (!auth()->check()) {
+            return redirect('login')->with('error', 'Anda harus login terlebih dahulu');
+        }
         $user_id = auth()->user()->user_id;
 
-        SuratUndanganModel::create([
+        $undangan = SuratUndanganModel::create([
             'user_id'               => $user_id,
             'undangan_nama'         => $request->undangan_nama,
             'undangan_tempat'       => $request->undangan_tempat,
@@ -87,6 +92,42 @@ class SuratUndanganController extends Controller
             'undangan_isi_waktu'    => $request->undangan_isi_waktu,
             'undangan_isi_tempat'   => $request->undangan_isi_tempat,
             'undangan_isi_acara'    => $request->undangan_isi_acara
+        ]);
+
+        // Generate PDF
+        $user       = UserModel::where('level_id', 2)->first();
+        $ketua_id   = $user->warga_id;
+        $ketua      = WargaModel::find($ketua_id);
+
+        $pdf            = PDF::loadView('surat.cetak_surat', ['undangan' => $undangan, 'user' => $user, 'ketua_id' => $ketua_id, 'ketua' => $ketua]);
+
+        $formattedDate  = Carbon::parse($undangan->undangan_tanggal)->format('dmY');
+        $filename  = $undangan->undangan_nama . '_' . $formattedDate . '.pdf';
+        $directory = public_path('arsip_surat');
+
+        // Buat direktori jika tidak ada
+        if (!file_exists($directory)) {
+            mkdir($directory, 0755, true);
+        }
+
+        $path = $directory . '/' . $filename;
+
+        // Save the PDF to the specified path
+        try {
+            $pdf->save($path);
+        } catch (\Exception $e) {
+            return redirect('/sekretaris/undangan')->with('error', 'Gagal menyimpan PDF: ' . $e->getMessage());
+        }
+
+        // Create entry in Arsip Surat as Surat Masuk for Ketua
+        ArsipSuratModel::create([
+            'nomor_surat' => $undangan->undangan_no_surat,
+            'tanggal_surat' => $undangan->undangan_tanggal,
+            'pengirim' => 'RW',
+            'penerima' => 'Warga',
+            'perihal' => $undangan->undangan_perihal,
+            'lampiran' => $filename,
+            'keterangan' => $undangan->undangan_isi_acara
         ]);
 
         return redirect('/sekretaris/undangan')->with('success', 'Surat Undangan berhasil dibuat');

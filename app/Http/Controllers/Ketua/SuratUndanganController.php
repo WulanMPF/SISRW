@@ -3,12 +3,14 @@
 namespace App\Http\Controllers\Ketua;
 
 use App\Http\Controllers\Controller;
+use App\Models\ArsipSuratModel;
 use App\Models\SuratUndanganModel;
 use App\Models\UserModel;
 use App\Models\WargaModel;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
 use Barryvdh\DomPDF\Facade\Pdf as PDF;
+use Carbon\Carbon;
 
 class SuratUndanganController extends Controller
 {
@@ -101,10 +103,41 @@ class SuratUndanganController extends Controller
             return redirect('ketua/surat')->with('error', 'Data surat tidak ditemukan');
         }
 
-        $html = view('surat.cetak_surat', ['undangan' => $undangan, 'user' => $user, 'ketua_id' => $ketua_id, 'ketua' => $ketua])->render();
+        // Format the date to ddmmyyyy
+        $formattedDate = Carbon::parse($undangan->undangan_tanggal)->format('dmY');
+        $filename = $undangan->undangan_nama . '_' . $formattedDate . '.pdf';
+        $directory = public_path('arsip_surat');
 
-        $pdf = PDF::loadHTML($html);
-        return $pdf->stream($undangan->undangan_nama . '.pdf');
+        // Buat direktori jika tidak ada
+        if (!file_exists($directory)) {
+            mkdir($directory, 0755, true);
+        }
+
+        $path = $directory . '/' . $filename;
+
+        // Generate and save the PDF to the specified path
+        try {
+            $pdf = PDF::loadView('surat.cetak_surat', ['undangan' => $undangan, 'user' => $user, 'ketua_id' => $ketua_id, 'ketua' => $ketua]);
+            $pdf->save($path);
+        } catch (\Exception $e) {
+            return redirect('/sekretaris/undangan')->with('error', 'Gagal menyimpan PDF: ' . $e->getMessage());
+        }
+
+        // Create entry in Arsip Surat as Surat Masuk for Ketua
+        ArsipSuratModel::create([
+            'nomor_surat' => $undangan->undangan_no_surat,
+            'tanggal_surat' => $undangan->undangan_tanggal,
+            'pengirim' => 'RW',
+            'penerima' => 'Warga',
+            'perihal' => $undangan->undangan_perihal,
+            'lampiran' => $filename,
+            'keterangan' => $undangan->undangan_isi_acara
+        ]);
+
+        // $html = view('surat.cetak_surat', ['undangan' => $undangan, 'user' => $user, 'ketua_id' => $ketua_id, 'ketua' => $ketua])->render();
+
+        // $pdf = PDF::loadHTML($html);
+        return $pdf->stream($filename);
     }
     public function editUndangan(string $id)
     {
