@@ -1,0 +1,123 @@
+]@extends('layout.sekretaris.template')
+
+@section('content')
+    <div class="card card-outline">
+        <div class="card-body">
+            <form method="POST" action="{{ url('sekretaris/bansos/store') }}" enctype="multipart/form-data" class="form-horizontal">
+                @csrf
+                <div class="form-group row">
+                    <label class="col-1 control-label col-form-label">Nomor KK</label>
+                    <div class="col-11">
+                        <select class="form-control" id="kk_id" name="kk_id" required>
+                            <option value="">- Pilih Nama Kepala Keluarga -</option>
+                            @foreach ($kk as $item)
+                                <option value="{{ $item->kk_id }}">{{ $item->nama_kepala_keluarga }}</option>
+                            @endforeach
+                        </select>
+                        @error('kk_id')
+                            <small class="form-text text-danger">{{ $message }}</small>
+                        @enderror
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-1 control-label col-form-label"> Jenis Bansos </label>
+                    <div class="col-11">
+                        <select class="form-control" id="jenis_bansos" name="jenis_bansos" required>
+                            <option value="">- Pilih Jenis Bansos -</option>
+                            <option value="Bansos Beras 10kg">Bansos Beras 10kg</option>
+                            <option value="Bansos DTKS">Bansos DTKS</option>
+                            <option value="Bansos PKH">Bansos PKH</option>
+                            <option value="Bansos Tunai Akibat Covid 19">Bansos Tunai Akibat Covid 19</option>
+                        </select>
+                        @error('jenis_bansos')
+                            <small class="form-text text-danger">{{ $message }}</small>
+                        @enderror
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-1 control-label col-form-label">Penghasilan</label>
+                    <div class="col-11">
+                        <input type="number" id="penghasilan" name="penghasilan" class="form-control" rows="5" required>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-1 control-label col-form-label">Jumlah Tanggungan</label>
+                    <div class="col-11">
+                        <input type="number" id="jumlah_tanggungan" name="jumlah_tanggungan" class="form-control" rows="5" required>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-1 control-label col-form-label">Kondisi Dinding Rumah</label>
+                    <div class="col-11">
+                        <select class="form-control" id="dinding_rumah" name="dinding_rumah" required>
+                            <option value="">- Pilih Keadaan Dinding Rumah -</option>
+                            <option value="Anyaman">Anyaman</option>
+                            <option value="Triplek">Triplek</option>
+                            <option value="Tembok">Tembok</option>
+                        </select>
+                        @error('dinding_rumah')
+                            <small class="form-text text-danger">{{ $message }}</small>
+                        @enderror
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-1 control-label col-form-label">Kondisi Atap Rumah</label>
+                    <div class="col-11">
+                        <select class="form-control" id="atap_rumah" name="atap_rumah" required>
+                            <option value="">- Pilih Keadaan Atap Rumah -</option>
+                            <option value="Ijuk">Ijuk</option>
+                            <option value="Seng">Seng</option>
+                            <option value="Genteng">Genteng</option>
+                        </select>
+                        @error('atap_rumah')
+                            <small class="form-text text-danger">{{ $message }}</small>
+                        @enderror
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-1 control-label col-form-label">Kondisi Lantai Rumah</label>
+                    <div class="col-11">
+                        <select class="form-control" id="lantai_rumah" name="lantai_rumah" required>
+                            <option value="">- Pilih Keadaan Lantai Rumah -</option>
+                            <option value="Tanah">Tanah</option>
+                            <option value="Bambu">Bambu</option>
+                            <option value="Semen">Semen</option>
+                        </select>
+                        @error('lantai_rumah')
+                            <small class="form-text text-danger">{{ $message }}</small>
+                        @enderror
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-11 offset-1">
+                        <button type="submit" class="btn btn-sm btn-simpan">Simpan</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+@endsection
+
+@push('css')
+    <style>
+        #table_bansos {
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        #table_bansos thead {
+            background-color: #d9d2c7;
+            color: #7F643C;
+        }
+
+        .btn-simpan {
+            background-color: #d9d2c7;
+            margin-left: 0;
+            color: black;
+            border-radius: 15%;
+        }
+    </style>
+@endpush
+
+@push('js')
+@endpush
