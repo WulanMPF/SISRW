@@ -130,11 +130,6 @@ class PengaduanController extends Controller
         // Mengambil UMKM berdasarkan warga_id
         $pengaduan = PengaduanModel::with('warga')->where('warga_id', $warga_id)->get();
 
-        // Jika tidak ada UMKM ditemukan untuk warga yang diberikan, mungkin perlu ditangani dengan lebih lanjut
-        if ($pengaduan->isEmpty()) {
-            abort(404, 'Pengaduan not found for this warga');
-        }
-
         // Data untuk breadcrumb
         $breadcrumb = (object)[
             'title' => 'Pengaduan Saya',

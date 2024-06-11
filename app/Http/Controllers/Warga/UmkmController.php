@@ -218,11 +218,6 @@ class UmkmController extends Controller
         // Mengambil UMKM berdasarkan warga_id
         $umkm = UmkmModel::with('warga')->where('warga_id', $warga_id)->get();
 
-        // Jika tidak ada UMKM ditemukan untuk warga yang diberikan, mungkin perlu ditangani dengan lebih lanjut
-        if ($umkm->isEmpty()) {
-            abort(404, 'UMKM not found for this warga');
-        }
-
         // Data untuk breadcrumb
         $breadcrumb = (object)[
             'title' => 'Detail UMKM RW 05',
