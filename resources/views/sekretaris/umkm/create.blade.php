@@ -25,9 +25,9 @@
 
                     {{-- INI CUMA BUAT TESTING AJUKAN AJA -- aslinya ambil id pengguna dari session (line 46) --}}
                     <div class="form-group row">
-                        <label for="nama_usaha" class="col-sm-2 col-form-label">Warga ID:</label>
+                        <label for="nama_usaha" class="col-sm-2 col-form-label">NIK:</label>
                         <div class="col-sm-9">
-                            <input type="text" id="warga_id" name="warga_id" class="form-control" rows="5"
+                            <input type="text" id="nik" name="nik" class="form-control" rows="5"
                                 required>
                         </div>
                     </div>

@@ -135,43 +135,53 @@ class UmkmController extends Controller
     }
     public function store(Request $request)
     {
+        // Validate the input
         $request->validate([
-            'warga_id'    => 'required|integer',
-            'nama_usaha'  => 'required|string|max:20',
+            'nik'          => 'required|string|max:16',
+            'nama_usaha'   => 'required|string|max:20',
             'alamat_usaha' => 'required|string|max:50',
-            'jenis_usaha' => 'required|string|max:30',
-            'jam_buka' => 'required|date_format:H:i',
-            'jam_tutup' => 'required|date_format:H:i',
-            'no_telepon' => 'required|string|max:20',
+            'jenis_usaha'  => 'required|string|max:30',
+            'jam_buka'     => 'required|date_format:H:i',
+            'jam_tutup'    => 'required|date_format:H:i',
+            'no_telepon'   => 'required|string|max:20',
             'status_usaha' => 'required',
-            'deskripsi' => 'required|string|max:200',
-            'lampiran' => 'required|image|mimes:jpeg,png,jpg,svg|max:2048'
+            'deskripsi'    => 'required|string|max:200',
+            'lampiran'     => 'required|image|mimes:jpeg,png,jpg,svg|max:2048'
         ]);
 
-        // Mendapatkan nama file yang diacak menggunakan hashName()
+        // Find the warga_id by the inputted nik
+        $warga = WargaModel::where('nik', $request->nik)->first();
+
+        if (!$warga) {
+            return redirect()->back()->with('error', 'NIK tidak ditemukan.');
+        }
+
+        $warga_id = $warga->warga_id;
+
+        // Get the random file name using hashName()
         $namaFile = $request->file('lampiran')->hashName();
 
-        // Buat entri di database dengan nama file yang dihasilkan oleh hashName()
+        // Create a new UMKM entry in the database
         UmkmModel::create([
-            'warga_id'    => $request->warga_id,
-            'nama_usaha'  => $request->nama_usaha,
+            'warga_id'     => $warga_id,
+            'nama_usaha'   => $request->nama_usaha,
             'alamat_usaha' => $request->alamat_usaha,
-            'jenis_usaha' => $request->jenis_usaha,
-            'jam_buka' => $request->jam_buka,
-            'jam_tutup' => $request->jam_tutup,
-            'no_telepon' => $request->no_telepon,
+            'jenis_usaha'  => $request->jenis_usaha,
+            'jam_buka'     => $request->jam_buka,
+            'jam_tutup'    => $request->jam_tutup,
+            'no_telepon'   => $request->no_telepon,
             'status_usaha' => $request->status_usaha,
-            'deskripsi' => $request->deskripsi,
-            'lampiran' => $namaFile
+            'deskripsi'    => $request->deskripsi,
+            'lampiran'     => $namaFile
         ]);
 
-        // Simpan gambar ke dalam direktori lampiran_umkm dengan nama yang dihasilkan oleh hashName()
-        // $lampiranPath = $request->file('lampiran')->storeAs('umkm', $namaFile); // direktori storage/umkm
+        // Save the image to the directory lampiran_umkm with the generated hash name
         $path = $request->file('lampiran')->move('lampiran_umkm', $namaFile);
         $path = str_replace("\\", "//", $path);
 
         return redirect('/ketua/umkm')->with('success', 'Data UMKM berhasil ditambahkan');
     }
+
     public function show(string $id)
     {
         $umkm = UmkmModel::with('warga')->find($id);

@@ -102,6 +102,12 @@ class IuranController extends Controller
             'kk_id' => 'required|integer',
             'tgl_pembayaran' => 'required|date',
             'status_pembayaran' => 'required|string|max:20',
+        ], [
+            'periode_id.required' => 'Periode harus diisi.',
+            'kk_id.required' => 'Kepala Keluarga harus diisi.',
+            'tgl_pembayaran.required' => 'Tanggal pembayaran harus diisi.',
+            'tgl_pembayaran.date' => 'Tanggal pembayaran harus berupa tanggal yang valid.',
+            'status_pembayaran.required' => 'Status pembayaran harus diisi.',
         ]);
 
         // Simpan data ke database
@@ -119,6 +125,7 @@ class IuranController extends Controller
         $id_periode = $request->periode_id; // or however you obtain the id_periode
         return redirect()->route('bendahara.iuran.bayar', ['id_periode' => $id_periode])->with('success', 'Pembayaran iuran berhasil dilakukan.');
     }
+
 
     public function show(string $id)
     {
