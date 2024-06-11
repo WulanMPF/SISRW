@@ -116,7 +116,7 @@ class AjukanPersuratanController extends Controller
         $pdf->save($path);
 
         // Save the path to the model if necessary
-        $pengantar->update(['file_path' => $path]);
+        $pengantar->update(['lampiran' => $filename]);
 
         // Create entry in Arsip Surat as Surat Masuk for Ketua
         ArsipSuratModel::create([
@@ -125,7 +125,7 @@ class AjukanPersuratanController extends Controller
             'pengirim' => 'Warga',
             'penerima' => 'Ketua RW',
             'perihal' => 'Permohonan Surat Pengantar',
-            'file_path' => $path,
+            'lampiran' => $filename,
             'keterangan' => 'Surat Pengantar submitted by Warga'
         ]);
 
@@ -135,7 +135,7 @@ class AjukanPersuratanController extends Controller
     public function download($id)
     {
         $document = SuratPengantarModel::findOrFail($id); // Use the new model
-        $pathToFile = storage_path('app/public/' . $document->file_path);
+        $pathToFile = storage_path('app/public/' . $document->lampiran);
 
         if (!file_exists($pathToFile)) {
             abort(404);
