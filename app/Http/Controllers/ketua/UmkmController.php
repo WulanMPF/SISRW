@@ -219,7 +219,7 @@ class UmkmController extends Controller
             'lampiran' => 'nullable|image|mimes:jpeg,png,jpg,svg|max:2048'
         ]);
 
-        if ($request->image) {
+        if ($request->lampiran) {
             $namaFile = $request->file('lampiran')->hashName();
             $path = $request->file('lampiran')->move('lampiran_umkm', $namaFile);
             $path = str_replace("\\", "//", $path);
