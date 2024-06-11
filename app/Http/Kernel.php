@@ -3,7 +3,6 @@
 namespace App\Http;
 
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
-use App\Http\Middleware\Cek_login;
 
 class Kernel extends HttpKernel
 {
@@ -65,7 +64,14 @@ class Kernel extends HttpKernel
         'signed' => \App\Http\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
-        // Tambahkan middleware alias dengan nama cek_login
-        // 'cek_login' => \App\Http\Middleware\Cek_login::class
+    ];
+
+    /**
+     * The application's route middleware.
+     *
+     * @var array<string, class-string|string>
+     */
+    protected $routeMiddleware = [
+        'role' => \App\Http\Middleware\RoleMiddleware::class,
     ];
 }
