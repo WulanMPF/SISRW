@@ -13,11 +13,10 @@
                         <img src="https://sippn.menpan.go.id/asset/images/ayo_lapor.png" class="img-fluid" alt="LAPOR!">
                     </div>
                     <div class="col-md-8 col-sm-12">
-                        <h5><b>Anda juga dapat menyampaikan pengaduan dan aspirasi melalui
-                                formulir di bawah ini</b></h5>
-                        <p class="small" style="font-size: 0.9rem;">Melalui LAPOR!, Anda dapat menyampaikan permasalahan
-                            pelayanan publik yang Anda
-                            temui dalam satu kanal sehingga laporanmu dapat kami sampaikan ke instansi terkait.</p>
+                        <h5><b>Anda juga dapat menyampaikan pengaduan dan aspirasi melalui formulir di bawah ini</b></h5>
+                        <p class="small" style="font-size: 0.9rem;">Anda dapat menyampaikan permasalahan pelayanan publik
+                            yang Anda temui dalam satu kanal sehingga laporanmu dapat kami sampaikan ke instansi terkait.
+                        </p>
                         <button class="btn btn-sm btn-red mb-2" data-toggle="modal" data-target="#pengaduanModal">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -26,6 +25,14 @@
                                 <polyline points="15 3 21 3 21 9"></polyline>
                                 <line x1="10" y1="14" x2="21" y2="3"></line>
                             </svg>&nbsp;Open the FORM!
+                        </button>
+                        <button class="btn btn-sm btn-blue mb-2" onclick="window.location.href='pengaduan-saya'">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" class="feather feather-eye">
+                                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                                <circle cx="12" cy="12" r="3"></circle>
+                            </svg>&nbsp;Lihat Aduan Saya
                         </button>
                     </div>
                 </div>

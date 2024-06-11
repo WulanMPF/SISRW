@@ -354,15 +354,17 @@ Route::group(['prefix' => 'warga/pengaduan'], function () {
     Route::get('/', [WargaPengaduanController::class, 'index'])->name('pengaduan.index');
     Route::post('/list', [WargaPengaduanController::class, 'list']);
     Route::post('/', [WargaPengaduanController::class, 'store'])->name('pengaduan.store');
+    Route::get('/{id}', [WargaPengaduanController::class, 'show'])->name('pengaduan.show');
 });
+
+Route::get('warga/pengaduan-saya', [WargaPengaduanController::class, 'pengaduanSaya'])->name('pengaduanSaya.index');
 
 Route::group(['prefix' => 'warga/surat'], function () {
     Route::get('/', [AjukanPersuratanController::class, 'index']);
-     // Route::get('/', [AjukanPersuratanController::class, 'create'])->name('ajukanpersuratan.create');
+    // Route::get('/', [AjukanPersuratanController::class, 'create'])->name('ajukanpersuratan.create');
     Route::get('/create-pengantar', [AjukanPersuratanController::class, 'create'])->name('ajukanpersuratan.create-pengantar');
     // Route::post('surat-pengantar', [AjukanPersuratanController::class, 'store'])->name('ajukanpersuratan.store');
     Route::post('/warga/ajukanpersuratan/pengantar', [AjukanPersuratanController::class, 'store'])->name('warga.ajukanpersuratan.store');
-
 });
 
 Route::group(['prefix' => 'warga/umkm'], function () {

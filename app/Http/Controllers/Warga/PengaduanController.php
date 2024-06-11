@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\PengaduanModel; // Assuming this is the correct model name
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Yajra\DataTables\Facades\DataTables;
 
 class PengaduanController extends Controller
 {
@@ -30,7 +31,41 @@ class PengaduanController extends Controller
         // Passing data to the view
         return view('warga.pengaduan.index', ['breadcrumb' => $breadcrumb, 'pengaduan' => $pengaduan, 'activeMenu' => $activeMenu]);
     }
+    public function list(Request $request)
+    {
+        $warga_id = auth()->user()->warga_id;
 
+        $pengaduan = PengaduanModel::select('*')->where('warga_id', $warga_id);
+
+        if ($request->status_pengaduan) {
+            $pengaduan->where('status_pengaduan', $request->status_pengaduan);
+        }
+
+        $pengaduan = $pengaduan->with('warga')->get();
+
+        return DataTables::of($pengaduan)
+            ->addIndexColumn()
+            ->addColumn('aksi', function ($pengaduan) {
+                $btn = '<a href="' . url('/warga/pengaduan/' . $pengaduan->pengaduan_id) . '" class="btn btn-sm"><i class="fas fa-eye" style="color: #BB955C; font-size: 17px;"></i></a>';
+                return $btn;
+            })
+            ->rawColumns(['aksi'])
+            ->make(true);
+    }
+    public function show($id)
+    {
+        $pengaduan = PengaduanModel::findOrFail($id);
+
+        $breadcrumb = (object) [
+            'title' => 'Detail Pengaduan',
+            'date' => date('l, d F Y'),
+            'list' => ['Home', 'Pengaduan', 'Detail']
+        ];
+
+        $activeMenu = 'pengaduan';
+
+        return view('warga.pengaduan.show', compact('breadcrumb', 'activeMenu', 'pengaduan'));
+    }
     /**
      * Store a newly created resource in storage.
      */
@@ -68,5 +103,38 @@ class PengaduanController extends Controller
 
         // Redirect with success message
         return redirect()->route('pengaduan.index')->with('success', 'Pengaduan berhasil diajukan.');
+    }
+    public function pengaduanSaya()
+    {
+        // Ambil warga_id dari pengguna yang saat ini diotentikasi
+        $warga_id = auth()->user()->warga_id;
+
+        // Cek apakah warga_id tidak kosong dan benar-benar ditemukan
+        if (!$warga_id) {
+            abort(404, 'Warga not found');
+        }
+
+        // Mengambil UMKM berdasarkan warga_id
+        $pengaduan = PengaduanModel::with('warga')->where('warga_id', $warga_id)->get();
+
+        // Jika tidak ada UMKM ditemukan untuk warga yang diberikan, mungkin perlu ditangani dengan lebih lanjut
+        if ($pengaduan->isEmpty()) {
+            abort(404, 'Pengaduan not found for this warga');
+        }
+
+        // Data untuk breadcrumb
+        $breadcrumb = (object)[
+            'title' => 'Pengaduan Saya',
+            'date' => date('l, d F Y'),
+            'list' => ['Home', 'Pengaduan', 'Detail']
+        ];
+
+        $page = (object)[
+            'title' => 'List Pengajuan Saya'
+        ];
+
+        $activeMenu = 'pengaduan';
+
+        return view('warga.pengaduan.pengaduan_saya', compact('breadcrumb', 'page', 'pengaduan', 'warga_id', 'activeMenu'));
     }
 }
