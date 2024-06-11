@@ -17,7 +17,7 @@ return new class extends Migration
             $table->date('tanggal_surat');
             $table->string('pengirim', 25);
             $table->string('penerima', 25);
-            $table->string('perihal', 50);
+            $table->string('perihal', 100);
             $table->string('lampiran', 255)->nullable();
             $table->text('keterangan')->nullable();
             $table->timestamps();

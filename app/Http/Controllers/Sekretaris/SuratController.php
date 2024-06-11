@@ -72,7 +72,7 @@ class SuratController extends Controller
             'tanggal_surat'     => 'required|date',
             'pengirim'          => 'required|string|max:25',
             'penerima'          => 'required|string|max:25',
-            'perihal'           => 'required|string|max:50',
+            'perihal'           => 'required|string|max:100',
             'lampiran'          => 'nullable|file',
             'keterangan'        => 'required|string'
         ]);
