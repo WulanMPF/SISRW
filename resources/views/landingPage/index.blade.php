@@ -50,7 +50,7 @@
             <div class="row align-items-center">
                 <!-- Image Column -->
                 <div class="col-lg-6">
-                    <img src="images/banner2.png" alt="" class="img-fluid">
+                    <img src="{{ asset('images/Banner2.png') }}" alt="" class="img-fluid">
                 </div>
 
                 <div class="col-lg-6">
