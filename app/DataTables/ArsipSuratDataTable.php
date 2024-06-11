@@ -68,8 +68,13 @@ class ArsipSuratDataTable extends DataTable
                   ->width(60)
                   ->addClass('text-center'),
             Column::make('arsip_surat_id'),
-            Column::make('nama_surat'),
-            Column::make('jenis_surat'),
+            Column::make('nomor_surat'),
+            Column::make('tanggal_surat'),
+            Column::make('pengirim'),
+            Column::make('penerima'),
+            Column::make('perihal'),
+            Column::make('lampiran'), 
+            Column::make('keterangan'),
             Column::make('created_at'),
             Column::make('updated_at'),
         ];

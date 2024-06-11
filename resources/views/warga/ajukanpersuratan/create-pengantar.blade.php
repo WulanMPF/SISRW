@@ -22,7 +22,7 @@
                     <label for="pengantar_no_surat" class="col-sm-2 col-form-label mt-1" style="margin-right: 80px;">Nomor Surat</label>
                     <div class="col-sm-3">
                         <input type="text" class="form-control" id="pengantar_no_surat" name="pengantar_no_surat"
-                            placeholder="Nomor Surat" required>
+                            placeholder="Nomor Surat" value="P-83475" readonly required>
                     </div>
                 </div>
                 <div class="row mb-3">
@@ -85,7 +85,7 @@
                     </div>
                 </div>
                 <div class="text-left mt-3">
-                    <button type="submit" class="btn btn-tambah">Next</button>
+                    <button type="submit" class="btn btn-tambah">Submit</button>
                 </div>
             </form>
         </div>
