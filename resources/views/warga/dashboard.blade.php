@@ -29,7 +29,7 @@
     </ul>
     <div class="row">
         <!-- Gender Chart -->
-        <div class="col-md-5">
+        <div class="col-md-4">
             <div class="card">
                 <div class="card-body">
                     {!! $wargaChart->container() !!}
@@ -38,10 +38,19 @@
         </div>
 
         <!-- Agama Chart -->
-        <div class="col-md-5">
+        <div class="col-md-4">
             <div class="card">
                 <div class="card-body">
                     {!! $AgamaChart->container() !!}
+                </div>
+            </div>
+        </div>
+
+        <!-- Pekerjaan Chart -->
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    {!! $PekerjaanChart->container() !!}
                 </div>
             </div>
         </div>
@@ -232,4 +241,6 @@
     {{ $wargaChart->script() }}
     <script src="{{ $AgamaChart->cdn() }}"></script>
     {{ $AgamaChart->script() }}
+    <script src="{{ $PekerjaanChart->cdn() }}"></script>
+    {{ $PekerjaanChart->script() }}
 @endpush

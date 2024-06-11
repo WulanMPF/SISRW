@@ -115,13 +115,13 @@ class ArsipSuratController extends Controller
         $arsip_surat = ArsipSuratModel::find($id);
 
         $breadcrumb = (object)[
-            'title' => 'Edit Data UMKM RW 05',
+            'title' => 'Edit Data Surat RW 05',
             'date' => date('l, d F Y'),
-            'list' => ['Home', 'UMKM RW 05', 'Edit']
+            'list' => ['Home', 'Surat RW 05', 'Edit']
         ];
 
         $page = (object)[
-            'title' => 'Edit UMKM RW 05'
+            'title' => 'Edit Surat RW 05'
         ];
 
         $activeMenu = 'arsip_surat';
