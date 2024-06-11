@@ -7,53 +7,52 @@
             Data yang Anda cari tidak ditemukan.
         </div>
     @else
-        <div class="card">
-            <div class="card-header">
-                <h4><strong>{{ $undangan->undangan_nama }}</strong></h4>
-                <h4 style="font-size: 17px">{{ $undangan->undangan_no_surat }}</h4>
-            </div>
-            <div class="card-body">
-                <div class="card-text col-md-7">
-                    <div class="info-item mt-3">
-                        <strong class="title">Undangan</strong>
-                    </div>
-                    <div class="info-item ml-5">
-                        <strong class="title">Tempat:</strong>
-                        <p>{{ $undangan->undangan_tempat }}</p>
-                    </div>
-                    <div class="info-item ml-5">
-                        <strong class="title">Tanggal:</strong>
-                        <p>{{ $undangan->undangan_tanggal }}</p>
-                    </div>
-                    <div class="info-item ml-5">
-                        <strong class="title">Alamat:</strong>
-                        <p>{{ $undangan->undangan_perihal }}</p>
-                    </div>
-                    <div class="info-item mt-3">
-                        <strong class="title">Informasi Undangan</strong>
-                    </div>
-                    <div class="info-item ml-5">
-                        <strong class="title">Acara:</strong>
-                        <p>{{ $undangan->undangan_isi_acara }}</p>
-                    </div>
-                    <div class="info-item ml-5">
-                        <strong class="title">Hari : </strong>
-                        <p>{{ $undangan->undangan_isi_hari }}</p>
-                    </div>
-                    <div class="info-item ml-5">
-                        <strong class="title">Tanggal : </strong>
-                        <p>{{ $undangan->undangan_isi_tgl }}</p>
-                    </div>
-                    <div class="info-item ml-5">
-                        <strong class="title">Waktu : </strong>
-                        <p>{{ \Carbon\Carbon::parse($undangan->undangan_isi_waktu)->format('H:i') }}
-                        </p>
-                        <p>{{ $undangan->undangan_isi_waktu }}
-                        </p>
-                    </div>
-                    <div class="info-item ml-5">
-                        <strong class="title">Tempat : </strong>
-                        <p>{{ $undangan->undangan_isi_tempat }}</p>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-10 offset-md-1">
+                    <div class="card">
+                        <div class="card-header" style="text-align: center;">
+                            <h4><strong>{{ $undangan->undangan_nama }}</strong></h4>
+                            <h4 style="font-size: 17px">{{ $undangan->undangan_no_surat }}</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-striped">
+                                    <tr>
+                                        <th>Tempat Pembuatan Surat</th>
+                                        <td>{{ $undangan->undangan_tempat }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Tanggal Pembuatan Surat</th>
+                                        <td>{{ $undangan->undangan_tanggal }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Perihal Surat</th>
+                                        <td>{{ $undangan->undangan_perihal }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Acara Undangan</th>
+                                        <td>{{ $undangan->undangan_isi_acara }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Hari </th>
+                                        <td>{{ $undangan->undangan_isi_hari }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Tanggal</th>
+                                        <td>{{ $undangan->undangan_isi_tgl }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Waktu</th>
+                                        <td>{{ $undangan->undangan_isi_waktu }}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Tempat</th>
+                                        <td>{{ $undangan->undangan_isi_tempat }}</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -67,87 +66,36 @@
             font-family: 'Poppins', sans-serif;
         }
 
-        .title {
-            display: inline-block;
-            width: 200px;
-            color: #BB955C;
-        }
-
-        .img-umkm {
-            height: auto;
-            max-width: 25.5rem;
-            margin-top: 0.5rem;
-            float: left;
-            display: block;
-            border-radius: 1rem;
-        }
-
-        h4 {
-            text-align: center;
-        }
-
         .card {
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            margin: 1rem;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
 
         .card-header {
-            background-color: #f7f7f7;
-            border-bottom: 1px solid #ddd;
-            padding: 1rem;
-            border-top-left-radius: 5px;
-            border-top-right-radius: 5px;
+            background-color: #d9d2c7;
+            border-bottom: none;
         }
 
         .card-body {
-            display: flex;
-            padding: 1rem;
-            flex-direction: row;
+            padding: 20px;
         }
 
-        .card-text {
-            margin: 0.5rem;
+        .table {
+            margin-bottom: 0;
         }
 
-        .col-md-4 {
-            flex: 0 0 30%;
-            max-width: 30%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+        td {
+            border: none;
         }
 
-        .col-md-6 {
-            flex: 0 0 65%;
-            max-width: 65%;
-            padding-left: 2rem;
-            display: flex;
-            flex-direction: column;
+        .btn-secondary {
+            background-color: #BB955C;
+            border-color: #BB955C;
+            color: #ffffff;
         }
 
-        .card-img-top {
-            max-width: 100%;
-            height: auto;
-            border-radius: 5px;
-        }
-
-        .title {
-            font-weight: bold;
-            margin-right: 1rem;
-        }
-
-        p {
-            margin: 0.5rem 0;
-        }
-
-        .info-item {
-            display: flex;
-            align-items: center;
-            margin-bottom: 0.5rem;
+        a {
+            color: black;
         }
     </style>
-@endpush
-@push('js')
 @endpush

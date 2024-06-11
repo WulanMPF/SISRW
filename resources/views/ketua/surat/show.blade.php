@@ -37,8 +37,7 @@
                                     <td>
                                         @if ($arsip_surat->lampiran)
                                             <a href="{{ asset('arsip_surat/' . $arsip_surat->lampiran) }}" target="_blank">
-                                                Lihat Lampiran
-                                            </a>
+                                                {{ $arsip_surat->lampiran }} </a>
                                         @else
                                             Tidak ada lampiran
                                         @endif
