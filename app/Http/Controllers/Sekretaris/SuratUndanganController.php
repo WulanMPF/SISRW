@@ -95,12 +95,14 @@ class SuratUndanganController extends Controller
         ]);
 
         // Generate PDF
-        $user = UserModel::where('level_id', 2)->first();
-        $ketua_id = $user->warga_id;
-        $ketua = WargaModel::find($ketua_id);
-        $pdf = PDF::loadView('surat.cetak_surat', ['undangan' => $undangan, 'user' => $user, 'ketua_id' => $ketua_id, 'ketua' => $ketua]);
-        $formattedDate = Carbon::parse($undangan->undangan_tanggal)->format('dmY');
-        $filename = $undangan->undangan_nama . '_' . $formattedDate . '.pdf';
+        $user       = UserModel::where('level_id', 2)->first();
+        $ketua_id   = $user->warga_id;
+        $ketua      = WargaModel::find($ketua_id);
+
+        $pdf            = PDF::loadView('surat.cetak_surat', ['undangan' => $undangan, 'user' => $user, 'ketua_id' => $ketua_id, 'ketua' => $ketua]);
+
+        $formattedDate  = Carbon::parse($undangan->undangan_tanggal)->format('dmY');
+        $filename  = $undangan->undangan_nama . '_' . $formattedDate . '.pdf';
         $directory = public_path('arsip_surat');
 
         // Buat direktori jika tidak ada
@@ -117,19 +119,17 @@ class SuratUndanganController extends Controller
             return redirect('/sekretaris/undangan')->with('error', 'Gagal menyimpan PDF: ' . $e->getMessage());
         }
 
-        // Save the path to the model if necessary
-        $undangan->update(['lampiran' => $filename]);
-
         // Create entry in Arsip Surat as Surat Masuk for Ketua
         ArsipSuratModel::create([
             'nomor_surat' => $undangan->undangan_no_surat,
-            'tanggal_surat' => now(),
+            'tanggal_surat' => $undangan->undangan_tanggal,
             'pengirim' => 'RW',
             'penerima' => 'Warga',
             'perihal' => $undangan->undangan_perihal,
             'lampiran' => $filename,
             'keterangan' => $undangan->undangan_isi_acara
         ]);
+
         return redirect('/sekretaris/undangan')->with('success', 'Surat Undangan berhasil dibuat');
     }
     /*public function show(string $id)
