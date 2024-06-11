@@ -79,8 +79,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::group(['prefix' => 'ketua', 'middleware' => ['role:ketua']], function () {
 
         Route::group(['prefix' => '/dashboard'], function () {
-            Route::get('/', [DashboardController::class, 'index'])->name('ketua.dashboard');
-            ;
+            Route::get('/', [DashboardController::class, 'index'])->name('ketua.dashboard');;
         });
 
 
@@ -187,15 +186,13 @@ Route::group(['middleware' => ['auth']], function () {
         Route::group(['prefix' => '/notification'], function () {
             Route::get('/', [NotifikasiController::class, 'index']);
         });
-
     });
 
     // Route Halaman Sekretaris RW
     Route::group(['prefix' => 'sekretaris', 'middleware' => ['role:sekretaris']], function () {
         // Route Halaman Sekretaris RW
         Route::group(['prefix' => '/dashboard'], function () {
-            Route::get('/', [SekretarisDashboardController::class, 'index'])->name('sekretaris.dashboard');
-            ;
+            Route::get('/', [SekretarisDashboardController::class, 'index'])->name('sekretaris.dashboard');;
         });
         Route::group(['prefix' => '/warga'], function () {
             Route::get('/', [SekretarisWargaController::class, 'index'])->name('warga.index');
@@ -295,8 +292,7 @@ Route::group(['middleware' => ['auth']], function () {
     // Route Halaman Bendahara RW
     Route::group(['prefix' => 'bendahara', 'middleware' => ['role:bendahara']], function () {
         Route::group(['prefix' => '/dashboard'], function () {
-            Route::get('/', [BendaharaDashboardController::class, 'index'])->name('bendahara.dashboard');
-            ;
+            Route::get('/', [BendaharaDashboardController::class, 'index'])->name('bendahara.dashboard');;
         });
 
         Route::group(['prefix' => '/iuran'], function () {
@@ -350,17 +346,16 @@ Route::group(['middleware' => ['auth']], function () {
             Route::get('/{id}', [WargaPengaduanController::class, 'show'])->name('pengaduan.show');
         });
 
-        Route::get('warga/pengaduan-saya', [WargaPengaduanController::class, 'pengaduanSaya'])->name('pengaduanSaya.index');
+        Route::get('/pengaduan-saya', [WargaPengaduanController::class, 'pengaduanSaya'])->name('pengaduanSaya.index');
 
 
         Route::group(['prefix' => '/surat'], function () {
             Route::get('/', [AjukanPersuratanController::class, 'index']);
-             // Route::get('/', [AjukanPersuratanController::class, 'create'])->name('ajukanpersuratan.create');
+            // Route::get('/', [AjukanPersuratanController::class, 'create'])->name('ajukanpersuratan.create');
             // Route::get('/', [AjukanPersuratanController::class, 'create'])->name('ajukanpersuratan.create');
             Route::get('/create-pengantar', [AjukanPersuratanController::class, 'create'])->name('ajukanpersuratan.create-pengantar');
             // Route::post('surat-pengantar', [AjukanPersuratanController::class, 'store'])->name('ajukanpersuratan.store');
             Route::post('/warga/ajukanpersuratan/pengantar', [AjukanPersuratanController::class, 'store'])->name('warga.ajukanpersuratan.store');
-
         });
 
         Route::group(['prefix' => '/umkm'], function () {
@@ -392,4 +387,3 @@ Route::group(['middleware' => ['auth']], function () {
         });
     });
 });
-

@@ -45,11 +45,22 @@ class PengaduanController extends Controller
 
         return DataTables::of($pengaduan)
             ->addIndexColumn()
+            ->addColumn('status_pengaduan', function ($row) {
+                $color = '';
+                if ($row->status_pengaduan == 'Ditunda') {
+                    $color = 'text-danger';
+                } elseif ($row->status_pengaduan == 'Diproses') {
+                    $color = 'text-yellow-brown';
+                } elseif ($row->status_pengaduan == 'Selesai') {
+                    $color = 'text-success';
+                }
+                return '<span class="' . $color . '">' . $row->status_pengaduan . '</span>';
+            })
             ->addColumn('aksi', function ($pengaduan) {
                 $btn = '<a href="' . url('/warga/pengaduan/' . $pengaduan->pengaduan_id) . '" class="btn btn-sm"><i class="fas fa-eye" style="color: #BB955C; font-size: 17px;"></i></a>';
                 return $btn;
             })
-            ->rawColumns(['aksi'])
+            ->rawColumns(['status_pengaduan', 'aksi'])
             ->make(true);
     }
     public function show($id)
@@ -95,8 +106,10 @@ class PengaduanController extends Controller
         // Handle file upload with Laravel's Storage facade
         if ($request->hasFile('lampiran')) {
             $lampiran = $request->file('lampiran');
-            $path = $lampiran->store('public/lampiran');
-            $pengaduan->lampiran = Storage::url($path);
+            $namaFile = $lampiran->getClientOriginalName();
+            $path = $lampiran->move('lampiran', $namaFile);
+            $path = str_replace("\\", "//", $path);
+            $pengaduan->lampiran = $namaFile;
         }
 
         $pengaduan->save();

@@ -93,6 +93,23 @@
             overflow-x: scroll;
         }
 
+        span .text-danger {
+            color: red !important;
+        }
+
+        span .text-warning {
+            color: yellow !important;
+        }
+
+        span .text-success {
+            color: green !important;
+        }
+
+        span .text-yellow-brown {
+            color: #b58900 !important;
+            /* Kuning sedikit coklat */
+        }
+
         @media (max-width: 767px) {
             .table-responsive {
                 overflow-x: scroll;

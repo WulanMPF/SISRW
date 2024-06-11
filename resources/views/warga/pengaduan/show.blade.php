@@ -35,7 +35,9 @@
                                 </tr>
                                 <tr>
                                     <th>Lampiran</th>
-                                    <td>{{ $pengaduan->lampiran }}</td>
+                                    <td> <a href="{{ url('lampiran/' . $pengaduan->lampiran) }}" target="_blank">
+                                            {{ $pengaduan->lampiran }}
+                                        </a></td>
                                 </tr>
                                 <tr>
                                     <th>Tindakan Diambil</th>
@@ -91,6 +93,10 @@
             background-color: #BB955C;
             border-color: #BB955C;
             color: #ffffff;
+        }
+
+        a {
+            color: black;
         }
     </style>
 @endpush
