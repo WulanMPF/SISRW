@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\RoleController;
 use App\Http\Controllers\Bendahara\DashboardController as BendaharaDashboardController;
 use App\Http\Controllers\Ketua\DashboardController;
 use App\Http\Controllers\Ketua\WargaController;
@@ -72,11 +73,20 @@ Route::post('/register-proses', [LoginController::class, 'register_proses'])->na
 Route::get('/reset-password', [LoginController::class, 'forgot_password'])->name('forgot-password');
 Route::post('/reset-proses', [LoginController::class, 'register_proses'])->name('register-proses');
 
+
+// Route::middleware(['checkActiveRole'])->group(function () {
+//     Route::get('/ketua/dashboard', 'KetuaController@dashboard')->name('ketua.dashboard');
+//     Route::get('/sekretaris/dashboard', 'SekretarisController@dashboard')->name('sekretaris.dashboard');
+//     Route::get('/bendahara/dashboard', 'BendaharaController@dashboard')->name('bendahara.dashboard');
+//     Route::get('/warga/dashboard', 'WargaController@dashboard')->name('warga.dashboard');
+Route::get('/switch-role/{role}', [RoleController::class, 'switchRole'])->name('switch-role');
+// });
+
 // Middleware Login
 Route::group(['middleware' => ['auth']], function () {
 
     // Route Halaman Ketua RW
-    Route::group(['prefix' => 'ketua', 'middleware' => ['role:ketua']], function () {
+    Route::group(['prefix' => 'ketua', 'middleware' => ['checkActiveRole:ketua']], function () {
 
         Route::group(['prefix' => '/dashboard'], function () {
             Route::get('/', [DashboardController::class, 'index'])->name('ketua.dashboard');;
@@ -189,7 +199,7 @@ Route::group(['middleware' => ['auth']], function () {
     });
 
     // Route Halaman Sekretaris RW
-    Route::group(['prefix' => 'sekretaris', 'middleware' => ['role:sekretaris']], function () {
+    Route::group(['prefix' => 'sekretaris', 'middleware' => ['checkActiveRole:sekretaris']], function () {
         // Route Halaman Sekretaris RW
         Route::group(['prefix' => '/dashboard'], function () {
             Route::get('/', [SekretarisDashboardController::class, 'index'])->name('sekretaris.dashboard');;
@@ -305,7 +315,7 @@ Route::group(['middleware' => ['auth']], function () {
     });
 
     // Route Halaman Bendahara RW
-    Route::group(['prefix' => 'bendahara', 'middleware' => ['role:bendahara']], function () {
+    Route::group(['prefix' => 'bendahara', 'middleware' => ['checkActiveRole:bendahara']], function () {
         Route::group(['prefix' => '/dashboard'], function () {
             Route::get('/', [BendaharaDashboardController::class, 'index'])->name('bendahara.dashboard');;
         });
@@ -344,7 +354,7 @@ Route::group(['middleware' => ['auth']], function () {
     });
 
     // Route Halaman Warga
-    Route::group(['prefix' => 'warga', 'middleware' => ['role:warga']], function () {
+    Route::group(['prefix' => 'warga', 'middleware' => ['checkActiveRole:warga']], function () {
         Route::get('/dashboard', [WargaDashboardController::class, 'index'])->name('warga.dashboard');
 
         Route::group(['prefix' => '/iuran'], function () {

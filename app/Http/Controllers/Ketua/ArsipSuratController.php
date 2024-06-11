@@ -34,15 +34,7 @@ class ArsipSuratController extends Controller
 
     public function list(Request $request)
     {
-        $arsip_surat = ArsipSuratModel::all();
-
-        /*if ($request->has('pengirim') && $request->pengirim != '') {
-            $arsip_surat->where('pengirim', $request->pengirim);
-        }
-
-        if ($request->has('penerima') && $request->penerima != '') {
-            $arsip_surat->where('penerima', $request->penerima);
-        }*/
+        $arsip_surat = ArsipSuratModel::query(); // Menggunakan query builder agar dapat menambahkan kondisi
 
         if ($request->has('pengirim') && !empty($request->pengirim)) {
             $arsip_surat->where('pengirim', 'like', '%' . $request->pengirim . '%');
@@ -50,6 +42,15 @@ class ArsipSuratController extends Controller
 
         if ($request->has('penerima') && !empty($request->penerima)) {
             $arsip_surat->where('penerima', 'like', '%' . $request->penerima . '%');
+        }
+
+        // Menambahkan kondisi tambahan sesuai dengan jenis surat (masuk atau keluar)
+        if ($request->has('surat_type') && !empty($request->surat_type)) {
+            if ($request->surat_type === 'masuk') {
+                $arsip_surat->where('penerima', 'RW'); // Surat masuk, kolom 'penerima' = 'RW'
+            } elseif ($request->surat_type === 'keluar') {
+                $arsip_surat->where('pengirim', 'RW'); // Surat keluar, kolom 'pengirim' = 'RW'
+            }
         }
 
         return DataTables::of($arsip_surat)
@@ -63,6 +64,7 @@ class ArsipSuratController extends Controller
             ->rawColumns(['Action'])
             ->make(true);
     }
+
     public function createArsipSurat()
     {
         $breadcrumb = (object) [

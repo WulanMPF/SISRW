@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Mail;
 use App\Models\UserModel;
 use App\Models\WargaModel;
 use App\Models\PasswordResetToken;
+use Illuminate\Support\Str;
 
 class LoginController extends Controller
 {
@@ -37,7 +38,7 @@ class LoginController extends Controller
             'email' => 'required|email|exists:user,email'
         ], $customMessage);
 
-        $token = \Str::random(60);
+        $token = Str::random(60);
 
         PasswordResetToken::updateOrCreate(
             [
@@ -50,7 +51,7 @@ class LoginController extends Controller
             ]
         );
 
-        Mail ::to($request->email)->send(new ResetPasswordMail($token));
+        Mail::to($request->email)->send(new ResetPasswordMail($token));
 
         return redirect()->route('forgot-password')->with('success', 'Kami telah mengirimkan link reset password ke email anda');
     }
@@ -117,7 +118,7 @@ class LoginController extends Controller
 
         // Jika user tidak ditemukan atau password salah, kembalikan ke halaman login
         if (!$user || !Hash::check($request->password, $user->password)) {
-            return redirect()->route('login')->with('failed', 'NIK atau Password Salah');
+            return redirect()->route('login')->with('error', 'NIK atau Password Salah');
         }
 
         // Authentikasi pengguna dengan menggunakan user yang ditemukan
@@ -137,6 +138,8 @@ class LoginController extends Controller
                 return redirect()->route('admin.dashboard'); // Default redirect jika level_id tidak cocok
         }
     }
+
+
 
 
 

@@ -117,6 +117,15 @@
                     <h4>SISTEM INFORMASI RW 05</h4>
                     <h2>Login</h2>
 
+                    <div class="form-group mb-3">
+                        @if (session('success'))
+                        <div class="alert alert-success">{{ session('success') }}</div>
+                    @endif
+                    @if (session('error'))
+                        <div class="alert alert-danger">{{ session('error') }}</div>
+                    @endif
+                    </div>
+
                     <form action="{{ route('login-proses') }}" method="POST">
                         @csrf
                         <div class="form-group mb-3">

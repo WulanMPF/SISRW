@@ -31,17 +31,20 @@
                     <a class="dropdown-item" style="font-weight: 300; font-size: 0.9rem;">
                         Masuk Sebagai
                     </a>
-                    <a href="{{ url('/sekretaris/dashboard') }}" class="dropdown-item">
+                    {{-- <a href="{{ route('switch-role', ['role' => 2]) }}" class="dropdown-item">
+                        Ketua
+                    </a> --}}
+                    <a href="{{ route('switch-role', ['role' => 3]) }}" class="dropdown-item">
                         Sekretaris
                     </a>
-                    <a href="{{ url('/bendahara/dashboard') }}" class="dropdown-item">
+                    <a href="{{ route('switch-role', ['role' => 4]) }}" class="dropdown-item">
                         Bendahara
                     </a>
-                    <a href="{{ url('/warga/dashboard') }}" class="dropdown-item">
+                    <a href="{{ route('switch-role', ['role' => 5]) }}" class="dropdown-item">
                         Warga
                     </a>
                 </div>
-
+                
                 <div class="dropdown-divider"></div>
                 <a href="{{ url('/') }}" class="dropdown-item dropdown-footer">Sign out</a>
             </div>

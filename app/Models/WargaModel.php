@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class WargaModel extends Model
 {
@@ -33,5 +34,9 @@ class WargaModel extends Model
     public function umkm()
     {
         return $this->hasMany(UmkmModel::class, 'warga_id');
+    }
+    public function user(): HasMany
+    {
+        return $this->HasMany(User::class, 'user_id', 'user_id');
     }
 }

@@ -160,33 +160,15 @@
                     dataType: "json",
                     type: "POST",
                     data: function(d) {
+                        d.surat_type = 'masuk'; // Menambahkan parameter 'surat_type' dengan nilai 'masuk'
                         d.penerima = 'RW';
                     }
                 },
-                columns: [{
-                        data: "DT_RowIndex",
-                        className: "text-center",
-                        orderable: false,
-                        searchable: false
-                    },
-                    {
-                        data: "nomor_surat",
-                        className: "",
-                        orderable: true,
-                        searchable: true
-                    },
-                    {
-                        data: "perihal",
-                        className: "",
-                        orderable: true,
-                        searchable: true
-                    },
-                    {
-                        data: "Action",
-                        className: "",
-                        orderable: false,
-                        searchable: false
-                    }
+                columns: [
+                    { data: "DT_RowIndex", className: "text-center", orderable: false, searchable: false },
+                    { data: "nomor_surat", className: "", orderable: true, searchable: true },
+                    { data: "perihal", className: "", orderable: true, searchable: true },
+                    { data: "Action", className: "", orderable: false, searchable: false }
                 ]
             });
 
@@ -198,33 +180,15 @@
                     dataType: "json",
                     type: "POST",
                     data: function(d) {
+                        d.surat_type = 'keluar'; // Menambahkan parameter 'surat_type' dengan nilai 'keluar'
                         d.pengirim = 'RW';
                     }
                 },
-                columns: [{
-                        data: "DT_RowIndex",
-                        className: "text-center",
-                        orderable: false,
-                        searchable: false
-                    },
-                    {
-                        data: "nomor_surat",
-                        className: "",
-                        orderable: true,
-                        searchable: true
-                    },
-                    {
-                        data: "perihal",
-                        className: "",
-                        orderable: true,
-                        searchable: true
-                    },
-                    {
-                        data: "Action",
-                        className: "",
-                        orderable: false,
-                        searchable: false
-                    }
+                columns: [
+                    { data: "DT_RowIndex", className: "text-center", orderable: false, searchable: false },
+                    { data: "nomor_surat", className: "", orderable: true, searchable: true },
+                    { data: "perihal", className: "", orderable: true, searchable: true },
+                    { data: "Action", className: "", orderable: false, searchable: false }
                 ]
             });
 
@@ -235,5 +199,6 @@
                 form.attr('action', '{{ url('ketua/surat/destroy') }}/' + Id);
             });
         });
+
     </script>
 @endpush
