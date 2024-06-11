@@ -103,7 +103,7 @@ class AjukanPersuratanController extends Controller
 
         $pdf = PDF::loadView('surat.cetak_pengantar', ['pengantar' => $pengantar]);
         $filename = 'Surat_Pengantar_' . $pengantar->user_id . '.pdf';
-        $directory = public_path('surat_pengantar');
+        $directory = public_path('arsip_surat');
 
         // Buat direktori jika tidak ada
         if (!file_exists($directory)) {
