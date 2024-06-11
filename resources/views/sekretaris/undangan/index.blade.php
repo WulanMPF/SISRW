@@ -144,7 +144,8 @@
                     <div class="row">
                         <h3>Arsip Surat Undangan RW 05</h3>
                         <div class="col-md text-right" style="margin-bottom:1rem;">
-                            <a class="btn btn-sm mt-1 btn-kembali mr-3" href="{{ url('/ketua/surat') }}">Kembali ke menu
+                            <a class="btn btn-sm mt-1 btn-kembali mr-3" href="{{ url('/sekretaris/surat') }}">Kembali ke
+                                menu
                                 utama</a>
                             <a class="btn btn-sm mt-1 btn-tambah" href="{{ url('/sekretaris/undangan/create') }}">+ Buat
                                 Surat</a>
