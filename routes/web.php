@@ -289,8 +289,10 @@ Route::group(['middleware' => ['auth']], function () {
 
     // Route Halaman Bendahara RW
     Route::group(['prefix' => 'bendahara', 'middleware' => ['role:bendahara']], function () {
-
-        Route::get('/', [BendaharaDashboardController::class, 'index'])->name('bendahara.dashboard');
+        Route::group(['prefix' => '/dashboard'], function () {
+            Route::get('/', [BendaharaDashboardController::class, 'index'])->name('sekretaris.dashboard');
+            ;
+        });
 
         Route::group(['prefix' => '/iuran'], function () {
             Route::get('/validasi', [BendaharaIuranController::class, 'validasi'])->name('bendahara.iuran.validasi');
