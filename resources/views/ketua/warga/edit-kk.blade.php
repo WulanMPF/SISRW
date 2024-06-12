@@ -21,21 +21,21 @@
                     </div>
                 </div>
                 <div class="row mb-3">
-                    <label class="col-sm-2 col-form-label mt-1" for="nama_kepala_keluarga">Nama Kepala Keluarga</label>
+                    <label class="no_kk col-sm-2 col-form-label mt-1" for="nama_kepala_keluarga">Nama Kepala Keluarga</label>
                     <div class="col-sm-3">
                         <input type="text" class="form-control" id="nama_kepala_keluarga" name="nama_kepala_keluarga"
                             placeholder="Nama Kepala Keluarga" value="{{ $kk->nama_kepala_keluarga }}" required>
                     </div>
                 </div>
                 <div class="row mb-3">
-                    <label class="col-sm-2 col-form-label mt-1" for="alamat">Alamat</label>
+                    <label class="no_kk col-sm-2 col-form-label mt-1" for="alamat">Alamat</label>
                     <div class="col-sm-3">
                         <input type="text" class="form-control" id="alamat" name="alamat" placeholder="Alamat" value="{{ $kk->alamat }}"
                             required>
                     </div>
                 </div>
                 <div class="row mb-3">
-                    <label class="col-sm-2 col-form-label mt-1" for="rt_rw">RT/RW</label>
+                    <label class="no_kk col-sm-2 col-form-label mt-1" for="rt_rw">RT/RW</label>
                     <div class="col-sm-3">
                         <input type="text" class="form-control" id="rt_rw" name="rt_rw" placeholder="RT/RW"
                         value="{{ $kk->rt_rw }}" required>
