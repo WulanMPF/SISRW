@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Ketua;
 
 use App\Http\Controllers\Controller;
 use App\Models\ArsipSuratModel;
+use App\Models\KkModel;
 use App\Models\SuratPengantarModel;
 use App\Models\UserModel;
 use App\Models\WargaModel;
@@ -64,11 +65,6 @@ class SuratPengantarController extends Controller
             'pengantar_no_surat' => 'required|string|max:20',
             'pengantar_isi_nik' => 'required|string|max:20',
             'pengantar_isi_nama' => 'required|string|max:100',
-            'pengantar_isi_ttl' => 'required|string|max:100',
-            'pengantar_isi_jk' => 'required|in:L,P',
-            'pengantar_isi_agama' => 'required|string|max:20',
-            'pengantar_isi_pekerjaan' => 'required|string|max:50',
-            'pengantar_isi_alamat' => 'required|string|max:100',
             'pengantar_isi_keperluan' => 'required|string|max:100',
         ]);
 
@@ -76,20 +72,27 @@ class SuratPengantarController extends Controller
             return redirect('login')->with('error', 'Anda harus login terlebih dahulu');
         }
         $user_id = auth()->user()->user_id;
+        $warga = WargaModel::where('nik', $request->pengantar_isi_nik)->first();
 
-        $pengantar = SuratPengantarModel::create([
-            'user_id' => $user_id,
-            'pengantar_nama' => $request->pengantar_nama,
-            'pengantar_no_surat' => $request->pengantar_no_surat,
-            'pengantar_isi_nik' => $request->pengantar_isi_nik,
-            'pengantar_isi_nama' => $request->pengantar_isi_nama,
-            'pengantar_isi_ttl' => $request->pengantar_isi_ttl,
-            'pengantar_isi_jk' => $request->pengantar_isi_jk,
-            'pengantar_isi_agama' => $request->pengantar_isi_agama,
-            'pengantar_isi_pekerjaan' => $request->pengantar_isi_pekerjaan,
-            'pengantar_isi_alamat' => $request->pengantar_isi_alamat,
-            'pengantar_isi_keperluan' => $request->pengantar_isi_keperluan,
-        ]);
+        if ($warga) {
+            $kk_warga = KkModel::where('kk_id', $warga->kk_id)->first();
+
+            $pengantar = SuratPengantarModel::create([
+                'user_id' => $user_id,
+                'pengantar_nama' => $request->pengantar_nama,
+                'pengantar_no_surat' => $request->pengantar_no_surat,
+                'pengantar_isi_nik' => $request->pengantar_isi_nik,
+                'pengantar_isi_nama' => $request->pengantar_isi_nama,
+                'pengantar_isi_ttl' => $warga->tempat_tgl_lahir,
+                'pengantar_isi_jk' => $warga->jenis_kelamin,
+                'pengantar_isi_agama' => $warga->agama,
+                'pengantar_isi_pekerjaan' => $warga->pekerjaan,
+                'pengantar_isi_alamat' => $kk_warga ? $kk_warga->alamat : null, // Check if $kk_warga is not null
+                'pengantar_isi_keperluan' => $request->pengantar_isi_keperluan,
+            ]);
+        } else {
+            return response()->json(['error' => 'Warga not found'], 404);
+        }
 
         // Generate PDF
         $user       = UserModel::where('level_id', 2)->first();
