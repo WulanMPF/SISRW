@@ -47,9 +47,9 @@ class ArsipSuratController extends Controller
         // Menambahkan kondisi tambahan sesuai dengan jenis surat (masuk atau keluar)
         if ($request->has('surat_type') && !empty($request->surat_type)) {
             if ($request->surat_type === 'masuk') {
-                $arsip_surat->where('penerima', 'RW'); // Surat masuk, kolom 'penerima' = 'RW'
+                $arsip_surat->where('penerima', 'like', '%RW%'); // Surat masuk, kolom 'penerima' mengandung 'RW'
             } elseif ($request->surat_type === 'keluar') {
-                $arsip_surat->where('pengirim', 'RW'); // Surat keluar, kolom 'pengirim' = 'RW'
+                $arsip_surat->where('pengirim', 'like', '%RW%'); // Surat keluar, kolom 'pengirim' mengandung 'RW'
             }
         }
 
