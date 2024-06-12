@@ -35,9 +35,7 @@
                                 </tr>
                                 <tr>
                                     <th>Lampiran</th>
-                                    <td> <a href="{{ url('lampiran/' . $pengaduan->lampiran) }}" target="_blank">
-                                            {{ $pengaduan->lampiran }}
-                                        </a></td>
+                                    <td><img src="{{ asset('lampiran_pengaduan/' . $pengaduan->lampiran) }}" class="card-img-top img-umkm center"></td>
                                 </tr>
                                 <tr>
                                     <th>Tindakan Diambil</th>

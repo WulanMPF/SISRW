@@ -49,7 +49,7 @@
             <div class="d-flex flex-wrap overflow-auto flex-container mt-3">
                 @foreach ($pengaduan as $item)
                     <div class="card pengaduan-card col-md-5 col-lg-3 col-sm-12 mx-2 my-2">
-                        <img src="{{ asset('lampiran/' . $item->lampiran) }}" class="card-img-top center">
+                        <img src="{{ asset('lampiran_pengaduan/' . $item->lampiran) }}" class="card-img-top center">
                         <div class="card-body p-2">
                             <h5 class="card-title"><strong>{{ $item->jenis_pengaduan }}</strong></h5>
                             <p class="card-text mb-1">{{ $item->tgl_pengaduan }}</p>
