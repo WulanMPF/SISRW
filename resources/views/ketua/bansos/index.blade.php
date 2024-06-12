@@ -1,35 +1,35 @@
 @extends('layout.ketua.template')
 
 @section('content')
-<!-- The Modal -->
-<div class="modal fade" id="confirmDeleteModal">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <!-- Modal Header -->
-            <div class="modal-header">
-                <h4 class="modal-title">Konfirmasi Penghapusan</h4>
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-            </div>
-            <!-- Modal Body -->
-            <div class="modal-body">
-                <form id="deleteForm" method="POST" action="">
-                    @csrf
-                    {!! method_field('DELETE') !!}
-                    {{-- @if($anggotaKeluarga->isNotEmpty()) --}}
-                    <div class="form-group">
-                        <p>Apakah Anda Yakin Ingin Menghapus Data Ini?</p>
-                    </div>
-                    <div class="text-left mt-3">
-                        <button type="submit" class="btn btn-danger">Ya, hapus data ini</button>
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                    </div>
-                    {{-- @endif --}}
-                </form>
-                
+    <!-- The Modal -->
+    <div class="modal fade" id="confirmDeleteModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">Konfirmasi Penghapusan</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <!-- Modal Body -->
+                <div class="modal-body">
+                    <form id="deleteForm" method="POST" action="">
+                        @csrf
+                        {!! method_field('DELETE') !!}
+                        {{-- @if ($anggotaKeluarga->isNotEmpty()) --}}
+                        <div class="form-group">
+                            <p>Apakah Anda Yakin Ingin Menghapus Data Ini?</p>
+                        </div>
+                        <div class="text-left mt-3">
+                            <button type="submit" class="btn btn-danger">Ya, hapus data ini</button>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                        </div>
+                        {{-- @endif --}}
+                    </form>
+
+                </div>
             </div>
         </div>
     </div>
-</div>
     <div class="card card-outline card-light">
         {{-- <div class="card-header">
             <h3 class="card-title">{{ $page->title }}</h3>
@@ -49,7 +49,8 @@
                 <div class="col-md-12">
                     <div class="form-group row">
                         <div class="col-2">
-                            <a class="btn btn-sm mt-1" id="tambah" href="{{ url('ketua/bansos/create') }}">+Tambah Data</a>
+                            <a class="btn btn-sm mt-1" id="tambah" href="{{ url('ketua/bansos/create') }}">+Tambah
+                                Data</a>
                         </div>
                         <div class="col-md-12 text-right">
                             <a class="btn btn-sm mt-1 btn-tambah" data-toggle="dropdown">Lakukan Perangkingan</a>
@@ -65,24 +66,24 @@
                     </div>
                 </div>
             </div>
-
-            <table class="table table-bordered table-hover table-sm" id="table_bansos"
-                style="text-align: center;">
-                <thead>
-                    <tr>
-                        <th>No</th>
-                        <th>Nomor Kartu Keluarga</th>
-                        <th>Nama Kepala Keluarga</th>
-                        <th>Jenis Bantuan</th>
-                        <th>Penghasilan</th>
-                        <th>Jumlah Tanggungan</th>
-                        <th>Kondisi Dinding Rumah</th>
-                        <th>Kondisi Atap Rumah</th>
-                        <th>Kondisi Lantai Rumah</th>
-                        <th>Aksi</th>
-                    </tr>
-                </thead>
-            </table>
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover table-sm" id="table_bansos" style="text-align: center;">
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Nomor Kartu Keluarga</th>
+                            <th>Nama Kepala Keluarga</th>
+                            <th>Jenis Bantuan</th>
+                            <th>Penghasilan</th>
+                            <th>Jumlah Tanggungan</th>
+                            <th>Kondisi Dinding Rumah</th>
+                            <th>Kondisi Atap Rumah</th>
+                            <th>Kondisi Lantai Rumah</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
         </div>
     </div>
 @endsection
@@ -118,6 +119,16 @@
             background-color: #BB955C;
             border-color: #BB955C;
             color: #ffffff;
+        }
+
+        .table-responsive {
+            overflow-x: scroll;
+        }
+
+        @media (max-width: 767px) {
+            .table-responsive {
+                overflow-x: scroll;
+            }
         }
     </style>
 @endpush
@@ -193,7 +204,8 @@
                 var button = $(event.relatedTarget); // Button yang memicu modal
                 var bansosId = button.data('id'); // Ambil nilai data-umkm-id
                 var form = $('#deleteForm');
-                form.attr('action', '{{ url('ketua/bansos/destroy') }}/' + bansosId); // Set action form dengan ID UMKM
+                form.attr('action', '{{ url('ketua/bansos/destroy') }}/' +
+                    bansosId); // Set action form dengan ID UMKM
             });
 
         });
