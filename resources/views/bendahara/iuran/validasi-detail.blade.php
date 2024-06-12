@@ -41,7 +41,7 @@
                                 </tr>
                                 <tr>
                                     <th scope="row">Bukti Pembayaran</th>
-                                    <td><img src="{{ asset('uploads/' . $iuran->lampiran) }}"
+                                    <td><img src="{{ asset('lampiran_pembayaran/' . $iuran->lampiran) }}"
                                             class="card-img-top img-umkm center"></td>
                                 </tr>
                             </tbody>

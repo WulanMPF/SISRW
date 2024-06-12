@@ -10,11 +10,11 @@
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
         <!-- Notifications Dropdown Menu -->
-        <li class="nav-item ">
+        {{-- <li class="nav-item ">
             <a class="nav-link" href="{{ url('/warga/notification') }}">
                 <i class="far fa-bell"></i>
             </a>
-        </li>
+        </li> --}}
         <!-- User Profile Dropdown Menu -->
         <li class="nav-item dropdown">
             <a class="nav-link" data-toggle="dropdown">
