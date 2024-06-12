@@ -15,15 +15,15 @@
                         <a href="{{ url('/sekretaris/surat/create') }}" class="btn btn-sm btn-tambah mr-3">
                             + Arsip Undangan
                         </a>
-                        <a href="{{ url('/sekretaris/undangan') }}" class="btn btn-sm btn-tambah mr-3">
-                            Surat Undangan
-                        </a>
-                        {{-- <a class="btn btn-sm btn-tambah" data-toggle="dropdown">Halaman Surat</a>
+                        <a class="btn btn-sm btn-tambah" data-toggle="dropdown">Halaman Surat</a>
                         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                             <a href="{{ url('/sekretaris/undangan') }}" class="dropdown-item">
                                 Surat Undangan
                             </a>
-                        </div> --}}
+                            <a href="{{ url('/sekretaris/pengantar') }}" class="dropdown-item">
+                                Surat Pengantar
+                            </a>
+                        </div>
                     </div>
                 </div>
                 <ul class="nav nav-tabs" id="myTab" role="tablist">
