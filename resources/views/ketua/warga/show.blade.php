@@ -1,14 +1,14 @@
 @extends('layout.ketua.template')
 
 @section('content')
-    <div class="card card-outline card-light">
-        <div class="card-body">
-            @if (session('success'))
+@if (session('success'))
             <div class="alert alert-success">{{ session('success') }}</div>
         @endif
         @if (session('error'))
             <div class="alert alert-danger">{{ session('error') }}</div>
         @endif
+    <div class="card card-outline card-light">
+        <div class="card-body">
             <div class="row mb-3">
                 <label class="no_kk col-sm-2 col-form-label mt-1" for="no_kk">Nomor Kartu Keluarga</label>
                 <label class="col-sm-2 col-form-label mt-1" for="no_kk" style="font-weight: 500">

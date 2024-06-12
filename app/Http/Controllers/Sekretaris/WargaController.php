@@ -35,7 +35,7 @@ class WargaController extends Controller
         $warga = WargaModel::where('status_warga', 'sementara')->get();
 
         $breadcrumb = (object) [
-            'title' => 'Data Warga RW 05',
+            'title' => 'Data Warga Sementara RW 05',
             'date' => date('l, d F Y'),
             'list'  => ['Home', 'Data Warga']
         ];
@@ -165,7 +165,7 @@ class WargaController extends Controller
     {
         // Validasi input data KK
         $request->validate([
-            'no_kk' => 'required|string|max:20',
+            'no_kk' => 'required|string|max:16',
             'nama_kepala_keluarga' => 'required|string|max:100',
             'alamat' => 'required|string|max:255',
             'rt_rw' => 'required|string|max:10',
@@ -476,7 +476,7 @@ class WargaController extends Controller
     {
         // Validasi input data KK
         $request->validate([
-            'no_kk' => 'required|string|max:20',
+            'no_kk' => 'required|string|max:16',
             'nama_kepala_keluarga' => 'required|string|max:100',
             'alamat' => 'required|string|max:255',
             'rt_rw' => 'required|string|max:10',
@@ -576,11 +576,6 @@ class WargaController extends Controller
             // Mengambil semua warga dengan kk_id yang sesuai
             $warga = WargaModel::where('kk_id', $kk_id)->get();
 
-            // Jika tidak ada warga dengan kk_id yang sesuai
-            if ($warga->isEmpty()) {
-                return redirect()->route('warga.show', ['kk_id' => $kk_id])->with('error', 'Data warga tidak ditemukan');
-            }
-
             // Mengubah status warga menjadi 'pindah' untuk semua warga dengan kk_id yang sesuai
             foreach ($warga as $w) {
                 $w->status_warga = 'pindah'; // Alasan penghapusan diatur menjadi 'pindah'
@@ -598,6 +593,7 @@ class WargaController extends Controller
             return redirect()->route('warga.index')->with('error', 'Data KK tidak ditemukan');
         }
     }
+
 
     public function destroyWargaSementara(Request $request, $warga_id)
     {
