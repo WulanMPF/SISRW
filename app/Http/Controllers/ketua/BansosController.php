@@ -55,9 +55,11 @@ class BansosController extends Controller
             ->addColumn('aksi', function ($bansos) {
                 //     $btn = '<a href="' . url('/ketua/bansos/' . $bansos->bansos_id) . '" class="btn btn-sm" style="background-color: #BB955C; color: white; border-radius: 9px;">Lihat Detail</a>  &nbsp;';
                 //     return $btn;
+                $btn = '<div class="btn-group mr-2">';
                 $editBtn = '<a href="' . url('/ketua/bansos/edit/' . $bansos->bansos_id) . '" class="btn btn-sm"><i class="fas fa-edit" style="color: #007bff;" font-size: 17px;></i></a>';
                 $deleteBtn = '<button class="btn btn-sm delete-btn" data-toggle="modal" data-target="#confirmDeleteModal" data-id="' . $bansos->bansos_id . '"><i class="fas fa-trash-alt" style="color: #dc3545; font-size: 17px;"></i></button>';
-                return $editBtn . $deleteBtn;
+                $btn2 = '</div>';
+                return  $btn . $editBtn . $deleteBtn . $btn2;
             })
             ->rawColumns(['aksi'])
             ->make(true);
