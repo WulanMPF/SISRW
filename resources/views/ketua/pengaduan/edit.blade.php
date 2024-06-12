@@ -7,7 +7,7 @@
                 <h2 class="text-center mb-4">Edit Pengaduan</h2>
                 <div class="card">
                     <div class="card-body">
-                        <form method="POST" action="{{ route('pengaduan.update', $pengaduan->pengaduan_id) }}">
+                        <form method="POST" action="{{ route('ketua.pengaduan.update', $pengaduan->pengaduan_id) }}">
                             @csrf
                             @method('PUT')
 
@@ -45,7 +45,7 @@
                                     </tr>
                                     <tr>
                                         <th>Lampiran</th>
-                                        <td>{{ $pengaduan->lampiran }}</td>
+                                        <td><img src="{{ asset('lampiran_pengaduan/' . $pengaduan->lampiran) }}" class="card-img-top img-umkm center"></td>
                                     </tr>
                                     <tr>
                                         <th>Tindakan Diambil</th>
@@ -57,8 +57,8 @@
                             </div>
 
                             <div class="form-group text-center">
-                                <button type="submit" class="btn btn-primary">Update</button>
-                                <a href="{{ route('pengaduan.index') }}" class="btn btn-secondary">Kembali</a>
+                                <button type="submit" class="btn btn-submit">Update</button>
+                                <a href="{{ route('ketua.pengaduan.index') }}" class="btn btn-secondary">Kembali</a>
                             </div>
                         </form>
                     </div>
@@ -95,6 +95,20 @@
 
         td {
             border: none;
+        }
+        .btn-submit {
+            background-color: #BB955C;
+            border-color: #BB955C;
+            color: #ffffff;
+            font-family: Poppins;
+            font-size: 15px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: normal;
+            margin-left: 30%;
+            border-radius: 10px;
+            padding-left: 1rem;
+            padding-right: 1rem;
         }
     </style>
 @endpush

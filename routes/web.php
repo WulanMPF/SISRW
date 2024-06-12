@@ -176,12 +176,12 @@ Route::group(['middleware' => ['auth']], function () {
             Route::get('/{id}', [LapkeuController::class, 'show']);
         });
         Route::group(['prefix' => '/pengaduan'], function () {
-            Route::get('/', [PengaduanController::class, 'index'])->name('pengaduan.index');
+            Route::get('/', [PengaduanController::class, 'index'])->name('ketua.pengaduan.index');
             Route::post('/list', [PengaduanController::class, 'list']);
             Route::get('/{id}', [PengaduanController::class, 'show'])->name('ketua.pengaduan.show');
             // Route::get('/{id}/show', [PengaduanController::class, 'show'])->name('pengaduan.show');
             Route::get('/{id}/edit', [PengaduanController::class, 'edit']);
-            Route::put('/{id}', [PengaduanController::class, 'update'])->name('pengaduan.update');
+            Route::put('/{id}', [PengaduanController::class, 'update'])->name('ketua.pengaduan.update');
         });
         Route::group(['prefix' => '/iuran'], function () {
             Route::get('/', [IuranController::class, 'index']);

@@ -124,6 +124,6 @@ class PengaduanController extends Controller
             'status_pengaduan' => $request->status_pengaduan,
         ]);
 
-        return redirect()->route('pengaduan.index')->with('success', 'Data pengaduan berhasil diupdate');
+        return redirect()->route('ketua.pengaduan.index')->with('success', 'Data pengaduan berhasil diupdate');
     }
 }
