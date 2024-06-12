@@ -23,6 +23,7 @@ use App\Http\Controllers\Bendahara\ProfileController as BendaharaProfileControll
 use App\Http\Controllers\Ketua\ArsipSuratController;
 use App\Http\Controllers\Ketua\NotifikasiController;
 use App\Http\Controllers\Ketua\ProfileController;
+use App\Http\Controllers\Ketua\SuratPengantarController;
 use App\Http\Controllers\Ketua\SuratUndanganController as KetuaSuratUndanganController;
 use App\Http\Controllers\Login\LoginController;
 use App\Http\Controllers\Sekretaris\NotifikasiController as SekretarisNotifikasiController;
@@ -137,6 +138,17 @@ Route::group(['middleware' => ['auth']], function () {
             Route::put('/{id}', [KetuaSuratUndanganController::class, 'updateUndangan'])->name('ketua.undangan.update');
             Route::delete('/destroy/{id}', [KetuaSuratUndanganController::class, 'destroyUndangan']);
         });
+
+        Route::group(['prefix' => '/pengantar'], function () {
+            Route::get('/', [SuratPengantarController::class, 'index']);
+            Route::get('/cetak_surat_pdf/{id}', [SuratPengantarController::class, 'cetak']);
+            Route::post('/list', [SuratPengantarController::class, 'list']);
+            Route::get('/create', [SuratPengantarController::class, 'create'])->name('ketua.pengantar.create');
+            Route::post('/', [SuratPengantarController::class, 'store'])->name('ketua.pengantar.store');
+            Route::get('/{id}', [SuratPengantarController::class, 'show']);
+            Route::delete('/destroy/{id}', [SuratPengantarController::class, 'destroy']);
+        });
+
         Route::group(['prefix' => '/umkm'], function () {
             Route::get('/', [UmkmController::class, 'index'])->name('umkm.index');
             Route::post('/list', [UmkmController::class, 'list']);

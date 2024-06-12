@@ -30,7 +30,7 @@ class SuratController extends Controller
 
     public function list(Request $request)
     {
-        $arsip_surat = ArsipSuratModel::all();
+        $arsip_surat = ArsipSuratModel::query();
 
         if ($request->has('pengirim') && !empty($request->pengirim)) {
             $arsip_surat->where('pengirim', 'like', '%' . $request->pengirim . '%');
@@ -38,6 +38,15 @@ class SuratController extends Controller
 
         if ($request->has('penerima') && !empty($request->penerima)) {
             $arsip_surat->where('penerima', 'like', '%' . $request->penerima . '%');
+        }
+
+        // Menambahkan kondisi tambahan sesuai dengan jenis surat (masuk atau keluar)
+        if ($request->has('surat_type') && !empty($request->surat_type)) {
+            if ($request->surat_type === 'masuk') {
+                $arsip_surat->where('penerima', 'like', '%RW%');
+            } elseif ($request->surat_type === 'keluar') {
+                $arsip_surat->where('pengirim', 'like', '%RW%');
+            }
         }
 
         return DataTables::of($arsip_surat)
