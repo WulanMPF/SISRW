@@ -41,6 +41,7 @@ use App\Http\Controllers\Warga\ProfileController as WargaProfileController;
 use App\Http\Controllers\WelcomeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\landingPage\LandingController;
+use App\Http\Controllers\Sekretaris\SuratPengantarController as SekretarisSuratPengantarController;
 
 /*
 |--------------------------------------------------------------------------
@@ -257,6 +258,15 @@ Route::group(['middleware' => ['auth']], function () {
             Route::get('/{id}/edit', [SuratUndanganController::class, 'edit'])->name('undangan.edit');
             Route::put('/{id}', [SuratUndanganController::class, 'update'])->name('undangan.update');
             Route::delete('/destroy/{id}', [SuratUndanganController::class, 'destroy']);
+        });
+        Route::group(['prefix' => '/pengantar'], function () {
+            Route::get('/', [SekretarisSuratPengantarController::class, 'index']);
+            Route::get('/cetak_surat_pdf/{id}', [SekretarisSuratPengantarController::class, 'cetak']);
+            Route::post('/list', [SekretarisSuratPengantarController::class, 'list']);
+            Route::get('/create', [SekretarisSuratPengantarController::class, 'create'])->name('sekretaris.pengantar.create');
+            Route::post('/', [SekretarisSuratPengantarController::class, 'store'])->name('sekretaris.pengantar.store');
+            Route::get('/{id}', [SekretarisSuratPengantarController::class, 'show']);
+            Route::delete('/destroy/{id}', [SekretarisSuratPengantarController::class, 'destroy']);
         });
         Route::group(['prefix' => '/pengumuman'], function () {
             Route::get('/', [PengumumanController::class, 'index'])->name('sekretaris.pengumuman.index');
